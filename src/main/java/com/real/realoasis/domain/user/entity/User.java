@@ -32,6 +32,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.refreshToken = refreshToken;
+        this.name = null;
     }
 
 
