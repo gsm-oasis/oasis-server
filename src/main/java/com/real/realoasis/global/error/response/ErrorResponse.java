@@ -1,5 +1,6 @@
-package com.real.realoasis.global.error;
+package com.real.realoasis.global.error.response;
 
+import com.real.realoasis.global.error.type.ErrorCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

@@ -1,4 +1,4 @@
-package com.real.realoasis.global.security.auth;
+package com.real.realoasis.global.security.authentication;
 
 import com.real.realoasis.domain.user.entity.User;
 import lombok.RequiredArgsConstructor;

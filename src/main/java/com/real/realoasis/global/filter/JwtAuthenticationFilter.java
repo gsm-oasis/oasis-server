@@ -1,4 +1,4 @@
-package com.real.realoasis.global.security.filter;
+package com.real.realoasis.global.filter;
 
 import com.real.realoasis.global.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;

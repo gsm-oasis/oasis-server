@@ -1,6 +1,6 @@
 package com.real.realoasis.global.security;
 
-import com.real.realoasis.global.security.auth.AuthDetailsService;
+import com.real.realoasis.global.security.authentication.AuthDetailsService;
 import com.real.realoasis.global.security.properties.JwtProperties;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;

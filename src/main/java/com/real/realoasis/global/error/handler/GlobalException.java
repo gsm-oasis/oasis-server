@@ -1,8 +1,7 @@
 package com.real.realoasis.global.error.handler;
 
 import com.real.realoasis.domain.user.exception.UserNotFoundException;
-import com.real.realoasis.global.error.ErrorResponse;
-import lombok.RequiredArgsConstructor;
+import com.real.realoasis.global.error.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
