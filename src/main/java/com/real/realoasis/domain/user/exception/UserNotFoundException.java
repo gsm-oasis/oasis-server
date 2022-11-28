@@ -1,6 +1,6 @@
 package com.real.realoasis.domain.user.exception;
 
-import com.real.realoasis.global.error.ErrorCode;
+import com.real.realoasis.global.error.type.ErrorCode;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
