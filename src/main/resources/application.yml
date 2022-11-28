@@ -10,5 +10,5 @@ spring:
       ddl-auto: create
 
 jwt:
-  accessSecret: ${ACCESS_SECRET}
-  refreshSecret: ${REFRESH_SECRET}
+  secret:
+    key: ${JWT_KEY}
