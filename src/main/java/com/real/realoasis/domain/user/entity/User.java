@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,6 +25,10 @@ public class User {
     private String name;
     @Column(name = "refresh_token")
     private String refreshToken;
+
+    @ElementCollection(fetch = FetchType.EAGER) // roles 컬렉션
+    @Builder.Default
+    private List<String> roles = new ArrayList<>();
 
     public void updateRefreshToken(String refreshToken){
         this.refreshToken = refreshToken;
