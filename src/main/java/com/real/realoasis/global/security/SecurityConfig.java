@@ -1,6 +1,5 @@
 package com.real.realoasis.global.security;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.real.realoasis.global.filter.ExceptionHandlerFilter;
 import com.real.realoasis.global.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
