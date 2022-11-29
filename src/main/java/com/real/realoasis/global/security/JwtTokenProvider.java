@@ -2,10 +2,8 @@ package com.real.realoasis.global.security;
 
 import com.real.realoasis.global.security.authentication.AuthDetailsService;
 import com.real.realoasis.global.security.properties.JwtProperties;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.*;
+import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -15,6 +13,8 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
 import java.util.Base64;
 import java.util.Date;
 import java.util.List;
@@ -24,9 +24,6 @@ import java.util.List;
 public class JwtTokenProvider {
     private final JwtProperties jwtProperties;
     private final AuthDetailsService authDetailsService;
-
-    private String secretKey = jwtProperties.getKey();
-
     private final long ACCESS_TOKEN_EXPIRED_TIME = 2 * 60 * 1000; // 2시간
     private final long REFRESH_TOKEN_EXPIRED_TIME = 7 * 24 * 60 * 60 * 1000; // 1주
 
@@ -38,10 +35,17 @@ public class JwtTokenProvider {
         private final String value;
     }
 
-    // 객체 초기화, secretKey를 Base64로 인코딩
-    @PostConstruct
-    protected void init() {
-        secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
+    private Key getSignInKey(String secretKey) {
+        byte[] keyByte = secretKey.getBytes(StandardCharsets.UTF_8);
+        return Keys.hmacShaKeyFor(keyByte);
+    }
+
+    public Claims extractAllClaims(String token) throws ExpiredJwtException, IllegalStateException, UnsupportedOperationException {
+        return Jwts.parserBuilder()
+                .setSigningKey(getSignInKey(jwtProperties.getKey()))
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     // 토큰 생성
@@ -54,7 +58,7 @@ public class JwtTokenProvider {
                 .setClaims(claims) // 정보 저장
                 .setIssuedAt(new Date(System.currentTimeMillis())) // 토큰 발행 시간 정보
                 .setExpiration(new Date(System.currentTimeMillis() + expireTime)) // 토큰 유효시간 설정
-                .signWith(SignatureAlgorithm.HS256, secretKey) // 암호화 알고리즘과 secret 값
+                .signWith(getSignInKey(jwtProperties.getKey())) // 암호화 알고리즘과 secret 값
                 .compact();
     }
 
@@ -73,14 +77,13 @@ public class JwtTokenProvider {
 
     // 토큰에서 회원 정보 추출
     private String getUserPk(String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+        return extractAllClaims(token).getSubject();
     }
 
     // 토큰 유효성, 만료일자 확인
-    public boolean validateToken(String jwtToken){
+    public boolean validateToken(String token){
         try {
-            Jws<Claims> claimsJws = Jwts.parser().setSigningKey(secretKey).parseClaimsJws(jwtToken);
-            return !claimsJws.getBody().getExpiration().before(new Date());
+            return extractAllClaims(token).getExpiration().before(new Date());
         } catch (Exception e) {
             return false;
         }
