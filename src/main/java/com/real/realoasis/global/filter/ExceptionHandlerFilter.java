@@ -28,9 +28,9 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
         try {
             filterChain.doFilter(request, response);
         } catch (ExpiredJwtException e) {
-            setErrorResponse(ErrorCode.EXPIRATION_TOKEN, response);
+            setErrorResponse(ErrorCode.EXPIRATION_TOKEN_EXCEPTION, response);
         } catch (JwtException | IllegalArgumentException e) {
-            setErrorResponse(ErrorCode.INVALID_TOKEN, response);
+            setErrorResponse(ErrorCode.INVALID_TOKEN_EXCEPTION, response);
         } catch (UserNotFoundException e) {
             setErrorResponse(ErrorCode.USER_NOT_FOUND_EXCEPTION, response);
         }
