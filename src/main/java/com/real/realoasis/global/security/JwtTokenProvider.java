@@ -6,6 +6,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -25,8 +26,17 @@ public class JwtTokenProvider {
     private final AuthDetailsService authDetailsService;
 
     private String secretKey = jwtProperties.getKey();
-    private long tokenValidTime = 30 * 60 * 1000L; // 토큰 유효시간 30분
 
+    private final long ACCESS_TOKEN_EXPIRED_TIME = 2 * 60 * 1000; // 2시간
+    private final long REFRESH_TOKEN_EXPIRED_TIME = 7 * 24 * 60 * 60 * 1000; // 1주
+
+    @AllArgsConstructor
+    enum TokenType{
+        ACCESS_TOKEN("accessToken"),
+        REFRESH_TOKEN("refreshToken");
+
+        private final String value;
+    }
 
     // 객체 초기화, secretKey를 Base64로 인코딩
     @PostConstruct
@@ -36,16 +46,24 @@ public class JwtTokenProvider {
 
     // 토큰 생성
     // userPk == email
-    public String createToken(String userPk, List<String> roles){
+    public String createToken(String userPk, TokenType tokenType, Long expireTime){
         Claims claims = Jwts.claims().setSubject(userPk); // JWT payload 에 저장되는 정보단위
-        claims.put("roles", roles); // 정보는 key / value 쌍으로 저장
-        Date now = new Date();
+        claims.put("tokenType", tokenType.value); // 정보는 key / value 쌍으로 저장
+
         return Jwts.builder()
                 .setClaims(claims) // 정보 저장
-                .setIssuedAt(now) // 토큰 발행 시간 정보
-                .setExpiration(new Date(now.getTime() + tokenValidTime)) // 토큰 유효시간 설정
+                .setIssuedAt(new Date(System.currentTimeMillis())) // 토큰 발행 시간 정보
+                .setExpiration(new Date(System.currentTimeMillis() + expireTime)) // 토큰 유효시간 설정
                 .signWith(SignatureAlgorithm.HS256, secretKey) // 암호화 알고리즘과 secret 값
                 .compact();
+    }
+
+    public String generateAccessToken(String userPk) {
+        return createToken(userPk, TokenType.ACCESS_TOKEN, ACCESS_TOKEN_EXPIRED_TIME);
+    }
+
+    public String generateRefreshToken(String userPk) {
+        return createToken(userPk, TokenType.REFRESH_TOKEN, REFRESH_TOKEN_EXPIRED_TIME);
     }
     // 인증 정보 조회
     public Authentication getAuthentication(String token){
