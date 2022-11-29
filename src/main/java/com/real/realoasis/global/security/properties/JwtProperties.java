@@ -7,7 +7,6 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 import org.springframework.stereotype.Component;
 
 @Getter
-@Component
 @ConstructorBinding
 @AllArgsConstructor
 @ConfigurationProperties(prefix = "jwt.secret")
