@@ -1,6 +1,8 @@
 package com.real.realoasis.domain.auth.presentation;
 
+import com.real.realoasis.domain.auth.presentation.dto.request.LoginRequest;
 import com.real.realoasis.domain.auth.presentation.dto.request.SignUpRequest;
+import com.real.realoasis.domain.auth.presentation.dto.response.LoginResponse;
 import com.real.realoasis.domain.auth.service.LoginService;
 import com.real.realoasis.domain.auth.service.SignUpService;
 import com.real.realoasis.domain.auth.service.ReissueTokenService;
@@ -12,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
+
 @RestController
 @RequestMapping("auth")
 @RequiredArgsConstructor
@@ -22,8 +26,14 @@ public class AuthController {
 
     // 회원가입
     @PostMapping("/signup")
-    public ResponseEntity<Void> signUp(@RequestBody SignUpRequest signupRequest){
+    public ResponseEntity<Void> signUp(@Valid @RequestBody SignUpRequest signupRequest) {
         signUpService.signUp(signupRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    // 로그인
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
+        return new ResponseEntity<>(loginService.login(loginRequest), HttpStatus.OK);
     }
 }
