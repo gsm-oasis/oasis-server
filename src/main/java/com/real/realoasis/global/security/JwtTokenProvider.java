@@ -33,7 +33,8 @@ public class JwtTokenProvider {
     }
 
     private Key getSignInKey(String secretKey) {
-        byte[] keyByte = secretKey.getBytes(StandardCharsets.UTF_8);
+        String key = secretKey + "as-12939gjbkavlllclj$2sd";
+        byte[] keyByte = key.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyByte);
     }
 
