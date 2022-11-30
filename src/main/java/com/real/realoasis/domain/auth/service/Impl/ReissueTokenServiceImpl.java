@@ -23,14 +23,14 @@ public class ReissueTokenServiceImpl implements ReissueTokenService {
             throw  new ExpiredTokenException(ErrorCode.EXPIRATION_TOKEN_EXCEPTION);
         }
 
-        User user = userFacade.findUserByEmail(jwtTokenProvider.getUserPk(refreshToken));
+        User user = userFacade.findUserById(jwtTokenProvider.getUserPk(refreshToken));
 
         if(!user.getRefreshToken().equals(refreshToken)){
             throw new InvalidTokenException(ErrorCode.INVALID_TOKEN_EXCEPTION);
         }
 
-        String newAccessToken = jwtTokenProvider.generateAccessToken(user.getEmail());
-        String newRefreshToken = jwtTokenProvider.generateRefreshToken(user.getEmail());
+        String newAccessToken = jwtTokenProvider.generateAccessToken(user.getId());
+        String newRefreshToken = jwtTokenProvider.generateRefreshToken(user.getId());
 
         return ReissueTokenResponse.builder()
                 .accessToken(newAccessToken)

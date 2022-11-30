@@ -19,12 +19,12 @@ public class LoginServiceImpl implements LoginService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public LoginResponse login(LoginRequest loginRequest) {
-        User user = userFacade.findUserByEmail(loginRequest.getEmail());
+        User user = userFacade.findUserById(loginRequest.getId());
 
         userFacade.checkPassword(user, loginRequest.getPassword());
 
-        String accessToken = jwtTokenProvider.generateAccessToken(loginRequest.getEmail());
-        String refreshToken = jwtTokenProvider.generateRefreshToken(loginRequest.getEmail());
+        String accessToken = jwtTokenProvider.generateAccessToken(loginRequest.getId());
+        String refreshToken = jwtTokenProvider.generateRefreshToken(loginRequest.getId());
 
         user.updateRefreshToken(refreshToken);
 

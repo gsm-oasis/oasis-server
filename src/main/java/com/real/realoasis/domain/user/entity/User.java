@@ -17,7 +17,10 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
+
     @Id
+    private String id;
+
     private String email;
 
     @NotNull
@@ -28,7 +31,7 @@ public class User {
     private String refreshToken;
 
     @ElementCollection(fetch = FetchType.EAGER) // roles 컬렉션
-    @CollectionTable(name = "role", joinColumns = @JoinColumn(name = "email"))
+    @CollectionTable(name = "role", joinColumns = @JoinColumn(name = "id"))
     @Builder.Default
     private List<Role> roles = new ArrayList<>();
 

@@ -29,8 +29,8 @@ public class UserFacade {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public User findUserByEmail(String email) {
-        return userRepository.findUserByEmail(email).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND_EXCEPTION));
+    public User findUserById(String id) {
+        return userRepository.findUserById(id).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND_EXCEPTION));
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -40,9 +40,10 @@ public class UserFacade {
         }
     }
 
+    @Transactional(rollbackFor = Exception.class)
     public User currentUser() {
-        String email = SecurityContextHolder.getContext().getAuthentication().getName();
-        return findUserByEmail(email);
+        String id = SecurityContextHolder.getContext().getAuthentication().getName();
+        return findUserById(id);
     }
 
 }

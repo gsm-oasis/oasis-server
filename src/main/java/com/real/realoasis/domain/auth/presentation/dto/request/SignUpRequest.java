@@ -15,6 +15,7 @@ import java.util.Collections;
 @NoArgsConstructor
 public class SignUpRequest {
 
+    private String id;
     private String email;
     private String password;
     private String nickName;
@@ -22,6 +23,7 @@ public class SignUpRequest {
 
     public User toEntity(String password) {
         return User.builder()
+                .id(id)
                 .email(email)
                 .password(password)
                 .nickName(nickName)
