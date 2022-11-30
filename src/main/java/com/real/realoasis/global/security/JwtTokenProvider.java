@@ -74,16 +74,17 @@ public class JwtTokenProvider {
     }
 
     // 토큰에서 회원 정보 추출
-    private String getUserPk(String token) {
+    public String getUserPk(String token) {
         return extractAllClaims(token).getSubject();
     }
 
     // 토큰 유효성, 만료일자 확인
     public boolean validateToken(String token){
         try {
-            return extractAllClaims(token).getExpiration().before(new Date());
-        } catch (Exception e) {
+            extractAllClaims(token).getExpiration();
             return false;
+        } catch (Exception e) {
+            return true;
         }
     }
 
