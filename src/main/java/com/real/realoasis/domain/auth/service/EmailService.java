@@ -10,4 +10,5 @@ public interface EmailService {
     MimeMessage createEmailForm(String email) throws MessagingException, UnsupportedEncodingException;
     String sendEmail(String toEmail) throws MessagingException, UnsupportedEncodingException;
 
+    void confirmAuthenticationCode(String authenticationCode);
 }

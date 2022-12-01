@@ -1,6 +1,6 @@
 package com.real.realoasis.domain.auth.presentation;
 
-import com.real.realoasis.domain.auth.presentation.dto.request.EmailAuthRequestDto;
+import com.real.realoasis.domain.auth.presentation.dto.request.AuthenticationCodeReq;
 import com.real.realoasis.domain.auth.presentation.dto.request.LoginRequest;
 import com.real.realoasis.domain.auth.presentation.dto.request.SignUpRequest;
 import com.real.realoasis.domain.auth.presentation.dto.response.LoginResponse;
@@ -29,15 +29,16 @@ public class AuthController {
 
     // 회원가입
     @PostMapping("/signup")
-    public ResponseEntity<Void> signUp(@Valid @RequestBody SignUpRequest signupRequest) {
+    public ResponseEntity<String> signUp(@Valid @RequestBody SignUpRequest signupRequest) throws MessagingException, UnsupportedEncodingException {
         signUpService.signUp(signupRequest);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(emailService.sendEmail(signupRequest.getEmail()), HttpStatus.CREATED);
     }
 
     // 이메일 인증
-    @PostMapping("/signup/mailconfirm")
-    public String mailConfirm(@RequestBody EmailAuthRequestDto emailDto) throws MessagingException, UnsupportedEncodingException {
-        return emailService.sendEmail(emailDto.getEmail());
+    @PostMapping("/mailconfirm")
+    public ResponseEntity<Void> confirmAuthenticationCode(@RequestBody AuthenticationCodeReq authenticationCode) {
+        emailService.confirmAuthenticationCode(authenticationCode.getAuthenticationCode());
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // 로그인
