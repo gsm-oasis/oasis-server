@@ -34,6 +34,12 @@ public class UserFacade {
     }
 
     @Transactional(rollbackFor = Exception.class)
+    public String findUserByEmail(String email){
+        User user = userRepository.findUserByEmail(email);
+        return user.getId();
+    }
+
+    @Transactional(rollbackFor = Exception.class)
     public void checkPassword(User user, String password) {
         if(!passwordEncoder.matches(password, user.getPassword())) {
             throw new PasswordNotMatchException(ErrorCode.PASSWORD_NOT_MATCH_EXCEPTION);
