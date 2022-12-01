@@ -2,9 +2,11 @@ package com.real.realoasis.domain.auth.presentation;
 
 import com.real.realoasis.domain.auth.presentation.dto.request.AuthenticationCodeReq;
 import com.real.realoasis.domain.auth.presentation.dto.request.LoginRequest;
+import com.real.realoasis.domain.auth.presentation.dto.request.SearchIDRequest;
 import com.real.realoasis.domain.auth.presentation.dto.request.SignUpRequest;
 import com.real.realoasis.domain.auth.presentation.dto.response.LoginResponse;
 import com.real.realoasis.domain.auth.presentation.dto.response.ReissueTokenResponse;
+import com.real.realoasis.domain.auth.presentation.dto.response.SearchIDResponse;
 import com.real.realoasis.domain.auth.service.EmailService;
 import com.real.realoasis.domain.auth.service.LoginService;
 import com.real.realoasis.domain.auth.service.SignUpService;
@@ -31,7 +33,8 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<String> signUp(@Valid @RequestBody SignUpRequest signupRequest) throws MessagingException, UnsupportedEncodingException {
         signUpService.signUp(signupRequest);
-        return new ResponseEntity<>(emailService.sendEmail(signupRequest.getEmail()), HttpStatus.CREATED);
+        emailService.sendEmail(signupRequest.getEmail());
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     // 이메일 인증
@@ -53,5 +56,11 @@ public class AuthController {
         return new ResponseEntity<>(reissueTokenService.reissue(refreshToken), HttpStatus.OK);
     }
 
+    // 이메일을 통해 아이디 찾기
+    @PostMapping("/search/id")
+    public ResponseEntity<SearchIDResponse> searchID(@RequestBody SearchIDRequest searchIDRequest) throws MessagingException, UnsupportedEncodingException {
+        emailService.sendId(searchIDRequest.getEmail());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 }
