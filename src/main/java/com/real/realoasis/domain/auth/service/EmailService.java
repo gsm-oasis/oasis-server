@@ -8,7 +8,11 @@ import java.io.UnsupportedEncodingException;
 public interface EmailService {
     void createCode();
     MimeMessage createEmailForm(String email) throws MessagingException, UnsupportedEncodingException;
-    String sendEmail(String toEmail) throws MessagingException, UnsupportedEncodingException;
+
+    MimeMessage createSearchIdForm(String email) throws MessagingException, UnsupportedEncodingException;
+    void sendId(String toEmail) throws MessagingException, UnsupportedEncodingException;
+
+    void sendEmail(String toEmail) throws MessagingException, UnsupportedEncodingException;
 
     void confirmAuthenticationCode(String authenticationCode);
 }

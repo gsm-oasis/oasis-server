@@ -2,6 +2,7 @@ package com.real.realoasis.domain.auth.service.Impl;
 
 import com.real.realoasis.domain.auth.exception.InValidAuthCodeException;
 import com.real.realoasis.domain.auth.service.EmailService;
+import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.global.error.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
@@ -9,14 +10,17 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 
+import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 import java.util.Random;
 
 
 @RequiredArgsConstructor
 @Service
 public class EmailServiceImpl implements EmailService {
+    private final UserFacade userFacade;
 
     private final JavaMailSender emailSender;
     private final SpringTemplateEngine templateEngine;
@@ -63,15 +67,36 @@ public class EmailServiceImpl implements EmailService {
         return message;
     }
 
+    @Override
+    public MimeMessage createSearchIdForm(String email) throws MessagingException{
+
+        String setFrom = "shgurtns7236@naver.com";
+        String title = "OASIS 아이디 찾기";
+
+        MimeMessage message = emailSender.createMimeMessage();
+        message.addRecipients(Message.RecipientType.TO, email);
+        message.setSubject(title);
+        message.setFrom(setFrom);
+        message.setText(setContext(userFacade.findUserByEmail(email)), "utf-8", "html");
+
+        return message;
+    }
+
+    @Override
+    public void sendId(String toEmail) throws MessagingException, UnsupportedEncodingException {
+        //메일전송에 필요한 정보 설정
+        MimeMessage emailForm = createSearchIdForm(toEmail);
+        //실제 메일 전송
+        emailSender.send(emailForm);
+    }
+
     // 실제 메일 전송
     @Override
-    public String sendEmail(String toEmail) throws MessagingException {
+    public void sendEmail(String toEmail) throws MessagingException {
         //메일전송에 필요한 정보 설정
         MimeMessage emailForm = createEmailForm(toEmail);
         //실제 메일 전송
         emailSender.send(emailForm);
-
-        return authNum; //인증 코드 반환
     }
 
     // 인증코드 확인
