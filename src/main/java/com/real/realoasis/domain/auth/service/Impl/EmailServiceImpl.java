@@ -38,10 +38,10 @@ public class EmailServiceImpl implements EmailService {
 
             switch (index) {
                 case 0 :
-                    key.append((char) ((int)random.nextInt(26) + 97));
+                    key.append((char) (random.nextInt(26) + 97));
                     break;
                 case 1:
-                    key.append((char) ((int)random.nextInt(26) + 65));
+                    key.append((char) (random.nextInt(26) + 65));
                     break;
                 case 2:
                     key.append(random.nextInt(9));
@@ -55,7 +55,7 @@ public class EmailServiceImpl implements EmailService {
     @Override
     public MimeMessage createEmailForm(String email) throws MessagingException{
         createCode(); //인증 코드 생성
-        String setFrom = "shgurtns7236@naver.com"; //email-config에 설정한 자신의 이메일 주소(보내는 사람)
+        String setFrom = "shgurtns7236@naver.com"; //email-config 에 설정한 자신의 이메일 주소(보내는 사람)
         String title = "OASIS 회원가입 인증 번호"; //제목
 
         MimeMessage message = emailSender.createMimeMessage();
