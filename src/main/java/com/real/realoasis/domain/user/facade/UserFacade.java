@@ -36,6 +36,9 @@ public class UserFacade {
     @Transactional(rollbackFor = Exception.class)
     public String findUserByEmail(String email){
         User user = userRepository.findUserByEmail(email);
+        if(user == null) {
+            throw new UserNotFoundException(ErrorCode.USER_NOT_FOUND_EXCEPTION);
+        }
         return user.getId();
     }
 
