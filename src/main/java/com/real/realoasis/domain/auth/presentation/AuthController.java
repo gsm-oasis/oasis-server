@@ -1,16 +1,11 @@
 package com.real.realoasis.domain.auth.presentation;
 
-import com.real.realoasis.domain.auth.presentation.dto.request.AuthenticationCodeReq;
-import com.real.realoasis.domain.auth.presentation.dto.request.LoginRequest;
-import com.real.realoasis.domain.user.presentation.dto.request.SearchIDRequest;
-import com.real.realoasis.domain.auth.presentation.dto.request.SignUpRequest;
+import com.real.realoasis.domain.auth.presentation.dto.request.*;
 import com.real.realoasis.domain.auth.presentation.dto.response.LoginResponse;
 import com.real.realoasis.domain.auth.presentation.dto.response.ReissueTokenResponse;
-import com.real.realoasis.domain.user.presentation.dto.response.SearchIDResponse;
-import com.real.realoasis.domain.auth.service.EmailService;
-import com.real.realoasis.domain.auth.service.LoginService;
-import com.real.realoasis.domain.auth.service.SignUpService;
-import com.real.realoasis.domain.auth.service.ReissueTokenService;
+import com.real.realoasis.domain.auth.presentation.dto.response.SearchIDResponse;
+import com.real.realoasis.domain.auth.presentation.dto.response.SearchPWResponse;
+import com.real.realoasis.domain.auth.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +23,7 @@ public class AuthController {
     private final SignUpService signUpService;
     private final ReissueTokenService reissueTokenService;
     private final EmailService emailService;
+    private final SearchPWService searchPWService;
 
     // 회원가입
     @PostMapping("/signup")
@@ -57,10 +53,15 @@ public class AuthController {
     }
 
     // 이메일을 통해 아이디 찾기
-    @PostMapping("/search/id")
+    @GetMapping("/search/id")
     public ResponseEntity<SearchIDResponse> searchID(@RequestBody SearchIDRequest searchIDRequest) throws MessagingException, UnsupportedEncodingException {
         emailService.sendId(searchIDRequest.getEmail());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // id 를 통해 비밀번호 찾기
+    @GetMapping("/search/pw")
+    public ResponseEntity<SearchPWResponse> searchPW(@RequestBody SearchPWRequest searchPWRequest) {
+        return new ResponseEntity<>(searchPWService.searchPW(searchPWRequest), HttpStatus.OK);
+    }
 }
