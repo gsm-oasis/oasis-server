@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.auth.presentation.dto.response;
+package com.real.realoasis.domain.user.presentation.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,9 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class SearchIDResponse {
-    private String userId;
+@Builder
+public class SearchIDRequest {
+    private String email;
 }

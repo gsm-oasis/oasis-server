@@ -2,11 +2,11 @@ package com.real.realoasis.domain.auth.presentation;
 
 import com.real.realoasis.domain.auth.presentation.dto.request.AuthenticationCodeReq;
 import com.real.realoasis.domain.auth.presentation.dto.request.LoginRequest;
-import com.real.realoasis.domain.auth.presentation.dto.request.SearchIDRequest;
+import com.real.realoasis.domain.user.presentation.dto.request.SearchIDRequest;
 import com.real.realoasis.domain.auth.presentation.dto.request.SignUpRequest;
 import com.real.realoasis.domain.auth.presentation.dto.response.LoginResponse;
 import com.real.realoasis.domain.auth.presentation.dto.response.ReissueTokenResponse;
-import com.real.realoasis.domain.auth.presentation.dto.response.SearchIDResponse;
+import com.real.realoasis.domain.user.presentation.dto.response.SearchIDResponse;
 import com.real.realoasis.domain.auth.service.EmailService;
 import com.real.realoasis.domain.auth.service.LoginService;
 import com.real.realoasis.domain.auth.service.SignUpService;
