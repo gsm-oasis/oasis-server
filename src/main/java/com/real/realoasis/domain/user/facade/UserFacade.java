@@ -12,6 +12,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Random;
+
 @Component
 @RequiredArgsConstructor
 public class UserFacade {
@@ -25,8 +27,26 @@ public class UserFacade {
 
     @Transactional(rollbackFor = Exception.class)
     public void saveUser(SignUpRequest signUpRequest) {
-        userRepository.save(signUpRequest.toEntity(passwordEncoder.encode(signUpRequest.getPassword())));
+        Random random = new Random();
+        StringBuilder key = new StringBuilder();
+
+        for(int i = 0; i < 8; i++) {
+            int index = random.nextInt(3);
+            switch (index) {
+                case 0 :
+                    key.append((char) (random.nextInt(26) + 97));
+                    break;
+                case 1 :
+                    key.append((char) (random.nextInt(26) + 65));
+                    break;
+                case 2:
+                    key.append(random.nextInt(9));
+                    break;
+                }
+            }
+        userRepository.save(signUpRequest.toEntity(passwordEncoder.encode(signUpRequest.getPassword()), key.toString()));
     }
+
 
     @Transactional(rollbackFor = Exception.class)
     public User findUserById(String id) {
@@ -40,6 +60,11 @@ public class UserFacade {
             throw new UserNotFoundException(ErrorCode.USER_NOT_FOUND_EXCEPTION);
         }
         return user.getId();
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public User findUserByCode(String code) {
+        return userRepository.findUserByCode(code).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND_EXCEPTION));
     }
 
     @Transactional(rollbackFor = Exception.class)
