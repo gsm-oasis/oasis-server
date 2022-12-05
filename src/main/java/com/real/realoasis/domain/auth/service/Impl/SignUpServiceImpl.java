@@ -21,6 +21,4 @@ public class SignUpServiceImpl implements SignUpService {
         }
         userFacade.saveUser(signupRequest);
     }
-
-
 }
