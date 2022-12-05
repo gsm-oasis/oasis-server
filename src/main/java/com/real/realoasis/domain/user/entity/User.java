@@ -35,8 +35,16 @@ public class User {
     @Builder.Default
     private List<Role> roles = new ArrayList<>();
 
+    private String code;
+
+    private String coupleId;
+
     public void updateRefreshToken(String refreshToken){
         this.refreshToken = refreshToken;
+    }
+
+    public void updateCoupleId(String coupleId){
+        this.coupleId = coupleId;
     }
 
 
