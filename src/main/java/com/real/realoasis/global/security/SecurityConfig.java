@@ -5,6 +5,7 @@ import com.real.realoasis.global.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -32,9 +33,18 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http
                 .authorizeRequests()
-                .antMatchers(
-                        "/auth/**"
-                ).permitAll()
+                //auth
+                .antMatchers(HttpMethod.PUT,"/auth/refresh").permitAll()
+                .antMatchers(HttpMethod.POST,"/auth/signup").permitAll()
+                .antMatchers(HttpMethod.POST,"/auth/login").permitAll()
+                .antMatchers(HttpMethod.PUT, "/auth/logout").permitAll()
+                .antMatchers(HttpMethod.GET,"/auth/search/id").permitAll()
+                .antMatchers(HttpMethod.GET,"/auth/search/pw").permitAll()
+                .antMatchers(HttpMethod.POST,"/auth/mailconfirm").permitAll()
+
+                //user
+                .antMatchers(HttpMethod.DELETE, "/user/withdrawal").authenticated()
+
                 .anyRequest().authenticated();
         http
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
