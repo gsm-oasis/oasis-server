@@ -21,12 +21,13 @@ public class SignUpRequest {
     private String nickName;
 
 
-    public User toEntity(String password) {
+    public User toEntity(String password, String code) {
         return User.builder()
                 .id(id)
                 .email(email)
                 .password(password)
                 .nickName(nickName)
+                .code(code)
                 .roles(Collections.singletonList(Role.ROLE_USER))
                 .build();
     }
