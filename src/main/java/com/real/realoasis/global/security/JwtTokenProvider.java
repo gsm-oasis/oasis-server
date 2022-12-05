@@ -1,14 +1,10 @@
 package com.real.realoasis.global.security;
 
-import com.real.realoasis.global.security.authentication.AuthDetailsService;
 import com.real.realoasis.global.security.properties.JwtProperties;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
@@ -19,7 +15,6 @@ import java.util.Date;
 @Component
 public class JwtTokenProvider {
     private final JwtProperties jwtProperties;
-    private final AuthDetailsService authDetailsService;
     private final long ACCESS_TOKEN_EXPIRED_TIME = 2 * 60 * 1000; // 2시간
     private final long REFRESH_TOKEN_EXPIRED_TIME = 7 * 24 * 60 * 60 * 1000; // 1주
 
@@ -32,8 +27,8 @@ public class JwtTokenProvider {
     }
 
     private Key getSignInKey(String secretKey) {
-        String key = secretKey + "as-12939gjbkavlllclj$2sd";
-        byte[] keyByte = key.getBytes(StandardCharsets.UTF_8);
+        secretKey = secretKey + "as-12939gjbkavlllclj$2sdsjjhbhwpvjjcpivjvvjwpvmwp-cdk";
+        byte[] keyByte = secretKey.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyByte);
     }
 
@@ -66,11 +61,7 @@ public class JwtTokenProvider {
     public String generateRefreshToken(String userPk) {
         return createToken(userPk, TokenType.REFRESH_TOKEN, REFRESH_TOKEN_EXPIRED_TIME);
     }
-    // 인증 정보 조회
-    public Authentication getAuthentication(String token){
-        UserDetails userDetails = authDetailsService.loadUserByUsername(this.getUserPk(token));
-        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
-    }
+
 
     // 토큰에서 회원 정보 추출
     public String getUserPk(String token) {
