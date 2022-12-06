@@ -3,6 +3,7 @@ package com.real.realoasis.global.error.handler;
 import com.real.realoasis.domain.auth.exception.ExpiredTokenException;
 import com.real.realoasis.domain.auth.exception.InValidAuthCodeException;
 import com.real.realoasis.domain.auth.exception.InvalidTokenException;
+import com.real.realoasis.domain.diary.exception.DiaryNotFoundException;
 import com.real.realoasis.domain.user.exception.DuplicateEmailException;
 import com.real.realoasis.domain.user.exception.PasswordNotMatchException;
 import com.real.realoasis.domain.user.exception.UserNotFoundException;
@@ -20,6 +21,13 @@ public class GlobalException {
         ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode());
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
     }
+
+    @ExceptionHandler(DiaryNotFoundException.class)
+    public ResponseEntity<ErrorResponse> DiaryNotFoundException(DiaryNotFoundException e) {
+        ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode());
+        return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
 
     @ExceptionHandler(InValidAuthCodeException.class)
     public ResponseEntity<ErrorResponse> InValidAuthCodeException(InValidAuthCodeException e) {
