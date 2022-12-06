@@ -19,6 +19,7 @@ import java.util.List;
 public class User {
 
     @Id
+    @Column(name = "user_id")
     private String id;
 
     private String email;
