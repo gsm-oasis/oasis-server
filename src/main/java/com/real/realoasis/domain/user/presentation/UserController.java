@@ -1,6 +1,6 @@
 package com.real.realoasis.domain.user.presentation;
 
-import com.real.realoasis.domain.user.presentation.request.ConnectCoupleRequest;
+import com.real.realoasis.domain.user.presentation.dto.request.ConnectCoupleRequest;
 import com.real.realoasis.domain.user.service.ConnectCoupleService;
 import com.real.realoasis.domain.user.service.WithdrawalService;
 import lombok.RequiredArgsConstructor;
