@@ -1,14 +1,16 @@
 package com.real.realoasis.domain.diary.entity;
 
+import com.real.realoasis.domain.photo.entity.Photo;
 import com.real.realoasis.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Builder
@@ -23,16 +25,27 @@ public class Diary {
 
     private String content;
 
-    private String image;
+    @OneToMany
+    private List<Photo> photo = new ArrayList<>();
 
+    public void updatePhoto(List<Photo> photo) {
+        this.photo = photo;
+    }
     private String mood;
 
-    private String date;
+
+    private LocalDateTime createDate;
+    @PrePersist
+    public void createDate() {
+        this.createDate = LocalDateTime.now();
+    }
 
     private String title;
 
+    private String writer;
+
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
-    @OnDelete( action = OnDeleteAction.CASCADE)
     private User user;
+
 }
