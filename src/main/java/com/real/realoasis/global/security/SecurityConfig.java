@@ -46,6 +46,9 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.DELETE, "/user/withdrawal").authenticated()
                 .antMatchers(HttpMethod.POST,"/user/connect/couple").authenticated()
 
+                //diary
+                .antMatchers(HttpMethod.POST,"/diary/create").authenticated()
+
                 .anyRequest().denyAll();
         http
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
