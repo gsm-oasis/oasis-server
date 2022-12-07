@@ -2,7 +2,9 @@ package com.real.realoasis.domain.diary.presentation;
 
 import com.real.realoasis.domain.diary.presentation.dto.request.CreateDiaryRequest;
 import com.real.realoasis.domain.diary.presentation.dto.request.EditDiaryRequest;
+import com.real.realoasis.domain.diary.presentation.dto.response.DetailDiaryPageResponse;
 import com.real.realoasis.domain.diary.service.CreateDiaryService;
+import com.real.realoasis.domain.diary.service.DetailDiaryPageService;
 import com.real.realoasis.domain.diary.service.EditDiaryService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +20,9 @@ import java.util.List;
 public class DiaryController {
     private final CreateDiaryService createDiaryService;
     private final EditDiaryService editDiaryService;
+    private final DetailDiaryPageService detailDiaryPageService;
 
+    //일기 생성
     @PostMapping("/create")
     public ResponseEntity<Void> createDiary(
             @RequestPart(value = "file", required = false)List<MultipartFile> files,
@@ -27,6 +31,7 @@ public class DiaryController {
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
+    //일기 수정
     @PutMapping("/edit/{diaryId}")
     public ResponseEntity<Void> editDiary(
             @PathVariable Long diaryId,
@@ -34,6 +39,12 @@ public class DiaryController {
             @RequestPart(value = "req") EditDiaryRequest editDiaryRequest) throws Exception {
         editDiaryService.editDiary(diaryId, editDiaryRequest, files);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    //일기디테일 페이지
+    @GetMapping("/detail/{diaryId}")
+    public ResponseEntity<DetailDiaryPageResponse> getDetailPage(@PathVariable Long diaryId){
+        return new ResponseEntity<>(detailDiaryPageService.getDetailPage(diaryId), HttpStatus.OK);
     }
 
 }
