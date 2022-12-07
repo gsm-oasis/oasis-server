@@ -34,7 +34,7 @@ public class AuthController {
     }
 
     // 이메일 인증
-    @PostMapping("/mailconfirm")
+    @PostMapping("/mailConfirm")
     public ResponseEntity<Void> confirmAuthenticationCode(@RequestBody AuthenticationCodeReq authenticationCode) {
         emailService.confirmAuthenticationCode(authenticationCode.getAuthenticationCode());
         return new ResponseEntity<>(HttpStatus.OK);

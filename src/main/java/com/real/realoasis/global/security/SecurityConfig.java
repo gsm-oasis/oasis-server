@@ -40,7 +40,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.PUT, "/auth/logout").permitAll()
                 .antMatchers(HttpMethod.GET,"/auth/search/id").permitAll()
                 .antMatchers(HttpMethod.GET,"/auth/search/pw").permitAll()
-                .antMatchers(HttpMethod.POST,"/auth/mailconfirm").permitAll()
+                .antMatchers(HttpMethod.POST,"/auth/mailConfirm").permitAll()
 
                 //user
                 .antMatchers(HttpMethod.DELETE, "/user/withdrawal").authenticated()
