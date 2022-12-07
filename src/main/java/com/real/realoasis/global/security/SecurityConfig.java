@@ -50,6 +50,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST,"/diary/create").authenticated()
                 .antMatchers(HttpMethod.PUT,"/diary/edit/**").authenticated()
                 .antMatchers(HttpMethod.GET,"/diary/detail/**").authenticated()
+                .antMatchers(HttpMethod.DELETE,"/diary/delete/**").authenticated()
 
                 .anyRequest().denyAll();
         http
