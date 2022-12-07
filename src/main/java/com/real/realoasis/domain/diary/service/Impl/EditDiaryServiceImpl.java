@@ -35,6 +35,6 @@ public class EditDiaryServiceImpl implements EditDiaryService {
             editDiary.updatePhoto(list);
         }
         editDiary.update(editDiaryRequest.getTitle(), editDiaryRequest.getContent(), editDiaryRequest.getMood());
-        diaryFacade.saveDairy(editDiary);
+        diaryFacade.saveDiary(editDiary);
     }
 }

@@ -39,6 +39,6 @@ public class CreateDairyServiceImpl implements CreateDiaryService {
             }
             diary.updatePhoto(list);
         }
-        diaryFacade.saveDairy(diary);
+        diaryFacade.saveDiary(diary);
     }
 }
