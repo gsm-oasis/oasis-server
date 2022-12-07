@@ -14,21 +14,20 @@ import org.springframework.transaction.annotation.Transactional;
 public class DiaryFacade {
     private final DiaryRepository diaryRepository;
 
-    @Transactional(readOnly = true, rollbackFor = Exception.class)
-    public boolean existsById(Long id) {
-        return diaryRepository.existsById(id);
-    }
-
     @Transactional(rollbackFor = Exception.class)
     public Diary findDiaryById(Long id) {
         return diaryRepository.findDiaryById(id).orElseThrow(() -> new DiaryNotFoundException(ErrorCode.DIARY_NOT_FOUND_EXCEPTION));
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void saveDairy(Diary diary) {
+    public void saveDiary(Diary diary) {
         diaryRepository.save(diary).createDate();
     }
 
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteDiary(Long diaryId) {
+        diaryRepository.deleteById(diaryId);
+    }
 
 
 }
