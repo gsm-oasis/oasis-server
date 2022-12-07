@@ -4,6 +4,7 @@ import com.real.realoasis.domain.diary.presentation.dto.request.CreateDiaryReque
 import com.real.realoasis.domain.diary.presentation.dto.request.EditDiaryRequest;
 import com.real.realoasis.domain.diary.presentation.dto.response.DetailDiaryPageResponse;
 import com.real.realoasis.domain.diary.service.CreateDiaryService;
+import com.real.realoasis.domain.diary.service.DeleteDiaryService;
 import com.real.realoasis.domain.diary.service.DetailDiaryPageService;
 import com.real.realoasis.domain.diary.service.EditDiaryService;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,7 @@ public class DiaryController {
     private final CreateDiaryService createDiaryService;
     private final EditDiaryService editDiaryService;
     private final DetailDiaryPageService detailDiaryPageService;
+    private final DeleteDiaryService deleteDiaryService;
 
     //일기 생성
     @PostMapping("/create")
@@ -45,6 +47,13 @@ public class DiaryController {
     @GetMapping("/detail/{diaryId}")
     public ResponseEntity<DetailDiaryPageResponse> getDetailPage(@PathVariable Long diaryId){
         return new ResponseEntity<>(detailDiaryPageService.getDetailPage(diaryId), HttpStatus.OK);
+    }
+
+    //일기 삭제
+    @DeleteMapping("/delete/{diaryId}")
+    public ResponseEntity<Void> deleteDiary(@PathVariable Long diaryId){
+        deleteDiaryService.deleteDiary(diaryId);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
