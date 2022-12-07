@@ -3,10 +3,8 @@ package com.real.realoasis.domain.diary.presentation;
 import com.real.realoasis.domain.diary.presentation.dto.request.CreateDiaryRequest;
 import com.real.realoasis.domain.diary.presentation.dto.request.EditDiaryRequest;
 import com.real.realoasis.domain.diary.presentation.dto.response.DetailDiaryPageResponse;
-import com.real.realoasis.domain.diary.service.CreateDiaryService;
-import com.real.realoasis.domain.diary.service.DeleteDiaryService;
-import com.real.realoasis.domain.diary.service.DetailDiaryPageService;
-import com.real.realoasis.domain.diary.service.EditDiaryService;
+import com.real.realoasis.domain.diary.presentation.dto.response.ListDiaryPageResponse;
+import com.real.realoasis.domain.diary.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +21,7 @@ public class DiaryController {
     private final EditDiaryService editDiaryService;
     private final DetailDiaryPageService detailDiaryPageService;
     private final DeleteDiaryService deleteDiaryService;
+    private final ListDiaryPageService listDiaryPageService;
 
     //일기 생성
     @PostMapping("/create")
@@ -54,6 +53,12 @@ public class DiaryController {
     public ResponseEntity<Void> deleteDiary(@PathVariable Long diaryId){
         deleteDiaryService.deleteDiary(diaryId);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    //일기 리스트
+    @GetMapping("/list")
+    public ResponseEntity<List<ListDiaryPageResponse>> getList(){
+        return new ResponseEntity<>(listDiaryPageService.getList(), HttpStatus.OK);
     }
 
 }
