@@ -22,30 +22,30 @@ public class Diary {
     @Column(name = "diary_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
     private String content;
-
     @OneToMany
     private List<Photo> photo = new ArrayList<>();
-
-    public void updatePhoto(List<Photo> photo) {
-        this.photo = photo;
-    }
     private String mood;
-
-
     private LocalDateTime createDate;
-    @PrePersist
-    public void createDate() {
-        this.createDate = LocalDateTime.now();
-    }
-
     private String title;
-
     private String writer;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    public void updatePhoto(List<Photo> photo) {
+        this.photo = photo;
+    }
+
+    @PrePersist
+    public void createDate() {
+        this.createDate = LocalDateTime.now();
+    }
+
+    public void update(String title, String content, String mood){
+        this.title = title;
+        this.content = content;
+        this.mood = mood;
+    }
 }
