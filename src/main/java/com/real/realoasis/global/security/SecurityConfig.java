@@ -49,6 +49,8 @@ public class SecurityConfig {
                 //diary
                 .antMatchers(HttpMethod.POST,"/diary/create").authenticated()
                 .antMatchers(HttpMethod.PUT,"/diary/edit/**").authenticated()
+                .antMatchers(HttpMethod.GET,"/diary/detail/**").authenticated()
+
                 .anyRequest().denyAll();
         http
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
