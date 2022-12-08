@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.stream.Stream;
 
 @RestController
 @RequiredArgsConstructor
@@ -57,7 +58,7 @@ public class DiaryController {
 
     //일기 리스트
     @GetMapping("/list")
-    public ResponseEntity<List<ListDiaryPageResponse>> getList(){
+    public ResponseEntity<Stream<ListDiaryPageResponse>> getList(){
         return new ResponseEntity<>(listDiaryPageService.getList(), HttpStatus.OK);
     }
 

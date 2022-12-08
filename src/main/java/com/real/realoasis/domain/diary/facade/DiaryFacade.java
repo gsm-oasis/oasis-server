@@ -2,12 +2,19 @@ package com.real.realoasis.domain.diary.facade;
 
 import com.real.realoasis.domain.diary.entity.Diary;
 import com.real.realoasis.domain.diary.exception.DiaryNotFoundException;
+import com.real.realoasis.domain.diary.presentation.dto.response.ListDiaryPageResponse;
 import com.real.realoasis.domain.diary.repository.DiaryRepository;
 import com.real.realoasis.domain.photo.entity.Photo;
+import com.real.realoasis.domain.user.entity.User;
+import com.real.realoasis.domain.user.facade.UserFacade;
+import com.real.realoasis.domain.user.repository.UserRepository;
 import com.real.realoasis.global.error.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 @Component
 @RequiredArgsConstructor
@@ -27,6 +34,11 @@ public class DiaryFacade {
     @Transactional(rollbackFor = Exception.class)
     public void deleteDiary(Long diaryId) {
         diaryRepository.deleteById(diaryId);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    public List<Diary> findAllByUserId(String userId){
+        return diaryRepository.findAllByUserId(userId);
     }
 
 

@@ -2,8 +2,8 @@ package com.real.realoasis.domain.diary.service;
 
 import com.real.realoasis.domain.diary.presentation.dto.response.ListDiaryPageResponse;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 public interface ListDiaryPageService {
-    List<ListDiaryPageResponse> getList();
+    Stream<ListDiaryPageResponse> getList();
 }
