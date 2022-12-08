@@ -47,7 +47,7 @@ public class UserFacade {
         userRepository.save(signUpRequest.toEntity(passwordEncoder.encode(signUpRequest.getPassword()), key.toString()));
     }
     @Transactional(rollbackFor = Exception.class)
-    public void saveCoupleUser(User currentUser){
+    public void saveUser(User currentUser){
         userRepository.save(currentUser);
     }
 
