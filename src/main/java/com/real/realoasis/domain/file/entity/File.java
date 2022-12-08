@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.photo.entity;
+package com.real.realoasis.domain.file.entity;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @Getter
-public class Photo {
+public class File {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "file_id")
@@ -24,7 +24,7 @@ public class Photo {
     private Long fileSize;
 
     @Builder
-    public Photo(String origFileName, String filePath, Long fileSize) {
+    public File(String origFileName, String filePath, Long fileSize) {
         this.origFileName = origFileName;
         this.filePath = filePath;
         this.fileSize = fileSize;

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class EditDiaryRequest {
+public class DiaryEditRequest {
     private String title;
     private String content;
     private String mood;

@@ -1,21 +1,21 @@
 package com.real.realoasis.domain.diary.presentation.dto.response;
 
+import com.real.realoasis.domain.file.entity.File;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Builder
-@AllArgsConstructor
 @NoArgsConstructor
-public class ListDiaryPageResponse {
-    private Long diaryId;
+@AllArgsConstructor
+public class DiaryDetailPageResponse {
+    private String title;
     private String content;
     private String mood;
-    private String title;
     private String writer;
-    private String createDate;
+    private List<File> photoList;
 }

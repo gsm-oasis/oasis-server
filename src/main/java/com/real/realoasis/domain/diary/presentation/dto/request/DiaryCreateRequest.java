@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateDiaryRequest {
+public class DiaryCreateRequest {
     private String title;
     private String content;
     private String mood;

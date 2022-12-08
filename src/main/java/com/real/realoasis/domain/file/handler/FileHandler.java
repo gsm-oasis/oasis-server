@@ -1,13 +1,12 @@
-package com.real.realoasis.domain.photo.handler;
+package com.real.realoasis.domain.file.handler;
 
-import com.real.realoasis.domain.photo.presentation.dto.PhotoDto;
-import com.real.realoasis.domain.photo.entity.Photo;
+import com.real.realoasis.domain.file.entity.File;
+import com.real.realoasis.domain.file.presentation.dto.FileDto;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -16,9 +15,9 @@ import java.util.List;
 @Component
 public class FileHandler {
 
-    public List<Photo> parseFileInfo(List<MultipartFile> multipartFiles) throws Exception {
+    public List<File> parseFileInfo(List<MultipartFile> multipartFiles) throws Exception {
         // 반환할 파일 리스트
-        List<Photo> fileList = new ArrayList<>();
+        List<File> fileList = new ArrayList<>();
 
         // 전달되어 온 파일이 존재할 경우
         if(!CollectionUtils.isEmpty(multipartFiles)) {
@@ -28,11 +27,11 @@ public class FileHandler {
             String current_date = now.format(dateTimeFormatter);
             // 프로젝트 디렉터리 내의 저장을 위한 절대 경로 설정
             // 경로 구분자 File.separator 사용
-            String absolutePath = new File("").getAbsolutePath() + File.separator + File.separator;
+            String absolutePath = new java.io.File("").getAbsolutePath() + java.io.File.separator + java.io.File.separator;
 
             // 파일을 저장할 세부 경로 지정
-            String path = "images" + File.separator + current_date;
-            File file = new File(path);
+            String path = "images" + java.io.File.separator + current_date;
+            java.io.File file = new java.io.File(path);
 
             // 디렉터리가 존재하지 않을 경우
             if(!file.exists()) {
@@ -66,14 +65,14 @@ public class FileHandler {
                 String new_file_name = System.nanoTime() + originalFileExtension;
 
                 // 파일 DTO 생성
-                PhotoDto photoDto = new PhotoDto(
+                FileDto photoDto = new FileDto(
                         multipartFile.getOriginalFilename(),
-                        path + File.separator + new_file_name,
+                        path + java.io.File.separator + new_file_name,
                         multipartFile.getSize()
                 );
 
-                // 파일 DTO 이용하여 Photo 엔티티 생성
-                Photo photo = new Photo(
+                // 파일 DTO 이용하여 File 엔티티 생성
+                File photo = new File(
                         photoDto.getOrigFileName(),
                         photoDto.getFilePath(),
                         photoDto.getFileSize()
@@ -83,7 +82,7 @@ public class FileHandler {
                 fileList.add(photo);
 
                 // 업로드 한 파일 데이터를 지정한 파일에 저장
-                file = new File(absolutePath + path + File.separator + new_file_name);
+                file = new java.io.File(absolutePath + path + java.io.File.separator + new_file_name);
                 multipartFile.transferTo(file);
             }
         }
