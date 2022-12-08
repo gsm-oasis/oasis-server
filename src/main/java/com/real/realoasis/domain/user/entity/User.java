@@ -28,6 +28,15 @@ public class User {
     private String password;
 
     private String nickName;
+
+    private String questionTime;
+
+    private String anniversaryTime;
+
+    private String code;
+
+    private String coupleId;
+
     @Column(name = "refresh_token")
     private String refreshToken;
 
@@ -35,10 +44,6 @@ public class User {
     @CollectionTable(name = "role", joinColumns = @JoinColumn(name = "id"))
     @Builder.Default
     private List<Role> roles = new ArrayList<>();
-
-    private String code;
-
-    private String coupleId;
 
     public void updateRefreshToken(String refreshToken){
         this.refreshToken = refreshToken;
