@@ -1,7 +1,7 @@
 package com.real.realoasis.domain.file.handler;
 
-import com.real.realoasis.domain.file.entity.File;
-import com.real.realoasis.domain.file.presentation.dto.FileDto;
+import com.real.realoasis.domain.file.entity.Photo;
+import com.real.realoasis.domain.file.presentation.dto.PhotoDto;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.util.ObjectUtils;
@@ -15,9 +15,9 @@ import java.util.List;
 @Component
 public class FileHandler {
 
-    public List<File> parseFileInfo(List<MultipartFile> multipartFiles) throws Exception {
+    public List<Photo> parseFileInfo(List<MultipartFile> multipartFiles) throws Exception {
         // 반환할 파일 리스트
-        List<File> fileList = new ArrayList<>();
+        List<Photo> fileList = new ArrayList<>();
 
         // 전달되어 온 파일이 존재할 경우
         if(!CollectionUtils.isEmpty(multipartFiles)) {
@@ -26,7 +26,7 @@ public class FileHandler {
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyyMMdd");
             String current_date = now.format(dateTimeFormatter);
             // 프로젝트 디렉터리 내의 저장을 위한 절대 경로 설정
-            // 경로 구분자 File.separator 사용
+            // 경로 구분자 Photo.separator 사용
             String absolutePath = new java.io.File("").getAbsolutePath() + java.io.File.separator + java.io.File.separator;
 
             // 파일을 저장할 세부 경로 지정
@@ -65,14 +65,14 @@ public class FileHandler {
                 String new_file_name = System.nanoTime() + originalFileExtension;
 
                 // 파일 DTO 생성
-                FileDto photoDto = new FileDto(
+                PhotoDto photoDto = new PhotoDto(
                         multipartFile.getOriginalFilename(),
                         path + java.io.File.separator + new_file_name,
                         multipartFile.getSize()
                 );
 
-                // 파일 DTO 이용하여 File 엔티티 생성
-                File photo = new File(
+                // 파일 DTO 이용하여 Photo 엔티티 생성
+                Photo photo = new Photo(
                         photoDto.getOrigFileName(),
                         photoDto.getFilePath(),
                         photoDto.getFileSize()

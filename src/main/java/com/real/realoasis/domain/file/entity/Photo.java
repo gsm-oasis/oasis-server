@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @Getter
-public class File {
+public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "file_id")
@@ -24,7 +24,7 @@ public class File {
     private Long fileSize;
 
     @Builder
-    public File(String origFileName, String filePath, Long fileSize) {
+    public Photo(String origFileName, String filePath, Long fileSize) {
         this.origFileName = origFileName;
         this.filePath = filePath;
         this.fileSize = fileSize;

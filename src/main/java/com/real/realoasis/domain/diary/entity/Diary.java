@@ -1,6 +1,6 @@
 package com.real.realoasis.domain.diary.entity;
 
-import com.real.realoasis.domain.file.entity.File;
+import com.real.realoasis.domain.file.entity.Photo;
 import com.real.realoasis.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -25,7 +25,7 @@ public class Diary {
     private Long id;
     private String content;
     @OneToMany
-    private List<File> photo = new ArrayList<>();
+    private List<Photo> photo = new ArrayList<>();
     private String mood;
     private String createDate;
     private String title;
@@ -35,7 +35,7 @@ public class Diary {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    public void updatePhoto(List<File> photo) {
+    public void updatePhoto(List<Photo> photo) {
         this.photo = photo;
     }
 

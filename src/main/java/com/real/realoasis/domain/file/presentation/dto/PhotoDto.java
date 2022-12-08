@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class FileDto {
+public class PhotoDto {
     private String origFileName;
 
     private String filePath;
@@ -15,7 +15,7 @@ public class FileDto {
     private Long fileSize;
 
     @Builder
-    public FileDto(String origFileName, String filePath, Long fileSize){
+    public PhotoDto(String origFileName, String filePath, Long fileSize){
         this.origFileName = origFileName;
         this.filePath = filePath;
         this.fileSize = fileSize;
