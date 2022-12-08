@@ -17,5 +17,5 @@ public class ListDiaryPageResponse {
     private String mood;
     private String title;
     private String writer;
-    private LocalDateTime createDate;
+    private String createDate;
 }

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class Diary {
     @OneToMany
     private List<Photo> photo = new ArrayList<>();
     private String mood;
-    private LocalDateTime createDate;
+    private String createDate;
     private String title;
     private String writer;
 
@@ -40,7 +41,7 @@ public class Diary {
 
     @PrePersist
     public void createDate() {
-        this.createDate = LocalDateTime.now();
+        this.createDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
     }
 
     public void update(String title, String content, String mood){

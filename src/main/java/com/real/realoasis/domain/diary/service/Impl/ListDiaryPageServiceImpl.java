@@ -27,7 +27,7 @@ public class ListDiaryPageServiceImpl implements ListDiaryPageService {
             String mood = diary.getMood();
             String title = diary.getTitle();
             String writer = diary.getWriter();
-            LocalDateTime createDate = diary.getCreateDate();
+            String createDate = diary.getCreateDate();
             list.add(new ListDiaryPageResponse(diaryId, content, mood, title, writer, createDate));
         });
         return list;
