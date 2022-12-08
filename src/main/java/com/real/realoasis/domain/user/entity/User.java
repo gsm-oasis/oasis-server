@@ -53,5 +53,8 @@ public class User {
         this.coupleId = coupleId;
     }
 
+    public void updateNickname(String nickName) {
+        this.nickName = nickName;
+    }
 
 }
