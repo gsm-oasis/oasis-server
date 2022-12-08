@@ -1,9 +1,11 @@
 package com.real.realoasis.domain.user.presentation;
 
 import com.real.realoasis.domain.user.presentation.dto.request.NicknameChangeRequest;
+import com.real.realoasis.domain.user.presentation.dto.request.PasswordChangeRequest;
 import com.real.realoasis.domain.user.presentation.dto.response.SettingResponse;
 import com.real.realoasis.domain.user.service.GetSettingService;
 import com.real.realoasis.domain.user.service.NicknameChangeService;
+import com.real.realoasis.domain.user.service.PasswordChangeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserSettingController {
     private final GetSettingService getSettingService;
     private final NicknameChangeService nicknameChangeService;
+    private final PasswordChangeService passwordChangeService;
 
     // 설정 메인 페이지
     @GetMapping("/")
@@ -26,6 +29,13 @@ public class UserSettingController {
     @PutMapping("/change/nickname")
     public ResponseEntity<Void> changeNickname(@RequestBody NicknameChangeRequest nicknameChangeRequest){
         nicknameChangeService.nicknameChange(nicknameChangeRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    // 비밀번호 변경 페이지
+    @PutMapping("/change/password")
+    public ResponseEntity<Void> changePassword(@RequestBody PasswordChangeRequest passwordChangeRequest){
+        passwordChangeService.passwordChange(passwordChangeRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
