@@ -28,6 +28,8 @@ public class SignUpRequest {
                 .password(password)
                 .nickName(nickName)
                 .code(code)
+                .anniversaryTime("5")
+                .questionTime("1day")
                 .roles(Collections.singletonList(Role.ROLE_USER))
                 .build();
     }
