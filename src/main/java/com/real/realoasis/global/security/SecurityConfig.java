@@ -46,6 +46,9 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.DELETE, "/user/withdrawal").authenticated()
                 .antMatchers(HttpMethod.POST,"/user/connect/couple").authenticated()
 
+                //user/setting
+                .antMatchers(HttpMethod.GET,"/user/setting/").authenticated()
+
                 //diary
                 .antMatchers(HttpMethod.POST,"/diary/create").authenticated()
                 .antMatchers(HttpMethod.PUT,"/diary/edit/**").authenticated()
