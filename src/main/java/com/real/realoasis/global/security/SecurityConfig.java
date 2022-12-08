@@ -49,6 +49,7 @@ public class SecurityConfig {
                 //user/setting
                 .antMatchers(HttpMethod.GET,"/user/setting/").authenticated()
                 .antMatchers(HttpMethod.PUT,"/user/setting/change/nickname").authenticated()
+                .antMatchers(HttpMethod.PUT,"/user/setting/change/password").authenticated()
 
                 //diary
                 .antMatchers(HttpMethod.POST,"/diary/create").authenticated()
