@@ -55,6 +55,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.PUT,"/user/setting/change/anniversarytime").authenticated()
 
                 //mainpage
+                .antMatchers(HttpMethod.GET,"/mainpage/").authenticated()
                 .antMatchers(HttpMethod.POST,"/mainpage/enter/datingdate").authenticated()
 
                 //diary
