@@ -1,20 +1,25 @@
 package com.real.realoasis.domain.user.presentation;
 
 import com.real.realoasis.domain.user.presentation.dto.request.DatingDateEnterRequest;
+import com.real.realoasis.domain.user.presentation.dto.response.MainPageResponse;
 import com.real.realoasis.domain.user.service.DatingDateEnterService;
+import com.real.realoasis.domain.user.service.GetMainPageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/mainpage")
 @RequiredArgsConstructor
 public class MainPageController {
     private final DatingDateEnterService datingDateEnterService;
+    private final GetMainPageService getMainPageService;
+
+    @GetMapping("/")
+    public ResponseEntity<MainPageResponse> getMainPage(){
+        return new ResponseEntity<>(getMainPageService.getMainPage(), HttpStatus.OK);
+    }
 
     @PostMapping("/enter/datingdate")
     public ResponseEntity<Void> datingDateEnter(@RequestBody DatingDateEnterRequest datingDateEnterRequest){
