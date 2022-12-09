@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +40,10 @@ public class User {
 
     private String coupleId;
 
+    private String createDate;
+
+    private String datedDate;
+
     @Column(name = "refresh_token")
     private String refreshToken;
 
@@ -45,6 +51,10 @@ public class User {
     @CollectionTable(name = "role", joinColumns = @JoinColumn(name = "id"))
     @Builder.Default
     private List<Role> roles = new ArrayList<>();
+
+    public void createDate() {
+        this.createDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+    }
 
     public void updateRefreshToken(String refreshToken){
         this.refreshToken = refreshToken;
