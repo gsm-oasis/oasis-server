@@ -24,7 +24,7 @@ public class DiaryListPageServiceImpl implements DiaryListPageService {
     public Stream<DiaryListPageResponse> getList() {
         User currentUser = userFacade.currentUser();
 
-        User coupleUser = userFacade.findUserById(userFacade.currentUser().getCoupleId());
+        User coupleUser = userFacade.findUserById(currentUser.getCoupleId());
 
         List<DiaryListPageResponse> list = new ArrayList<>();
 
