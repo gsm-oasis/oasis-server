@@ -63,4 +63,8 @@ public class User {
     }
 
     public void updateQuestionTime(String questionTime) { this.questionTime = questionTime; }
+
+    public void updateAnniversaryTime(String anniversaryTime) {
+        this.anniversaryTime = anniversaryTime;
+    }
 }
