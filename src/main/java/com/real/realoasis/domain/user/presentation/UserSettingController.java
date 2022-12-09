@@ -1,13 +1,11 @@
 package com.real.realoasis.domain.user.presentation;
 
+import com.real.realoasis.domain.user.presentation.dto.request.AnniversaryTimeChangeRequest;
 import com.real.realoasis.domain.user.presentation.dto.request.NicknameChangeRequest;
 import com.real.realoasis.domain.user.presentation.dto.request.PasswordChangeRequest;
 import com.real.realoasis.domain.user.presentation.dto.request.QuestionTimeChangeRequest;
 import com.real.realoasis.domain.user.presentation.dto.response.SettingResponse;
-import com.real.realoasis.domain.user.service.GetSettingService;
-import com.real.realoasis.domain.user.service.NicknameChangeService;
-import com.real.realoasis.domain.user.service.PasswordChangeService;
-import com.real.realoasis.domain.user.service.QuestionTimeChangeService;
+import com.real.realoasis.domain.user.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +19,7 @@ public class UserSettingController {
     private final NicknameChangeService nicknameChangeService;
     private final PasswordChangeService passwordChangeService;
     private final QuestionTimeChangeService questionTimeChangeService;
+    private final AnniversaryTimeChangeService anniversaryTimeChangeService;
 
     // 설정 메인 페이지
     @GetMapping("/")
@@ -46,6 +45,13 @@ public class UserSettingController {
     @PutMapping("/change/questiontime")
     public ResponseEntity<Void> changeQuestionTime(@RequestBody QuestionTimeChangeRequest questionTimeChangeRequest){
         questionTimeChangeService.questionTimeChange(questionTimeChangeRequest);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    // 기념일 알림 시간 변경 페이지
+    @PutMapping("/change/anniversarytime")
+    public ResponseEntity<Void> changeAnniversaryTIme(@RequestBody AnniversaryTimeChangeRequest anniversaryTimeChangeRequest){
+        anniversaryTimeChangeService.anniversaryTimeChange(anniversaryTimeChangeRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
