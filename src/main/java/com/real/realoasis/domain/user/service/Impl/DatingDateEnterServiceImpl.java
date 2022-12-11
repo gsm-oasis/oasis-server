@@ -15,7 +15,7 @@ public class DatingDateEnterServiceImpl implements DatingDateEnterService {
     @Override
     public void datingDateEnter(DatingDateEnterRequest datingDateEnterRequest) {
         User currentUser = userFacade.currentUser();
-        currentUser.createDatingDate(datingDateEnterRequest.getDatingDate());
+        currentUser.createFirstDay(datingDateEnterRequest.getFirstDay());
         userFacade.saveUser(currentUser);
     }
 }

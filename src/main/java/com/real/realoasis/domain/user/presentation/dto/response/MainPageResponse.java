@@ -6,6 +6,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.time.Period;
 import java.util.stream.Stream;
 
 @Builder
@@ -15,7 +16,7 @@ import java.util.stream.Stream;
 public class MainPageResponse {
     private String userName;
     private String coupleName;
-    private String datingDate;
+    private int datingDate;
     private Long questionId;
     private String content;
     private Stream<DiaryListPageResponse> diaryListPageResponse;

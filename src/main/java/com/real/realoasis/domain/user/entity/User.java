@@ -1,6 +1,5 @@
 package com.real.realoasis.domain.user.entity;
 
-import com.real.realoasis.domain.user.presentation.dto.request.QuestionTimeChangeRequest;
 import com.real.realoasis.domain.user.type.Role;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
@@ -9,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +39,16 @@ public class User {
 
     private String coupleId;
 
-    private String datingDate;
+    private String firstDay;
+
+    private String today;
+
+    private int datingDate;
+
+    @PrePersist
+    public void today(){
+        this.today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+    }
 
     @Column(name = "refresh_token")
     private String refreshToken;
@@ -72,7 +80,11 @@ public class User {
         this.anniversaryTime = anniversaryTime;
     }
 
-    public void createDatingDate(String datingDate){
+    public void updateDatingDate(int datingDate){
         this.datingDate = datingDate;
+    }
+
+    public void createFirstDay(String firstDay){
+        this.firstDay = firstDay;
     }
 }
