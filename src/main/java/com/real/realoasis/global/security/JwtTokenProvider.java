@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @RequiredArgsConstructor
@@ -38,6 +39,10 @@ public class JwtTokenProvider {
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
+    }
+
+    public LocalDateTime getExpiredTime() {
+        return LocalDateTime.now().plusSeconds(ACCESS_TOKEN_EXPIRED_TIME/1000);
     }
 
     // 토큰 생성
