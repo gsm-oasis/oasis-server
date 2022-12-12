@@ -25,4 +25,8 @@ public class Question {
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    public void updateAnswer(String answer){
+        this.answer = answer;
+    }
 }
