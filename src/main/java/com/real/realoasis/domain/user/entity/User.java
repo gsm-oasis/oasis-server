@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.user.entity;
 
+import com.real.realoasis.domain.question.entity.Question;
 import com.real.realoasis.domain.user.type.Role;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
@@ -45,11 +46,6 @@ public class User {
 
     private int datingDate;
 
-    @PrePersist
-    public void today(){
-        this.today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-    }
-
     @Column(name = "refresh_token")
     private String refreshToken;
 
@@ -86,5 +82,10 @@ public class User {
 
     public void createFirstDay(String firstDay){
         this.firstDay = firstDay;
+    }
+
+    @PrePersist
+    public void today(){
+        this.today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
     }
 }
