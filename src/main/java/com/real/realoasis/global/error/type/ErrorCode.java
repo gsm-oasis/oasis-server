@@ -18,6 +18,9 @@ public enum ErrorCode {
     EXPIRATION_TOKEN_EXCEPTION("만료된 토큰입니다.", 403),
     INVALID_TOKEN_EXCEPTION("유효하지 않은 토큰입니다.", 403),
 
+
+    // question
+    QUESTION_NOT_FOUND_EXCEPTION("질문을 찾을 수 없습니다.",404),
     // diary
     DIARY_NOT_FOUND_EXCEPTION("일기를 찾을 수 없습니다.", 404);
 
