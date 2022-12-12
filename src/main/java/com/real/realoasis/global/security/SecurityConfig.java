@@ -65,6 +65,9 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.DELETE,"/diary/delete/**").authenticated()
                 .antMatchers(HttpMethod.GET,"/diary/list").authenticated()
 
+                //question
+                .antMatchers(HttpMethod.POST,"/question/**").authenticated()
+
                 .anyRequest().denyAll();
         http
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
