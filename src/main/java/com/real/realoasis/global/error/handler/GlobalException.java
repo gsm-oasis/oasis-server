@@ -4,7 +4,7 @@ import com.real.realoasis.domain.auth.exception.ExpiredTokenException;
 import com.real.realoasis.domain.auth.exception.InValidAuthCodeException;
 import com.real.realoasis.domain.auth.exception.InvalidTokenException;
 import com.real.realoasis.domain.diary.exception.DiaryNotFoundException;
-import com.real.realoasis.domain.question.exception.QuestionNotFoundException;
+import com.real.realoasis.domain.questionAnswer.exception.QuestionNotFoundException;
 import com.real.realoasis.domain.user.exception.DuplicateEmailException;
 import com.real.realoasis.domain.user.exception.PasswordNotMatchException;
 import com.real.realoasis.domain.user.exception.UserNotFoundException;

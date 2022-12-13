@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.question.exception;
+package com.real.realoasis.domain.questionAnswer.exception;
 
 import com.real.realoasis.global.error.type.ErrorCode;
 import lombok.Getter;
