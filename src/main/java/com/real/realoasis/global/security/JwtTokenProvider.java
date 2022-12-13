@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.time.LocalDateTime;
@@ -32,6 +33,7 @@ public class JwtTokenProvider {
         byte[] keyByte = secretKey.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyByte);
     }
+
 
     public Claims extractAllClaims(String token) throws ExpiredJwtException, IllegalStateException, UnsupportedOperationException {
         return Jwts.parserBuilder()
@@ -67,10 +69,19 @@ public class JwtTokenProvider {
         return createToken(userPk, TokenType.REFRESH_TOKEN, REFRESH_TOKEN_EXPIRED_TIME);
     }
 
+    public String resolveToken(HttpServletRequest req) {
+        String bearerToken = req.getHeader("Authorization");
+        if (bearerToken != null && bearerToken.startsWith("Bearer ")) {
+            return bearerToken.substring(7);
+        }else{
+            return null;
+        }
+    }
 
     // 토큰에서 회원 정보 추출
     public String getUserPk(String token) {
-        return extractAllClaims(token).getSubject();
+        String refreshToken = token.replace("Bearer","");
+        return extractAllClaims(refreshToken).getSubject();
     }
 
     // 토큰 유효성, 만료일자 확인
