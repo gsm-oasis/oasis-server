@@ -1,6 +1,5 @@
 package com.real.realoasis.domain.user.entity;
 
-import com.real.realoasis.domain.question.entity.Question;
 import com.real.realoasis.domain.user.type.Role;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
