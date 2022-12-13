@@ -5,7 +5,6 @@ import com.real.realoasis.global.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -25,8 +24,8 @@ public class SecurityConfig {
     @Bean
     protected SecurityFilterChain configure(HttpSecurity http) throws Exception{
         http
-                .cors()
-                .and()
+                .cors();
+        http
                 .csrf().disable()
                 .httpBasic().disable();
         http
@@ -34,6 +33,7 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http
                 .authorizeRequests()
+                .antMatchers(HttpMethod.OPTIONS,"/**/*").permitAll()
                 //auth
                 .antMatchers(HttpMethod.PUT,"/auth/refresh").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth/signup").permitAll()
@@ -67,8 +67,7 @@ public class SecurityConfig {
 
                 //question
                 .antMatchers(HttpMethod.POST,"/question/**").authenticated()
-
-                .anyRequest().denyAll();
+                .anyRequest().permitAll();
         http
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(exceptionHandlerFilter, JwtAuthenticationFilter.class);
