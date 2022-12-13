@@ -16,7 +16,7 @@ public class SignUpServiceImpl implements SignUpService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void signUp(SignUpRequest signupRequest) {
-        if(userFacade.existsById(signupRequest.getEmail())){
+        if(userFacade.existsById(signupRequest.getId())){
             throw new DuplicateEmailException(ErrorCode.DUPLICATE_EMAIL_EXCEPTION);
         }
         userFacade.saveUser(signupRequest);
