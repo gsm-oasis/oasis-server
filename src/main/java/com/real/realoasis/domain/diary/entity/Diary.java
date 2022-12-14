@@ -24,7 +24,7 @@ public class Diary {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
-    @OneToMany
+    @OneToMany(cascade = CascadeType.REMOVE)
     private List<Photo> photo = new ArrayList<>();
     private String mood;
     private String createDate;
