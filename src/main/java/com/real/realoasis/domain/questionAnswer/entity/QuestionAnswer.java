@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.questionAnswer.entity;
 
+import com.real.realoasis.domain.question.entity.Question;
 import com.real.realoasis.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,22 +19,13 @@ public class QuestionAnswer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String answer1;
+    private String answer;
 
-    private String answer2;
-
-    private String content;
+    @ManyToOne
+    private Question question;
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    public void updateAnswer(String answer){
-        if(this.answer1 == null) {
-            this.answer1 = answer;
-        }
-        else {
-            this.answer2 = answer;
-        }
-    }
 }

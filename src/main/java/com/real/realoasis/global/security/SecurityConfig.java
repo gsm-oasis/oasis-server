@@ -66,7 +66,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET,"/diary/list").authenticated()
 
                 //question
-                .antMatchers(HttpMethod.POST,"/question/**").authenticated()
+                .antMatchers(HttpMethod.POST,"/question/answer/**").authenticated()
                 .anyRequest().permitAll();
         http
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)

@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class QuestionAnswerController {
     private final CreateQuestionAnswerService createQuestionAnswerService;
 
-    @PostMapping("/{questionId}")
+    @PostMapping("/answer/{questionId}")
     public ResponseEntity<Void> createAnswer(@PathVariable Long questionId, @RequestBody QuestionAnswerRequest questionAnswerRequest){
         createQuestionAnswerService.createQuestionAnswer(questionAnswerRequest, questionId);
         return new ResponseEntity<>(HttpStatus.CREATED);
