@@ -5,7 +5,7 @@ import com.real.realoasis.domain.auth.exception.InValidAuthCodeException;
 import com.real.realoasis.domain.auth.exception.InvalidTokenException;
 import com.real.realoasis.domain.diary.exception.DiaryNotFoundException;
 import com.real.realoasis.domain.questionAnswer.exception.QuestionNotFoundException;
-import com.real.realoasis.domain.user.exception.DuplicateEmailException;
+import com.real.realoasis.domain.user.exception.DuplicateIdException;
 import com.real.realoasis.domain.user.exception.PasswordNotMatchException;
 import com.real.realoasis.domain.user.exception.UserNotFoundException;
 import com.real.realoasis.global.error.response.ErrorResponse;
@@ -60,8 +60,8 @@ public class GlobalException {
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
     }
 
-    @ExceptionHandler(DuplicateEmailException.class)
-    public ResponseEntity<ErrorResponse> DuplicateEmailException(DuplicateEmailException e){
+    @ExceptionHandler(DuplicateIdException.class)
+    public ResponseEntity<ErrorResponse> DuplicateIdException(DuplicateIdException e){
         ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode());
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
     }

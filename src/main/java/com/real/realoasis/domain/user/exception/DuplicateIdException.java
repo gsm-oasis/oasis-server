@@ -6,6 +6,6 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class DuplicateEmailException extends RuntimeException {
+public class DuplicateIdException extends RuntimeException {
     private final ErrorCode errorCode;
 }

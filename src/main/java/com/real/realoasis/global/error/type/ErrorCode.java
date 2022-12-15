@@ -10,7 +10,7 @@ public enum ErrorCode {
     //user
     USER_NOT_FOUND_EXCEPTION("USER 를 찾을 수 없습니다.",404),
     PASSWORD_NOT_MATCH_EXCEPTION("비밀번호가 일치하지 않습니다.", 400),
-    DUPLICATE_EMAIL_EXCEPTION("이미 존재하는 이메일입니다.",409),
+    DUPLICATE_ID_EXCEPTION("이미 존재하는 아이디입니다.",409),
 
     // mail
     INVALID_AUTH_CODE_EXCEPTION("옳지 않은 인증 코드입니다.", 404),
