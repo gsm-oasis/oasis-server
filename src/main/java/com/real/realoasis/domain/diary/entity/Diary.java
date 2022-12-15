@@ -41,7 +41,7 @@ public class Diary {
 
     @PrePersist
     public void createDate() {
-        this.createDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
+        this.createDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
     }
 
     public void update(String title, String content, String mood){
