@@ -1,6 +1,7 @@
 package com.real.realoasis.domain.user.facade;
 
 import com.real.realoasis.domain.auth.presentation.dto.request.SignUpRequest;
+import com.real.realoasis.domain.auth.presentation.dto.response.SignupResponse;
 import com.real.realoasis.domain.user.entity.User;
 import com.real.realoasis.domain.user.exception.PasswordNotMatchException;
 import com.real.realoasis.domain.user.exception.UserNotFoundException;
@@ -26,7 +27,7 @@ public class UserFacade {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void saveUser(SignUpRequest signUpRequest) {
+    public SignupResponse saveUser(SignUpRequest signUpRequest) {
         Random random = new Random();
         StringBuilder key = new StringBuilder();
 
@@ -45,6 +46,9 @@ public class UserFacade {
                 }
             }
         userRepository.save(signUpRequest.toEntity(passwordEncoder.encode(signUpRequest.getPassword()), key.toString()));
+        return SignupResponse.builder()
+                .code(key.toString())
+                .build();
     }
     @Transactional(rollbackFor = Exception.class)
     public void saveUser(User currentUser){

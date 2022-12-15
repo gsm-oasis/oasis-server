@@ -1,10 +1,7 @@
 package com.real.realoasis.domain.auth.presentation;
 
 import com.real.realoasis.domain.auth.presentation.dto.request.*;
-import com.real.realoasis.domain.auth.presentation.dto.response.LoginResponse;
-import com.real.realoasis.domain.auth.presentation.dto.response.ReissueTokenResponse;
-import com.real.realoasis.domain.auth.presentation.dto.response.SearchIDResponse;
-import com.real.realoasis.domain.auth.presentation.dto.response.SearchPWResponse;
+import com.real.realoasis.domain.auth.presentation.dto.response.*;
 import com.real.realoasis.domain.auth.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -27,9 +24,8 @@ public class AuthController {
 
     // 회원가입
     @PostMapping("/signup")
-    public ResponseEntity<Void> signUp(@Valid @RequestBody SignUpRequest signupRequest){
-        signUpService.signUp(signupRequest);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+    public ResponseEntity<SignupResponse> signUp(@Valid @RequestBody SignUpRequest signupRequest){
+        return new ResponseEntity<>(signUpService.signUp(signupRequest),HttpStatus.CREATED);
     }
 
     // 이메일에 인증코드 전송

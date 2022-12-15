@@ -1,6 +1,7 @@
 package com.real.realoasis.domain.auth.service.Impl;
 
 import com.real.realoasis.domain.auth.presentation.dto.request.SignUpRequest;
+import com.real.realoasis.domain.auth.presentation.dto.response.SignupResponse;
 import com.real.realoasis.domain.auth.service.SignUpService;
 import com.real.realoasis.domain.user.exception.DuplicateIdException;
 import com.real.realoasis.domain.user.facade.UserFacade;
@@ -15,11 +16,11 @@ public class SignUpServiceImpl implements SignUpService {
     private final UserFacade userFacade;
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void signUp(SignUpRequest signupRequest) {
+    public SignupResponse signUp(SignUpRequest signupRequest) {
         if(userFacade.existsById(signupRequest.getId())){
             throw new DuplicateIdException(ErrorCode.DUPLICATE_ID_EXCEPTION);
         }
-        System.out.println(signupRequest.getNickname());
-        userFacade.saveUser(signupRequest);
+        return userFacade.saveUser(signupRequest);
+
     }
 }
