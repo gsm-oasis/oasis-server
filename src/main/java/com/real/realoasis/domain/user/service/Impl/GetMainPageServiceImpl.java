@@ -34,8 +34,8 @@ public class GetMainPageServiceImpl implements GetMainPageService {
         currentUser.updateDatingDate(datingDate);
 
         return MainPageResponse.builder()
-                .userName(currentUser.getNickName())
-                .coupleName(coupleUser.getNickName())
+                .userName(currentUser.getNickname())
+                .coupleName(coupleUser.getNickname())
                 .datingDate(datingDate)
                 .questionId(1L)
                 .content("아직안만듬")

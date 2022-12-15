@@ -15,7 +15,7 @@ public class NicknameChangeServiceImpl implements NicknameChangeService {
     @Override
     public void nicknameChange(NicknameChangeRequest nicknameChangeRequest) {
         User currentUser = userFacade.currentUser();
-        currentUser.updateNickname(nicknameChangeRequest.getNickName());
+        currentUser.updateNickname(nicknameChangeRequest.getNickname());
         userFacade.saveUser(currentUser);
     }
 }

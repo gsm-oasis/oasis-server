@@ -18,7 +18,7 @@ public class SignUpRequest {
     private String id;
     private String email;
     private String password;
-    private String nickName;
+    private String nickname;
 
 
     public User toEntity(String password, String code) {
@@ -26,7 +26,7 @@ public class SignUpRequest {
                 .id(id)
                 .email(email)
                 .password(password)
-                .nickName(nickName)
+                .nickname(nickname)
                 .code(code)
                 .anniversaryTime("5")
                 .questionTime("12:00")

@@ -29,7 +29,7 @@ public class User {
     @NotNull
     private String password;
 
-    private String nickName;
+    private String nickname;
 
     private String questionTime;
 
@@ -61,8 +61,8 @@ public class User {
         this.coupleId = coupleId;
     }
 
-    public void updateNickname(String nickName) {
-        this.nickName = nickName;
+    public void updateNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public void updatePassword(String password) {
