@@ -21,6 +21,9 @@ public enum ErrorCode {
 
     // question
     QUESTION_NOT_FOUND_EXCEPTION("질문을 찾을 수 없습니다.",404),
+
+    // question answer
+    QUESTION_ANSWER_NOT_FOUND_EXCEPTION("답변을 찾을 수 없습니다.", 404),
     // diary
     DIARY_NOT_FOUND_EXCEPTION("일기를 찾을 수 없습니다.", 404);
 
