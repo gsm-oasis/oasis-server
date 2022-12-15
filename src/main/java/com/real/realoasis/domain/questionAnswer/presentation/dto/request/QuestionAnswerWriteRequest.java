@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class QuestionAnswerRequest {
+public class QuestionAnswerWriteRequest {
     private String answer;
 
     public QuestionAnswer toEntity(Question question, User user){
