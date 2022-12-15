@@ -3,7 +3,7 @@ package com.real.realoasis.domain.questionAnswer.facade;
 import com.real.realoasis.domain.question.entity.Question;
 import com.real.realoasis.domain.question.repository.QuestionRepository;
 import com.real.realoasis.domain.questionAnswer.entity.QuestionAnswer;
-import com.real.realoasis.domain.questionAnswer.exception.QuestionNotFoundException;
+import com.real.realoasis.domain.question.exception.QuestionNotFoundException;
 import com.real.realoasis.domain.questionAnswer.repository.QuestionAnswerRepository;
 import com.real.realoasis.global.error.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
@@ -20,6 +20,15 @@ public class QuestionAnswerFacade {
 
     public Question findQuestionByQuestionId(Long questionId){
        return questionRepository.findQuestionById(questionId).orElseThrow(() -> new QuestionNotFoundException(ErrorCode.QUESTION_NOT_FOUND_EXCEPTION));
+    }
+
+    public String findQuestionAnswerByQuestionIdAndUserId(Long questionId, String userId){
+        QuestionAnswer questionAnswer = questionAnswerRepository.findQuestionAnswerByQuestionIdAndUserId(questionId, userId);
+        if(questionAnswer == null){
+            return " ";
+        } else {
+            return questionAnswer.getAnswer();
+        }
     }
     public void saveAnswer(QuestionAnswer questionAnswer) {
         questionAnswerRepository.save(questionAnswer);
