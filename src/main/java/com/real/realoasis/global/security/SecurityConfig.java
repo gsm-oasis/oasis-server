@@ -41,7 +41,8 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.PUT, "/auth/logout").permitAll()
                 .antMatchers(HttpMethod.GET,"/auth/search/id").permitAll()
                 .antMatchers(HttpMethod.GET,"/auth/search/pw").permitAll()
-                .antMatchers(HttpMethod.POST,"/auth/mailConfirm").permitAll()
+                .antMatchers(HttpMethod.POST,"/auth/mailconfirm").permitAll()
+                .antMatchers(HttpMethod.POST,"/auth/sendmail").permitAll()
 
                 //user
                 .antMatchers(HttpMethod.DELETE, "/user/withdrawal").authenticated()
@@ -67,6 +68,7 @@ public class SecurityConfig {
 
                 //question
                 .antMatchers(HttpMethod.POST,"/question/answer/**").authenticated()
+
                 .anyRequest().permitAll();
         http
                 .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
