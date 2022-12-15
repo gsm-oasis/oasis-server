@@ -27,16 +27,22 @@ public class AuthController {
 
     // 회원가입
     @PostMapping("/signup")
-    public ResponseEntity<String> signUp(@Valid @RequestBody SignUpRequest signupRequest) throws MessagingException, UnsupportedEncodingException {
+    public ResponseEntity<Void> signUp(@Valid @RequestBody SignUpRequest signupRequest){
         signUpService.signUp(signupRequest);
-        emailService.sendEmail(signupRequest.getEmail());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
-    // 이메일 인증
-    @PostMapping("/mailConfirm")
+    // 이메일에 인증코드 전송
+    @PostMapping("/sendmail")
+    public ResponseEntity<Void> sendMail(@RequestBody SendMailRequest sendMailRequest) throws MessagingException, UnsupportedEncodingException {
+        emailService.sendEmail(sendMailRequest.getEmail());
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    // 인증코드 확인
+    @PostMapping("/mailconfirm")
     public ResponseEntity<Void> confirmAuthenticationCode(@RequestBody AuthenticationCodeReq authenticationCode) {
-        emailService.confirmAuthenticationCode(authenticationCode.getAuthenticationCode());
+        emailService.confirmAuthenticationCode(authenticationCode.getCode());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
