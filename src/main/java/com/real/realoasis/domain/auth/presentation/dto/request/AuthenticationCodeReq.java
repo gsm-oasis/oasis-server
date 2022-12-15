@@ -10,6 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AuthenticationCodeReq {
-    private String authenticationCode;
-
+    private String code;
 }
