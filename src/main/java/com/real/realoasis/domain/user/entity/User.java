@@ -50,6 +50,7 @@ public class User {
 
     @ElementCollection(fetch = FetchType.EAGER) // roles 컬렉션
     @CollectionTable(name = "role", joinColumns = @JoinColumn(name = "id"))
+    @Builder.Default
     private List<Role> roles = new ArrayList<>();
 
     public void updateRefreshToken(String refreshToken){

@@ -25,6 +25,7 @@ public class Diary {
     private Long id;
     private String content;
     @OneToMany(cascade = CascadeType.REMOVE)
+    @Builder.Default
     private List<Photo> photo = new ArrayList<>();
     private String mood;
     private String createDate;
