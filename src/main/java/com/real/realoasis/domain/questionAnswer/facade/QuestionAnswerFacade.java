@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 
 @Component
 @RequiredArgsConstructor
@@ -32,5 +34,9 @@ public class QuestionAnswerFacade {
     }
     public void saveAnswer(QuestionAnswer questionAnswer) {
         questionAnswerRepository.save(questionAnswer);
+    }
+
+    public List<QuestionAnswer> findAllByUserId(String userId) {
+        return questionAnswerRepository.findAllByUserId(userId);
     }
 }
