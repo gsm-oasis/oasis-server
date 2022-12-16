@@ -28,28 +28,28 @@ public class UserSettingController {
     }
 
     // 닉네임 변경 페이지
-    @PutMapping("/change/nickname")
+    @PatchMapping("/change/nickname")
     public ResponseEntity<Void> changeNickname(@RequestBody NicknameChangeRequest nicknameChangeRequest){
         nicknameChangeService.nicknameChange(nicknameChangeRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // 비밀번호 변경 페이지
-    @PutMapping("/change/password")
+    @PatchMapping("/change/password")
     public ResponseEntity<Void> changePassword(@RequestBody PasswordChangeRequest passwordChangeRequest){
         passwordChangeService.passwordChange(passwordChangeRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // 질문시간 변경 페이지
-    @PutMapping("/change/questiontime")
+    @PatchMapping("/change/questiontime")
     public ResponseEntity<Void> changeQuestionTime(@RequestBody QuestionTimeChangeRequest questionTimeChangeRequest){
         questionTimeChangeService.questionTimeChange(questionTimeChangeRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // 기념일 알림 시간 변경 페이지
-    @PutMapping("/change/anniversarytime")
+    @PatchMapping("/change/anniversarytime")
     public ResponseEntity<Void> changeAnniversaryTIme(@RequestBody AnniversaryTimeChangeRequest anniversaryTimeChangeRequest){
         anniversaryTimeChangeService.anniversaryTimeChange(anniversaryTimeChangeRequest);
         return new ResponseEntity<>(HttpStatus.OK);

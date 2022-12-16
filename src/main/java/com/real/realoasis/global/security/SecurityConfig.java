@@ -35,10 +35,10 @@ public class SecurityConfig {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS,"/**/*").permitAll()
                 //auth
-                .antMatchers(HttpMethod.PUT,"/auth/refresh").permitAll()
+                .antMatchers(HttpMethod.PATCH,"/auth/refresh").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth/signup").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth/login").permitAll()
-                .antMatchers(HttpMethod.PUT, "/auth/logout").permitAll()
+                .antMatchers(HttpMethod.PATCH, "/auth/logout").permitAll()
                 .antMatchers(HttpMethod.GET,"/auth/search/id").permitAll()
                 .antMatchers(HttpMethod.GET,"/auth/search/pw").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth/mailconfirm").permitAll()
@@ -50,10 +50,10 @@ public class SecurityConfig {
 
                 //user/setting
                 .antMatchers(HttpMethod.GET,"/user/setting/").authenticated()
-                .antMatchers(HttpMethod.PUT,"/user/setting/change/nickname").authenticated()
-                .antMatchers(HttpMethod.PUT,"/user/setting/change/password").authenticated()
-                .antMatchers(HttpMethod.PUT,"/user/setting/change/questiontime").authenticated()
-                .antMatchers(HttpMethod.PUT,"/user/setting/change/anniversarytime").authenticated()
+                .antMatchers(HttpMethod.PATCH,"/user/setting/change/nickname").authenticated()
+                .antMatchers(HttpMethod.PATCH,"/user/setting/change/password").authenticated()
+                .antMatchers(HttpMethod.PATCH,"/user/setting/change/questiontime").authenticated()
+                .antMatchers(HttpMethod.PATCH,"/user/setting/change/anniversarytime").authenticated()
 
                 //mainpage
                 .antMatchers(HttpMethod.GET,"/mainpage/").authenticated()
@@ -61,7 +61,7 @@ public class SecurityConfig {
 
                 //diary
                 .antMatchers(HttpMethod.POST,"/diary/create").authenticated()
-                .antMatchers(HttpMethod.PUT,"/diary/edit/**").authenticated()
+                .antMatchers(HttpMethod.PATCH,"/diary/edit/**").authenticated()
                 .antMatchers(HttpMethod.GET,"/diary/detail/**").authenticated()
                 .antMatchers(HttpMethod.DELETE,"/diary/delete/**").authenticated()
                 .antMatchers(HttpMethod.GET,"/diary/list").authenticated()

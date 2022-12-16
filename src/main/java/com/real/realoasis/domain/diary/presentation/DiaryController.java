@@ -34,7 +34,7 @@ public class DiaryController {
     }
 
     //일기 수정
-    @PutMapping("/edit/{diaryId}")
+    @PatchMapping("/edit/{diaryId}")
     public ResponseEntity<Void> editDiary(
             @PathVariable Long diaryId,
             @RequestPart(value = "file", required = false)List<MultipartFile> files,

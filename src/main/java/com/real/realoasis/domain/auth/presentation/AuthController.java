@@ -49,7 +49,7 @@ public class AuthController {
     }
 
     // 토큰 재발급
-    @PutMapping("/refresh")
+    @PatchMapping("/refresh")
     public ResponseEntity<ReissueTokenResponse> refresh(@RequestHeader("Refresh") String refreshToken){
         return new ResponseEntity<>(reissueTokenService.reissue(refreshToken), HttpStatus.OK);
     }
