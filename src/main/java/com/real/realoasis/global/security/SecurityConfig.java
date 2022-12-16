@@ -68,6 +68,8 @@ public class SecurityConfig {
 
                 //question
                 .antMatchers(HttpMethod.POST,"/question/answer/**").authenticated()
+                .antMatchers(HttpMethod.GET,"/question/list").authenticated()
+                .antMatchers(HttpMethod.GET,"/question/**").authenticated()
 
                 .anyRequest().permitAll();
         http
