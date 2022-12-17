@@ -1,11 +1,14 @@
 package com.real.realoasis.domain.user.entity;
 
+import com.real.realoasis.domain.heart.entity.Heart;
 import com.real.realoasis.domain.user.type.Role;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -45,6 +48,13 @@ public class User {
 
     private int datingDate;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Heart heart;
+
+    public void updateHeart(Heart heart){
+        this.heart = heart;
+    }
     @Column(name = "refresh_token")
     private String refreshToken;
 
