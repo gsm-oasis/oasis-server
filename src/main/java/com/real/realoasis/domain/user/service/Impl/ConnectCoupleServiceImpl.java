@@ -22,7 +22,7 @@ public class ConnectCoupleServiceImpl implements ConnectCoupleService {
 
         userFacade.saveUser(currentUser);
         return ConnectCoupleResponse.builder()
-                .coupleCode(coupleUser.getNickname())
+                .nickname(coupleUser.getNickname())
                 .build();
     }
 }

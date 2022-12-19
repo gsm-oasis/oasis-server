@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ConnectCoupleResponse {
-    private String coupleCode;
+    private String nickname;
 }
