@@ -1,6 +1,7 @@
 package com.real.realoasis.domain.user.presentation;
 
 import com.real.realoasis.domain.user.presentation.dto.request.ConnectCoupleRequest;
+import com.real.realoasis.domain.user.presentation.dto.response.ConnectCoupleResponse;
 import com.real.realoasis.domain.user.service.ConnectCoupleService;
 import com.real.realoasis.domain.user.service.WithdrawalService;
 import lombok.RequiredArgsConstructor;
@@ -24,9 +25,8 @@ public class UserController {
 
     // 커플연결
     @PostMapping("/connect/couple")
-    public ResponseEntity<Void> connectCouple(@RequestBody ConnectCoupleRequest connectCoupleRequest){
-        connectCoupleService.connectCouple(connectCoupleRequest);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<ConnectCoupleResponse> connectCouple(@RequestBody ConnectCoupleRequest connectCoupleRequest){
+        return new ResponseEntity<>(connectCoupleService.connectCouple(connectCoupleRequest),HttpStatus.OK);
     }
 
 
