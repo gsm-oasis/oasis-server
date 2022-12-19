@@ -29,7 +29,6 @@ public class JwtTokenProvider {
     }
 
     private Key getSignInKey(String secretKey) {
-        secretKey = secretKey + "as-12939gjbkavlllclj$2sdsjjhbhwpvjjcpivjvvjwpvmwp-cdk";
         byte[] keyByte = secretKey.getBytes(StandardCharsets.UTF_8);
         return Keys.hmacShaKeyFor(keyByte);
     }
@@ -48,7 +47,7 @@ public class JwtTokenProvider {
     }
 
     // 토큰 생성
-    // userPk == id
+    // userPk == email
     public String createToken(String userPk, TokenType tokenType, Long expireTime){
         Claims claims = Jwts.claims().setSubject(userPk); // JWT payload 에 저장되는 정보단위
         claims.put("tokenType", tokenType.value); // 정보는 key / value 쌍으로 저장
