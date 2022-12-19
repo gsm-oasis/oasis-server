@@ -32,6 +32,7 @@ public class LoginServiceImpl implements LoginService {
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .expiredAt(jwtTokenProvider.getExpiredTime())
+                .code(user.getCode())
                 .build();
     }
 }
