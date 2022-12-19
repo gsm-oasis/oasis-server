@@ -34,7 +34,7 @@ public class User {
 
     private String nickname;
 
-가    private long anniversaryDate;
+    private long anniversaryDate;
 
     private String code;
 
