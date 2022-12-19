@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SettingResponse {
-    private String questionTime;
     private String anniversaryTime;
     private String version;
     private String myCode;

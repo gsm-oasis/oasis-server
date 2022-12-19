@@ -34,8 +34,6 @@ public class User {
 
     private String nickname;
 
-    private String questionTime;
-
     private String anniversaryTime;
 
     private String code;
@@ -46,7 +44,7 @@ public class User {
 
     private String today;
 
-    private int datingDate;
+    private long datingDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -79,14 +77,9 @@ public class User {
         this.password = password;
     }
 
-    public void updateQuestionTime(String questionTime) { this.questionTime = questionTime; }
 
     public void updateAnniversaryTime(String anniversaryTime) {
         this.anniversaryTime = anniversaryTime;
-    }
-
-    public void updateDatingDate(int datingDate){
-        this.datingDate = datingDate;
     }
 
     public void createFirstDay(String firstDay){
@@ -96,5 +89,9 @@ public class User {
     @PrePersist
     public void today(){
         this.today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+    }
+
+    public void updateDatingDate(long datingDate) {
+        this.datingDate = datingDate;
     }
 }

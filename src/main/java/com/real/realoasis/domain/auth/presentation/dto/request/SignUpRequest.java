@@ -27,10 +27,9 @@ public class SignUpRequest {
                 .id(id)
                 .email(email)
                 .password(password)
+                .anniversaryTime("7")
                 .nickname(nickname)
                 .code(code)
-                .anniversaryTime("5")
-                .questionTime("12:00")
                 .roles(Collections.singletonList(Role.ROLE_USER))
                 .build();
     }

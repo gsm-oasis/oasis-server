@@ -3,7 +3,6 @@ package com.real.realoasis.domain.user.presentation;
 import com.real.realoasis.domain.user.presentation.dto.request.AnniversaryTimeChangeRequest;
 import com.real.realoasis.domain.user.presentation.dto.request.NicknameChangeRequest;
 import com.real.realoasis.domain.user.presentation.dto.request.PasswordChangeRequest;
-import com.real.realoasis.domain.user.presentation.dto.request.QuestionTimeChangeRequest;
 import com.real.realoasis.domain.user.presentation.dto.response.SettingResponse;
 import com.real.realoasis.domain.user.service.*;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +17,6 @@ public class UserSettingController {
     private final GetSettingService getSettingService;
     private final NicknameChangeService nicknameChangeService;
     private final PasswordChangeService passwordChangeService;
-    private final QuestionTimeChangeService questionTimeChangeService;
     private final AnniversaryTimeChangeService anniversaryTimeChangeService;
 
     // 설정 메인 페이지
@@ -38,13 +36,6 @@ public class UserSettingController {
     @PatchMapping("/change/password")
     public ResponseEntity<Void> changePassword(@RequestBody PasswordChangeRequest passwordChangeRequest){
         passwordChangeService.passwordChange(passwordChangeRequest);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    // 질문시간 변경 페이지
-    @PatchMapping("/change/questiontime")
-    public ResponseEntity<Void> changeQuestionTime(@RequestBody QuestionTimeChangeRequest questionTimeChangeRequest){
-        questionTimeChangeService.questionTimeChange(questionTimeChangeRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
