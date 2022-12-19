@@ -11,8 +11,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 
 @Service
@@ -27,16 +27,15 @@ public class GetMainPageServiceImpl implements GetMainPageService {
         User currentUser = userFacade.currentUser();
         User coupleUser = userFacade.findUserById(currentUser.getCoupleId());
 
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyyMMdd");
+        currentUser.today();
 
-        LocalDate firstDayToLocalDate = LocalDate.parse(currentUser.getFirstDay(), format);
-        LocalDate todayToLocalDate = LocalDate.parse(currentUser.getToday(), format);
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
+        LocalDate firstDayToLocalDate = LocalDate.parse(currentUser.getFirstDay(), dateFormat);
+        LocalDate todayToLocalDate = LocalDate.parse(currentUser.getToday(), dateFormat);
 
-        Period diff = Period.between(firstDayToLocalDate, todayToLocalDate);
-        int datingDate = diff.getYears() + diff.getMonths() + diff.getDays();
-        currentUser.updateDatingDate(datingDate);
+        long datingDate = ChronoUnit.DAYS.between(firstDayToLocalDate, todayToLocalDate);
 
-        Question question = questionAnswerFacade.findQuestionByQuestionId((long) datingDate);
+        Question question = questionAnswerFacade.findQuestionByQuestionId(datingDate - currentUser.getDatingDate());
 
         return MainPageResponse.builder()
                 .userName(currentUser.getNickname())
