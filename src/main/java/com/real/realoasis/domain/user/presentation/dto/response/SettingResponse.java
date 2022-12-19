@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SettingResponse {
-    private String anniversaryTime;
+    private long anniversaryTime;
     private String version;
     private String myCode;
 }

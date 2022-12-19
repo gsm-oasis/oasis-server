@@ -34,7 +34,7 @@ public class User {
 
     private String nickname;
 
-    private String anniversaryTime;
+가    private long anniversaryDate;
 
     private String code;
 
@@ -78,8 +78,8 @@ public class User {
     }
 
 
-    public void updateAnniversaryTime(String anniversaryTime) {
-        this.anniversaryTime = anniversaryTime;
+    public void updateAnniversaryTime(long anniversaryDate) {
+        this.anniversaryDate = anniversaryDate;
     }
 
     public void createFirstDay(String firstDay){

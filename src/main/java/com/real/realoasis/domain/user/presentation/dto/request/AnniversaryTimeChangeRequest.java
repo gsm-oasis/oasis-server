@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AnniversaryTimeChangeRequest {
-    private String anniversaryTime;
+    private long anniversaryTime;
 }

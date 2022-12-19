@@ -16,7 +16,7 @@ public class GetSettingServiceImpl implements GetSettingService {
     public SettingResponse getSetting() {
         User user = userFacade.currentUser();
         return SettingResponse.builder()
-                .anniversaryTime(user.getAnniversaryTime())
+                .anniversaryTime(user.getAnniversaryDate())
                 .myCode(user.getCode())
                 .build();
     }
