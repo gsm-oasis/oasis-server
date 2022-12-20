@@ -33,6 +33,7 @@ public class LoginServiceImpl implements LoginService {
                 .refreshToken(refreshToken)
                 .expiredAt(jwtTokenProvider.getExpiredTime())
                 .code(user.getCode())
+                .couple(user.isCouple())
                 .build();
     }
 }

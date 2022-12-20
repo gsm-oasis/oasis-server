@@ -19,8 +19,10 @@ public class ConnectCoupleServiceImpl implements ConnectCoupleService {
         User coupleUser = userFacade.findUserByCode(connectCoupleRequest.getCode());
 
         currentUser.updateCoupleId(coupleUser.getId());
+        currentUser.updateIsCouple();
 
         userFacade.saveUser(currentUser);
+
         return ConnectCoupleResponse.builder()
                 .nickname(coupleUser.getNickname())
                 .build();

@@ -34,6 +34,8 @@ public class User {
 
     private String nickname;
 
+    private boolean isCouple;
+
     private long anniversaryDate;
 
     private String code;
@@ -63,6 +65,10 @@ public class User {
 
     public void updateRefreshToken(String refreshToken){
         this.refreshToken = refreshToken;
+    }
+
+    public void updateIsCouple() {
+        this.isCouple = true;
     }
 
     public void updateCoupleId(String coupleId){
