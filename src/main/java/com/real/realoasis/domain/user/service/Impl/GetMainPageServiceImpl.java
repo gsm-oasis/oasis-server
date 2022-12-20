@@ -28,6 +28,8 @@ public class GetMainPageServiceImpl implements GetMainPageService {
 
         currentUser.today();
 
+        User coupleUser = userFacade.findUserById(currentUser.getCoupleId());
+
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
         LocalDate firstDayToLocalDate = LocalDate.parse(currentUser.getFirstDay(), dateFormat);
         LocalDate todayToLocalDate = LocalDate.parse(currentUser.getToday(), dateFormat);
@@ -37,6 +39,8 @@ public class GetMainPageServiceImpl implements GetMainPageService {
         Question question = questionAnswerFacade.findQuestionByQuestionId(datingDate - currentUser.getDatingDate());
 
         return MainPageResponse.builder()
+                .nickname(currentUser.getNickname())
+                .coupleNickname(coupleUser.getNickname())
                 .heartLevel(currentUser.getHeart().getLevel())
                 .datingDate(datingDate)
                 .questionId(question.getId())

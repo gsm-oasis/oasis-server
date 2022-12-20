@@ -17,6 +17,4 @@ public class LoginResponse {
     private LocalDateTime expiredAt;
     private String code;
     private boolean couple;
-    private String name;
-    private String coupleName;
 }

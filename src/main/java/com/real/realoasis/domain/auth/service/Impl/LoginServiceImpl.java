@@ -22,8 +22,6 @@ public class LoginServiceImpl implements LoginService {
         User user = userFacade.findUserById(loginRequest.getId());
         userFacade.checkPassword(user, loginRequest.getPassword());
 
-        User couple = userFacade.findUserById(user.getCoupleId());
-
         String accessToken = jwtTokenProvider.generateAccessToken(loginRequest.getId());
         String refreshToken = jwtTokenProvider.generateRefreshToken(loginRequest.getId());
 
@@ -35,8 +33,6 @@ public class LoginServiceImpl implements LoginService {
                 .expiredAt(jwtTokenProvider.getExpiredTime())
                 .code(user.getCode())
                 .couple(user.isCouple())
-                .name(user.getNickname())
-                .coupleName(couple.getNickname())
                 .build();
     }
 }

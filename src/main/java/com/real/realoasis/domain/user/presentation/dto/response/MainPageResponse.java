@@ -6,7 +6,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.time.Period;
 import java.util.stream.Stream;
 
 @Builder
@@ -14,6 +13,8 @@ import java.util.stream.Stream;
 @AllArgsConstructor
 @NoArgsConstructor
 public class MainPageResponse {
+    private String nickname;
+    private String coupleNickname;
     private int heartLevel;
     private long datingDate;
     private Long questionId;
