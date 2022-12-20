@@ -47,7 +47,7 @@ public class JwtTokenProvider {
     }
 
     // 토큰 생성
-    // userPk == email
+    // userPk == id
     public String createToken(String userPk, TokenType tokenType, Long expireTime){
         Claims claims = Jwts.claims().setSubject(userPk); // JWT payload 에 저장되는 정보단위
         claims.put("tokenType", tokenType.value); // 정보는 key / value 쌍으로 저장
