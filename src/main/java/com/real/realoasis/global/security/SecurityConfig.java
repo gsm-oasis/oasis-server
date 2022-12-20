@@ -22,7 +22,7 @@ public class SecurityConfig {
     private final ExceptionHandlerFilter exceptionHandlerFilter;
 
     @Bean
-    protected SecurityFilterChain configure(HttpSecurity http) throws Exception{
+    public SecurityFilterChain configure(HttpSecurity http) throws Exception{
         http
                 .cors();
         http
