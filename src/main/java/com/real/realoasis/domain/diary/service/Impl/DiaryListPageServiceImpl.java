@@ -31,20 +31,18 @@ public class DiaryListPageServiceImpl implements DiaryListPageService {
         diaryFacade.findAllByUserId(currentUser.getId()).forEach(diary -> {
             Long diaryId = diary.getId();
             String content = diary.getContent();
-            String mood = diary.getMood();
             String title = diary.getTitle();
             String writer = diary.getWriter();
             String createDate = diary.getCreateDate();
-            list.add(new DiaryListPageResponse(diaryId, content, mood, title, writer, createDate));
+            list.add(new DiaryListPageResponse(diaryId, content, title, writer, createDate));
         });
         diaryFacade.findAllByUserId(coupleUser.getId()).forEach(diary -> {
             Long diaryId = diary.getId();
             String content = diary.getContent();
-            String mood = diary.getMood();
             String title = diary.getTitle();
             String writer = diary.getWriter();
             String createDate = diary.getCreateDate();
-            list.add(new DiaryListPageResponse(diaryId, content, mood, title, writer, createDate));
+            list.add(new DiaryListPageResponse(diaryId, content, title, writer, createDate));
         });
         return list.stream()
                 .sorted(Comparator.comparing(DiaryListPageResponse::getDiaryId).reversed());

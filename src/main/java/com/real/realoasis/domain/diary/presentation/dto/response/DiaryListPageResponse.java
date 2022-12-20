@@ -12,7 +12,6 @@ import lombok.NoArgsConstructor;
 public class DiaryListPageResponse {
     private Long diaryId;
     private String content;
-    private String mood;
     private String title;
     private String writer;
     private String createDate;
