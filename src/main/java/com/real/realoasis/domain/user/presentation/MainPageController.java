@@ -24,6 +24,6 @@ public class MainPageController {
     @PostMapping("/enter/datingdate")
     public ResponseEntity<Void> datingDateEnter(@RequestBody DatingDateEnterRequest datingDateEnterRequest){
         datingDateEnterService.datingDateEnter(datingDateEnterRequest);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
