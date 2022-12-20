@@ -25,7 +25,6 @@ public class GetMainPageServiceImpl implements GetMainPageService {
     @Override
     public MainPageResponse getMainPage() {
         User currentUser = userFacade.currentUser();
-        User coupleUser = userFacade.findUserById(currentUser.getCoupleId());
 
         currentUser.today();
 
@@ -38,8 +37,7 @@ public class GetMainPageServiceImpl implements GetMainPageService {
         Question question = questionAnswerFacade.findQuestionByQuestionId(datingDate - currentUser.getDatingDate());
 
         return MainPageResponse.builder()
-                .userName(currentUser.getNickname())
-                .coupleName(coupleUser.getNickname())
+                .heartLevel(currentUser.getHeart().getLevel())
                 .datingDate(datingDate)
                 .questionId(question.getId())
                 .content(question.getContent())
