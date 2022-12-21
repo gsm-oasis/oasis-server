@@ -43,10 +43,11 @@ public class JwtTokenProvider {
                 .getBody();
     }
 
-    public String getExpiredTime() {
-        return LocalDateTime.now().plusSeconds(ACCESS_TOKEN_EXPIRED_TIME/1000).format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
+    public Long getExpiredTime(String token) {
+        Date expirationTime = extractAllClaims(token).getExpiration();
+        long now = new Date().getTime();
+        return expirationTime.getTime() - now;
     }
-
     // 토큰 생성
     // userPk == id
     public String createToken(String userPk, TokenType tokenType, Long expireTime){

@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 public class LoginResponse {
     private String accessToken;
     private String refreshToken;
-    private String expiredAt;
+    private Long expiredAt;
     private String code;
     private boolean couple;
 }
