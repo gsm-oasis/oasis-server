@@ -11,13 +11,14 @@ import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @RequiredArgsConstructor
 @Component
 public class JwtTokenProvider {
     private final JwtProperties jwtProperties;
-    private final long ACCESS_TOKEN_EXPIRED_TIME = 2 * 60 * 10000; // 2시간
+    private final long ACCESS_TOKEN_EXPIRED_TIME = 2 * 60 * 500; // 2시간
     private final long REFRESH_TOKEN_EXPIRED_TIME = 7 * 24 * 60 * 60 * 1000; // 1주
 
     @AllArgsConstructor
@@ -42,8 +43,8 @@ public class JwtTokenProvider {
                 .getBody();
     }
 
-    public LocalDateTime getExpiredTime() {
-        return LocalDateTime.now().plusSeconds(ACCESS_TOKEN_EXPIRED_TIME/1000);
+    public String getExpiredTime() {
+        return LocalDateTime.now().plusSeconds(ACCESS_TOKEN_EXPIRED_TIME/1000).format(DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss"));
     }
 
     // 토큰 생성
