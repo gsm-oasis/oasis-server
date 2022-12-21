@@ -1,7 +1,7 @@
 package com.real.realoasis.domain.auth.service;
 
-import com.real.realoasis.domain.auth.presentation.dto.response.ReissueTokenResponse;
+import com.real.realoasis.domain.auth.presentation.dto.response.LoginResponse;
 
 public interface ReissueTokenService {
-    ReissueTokenResponse reissue(String refreshToken);
+    LoginResponse reissue(String refreshToken);
 }

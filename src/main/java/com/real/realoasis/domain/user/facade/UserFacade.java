@@ -17,16 +17,15 @@ import java.util.Random;
 
 @Component
 @RequiredArgsConstructor
+@Transactional(readOnly = true, rollbackFor = Exception.class)
 public class UserFacade {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    @Transactional(readOnly = true, rollbackFor = Exception.class)
     public boolean existsById(String id) {
         return userRepository.existsById(id);
     }
 
-    @Transactional(rollbackFor = Exception.class)
     public SignupResponse saveUser(SignUpRequest signUpRequest) {
         Random random = new Random();
         StringBuilder key = new StringBuilder();
@@ -50,17 +49,14 @@ public class UserFacade {
                 .code(key.toString())
                 .build();
     }
-    @Transactional(rollbackFor = Exception.class)
     public void saveUser(User currentUser){
         userRepository.save(currentUser);
     }
 
-    @Transactional(rollbackFor = Exception.class)
     public User findUserById(String id) {
         return userRepository.findUserById(id).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND_EXCEPTION));
     }
 
-    @Transactional(rollbackFor = Exception.class)
     public String findUserByEmail(String email){
         User user = userRepository.findUserByEmail(email);
         if(user == null) {
@@ -69,22 +65,55 @@ public class UserFacade {
         return user.getId();
     }
 
-    @Transactional(rollbackFor = Exception.class)
     public User findUserByCode(String code) {
         return userRepository.findUserByCode(code).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND_EXCEPTION));
     }
 
-    @Transactional(rollbackFor = Exception.class)
     public void checkPassword(User user, String password) {
         if(!passwordEncoder.matches(password, user.getPassword())) {
             throw new PasswordNotMatchException(ErrorCode.PASSWORD_NOT_MATCH_EXCEPTION);
         }
     }
 
-    @Transactional(rollbackFor = Exception.class)
     public User currentUser() {
         String id = SecurityContextHolder.getContext().getAuthentication().getName();
         return findUserById(id);
+    }
+
+
+    public int getAnniversary(long datingDate){
+        int annivesary = 100;
+        if(datingDate < 100){
+            annivesary = 100;
+            return annivesary;
+        } else if (datingDate < 200) {
+            annivesary = 200;
+            return annivesary;
+        } else if (datingDate < 300) {
+            annivesary = 300;
+            return annivesary;
+        }else if (datingDate < 400) {
+            annivesary = 400;
+            return annivesary;
+        }else if (datingDate < 500) {
+            annivesary = 500;
+            return annivesary;
+        }else if (datingDate < 600) {
+            annivesary = 600;
+            return annivesary;
+        }else if (datingDate < 700) {
+            annivesary = 700;
+            return annivesary;
+        }else if (datingDate < 800) {
+            annivesary = 800;
+            return annivesary;
+        }else if (datingDate < 900) {
+            annivesary = 900;
+            return annivesary;
+        }else if (datingDate < 1000) {
+            annivesary = 1000;
+            return annivesary;
+        } else return annivesary;
     }
 
 }

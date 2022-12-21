@@ -16,8 +16,8 @@ public class LoginServiceImpl implements LoginService {
     private final UserFacade userFacade;
     private final JwtTokenProvider jwtTokenProvider;
 
-    @Override
     @Transactional(rollbackFor = Exception.class)
+    @Override
     public LoginResponse login(LoginRequest loginRequest) {
         User user = userFacade.findUserById(loginRequest.getId());
         userFacade.checkPassword(user, loginRequest.getPassword());

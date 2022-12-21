@@ -2,7 +2,7 @@ package com.real.realoasis.domain.auth.service.Impl;
 
 import com.real.realoasis.domain.auth.exception.ExpiredTokenException;
 import com.real.realoasis.domain.auth.exception.InvalidTokenException;
-import com.real.realoasis.domain.auth.presentation.dto.response.ReissueTokenResponse;
+import com.real.realoasis.domain.auth.presentation.dto.response.LoginResponse;
 import com.real.realoasis.domain.auth.service.ReissueTokenService;
 import com.real.realoasis.domain.user.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
@@ -10,6 +10,7 @@ import com.real.realoasis.global.error.type.ErrorCode;
 import com.real.realoasis.global.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,8 +18,9 @@ public class ReissueTokenServiceImpl implements ReissueTokenService {
     private final JwtTokenProvider jwtTokenProvider;
     private final UserFacade userFacade;
 
+    @Transactional(rollbackFor = Exception.class)
     @Override
-    public ReissueTokenResponse reissue(String refreshToken) {
+    public LoginResponse reissue(String refreshToken) {
         if(jwtTokenProvider.validateToken(refreshToken)){
             throw  new ExpiredTokenException(ErrorCode.EXPIRATION_TOKEN_EXCEPTION);
         }
@@ -32,9 +34,14 @@ public class ReissueTokenServiceImpl implements ReissueTokenService {
         String newAccessToken = jwtTokenProvider.generateAccessToken(user.getId());
         String newRefreshToken = jwtTokenProvider.generateRefreshToken(user.getId());
 
-        return ReissueTokenResponse.builder()
+        user.updateRefreshToken(newRefreshToken);
+
+        return LoginResponse.builder()
                 .accessToken(newAccessToken)
                 .refreshToken(newRefreshToken)
+                .expiredAt(jwtTokenProvider.getExpiredTime())
+                .code(user.getCode())
+                .couple(user.isCouple())
                 .build();
     }
 }

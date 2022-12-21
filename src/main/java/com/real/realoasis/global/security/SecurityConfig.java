@@ -33,7 +33,7 @@ public class SecurityConfig {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
         http
                 .authorizeRequests()
-                .antMatchers(HttpMethod.OPTIONS,"/**/*").permitAll()
+                .mvcMatchers(HttpMethod.OPTIONS,"/**").permitAll()
                 //auth
                 .antMatchers(HttpMethod.PATCH,"/auth/refresh").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth/signup").permitAll()
@@ -72,7 +72,7 @@ public class SecurityConfig {
 
                 .anyRequest().permitAll();
         http
-                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
+                .addFilterAfter(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(exceptionHandlerFilter, JwtAuthenticationFilter.class);
 
         return http.build();

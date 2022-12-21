@@ -43,9 +43,11 @@ public class GetMainPageServiceImpl implements GetMainPageService {
                 .coupleNickname(coupleUser.getNickname())
                 .heartLevel(currentUser.getHeart().getLevel())
                 .datingDate(datingDate)
+                .anniversary(userFacade.getAnniversary(datingDate))
                 .questionId(question.getId())
                 .content(question.getContent())
                 .diaryListPageResponse(diaryListPageService.getList())
                 .build();
     }
+
 }

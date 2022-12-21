@@ -17,6 +17,7 @@ public class MainPageResponse {
     private String coupleNickname;
     private int heartLevel;
     private long datingDate;
+    private int anniversary;
     private Long questionId;
     private String content;
     private Stream<DiaryListPageResponse> diaryListPageResponse;
