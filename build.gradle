@@ -52,6 +52,9 @@ dependencies {
 
     // file upload
     implementation 'commons-io:commons-io:2.11.0'
+
+    // redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 }
 
 tasks.named('test') {
