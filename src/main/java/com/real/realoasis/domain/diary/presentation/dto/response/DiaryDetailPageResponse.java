@@ -16,6 +16,6 @@ public class DiaryDetailPageResponse {
     private String title;
     private String content;
     private String mood;
-    private String writer;
-    private List<Photo> photoList;
+    private List<Photo> imgs;
+    private String createDate;
 }
