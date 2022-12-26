@@ -15,6 +15,11 @@ public class DiaryDetailPageServiceImpl implements DiaryDetailPageService {
     @Override
     public DiaryDetailPageResponse getDetailPage(Long diaryId) {
         Diary diary = diaryFacade.findDiaryById(diaryId);
-        return new DiaryDetailPageResponse(diary.getTitle(), diary.getContent(), diary.getMood(), diary.getWriter(), diary.getPhoto());
+        String cd = diary.getCreateDate(); //20221216
+        String year = cd.substring(0,3);
+        String month = cd.substring(4,5);
+        String day = cd.substring(6,7);
+        String createDate = year + "년 " + month + "월 " + day + "일";
+        return new DiaryDetailPageResponse(diary.getTitle(), diary.getContent(), diary.getMood(), diary.getPhoto(), createDate);
     }
 }
