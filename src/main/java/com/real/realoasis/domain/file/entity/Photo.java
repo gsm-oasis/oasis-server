@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.file.entity;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,6 +10,8 @@ import javax.persistence.*;
 @Entity
 @NoArgsConstructor
 @Getter
+@Builder
+@AllArgsConstructor
 public class Photo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,17 +19,9 @@ public class Photo {
     private Long id;
 
     @Column(nullable = false)
-    private String origFileName; // 파일 원본명
-
-    @Column(nullable = false)
     private String filePath; // 파일 저장 경로
 
-    private Long fileSize;
-
-    @Builder
-    public Photo(String origFileName, String filePath, Long fileSize) {
-        this.origFileName = origFileName;
+    public Photo(String filePath) {
         this.filePath = filePath;
-        this.fileSize = fileSize;
     }
 }
