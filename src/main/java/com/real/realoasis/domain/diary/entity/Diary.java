@@ -1,23 +1,20 @@
 package com.real.realoasis.domain.diary.entity;
 
-import com.real.realoasis.domain.file.entity.Photo;
+import com.real.realoasis.domain.image.data.entity.Image;
 import com.real.realoasis.domain.user.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Builder
 @Getter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Diary {
@@ -26,9 +23,8 @@ public class Diary {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String content;
-    @OneToMany(cascade = CascadeType.REMOVE)
-    @Builder.Default
-    private List<Photo> photo = new ArrayList<>();
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private List<Image> images;
     private String mood;
     private String createDate;
     private String title;
@@ -38,8 +34,8 @@ public class Diary {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    public void updatePhoto(List<Photo> photo) {
-        this.photo = photo;
+    public void updateImages(List<Image> images) {
+        this.images = images;
     }
 
     @PrePersist

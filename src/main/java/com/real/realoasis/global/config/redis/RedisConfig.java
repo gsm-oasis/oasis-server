@@ -13,7 +13,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @RequiredArgsConstructor
 @Configuration
 @EnableRedisRepositories
-public class RedisConfiguration{
+public class RedisConfig {
 
     @Value("${spring.redis.host}")
     private String host;

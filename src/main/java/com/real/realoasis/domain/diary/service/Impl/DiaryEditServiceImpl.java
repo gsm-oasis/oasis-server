@@ -4,9 +4,8 @@ import com.real.realoasis.domain.diary.entity.Diary;
 import com.real.realoasis.domain.diary.facade.DiaryFacade;
 import com.real.realoasis.domain.diary.presentation.dto.request.DiaryEditRequest;
 import com.real.realoasis.domain.diary.service.DiaryEditService;
-import com.real.realoasis.domain.file.entity.Photo;
-import com.real.realoasis.domain.file.handler.FileHandler;
-import com.real.realoasis.domain.file.repository.PhotoRepository;
+import com.real.realoasis.domain.image.data.entity.Image;
+import com.real.realoasis.domain.image.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,21 +17,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DiaryEditServiceImpl implements DiaryEditService {
     private final DiaryFacade diaryFacade;
-    private final FileHandler fileHandler;
-    private final PhotoRepository photoRepository;
+    private final ImageService imageService;
 
     @Override
     public void editDiary(Long diaryId, DiaryEditRequest editDiaryRequest, List<MultipartFile> files) throws Exception {
         // 수정할 일기 객체 찾기
         Diary editDiary = diaryFacade.findDiaryById(diaryId);
+        List<String> imgUrlList = imageService.upload(files);
 
-        List<Photo> photoList = fileHandler.parseFileInfo(files);
-        if(!photoList.isEmpty()) {
-            List<Photo> list = new ArrayList<>();
-            for (Photo photo : photoList) {
-                list.add(photoRepository.save(photo));
+        if(!imgUrlList.isEmpty()) {
+            List<Image> list = new ArrayList<>();
+            for(String imgUrl : imgUrlList) {
+                Image image = new Image(imgUrl);
+                list.add(image);
             }
-            editDiary.updatePhoto(list);
+            editDiary.updateImages(list);
         }
         editDiary.update(editDiaryRequest.getTitle(), editDiaryRequest.getContent(), editDiaryRequest.getMood());
         diaryFacade.saveDiary(editDiary);

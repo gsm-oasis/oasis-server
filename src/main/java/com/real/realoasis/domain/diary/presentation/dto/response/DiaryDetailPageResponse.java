@@ -1,6 +1,6 @@
 package com.real.realoasis.domain.diary.presentation.dto.response;
 
-import com.real.realoasis.domain.file.entity.Photo;
+import com.real.realoasis.domain.image.data.entity.Image;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -16,6 +16,6 @@ public class DiaryDetailPageResponse {
     private String title;
     private String content;
     private String mood;
-    private List<Photo> imgs;
+    private List<Image> imgs;
     private String createDate;
 }

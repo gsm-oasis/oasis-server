@@ -20,6 +20,6 @@ public class DiaryDetailPageServiceImpl implements DiaryDetailPageService {
         String month = cd.substring(4,5);
         String day = cd.substring(6,7);
         String createDate = year + "년 " + month + "월 " + day + "일";
-        return new DiaryDetailPageResponse(diary.getTitle(), diary.getContent(), diary.getMood(), diary.getPhoto(), createDate);
+        return new DiaryDetailPageResponse(diary.getTitle(), diary.getContent(), diary.getMood(), diary.getImages(), createDate);
     }
 }
