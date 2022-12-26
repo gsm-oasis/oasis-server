@@ -66,16 +66,12 @@ public class FileHandler {
 
                 // 파일 DTO 생성
                 PhotoDto photoDto = new PhotoDto(
-                        multipartFile.getOriginalFilename(),
-                        path + java.io.File.separator + new_file_name,
-                        multipartFile.getSize()
+                        path + java.io.File.separator + new_file_name
                 );
 
                 // 파일 DTO 이용하여 Photo 엔티티 생성
                 Photo photo = new Photo(
-                        photoDto.getOrigFileName(),
-                        photoDto.getFilePath(),
-                        photoDto.getFileSize()
+                        photoDto.getFilePath()
                 );
 
                 // 생성 후 리스트에 추가
