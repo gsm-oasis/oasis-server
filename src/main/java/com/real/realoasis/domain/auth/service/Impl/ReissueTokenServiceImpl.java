@@ -32,7 +32,7 @@ public class ReissueTokenServiceImpl implements ReissueTokenService {
 
         User user = userFacade.findUserById(jwtTokenProvider.getUserPk(refreshToken));
 
-        String redisRefreshToken = (String) redisTemplate.opsForValue().get("refreshToken:" + user.getId());
+        String redisRefreshToken = (String) redisTemplate.opsForValue().get("refresh:" + user.getId());
         if(Objects.equals(redisRefreshToken, refreshToken)){
             throw new InvalidTokenException(ErrorCode.INVALID_TOKEN_EXCEPTION);
         }
@@ -41,7 +41,7 @@ public class ReissueTokenServiceImpl implements ReissueTokenService {
         String newRefreshToken = jwtTokenProvider.generateRefreshToken(user.getId());
 
         redisTemplate.opsForValue()
-                .set("RefreshToken:" + user.getId(), refreshToken,
+                .set("RefreshToken:" + user.getId(), newRefreshToken,
                         jwtTokenProvider.getExpiredTime(newRefreshToken), TimeUnit.MILLISECONDS);
 
 
