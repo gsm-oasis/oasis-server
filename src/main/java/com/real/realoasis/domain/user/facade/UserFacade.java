@@ -84,7 +84,6 @@ public class UserFacade {
     public int getAnniversary(long datingDate){
         int annivesary = 100;
         if(datingDate < 100){
-            annivesary = 100;
             return annivesary;
         } else if (datingDate < 200) {
             annivesary = 200;

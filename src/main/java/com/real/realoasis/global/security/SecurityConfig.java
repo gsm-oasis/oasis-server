@@ -70,6 +70,9 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET,"/question/list").authenticated()
                 .antMatchers(HttpMethod.GET,"/question/**").authenticated()
 
+                //image
+                .antMatchers(HttpMethod.POST,"/image").authenticated()
+
                 .anyRequest().permitAll();
         http
                 .addFilterAfter(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
