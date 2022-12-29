@@ -26,10 +26,8 @@ public class DiaryController {
 
     //일기 생성
     @PostMapping("/create")
-    public ResponseEntity<Void> createDiary(
-            @RequestPart(value = "file", required = false)List<MultipartFile> files,
-            @RequestPart(value = "req") DiaryCreateRequest createDiaryRequest) throws Exception {
-        createDiaryService.createDiary(createDiaryRequest, files);
+    public ResponseEntity<Void> createDiary(@RequestBody DiaryCreateRequest createDiaryRequest) throws Exception {
+        createDiaryService.createDiary(createDiaryRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -37,9 +35,8 @@ public class DiaryController {
     @PatchMapping("/edit/{diaryId}")
     public ResponseEntity<Void> editDiary(
             @PathVariable Long diaryId,
-            @RequestPart(value = "file", required = false)List<MultipartFile> files,
-            @RequestPart(value = "req") DiaryEditRequest editDiaryRequest) throws Exception {
-        editDiaryService.editDiary(diaryId, editDiaryRequest, files);
+            @RequestPart(value = "req") DiaryEditRequest editDiaryRequest) {
+        editDiaryService.editDiary(diaryId, editDiaryRequest);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
