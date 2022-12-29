@@ -4,7 +4,7 @@ import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.real.realoasis.domain.image.data.entity.Image;
+import com.real.realoasis.domain.image.data.ImageUploadDto;
 import com.real.realoasis.domain.image.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +25,7 @@ public class ImageServiceImpl implements ImageService {
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
 
-    public List<String> upload(List<MultipartFile> multipartFileList) throws Exception {
+    public ImageUploadDto upload(List<MultipartFile> multipartFileList) throws Exception {
         List<String> imagePathList = new ArrayList<>();
 
         for(MultipartFile multipartFile: multipartFileList) {
@@ -45,6 +45,6 @@ public class ImageServiceImpl implements ImageService {
             String imagePath = amazonS3Client.getUrl(bucket, originalName).toString(); // 접근가능한 URL 가져오기
             imagePathList.add(imagePath);
         }
-        return imagePathList;
+        return new ImageUploadDto(imagePathList);
     }
 }
