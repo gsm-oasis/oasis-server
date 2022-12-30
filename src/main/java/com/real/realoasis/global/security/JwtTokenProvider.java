@@ -10,15 +10,13 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 @RequiredArgsConstructor
 @Component
 public class JwtTokenProvider {
     private final JwtProperties jwtProperties;
-    private final long ACCESS_TOKEN_EXPIRED_TIME = 2 * 60 * 500; // 2시간
+    private final long ACCESS_TOKEN_EXPIRED_TIME = 2 * 60 * 10000; // 2시간
     private final long REFRESH_TOKEN_EXPIRED_TIME = 7 * 24 * 60 * 60 * 1000; // 1주
 
     @AllArgsConstructor
