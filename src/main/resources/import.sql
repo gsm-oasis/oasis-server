@@ -53,7 +53,7 @@ INSERT INTO user(user_id, is_couple,anniversary_date, code, couple_id, dating_da
 INSERT INTO user(user_id, is_couple,anniversary_date, code, couple_id, dating_date, email, first_day, nickname, password, today, heart_level) VALUES ('testId', true,'7', 'h64OW2u3', 'adminId', '9', 'shgur7236@naver.com', '20221210', '진시윤', '$2a$10$5gLLAwYnrS614Ay3bVc4E.vnJZ/0a0blCNkm1m9p5SyVKJoQFY8/K', '20221212', '1');
 
 
-INSERT INTO diary(title,content,mood,writer, user_id, create_date) values ('제목','일기 내용~~~~~','행복','노혁','adminId','20221215');
+INSERT INTO diary(title,content,mood,writer, user_id, create_date) values ('제목','일기 내용~~~~~일기 내용~~~~~일기 내용~~~~~일기 내용~~~~~일기 내용~~~~~일기 내용~~~~~일기 내용~~~~~일기 내용~~~~~일기 내용~~~~~일기 내용~~~~~일기 내용~~~~~일기 내용~~~~~일기 내용~~~~','행복','노혁','adminId','20221215');
 
 
 # update user set is_couple = false where is_couple = true;
