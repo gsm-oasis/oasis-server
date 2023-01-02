@@ -1,37 +1,13 @@
 package com.real.realoasis.domain.auth.data.request;
 
-import com.real.realoasis.domain.user.entity.User;
-import com.real.realoasis.domain.user.type.Role;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-import java.util.Collections;
-import java.util.Random;
+import lombok.*;
 
 @Getter
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class SignUpRequest {
-
-    private String id;
-    private String email;
-    private String password;
-    private String nickname;
-
-
-    public User toEntity(String password, String code) {
-        return User.builder()
-                .id(id)
-                .email(email)
-                .password(password)
-                .anniversaryDate(7)
-                .nickname(nickname)
-                .code(code)
-                .roles(Collections.singletonList(Role.ROLE_USER))
-                .build();
-    }
-
+    private final String id;
+    private final String email;
+    private final String password;
+    private final String nickname;
 }

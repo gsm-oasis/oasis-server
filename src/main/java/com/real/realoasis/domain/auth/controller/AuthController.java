@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.auth.controller;
 
+import com.real.realoasis.domain.auth.data.dto.MailDto;
 import com.real.realoasis.domain.auth.data.dto.SignupDto;
 import com.real.realoasis.domain.auth.data.request.*;
 import com.real.realoasis.domain.auth.data.response.LoginResponse;
@@ -8,6 +9,7 @@ import com.real.realoasis.domain.auth.data.response.SearchPWResponse;
 import com.real.realoasis.domain.auth.data.response.SignupResponse;
 import com.real.realoasis.domain.auth.service.*;
 import com.real.realoasis.domain.auth.util.AuthConverter;
+import com.real.realoasis.domain.auth.util.MailConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,6 +26,7 @@ public class AuthController {
     private final AuthService authService;
     private final EmailService emailService;
     private final AuthConverter authConverter;
+    private final MailConverter mailConverter;
 
     // 회원가입
     @PostMapping("/signup")
@@ -36,7 +39,8 @@ public class AuthController {
     // 이메일에 인증코드 전송
     @PostMapping("/sendmail")
     public ResponseEntity<Void> sendMail(@RequestBody SendMailRequest sendMailRequest) throws MessagingException, UnsupportedEncodingException {
-        emailService.sendEmail(sendMailRequest.getEmail());
+        MailDto mailDto = mailConverter.toDto(sendMailRequest);
+        emailService.sendEmail(mailDto.getEmail());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
