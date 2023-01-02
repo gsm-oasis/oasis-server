@@ -1,11 +1,13 @@
 package com.real.realoasis.domain.auth.controller;
 
+import com.real.realoasis.domain.auth.data.dto.SignupDto;
 import com.real.realoasis.domain.auth.data.request.*;
 import com.real.realoasis.domain.auth.data.response.LoginResponse;
 import com.real.realoasis.domain.auth.data.response.SearchIDResponse;
 import com.real.realoasis.domain.auth.data.response.SearchPWResponse;
 import com.real.realoasis.domain.auth.data.response.SignupResponse;
 import com.real.realoasis.domain.auth.service.*;
+import com.real.realoasis.domain.auth.util.AuthConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,16 +21,16 @@ import java.io.UnsupportedEncodingException;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
-    private final LoginService loginService;
-    private final SignUpService signUpService;
-    private final ReissueTokenService reissueTokenService;
+    private final AuthService authService;
     private final EmailService emailService;
-    private final SearchPWService searchPWService;
+    private final AuthConverter authConverter;
 
     // 회원가입
     @PostMapping("/signup")
     public ResponseEntity<SignupResponse> signUp(@Valid @RequestBody SignUpRequest signupRequest){
-        return new ResponseEntity<>(signUpService.signUp(signupRequest),HttpStatus.CREATED);
+        SignupDto signupDto = authConverter.toSignupDto(signupRequest);
+        SignupResponse signupResponse = authService.signUp(signupDto);
+        return new ResponseEntity<>(signupResponse,HttpStatus.CREATED);
     }
 
     // 이메일에 인증코드 전송
@@ -48,13 +50,13 @@ public class AuthController {
     // 로그인
     @PostMapping("/login")
     public ResponseEntity<LoginResponse> login(@Valid @RequestBody LoginRequest loginRequest) {
-        return new ResponseEntity<>(loginService.login(loginRequest), HttpStatus.OK);
+        return new ResponseEntity<>(authService.login(loginRequest), HttpStatus.OK);
     }
 
     // 토큰 재발급
     @PatchMapping("/refresh")
     public ResponseEntity<LoginResponse> refresh(@RequestHeader("RefreshToken") String refreshToken){
-        return new ResponseEntity<>(reissueTokenService.reissue(refreshToken), HttpStatus.CREATED);
+        return new ResponseEntity<>(authService.reissue(refreshToken), HttpStatus.CREATED);
     }
 
     // 이메일을 통해 아이디 찾기
@@ -67,6 +69,6 @@ public class AuthController {
     // id 를 통해 비밀번호 찾기
     @GetMapping("/search/pw")
     public ResponseEntity<SearchPWResponse> searchPW(@RequestBody SearchPWRequest searchPWRequest) {
-        return new ResponseEntity<>(searchPWService.searchPW(searchPWRequest), HttpStatus.OK);
+        return new ResponseEntity<>(authService.searchPW(searchPWRequest), HttpStatus.OK);
     }
 }

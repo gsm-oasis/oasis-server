@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.user.entity;
+package com.real.realoasis.domain.auth.data.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

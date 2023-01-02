@@ -26,31 +26,8 @@ public class UserFacade {
         return userRepository.existsById(id);
     }
 
-    public SignupResponse saveUser(SignUpRequest signUpRequest) {
-        Random random = new Random();
-        StringBuilder key = new StringBuilder();
-
-        for(int i = 0; i < 8; i++) {
-            int index = random.nextInt(3);
-            switch (index) {
-                case 0 :
-                    key.append((char) (random.nextInt(26) + 97));
-                    break;
-                case 1 :
-                    key.append((char) (random.nextInt(26) + 65));
-                    break;
-                case 2:
-                    key.append(random.nextInt(9));
-                    break;
-                }
-            }
-        userRepository.save(signUpRequest.toEntity(passwordEncoder.encode(signUpRequest.getPassword()), key.toString()));
-        return SignupResponse.builder()
-                .code(key.toString())
-                .build();
-    }
-    public void saveUser(User currentUser){
-        userRepository.save(currentUser);
+    public void saveUser(User user) {
+        userRepository.save(user);
     }
 
     public User findUserById(String id) {
