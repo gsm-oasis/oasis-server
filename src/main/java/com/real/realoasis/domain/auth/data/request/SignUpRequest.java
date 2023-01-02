@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.auth.presentation.dto.request;
+package com.real.realoasis.domain.auth.data.request;
 
 import com.real.realoasis.domain.user.entity.User;
 import com.real.realoasis.domain.user.type.Role;

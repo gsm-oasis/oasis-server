@@ -1,7 +1,7 @@
 package com.real.realoasis.domain.user.facade;
 
-import com.real.realoasis.domain.auth.presentation.dto.request.SignUpRequest;
-import com.real.realoasis.domain.auth.presentation.dto.response.SignupResponse;
+import com.real.realoasis.domain.auth.data.request.SignUpRequest;
+import com.real.realoasis.domain.auth.data.response.SignupResponse;
 import com.real.realoasis.domain.user.entity.User;
 import com.real.realoasis.domain.user.exception.PasswordNotMatchException;
 import com.real.realoasis.domain.user.exception.UserNotFoundException;

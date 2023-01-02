@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.auth.presentation.dto.response;
+package com.real.realoasis.domain.auth.data.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

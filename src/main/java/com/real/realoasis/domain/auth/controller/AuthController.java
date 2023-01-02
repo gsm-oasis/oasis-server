@@ -1,7 +1,10 @@
-package com.real.realoasis.domain.auth.presentation;
+package com.real.realoasis.domain.auth.controller;
 
-import com.real.realoasis.domain.auth.presentation.dto.request.*;
-import com.real.realoasis.domain.auth.presentation.dto.response.*;
+import com.real.realoasis.domain.auth.data.request.*;
+import com.real.realoasis.domain.auth.data.response.LoginResponse;
+import com.real.realoasis.domain.auth.data.response.SearchIDResponse;
+import com.real.realoasis.domain.auth.data.response.SearchPWResponse;
+import com.real.realoasis.domain.auth.data.response.SignupResponse;
 import com.real.realoasis.domain.auth.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

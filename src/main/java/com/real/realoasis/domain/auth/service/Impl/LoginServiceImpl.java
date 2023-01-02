@@ -1,7 +1,7 @@
 package com.real.realoasis.domain.auth.service.Impl;
 
-import com.real.realoasis.domain.auth.presentation.dto.request.LoginRequest;
-import com.real.realoasis.domain.auth.presentation.dto.response.LoginResponse;
+import com.real.realoasis.domain.auth.data.request.LoginRequest;
+import com.real.realoasis.domain.auth.data.response.LoginResponse;
 import com.real.realoasis.domain.auth.service.LoginService;
 import com.real.realoasis.domain.user.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;

@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.auth.presentation.dto.response;
+package com.real.realoasis.domain.auth.data.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class SearchPWResponse {
-    private String password;
+@NoArgsConstructor
+public class AuthenticationCodeReq {
+    private String code;
 }

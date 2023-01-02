@@ -2,7 +2,7 @@ package com.real.realoasis.domain.auth.service.Impl;
 
 import com.real.realoasis.domain.auth.exception.ExpiredTokenException;
 import com.real.realoasis.domain.auth.exception.InvalidTokenException;
-import com.real.realoasis.domain.auth.presentation.dto.response.LoginResponse;
+import com.real.realoasis.domain.auth.data.response.LoginResponse;
 import com.real.realoasis.domain.auth.service.ReissueTokenService;
 import com.real.realoasis.domain.user.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
