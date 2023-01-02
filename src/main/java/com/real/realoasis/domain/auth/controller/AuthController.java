@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.auth.controller;
 
+import com.real.realoasis.domain.auth.data.dto.AuthCodeDto;
 import com.real.realoasis.domain.auth.data.dto.MailDto;
 import com.real.realoasis.domain.auth.data.dto.SignupDto;
 import com.real.realoasis.domain.auth.data.request.*;
@@ -46,8 +47,9 @@ public class AuthController {
 
     // 인증코드 확인
     @PostMapping("/mailconfirm")
-    public ResponseEntity<Void> confirmAuthenticationCode(@RequestBody AuthenticationCodeReq authenticationCode) {
-        emailService.confirmAuthenticationCode(authenticationCode.getCode());
+    public ResponseEntity<Void> confirmAuthenticationCode(@RequestBody AuthenticationCodeRequest authenticationCodeRequest) {
+        AuthCodeDto authCodeDto = mailConverter.toDto(authenticationCodeRequest);
+        emailService.confirmAuthenticationCode(authCodeDto.getCode());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
