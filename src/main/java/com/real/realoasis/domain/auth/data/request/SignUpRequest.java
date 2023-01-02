@@ -4,10 +4,11 @@ import lombok.*;
 
 @Getter
 @Builder
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class SignUpRequest {
-    private final String id;
-    private final String email;
-    private final String password;
-    private final String nickname;
+    private String id;
+    private String email;
+    private String password;
+    private String nickname;
 }
