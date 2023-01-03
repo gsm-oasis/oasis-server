@@ -29,8 +29,8 @@ public class GetQuestionAnswerMainpageServiceImpl implements GetQuestionAnswerMa
                 .content(question.getContent())
                 .userName(currentUser.getNickname())
                 .coupleName(coupleUser.getNickname())
-                .answer1(answer1)
-                .answer2(answer2)
+                .answer(answer1)
+                .coupleAnswer(answer2)
                 .build();
     }
 }

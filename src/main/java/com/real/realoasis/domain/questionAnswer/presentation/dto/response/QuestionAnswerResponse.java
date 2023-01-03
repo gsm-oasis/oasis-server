@@ -13,6 +13,6 @@ public class QuestionAnswerResponse {
     private String content;
     private String userName;
     private String coupleName;
-    private String answer1;
-    private String answer2;
+    private String answer;
+    private String coupleAnswer;
 }
