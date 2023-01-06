@@ -74,6 +74,8 @@ public class AuthController {
     // id 를 통해 비밀번호 찾기
     @GetMapping("/search/pw")
     public ResponseEntity<SearchPWResponse> searchPW(@RequestBody SearchPWRequest searchPWRequest) {
-        return new ResponseEntity<>(authService.searchPW(searchPWRequest), HttpStatus.OK);
+        SearchPwDto searchPwDto = authConverter.toSearchPwDto(searchPWRequest);
+        SearchPWResponse searchPWResponse = authService.searchPW(searchPwDto);
+        return new ResponseEntity<>(searchPWResponse, HttpStatus.OK);
     }
 }

@@ -1,10 +1,13 @@
 package com.real.realoasis.domain.auth.util.Impl;
 
 import com.real.realoasis.domain.auth.data.dto.LoginDto;
+import com.real.realoasis.domain.auth.data.dto.SearchPwDto;
 import com.real.realoasis.domain.auth.data.dto.SignupDto;
 import com.real.realoasis.domain.auth.data.dto.TokenDto;
 import com.real.realoasis.domain.auth.data.request.LoginRequest;
+import com.real.realoasis.domain.auth.data.request.SearchPWRequest;
 import com.real.realoasis.domain.auth.data.request.SignUpRequest;
+import com.real.realoasis.domain.auth.data.response.SearchPWResponse;
 import com.real.realoasis.domain.auth.data.response.SignupResponse;
 import com.real.realoasis.domain.auth.data.response.TokenResponse;
 import com.real.realoasis.domain.auth.util.AuthConverter;
@@ -72,6 +75,20 @@ public class AuthConverterImpl implements AuthConverter {
                 .expiredAt(tokenDto.getExpiredAt())
                 .code(tokenDto.getCode())
                 .couple(tokenDto.isCouple())
+                .build();
+    }
+
+    @Override
+    public SearchPwDto toSearchPwDto(SearchPWRequest searchPWRequest) {
+        return SearchPwDto.builder()
+                .id(searchPWRequest.getId())
+                .build();
+    }
+
+    @Override
+    public SearchPWResponse toSearchPwResponse(String pw) {
+        return SearchPWResponse.builder()
+                .password(pw)
                 .build();
     }
 }

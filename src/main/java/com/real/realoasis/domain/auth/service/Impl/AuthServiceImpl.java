@@ -1,10 +1,9 @@
 package com.real.realoasis.domain.auth.service.Impl;
 
 import com.real.realoasis.domain.auth.data.dto.LoginDto;
+import com.real.realoasis.domain.auth.data.dto.SearchPwDto;
 import com.real.realoasis.domain.auth.data.dto.SignupDto;
 import com.real.realoasis.domain.auth.data.dto.TokenDto;
-import com.real.realoasis.domain.auth.data.request.SearchPWRequest;
-import com.real.realoasis.domain.auth.data.response.LoginResponse;
 import com.real.realoasis.domain.auth.data.response.SearchPWResponse;
 import com.real.realoasis.domain.auth.data.response.SignupResponse;
 import com.real.realoasis.domain.auth.data.response.TokenResponse;
@@ -81,12 +80,12 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public SearchPWResponse searchPW(SearchPWRequest searchPWRequest) {
-        User user = userFacade.findUserById(searchPWRequest.getId());
+    public SearchPWResponse searchPW(SearchPwDto searchPwDto) {
+        User user = userFacade.findUserById(searchPwDto.getId());
         String pw = user.getPassword();
-        return SearchPWResponse.builder()
-                .password(pw)
-                .build();
+
+        return authConverter.toSearchPwResponse(pw);
+
     }
 
     @Override
