@@ -10,7 +10,7 @@ import com.real.realoasis.domain.auth.data.response.TokenResponse;
 
 public interface AuthService {
     TokenResponse login(LoginDto loginDto);
-    LoginResponse reissue(String refreshToken);
+    TokenResponse reissue(String refreshToken);
     SearchPWResponse searchPW(SearchPWRequest searchPWRequest);
     SignupResponse signUp(SignupDto signupDto);
 

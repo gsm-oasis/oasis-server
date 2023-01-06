@@ -55,7 +55,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public LoginResponse reissue(String refreshToken) {
+    public TokenResponse reissue(String refreshToken) {
         if(jwtTokenProvider.validateToken(refreshToken)){
             throw new ExpiredTokenException(ErrorCode.EXPIRATION_TOKEN_EXCEPTION);
         }
@@ -63,25 +63,21 @@ public class AuthServiceImpl implements AuthService {
         User user = userFacade.findUserById(jwtTokenProvider.getUserPk(refreshToken));
 
         String redisRefreshToken = (String) redisTemplate.opsForValue().get("refresh:" + user.getId());
+
         if(Objects.equals(redisRefreshToken, refreshToken)){
             throw new InvalidTokenException(ErrorCode.INVALID_TOKEN_EXCEPTION);
         }
 
         String newAccessToken = jwtTokenProvider.generateAccessToken(user.getId());
         String newRefreshToken = jwtTokenProvider.generateRefreshToken(user.getId());
+        Long expiredAt = jwtTokenProvider.getExpiredTime(newAccessToken);
 
         redisTemplate.opsForValue()
                 .set("RefreshToken:" + user.getId(), newRefreshToken,
                         jwtTokenProvider.getExpiredTime(newRefreshToken), TimeUnit.MILLISECONDS);
 
-
-        return LoginResponse.builder()
-                .accessToken(newAccessToken)
-                .refreshToken(newRefreshToken)
-                .expiredAt(jwtTokenProvider.getExpiredTime(newAccessToken))
-                .code(user.getCode())
-                .couple(user.isCouple())
-                .build();
+        TokenDto tokenDto = authConverter.toTokenDto(newAccessToken, newRefreshToken, expiredAt, user);
+        return authConverter.toTokenResponse(tokenDto);
     }
 
     @Override

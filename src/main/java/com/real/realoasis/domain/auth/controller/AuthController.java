@@ -61,8 +61,9 @@ public class AuthController {
 
     // 토큰 재발급
     @PatchMapping("/refresh")
-    public ResponseEntity<LoginResponse> reissue(@RequestHeader("RefreshToken") String refreshToken){
-        return new ResponseEntity<>(authService.reissue(refreshToken), HttpStatus.CREATED);
+    public ResponseEntity<TokenResponse> reissue(@RequestHeader("RefreshToken") String refreshToken){
+        TokenResponse tokenResponse = authService.reissue(refreshToken);
+        return new ResponseEntity<>(tokenResponse, HttpStatus.CREATED);
     }
 
     // 이메일을 통해 아이디 찾기
