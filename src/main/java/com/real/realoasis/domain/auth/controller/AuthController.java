@@ -1,9 +1,6 @@
 package com.real.realoasis.domain.auth.controller;
 
-import com.real.realoasis.domain.auth.data.dto.AuthCodeDto;
-import com.real.realoasis.domain.auth.data.dto.LoginDto;
-import com.real.realoasis.domain.auth.data.dto.MailDto;
-import com.real.realoasis.domain.auth.data.dto.SignupDto;
+import com.real.realoasis.domain.auth.data.dto.*;
 import com.real.realoasis.domain.auth.data.request.*;
 import com.real.realoasis.domain.auth.data.response.*;
 import com.real.realoasis.domain.auth.service.*;
@@ -68,8 +65,9 @@ public class AuthController {
 
     // 이메일을 통해 아이디 찾기
     @GetMapping("/search/id")
-    public ResponseEntity<SearchIDResponse> searchID(@RequestBody SearchIDRequest searchIDRequest) throws MessagingException, UnsupportedEncodingException {
-        emailService.sendId(searchIDRequest.getEmail());
+    public ResponseEntity<Void> searchID(@RequestBody SearchIDRequest searchIDRequest) throws MessagingException, UnsupportedEncodingException {
+        SearchIdDto searchIdDto = mailConverter.toSearchIdDto(searchIDRequest);
+        emailService.sendId(searchIdDto.getEmail());
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
