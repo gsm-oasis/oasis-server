@@ -61,7 +61,7 @@ public class AuthController {
 
     // 토큰 재발급
     @PatchMapping("/refresh")
-    public ResponseEntity<LoginResponse> refresh(@RequestHeader("RefreshToken") String refreshToken){
+    public ResponseEntity<LoginResponse> reissue(@RequestHeader("RefreshToken") String refreshToken){
         return new ResponseEntity<>(authService.reissue(refreshToken), HttpStatus.CREATED);
     }
 
