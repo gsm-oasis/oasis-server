@@ -1,13 +1,11 @@
 package com.real.realoasis.domain.auth.controller;
 
 import com.real.realoasis.domain.auth.data.dto.AuthCodeDto;
+import com.real.realoasis.domain.auth.data.dto.LoginDto;
 import com.real.realoasis.domain.auth.data.dto.MailDto;
 import com.real.realoasis.domain.auth.data.dto.SignupDto;
 import com.real.realoasis.domain.auth.data.request.*;
-import com.real.realoasis.domain.auth.data.response.LoginResponse;
-import com.real.realoasis.domain.auth.data.response.SearchIDResponse;
-import com.real.realoasis.domain.auth.data.response.SearchPWResponse;
-import com.real.realoasis.domain.auth.data.response.SignupResponse;
+import com.real.realoasis.domain.auth.data.response.*;
 import com.real.realoasis.domain.auth.service.*;
 import com.real.realoasis.domain.auth.util.AuthConverter;
 import com.real.realoasis.domain.auth.util.MailConverter;
@@ -55,8 +53,10 @@ public class AuthController {
 
     // 로그인
     @PostMapping("/login")
-    public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
-        return new ResponseEntity<>(authService.login(loginRequest), HttpStatus.OK);
+    public ResponseEntity<TokenResponse> login(@RequestBody LoginRequest loginRequest) {
+        LoginDto loginDto = authConverter.toLoginDto(loginRequest);
+        TokenResponse tokenResponse = authService.login(loginDto);
+        return new ResponseEntity<>(tokenResponse,HttpStatus.OK);
     }
 
     // 토큰 재발급

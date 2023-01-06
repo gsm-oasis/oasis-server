@@ -1,8 +1,12 @@
 package com.real.realoasis.domain.auth.util.Impl;
 
+import com.real.realoasis.domain.auth.data.dto.LoginDto;
 import com.real.realoasis.domain.auth.data.dto.SignupDto;
+import com.real.realoasis.domain.auth.data.dto.TokenDto;
+import com.real.realoasis.domain.auth.data.request.LoginRequest;
 import com.real.realoasis.domain.auth.data.request.SignUpRequest;
 import com.real.realoasis.domain.auth.data.response.SignupResponse;
+import com.real.realoasis.domain.auth.data.response.TokenResponse;
 import com.real.realoasis.domain.auth.util.AuthConverter;
 import com.real.realoasis.domain.user.entity.User;
 import lombok.RequiredArgsConstructor;
@@ -38,6 +42,36 @@ public class AuthConverterImpl implements AuthConverter {
     public SignupResponse toSignResponse(String code) {
         return SignupResponse.builder()
                 .code(code)
+                .build();
+    }
+
+    @Override
+    public LoginDto toLoginDto(LoginRequest loginRequest) {
+        return LoginDto.builder()
+                .id(loginRequest.getId())
+                .password(loginRequest.getPassword())
+                .build();
+    }
+
+    @Override
+    public TokenDto toTokenDto(String accessToken, String refreshToken, Long expiredAt, User user) {
+        return TokenDto.builder()
+                .accessToken(accessToken)
+                .refreshToken(refreshToken)
+                .expiredAt(expiredAt)
+                .code(user.getCode())
+                .couple(user.isCouple())
+                .build();
+    }
+
+    @Override
+    public TokenResponse toTokenResponse(TokenDto tokenDto) {
+        return TokenResponse.builder()
+                .accessToken(tokenDto.getAccessToken())
+                .refreshToken(tokenDto.getRefreshToken())
+                .expiredAt(tokenDto.getExpiredAt())
+                .code(tokenDto.getCode())
+                .couple(tokenDto.isCouple())
                 .build();
     }
 }

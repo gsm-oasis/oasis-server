@@ -1,12 +1,13 @@
 package com.real.realoasis.domain.auth.service.Impl;
 
+import com.real.realoasis.domain.auth.data.dto.LoginDto;
 import com.real.realoasis.domain.auth.data.dto.SignupDto;
-import com.real.realoasis.domain.auth.data.request.LoginRequest;
+import com.real.realoasis.domain.auth.data.dto.TokenDto;
 import com.real.realoasis.domain.auth.data.request.SearchPWRequest;
-import com.real.realoasis.domain.auth.data.request.SignUpRequest;
 import com.real.realoasis.domain.auth.data.response.LoginResponse;
 import com.real.realoasis.domain.auth.data.response.SearchPWResponse;
 import com.real.realoasis.domain.auth.data.response.SignupResponse;
+import com.real.realoasis.domain.auth.data.response.TokenResponse;
 import com.real.realoasis.domain.auth.exception.ExpiredTokenException;
 import com.real.realoasis.domain.auth.exception.InvalidTokenException;
 import com.real.realoasis.domain.auth.service.AuthService;
@@ -35,25 +36,21 @@ public class AuthServiceImpl implements AuthService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public LoginResponse login(LoginRequest loginRequest) {
-        User user = userFacade.findUserById(loginRequest.getId());
-        userFacade.checkPassword(user, loginRequest.getPassword());
+    public TokenResponse login(LoginDto loginDto) {
+        User user = userFacade.findUserById(loginDto.getId());
+        userFacade.checkPassword(user, loginDto.getPassword());
 
-        String accessToken = jwtTokenProvider.generateAccessToken(loginRequest.getId());
-        String refreshToken = jwtTokenProvider.generateRefreshToken(loginRequest.getId());
+        String accessToken = jwtTokenProvider.generateAccessToken(loginDto.getId());
+        String refreshToken = jwtTokenProvider.generateRefreshToken(loginDto.getId());
+        Long expiredAt = jwtTokenProvider.getExpiredTime(accessToken);
 
         redisTemplate.opsForValue()
                 .set("RefreshToken:" + user.getId(), refreshToken,
                         jwtTokenProvider.getExpiredTime(refreshToken), TimeUnit.MILLISECONDS);
 
+        TokenDto tokenDto = authConverter.toTokenDto(accessToken, refreshToken, expiredAt, user);
 
-        return LoginResponse.builder()
-                .accessToken(accessToken)
-                .refreshToken(refreshToken)
-                .expiredAt(jwtTokenProvider.getExpiredTime(accessToken))
-                .code(user.getCode())
-                .couple(user.isCouple())
-                .build();
+        return authConverter.toTokenResponse(tokenDto);
     }
 
     @Transactional(rollbackFor = Exception.class)
