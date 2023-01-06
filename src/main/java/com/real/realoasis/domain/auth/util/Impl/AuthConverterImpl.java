@@ -5,9 +5,9 @@ import com.real.realoasis.domain.auth.data.dto.SearchPwDto;
 import com.real.realoasis.domain.auth.data.dto.SignupDto;
 import com.real.realoasis.domain.auth.data.dto.TokenDto;
 import com.real.realoasis.domain.auth.data.request.LoginRequest;
-import com.real.realoasis.domain.auth.data.request.SearchPWRequest;
+import com.real.realoasis.domain.auth.data.request.SearchPwRequest;
 import com.real.realoasis.domain.auth.data.request.SignUpRequest;
-import com.real.realoasis.domain.auth.data.response.SearchPWResponse;
+import com.real.realoasis.domain.auth.data.response.SearchPwResponse;
 import com.real.realoasis.domain.auth.data.response.SignupResponse;
 import com.real.realoasis.domain.auth.data.response.TokenResponse;
 import com.real.realoasis.domain.auth.util.AuthConverter;
@@ -79,15 +79,15 @@ public class AuthConverterImpl implements AuthConverter {
     }
 
     @Override
-    public SearchPwDto toSearchPwDto(SearchPWRequest searchPWRequest) {
+    public SearchPwDto toSearchPwDto(SearchPwRequest searchPWRequest) {
         return SearchPwDto.builder()
                 .id(searchPWRequest.getId())
                 .build();
     }
 
     @Override
-    public SearchPWResponse toSearchPwResponse(String pw) {
-        return SearchPWResponse.builder()
+    public SearchPwResponse toSearchPwResponse(String pw) {
+        return SearchPwResponse.builder()
                 .password(pw)
                 .build();
     }

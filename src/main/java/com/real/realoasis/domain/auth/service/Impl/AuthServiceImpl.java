@@ -4,7 +4,7 @@ import com.real.realoasis.domain.auth.data.dto.LoginDto;
 import com.real.realoasis.domain.auth.data.dto.SearchPwDto;
 import com.real.realoasis.domain.auth.data.dto.SignupDto;
 import com.real.realoasis.domain.auth.data.dto.TokenDto;
-import com.real.realoasis.domain.auth.data.response.SearchPWResponse;
+import com.real.realoasis.domain.auth.data.response.SearchPwResponse;
 import com.real.realoasis.domain.auth.data.response.SignupResponse;
 import com.real.realoasis.domain.auth.data.response.TokenResponse;
 import com.real.realoasis.domain.auth.exception.ExpiredTokenException;
@@ -80,7 +80,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public SearchPWResponse searchPW(SearchPwDto searchPwDto) {
+    public SearchPwResponse searchPW(SearchPwDto searchPwDto) {
         User user = userFacade.findUserById(searchPwDto.getId());
         String pw = user.getPassword();
 
