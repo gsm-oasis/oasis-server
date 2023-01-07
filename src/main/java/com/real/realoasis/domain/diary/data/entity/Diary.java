@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.diary.entity;
+package com.real.realoasis.domain.diary.data.entity;
 
 import com.real.realoasis.domain.image.data.entity.Image;
 import com.real.realoasis.domain.user.entity.User;

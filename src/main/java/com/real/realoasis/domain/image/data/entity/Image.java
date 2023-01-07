@@ -1,6 +1,5 @@
 package com.real.realoasis.domain.image.data.entity;
 
-import com.real.realoasis.domain.diary.entity.Diary;
 import lombok.*;
 
 import javax.persistence.*;

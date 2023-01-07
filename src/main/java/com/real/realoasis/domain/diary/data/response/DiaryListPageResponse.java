@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.diary.presentation.dto.response;
+package com.real.realoasis.domain.diary.data.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

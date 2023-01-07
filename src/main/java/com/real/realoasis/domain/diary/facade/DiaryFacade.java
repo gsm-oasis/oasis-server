@@ -1,6 +1,6 @@
 package com.real.realoasis.domain.diary.facade;
 
-import com.real.realoasis.domain.diary.entity.Diary;
+import com.real.realoasis.domain.diary.data.entity.Diary;
 import com.real.realoasis.domain.diary.exception.DiaryNotFoundException;
 import com.real.realoasis.domain.diary.repository.DiaryRepository;
 import com.real.realoasis.global.error.type.ErrorCode;

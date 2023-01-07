@@ -1,6 +1,6 @@
 package com.real.realoasis.domain.user.service.Impl;
 
-import com.real.realoasis.domain.diary.service.DiaryListPageService;
+import com.real.realoasis.domain.diary.service.DiaryService;
 import com.real.realoasis.domain.question.entity.Question;
 import com.real.realoasis.domain.questionAnswer.facade.QuestionAnswerFacade;
 import com.real.realoasis.domain.user.entity.User;
@@ -19,7 +19,7 @@ import java.time.temporal.ChronoUnit;
 @RequiredArgsConstructor
 public class GetMainPageServiceImpl implements GetMainPageService {
     private final UserFacade userFacade;
-    private final DiaryListPageService diaryListPageService;
+    private final DiaryService diaryService;
     private final QuestionAnswerFacade questionAnswerFacade;
 
     @Override
@@ -46,7 +46,7 @@ public class GetMainPageServiceImpl implements GetMainPageService {
                 .anniversary(userFacade.getAnniversary(datingDate))
                 .questionId(question.getId())
                 .content(question.getContent())
-                .diaryListPageResponse(diaryListPageService.getList())
+                .diaryListPageResponse(diaryService.getList())
                 .build();
     }
 
