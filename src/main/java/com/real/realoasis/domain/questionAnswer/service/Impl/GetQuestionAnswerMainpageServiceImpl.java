@@ -22,15 +22,15 @@ public class GetQuestionAnswerMainpageServiceImpl implements GetQuestionAnswerMa
 
         Question question = questionAnswerFacade.findQuestionByQuestionId(questionId);
 
-        String answer1 = questionAnswerFacade.findQuestionAnswerByQuestionIdAndUserId(questionId, currentUser.getId());
-        String answer2 = questionAnswerFacade.findQuestionAnswerByQuestionIdAndUserId(questionId, coupleUser.getId());
+        String answer = questionAnswerFacade.findQuestionAnswerByQuestionAndUser(questionId, currentUser.getId());
+        String coupleAnswer = questionAnswerFacade.findQuestionAnswerByQuestionAndUser(questionId, coupleUser.getId());
 
         return QuestionAnswerResponse.builder()
                 .content(question.getContent())
                 .userName(currentUser.getNickname())
                 .coupleName(coupleUser.getNickname())
-                .answer(answer1)
-                .coupleAnswer(answer2)
+                .answer(answer)
+                .coupleAnswer(coupleAnswer)
                 .build();
     }
 }
