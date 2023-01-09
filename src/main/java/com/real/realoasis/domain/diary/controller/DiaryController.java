@@ -2,8 +2,8 @@ package com.real.realoasis.domain.diary.controller;
 
 import com.real.realoasis.domain.diary.data.dto.CreateDiaryDto;
 import com.real.realoasis.domain.diary.data.dto.EditDiaryDto;
-import com.real.realoasis.domain.diary.data.request.DiaryCreateRequest;
-import com.real.realoasis.domain.diary.data.request.DiaryEditRequest;
+import com.real.realoasis.domain.diary.data.request.CreateDiaryRequest;
+import com.real.realoasis.domain.diary.data.request.EditDiaryRequest;
 import com.real.realoasis.domain.diary.data.response.DiaryDetailPageResponse;
 import com.real.realoasis.domain.diary.data.response.DiaryListPageResponse;
 import com.real.realoasis.domain.diary.service.*;
@@ -28,7 +28,7 @@ public class DiaryController {
     @PostMapping("/create")
     public ResponseEntity<Void> createDiary(
             @RequestPart(value = "file", required = false)List<MultipartFile> files,
-            @RequestPart(value = "req") DiaryCreateRequest createDiaryRequest) throws Exception {
+            @RequestPart(value = "req") CreateDiaryRequest createDiaryRequest) throws Exception {
         CreateDiaryDto createDiaryDto = diaryConverter.toCreateDiaryDto(createDiaryRequest);
         diaryService.createDiary(createDiaryDto, files);
         return new ResponseEntity<>(HttpStatus.CREATED);
@@ -39,7 +39,7 @@ public class DiaryController {
     public ResponseEntity<Void> editDiary(
             @PathVariable Long diaryId,
             @RequestPart(value = "file", required = false)List<MultipartFile> files,
-            @RequestPart(value = "req") DiaryEditRequest editDiaryRequest) throws Exception {
+            @RequestPart(value = "req") EditDiaryRequest editDiaryRequest) throws Exception {
         EditDiaryDto editDiaryDto = diaryConverter.toEditDiaryDto(editDiaryRequest);
         diaryService.editDiary(diaryId, editDiaryDto, files);
         return new ResponseEntity<>(HttpStatus.OK);

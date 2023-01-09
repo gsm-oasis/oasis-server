@@ -9,8 +9,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class DiaryEditRequest {
+public class CreateDiaryRequest {
     private String title;
     private String content;
     private String mood;
+    private String writer;
 }
