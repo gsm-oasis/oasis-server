@@ -49,7 +49,8 @@ public class DiaryController {
     //일기디테일 페이지
     @GetMapping("/detail/{diaryId}")
     public ResponseEntity<DiaryDetailPageResponse> getDetailPage(@PathVariable Long diaryId){
-        return new ResponseEntity<>(diaryService.getDetailPage(diaryId), HttpStatus.OK);
+        DiaryDetailPageResponse diaryDetailPageResponse = diaryService.getDetailPage(diaryId);
+        return new ResponseEntity<>(diaryDetailPageResponse, HttpStatus.OK);
     }
 
     //일기 삭제
