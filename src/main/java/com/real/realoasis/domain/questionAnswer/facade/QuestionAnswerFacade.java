@@ -32,7 +32,7 @@ public class QuestionAnswerFacade {
         User user = userFacade.findUserById(userId);
 
         QuestionAnswer questionAnswer = questionAnswerRepository.findQuestionAnswersByQuestionAndUser(question, user);
-        if(questionAnswer.getAnswer() == null){
+        if(questionAnswer == null){
             return  "";
         } else {
             return questionAnswer.getAnswer();
