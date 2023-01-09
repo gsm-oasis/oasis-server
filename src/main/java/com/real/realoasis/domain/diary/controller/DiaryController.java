@@ -1,6 +1,7 @@
 package com.real.realoasis.domain.diary.controller;
 
 import com.real.realoasis.domain.diary.data.dto.CreateDiaryDto;
+import com.real.realoasis.domain.diary.data.dto.EditDiaryDto;
 import com.real.realoasis.domain.diary.data.request.DiaryCreateRequest;
 import com.real.realoasis.domain.diary.data.request.DiaryEditRequest;
 import com.real.realoasis.domain.diary.data.response.DiaryDetailPageResponse;
@@ -39,7 +40,8 @@ public class DiaryController {
             @PathVariable Long diaryId,
             @RequestPart(value = "file", required = false)List<MultipartFile> files,
             @RequestPart(value = "req") DiaryEditRequest editDiaryRequest) throws Exception {
-        diaryService.editDiary(diaryId, editDiaryRequest, files);
+        EditDiaryDto editDiaryDto = diaryConverter.toEditDiaryDto(editDiaryRequest);
+        diaryService.editDiary(diaryId, editDiaryDto, files);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
