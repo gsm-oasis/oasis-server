@@ -29,7 +29,8 @@ public class QuestionAnswerController {
 
     @GetMapping("/{questionId}")
     public ResponseEntity<QuestionAnswerResponse> getMainpage(@PathVariable Long questionId){
-        return new ResponseEntity<>(getQuestionAnswerMainpageService.getMainpage(questionId), HttpStatus.OK);
+        QuestionAnswerResponse questionAnswerResponse = getQuestionAnswerMainpageService.getMainpage(questionId);
+        return new ResponseEntity<>(questionAnswerResponse, HttpStatus.OK);
     }
 
     @GetMapping("/list")

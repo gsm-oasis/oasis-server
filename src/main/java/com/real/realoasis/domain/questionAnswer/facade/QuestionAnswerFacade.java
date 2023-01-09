@@ -21,20 +21,16 @@ import java.util.List;
 public class QuestionAnswerFacade {
     private final QuestionAnswerRepository questionAnswerRepository;
     private final QuestionRepository questionRepository;
-    private final UserFacade userFacade;
 
     public Question findQuestionByQuestionId(Long questionId){
        return questionRepository.findQuestionById(questionId).orElseThrow(() -> new QuestionNotFoundException(ErrorCode.QUESTION_NOT_FOUND_EXCEPTION));
     }
 
-    public String findQuestionAnswerByQuestionAndUser(Long questionId, String userId){
-        Question question = questionRepository.findQuestionById(questionId).orElseThrow(() -> new QuestionNotFoundException(ErrorCode.QUESTION_NOT_FOUND_EXCEPTION));
-        User user = userFacade.findUserById(userId);
-
-        QuestionAnswer questionAnswer = questionAnswerRepository.findQuestionAnswersByQuestionAndUser(question, user);
+    public String findQuestionAnswerByQuestionIdUserId(Long questionId, String userId){
+        QuestionAnswer questionAnswer = questionAnswerRepository.findQuestionAnswerByQuestionIdAndUserId(questionId, userId);
         if(questionAnswer == null){
-            return  "";
-        } else {
+            return "";
+        }else {
             return questionAnswer.getAnswer();
         }
     }
