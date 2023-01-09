@@ -1,8 +1,10 @@
 package com.real.realoasis.domain.diary.util.Impl;
 
 import com.real.realoasis.domain.diary.data.dto.CreateDiaryDto;
+import com.real.realoasis.domain.diary.data.dto.EditDiaryDto;
 import com.real.realoasis.domain.diary.data.entity.Diary;
 import com.real.realoasis.domain.diary.data.request.DiaryCreateRequest;
+import com.real.realoasis.domain.diary.data.request.DiaryEditRequest;
 import com.real.realoasis.domain.diary.util.DiaryConverter;
 import com.real.realoasis.domain.user.entity.User;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +32,15 @@ public class DiaryConverterImpl implements DiaryConverter {
                 .title(createDiaryDto.getTitle())
                 .writer(createDiaryDto.getWriter())
                 .user(user)
+                .build();
+    }
+
+    @Override
+    public EditDiaryDto toEditDiaryDto(DiaryEditRequest editDiaryRequest) {
+        return EditDiaryDto.builder()
+                .title(editDiaryRequest.getTitle())
+                .content(editDiaryRequest.getContent())
+                .mood(editDiaryRequest.getMood())
                 .build();
     }
 }
