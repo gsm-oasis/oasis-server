@@ -32,8 +32,8 @@ public class QuestionAnswerFacade {
         User user = userFacade.findUserById(userId);
 
         QuestionAnswer questionAnswer = questionAnswerRepository.findQuestionAnswersByQuestionAndUser(question, user);
-        if(questionAnswer == null){
-            return  " ";
+        if(questionAnswer.getAnswer() == null){
+            return  "";
         } else {
             return questionAnswer.getAnswer();
         }
