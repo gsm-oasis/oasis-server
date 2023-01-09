@@ -1,6 +1,7 @@
 package com.real.realoasis.domain.diary.service.Impl;
 
 import com.real.realoasis.domain.diary.data.dto.CreateDiaryDto;
+import com.real.realoasis.domain.diary.data.dto.EditDiaryDto;
 import com.real.realoasis.domain.diary.data.entity.Diary;
 import com.real.realoasis.domain.diary.data.request.DiaryEditRequest;
 import com.real.realoasis.domain.diary.data.response.DiaryDetailPageResponse;
@@ -64,7 +65,7 @@ public class DiaryServiceImpl implements DiaryService {
     }
 
     @Override
-    public void editDiary(Long diaryId, DiaryEditRequest editDiaryRequest, List<MultipartFile> files) throws Exception {
+    public void editDiary(Long diaryId, EditDiaryDto editDiaryDto, List<MultipartFile> files) throws Exception {
         // 수정할 일기 객체 찾기
         Diary editDiary = diaryFacade.findDiaryById(diaryId);
         List<String> imgUrlList = imageService.upload(files);
@@ -77,7 +78,7 @@ public class DiaryServiceImpl implements DiaryService {
             }
             editDiary.updateImages(list);
         }
-        editDiary.update(editDiaryRequest.getTitle(), editDiaryRequest.getContent(), editDiaryRequest.getMood());
+        editDiary.update(editDiaryDto.getTitle(), editDiaryDto.getContent(), editDiaryDto.getMood());
         diaryFacade.saveDiary(editDiary);
     }
 
