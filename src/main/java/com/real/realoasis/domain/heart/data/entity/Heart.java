@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.heart.entity;
+package com.real.realoasis.domain.heart.data.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
