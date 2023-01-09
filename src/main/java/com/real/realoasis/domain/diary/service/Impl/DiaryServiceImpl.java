@@ -1,6 +1,7 @@
 package com.real.realoasis.domain.diary.service.Impl;
 
 import com.real.realoasis.domain.diary.data.dto.CreateDiaryDto;
+import com.real.realoasis.domain.diary.data.dto.DiaryDetailPageDto;
 import com.real.realoasis.domain.diary.data.dto.EditDiaryDto;
 import com.real.realoasis.domain.diary.data.entity.Diary;
 import com.real.realoasis.domain.diary.data.response.DiaryDetailPageResponse;
@@ -54,12 +55,13 @@ public class DiaryServiceImpl implements DiaryService {
     @Override
     public DiaryDetailPageResponse getDetailPage(Long diaryId) {
         Diary diary = diaryFacade.findDiaryById(diaryId);
-        String cd = diary.getCreateDate(); //20221216
-        String year = cd.substring(0,3);
-        String month = cd.substring(4,5);
-        String day = cd.substring(6,7);
+        String date = diary.getCreateDate();
+        String year = date.substring(0,3);
+        String month = date.substring(4,5);
+        String day = date.substring(6,7);
         String createDate = year + "년 " + month + "월 " + day + "일";
-        return new DiaryDetailPageResponse(diary.getTitle(), diary.getContent(), diary.getMood(),diary.getImages(), createDate);
+        DiaryDetailPageDto diaryDetailPageDto = diaryConverter.toDetailPageDto(diary.getTitle(), diary.getContent(), diary.getMood(),diary.getImages(), createDate);
+        return diaryConverter.toDetailPageResponse(diaryDetailPageDto);
     }
 
     @Override
