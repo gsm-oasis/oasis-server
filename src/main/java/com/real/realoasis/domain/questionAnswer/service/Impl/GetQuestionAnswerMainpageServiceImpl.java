@@ -26,7 +26,6 @@ public class GetQuestionAnswerMainpageServiceImpl implements GetQuestionAnswerMa
         String coupleAnswer = questionAnswerFacade.findQuestionAnswerByQuestionAndUser(questionId, coupleUser.getId());
 
         return QuestionAnswerResponse.builder()
-                .content(question.getContent())
                 .userName(currentUser.getNickname())
                 .coupleName(coupleUser.getNickname())
                 .answer(answer)

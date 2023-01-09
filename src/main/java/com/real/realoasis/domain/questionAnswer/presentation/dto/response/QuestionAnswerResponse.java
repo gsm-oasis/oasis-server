@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class QuestionAnswerResponse {
-    private String content;
     private String userName;
     private String coupleName;
     private String answer;
