@@ -1,12 +1,12 @@
 package com.real.realoasis.domain.diary.service.Impl;
 
 import com.real.realoasis.domain.diary.data.dto.CreateDiaryDto;
-import com.real.realoasis.domain.diary.data.dto.DiaryDetailPageDto;
-import com.real.realoasis.domain.diary.data.dto.DiaryListPageDto;
+import com.real.realoasis.domain.diary.data.dto.DiaryDetailDto;
+import com.real.realoasis.domain.diary.data.dto.DiaryListDto;
 import com.real.realoasis.domain.diary.data.dto.EditDiaryDto;
 import com.real.realoasis.domain.diary.data.entity.Diary;
-import com.real.realoasis.domain.diary.data.response.DiaryDetailPageResponse;
-import com.real.realoasis.domain.diary.data.response.DiaryListPageResponse;
+import com.real.realoasis.domain.diary.data.response.DiaryDetailResponse;
+import com.real.realoasis.domain.diary.data.response.DiaryListResponse;
 import com.real.realoasis.domain.diary.facade.DiaryFacade;
 import com.real.realoasis.domain.diary.service.DiaryService;
 import com.real.realoasis.domain.diary.util.DiaryConverter;
@@ -20,7 +20,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -56,15 +55,15 @@ public class DiaryServiceImpl implements DiaryService {
     }
 
     @Override
-    public DiaryDetailPageResponse getDetailPage(Long diaryId) {
+    public DiaryDetailResponse getDetail(Long diaryId) {
         Diary diary = diaryFacade.findDiaryById(diaryId);
         String date = diary.getCreateDate();
         String year = date.substring(0,3);
         String month = date.substring(4,5);
         String day = date.substring(6,7);
         String createDate = year + "년 " + month + "월 " + day + "일";
-        DiaryDetailPageDto diaryDetailPageDto = diaryConverter.toDetailPageDto(diary.getTitle(), diary.getContent(), diary.getMood(),diary.getImages(), createDate);
-        return diaryConverter.toDetailPageResponse(diaryDetailPageDto);
+        DiaryDetailDto diaryDetailPageDto = diaryConverter.toDetailDto(diary.getTitle(), diary.getContent(), diary.getMood(),diary.getImages(), createDate);
+        return diaryConverter.toDetailResponse(diaryDetailPageDto);
     }
 
     @Override
@@ -86,7 +85,7 @@ public class DiaryServiceImpl implements DiaryService {
     }
 
     @Override
-    public List<DiaryListPageResponse> getList() {
+    public List<DiaryListResponse> getList() {
         User currentUser = userFacade.currentUser();
         User coupleUser = userFacade.findUserById(currentUser.getCoupleId());
 
@@ -97,7 +96,7 @@ public class DiaryServiceImpl implements DiaryService {
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
 
-        List<DiaryListPageDto> diaryListPageDto = diaryConverter.toListPageDto(mergedList);
-        return diaryConverter.toListPageResponse(diaryListPageDto);
+        List<DiaryListDto> diaryListPageDto = diaryConverter.toListDto(mergedList);
+        return diaryConverter.toListResponse(diaryListPageDto);
     }
 }

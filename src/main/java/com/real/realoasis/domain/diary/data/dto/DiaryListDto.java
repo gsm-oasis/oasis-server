@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 @Builder
-public class DiaryListPageDto {
+public class DiaryListDto {
     private final Long diaryId;
     private final String content;
     private final String title;

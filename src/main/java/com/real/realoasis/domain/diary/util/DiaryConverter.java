@@ -1,14 +1,14 @@
 package com.real.realoasis.domain.diary.util;
 
 import com.real.realoasis.domain.diary.data.dto.CreateDiaryDto;
-import com.real.realoasis.domain.diary.data.dto.DiaryDetailPageDto;
-import com.real.realoasis.domain.diary.data.dto.DiaryListPageDto;
+import com.real.realoasis.domain.diary.data.dto.DiaryDetailDto;
+import com.real.realoasis.domain.diary.data.dto.DiaryListDto;
 import com.real.realoasis.domain.diary.data.dto.EditDiaryDto;
 import com.real.realoasis.domain.diary.data.entity.Diary;
 import com.real.realoasis.domain.diary.data.request.CreateDiaryRequest;
 import com.real.realoasis.domain.diary.data.request.EditDiaryRequest;
-import com.real.realoasis.domain.diary.data.response.DiaryDetailPageResponse;
-import com.real.realoasis.domain.diary.data.response.DiaryListPageResponse;
+import com.real.realoasis.domain.diary.data.response.DiaryDetailResponse;
+import com.real.realoasis.domain.diary.data.response.DiaryListResponse;
 import com.real.realoasis.domain.image.data.entity.Image;
 import com.real.realoasis.domain.user.entity.User;
 
@@ -21,11 +21,11 @@ public interface DiaryConverter {
 
     EditDiaryDto toEditDiaryDto(EditDiaryRequest editDiaryRequest);
 
-    DiaryDetailPageDto toDetailPageDto(String title, String content, String mood, List<Image> images, String createDate);
+    DiaryDetailDto toDetailDto(String title, String content, String mood, List<Image> images, String createDate);
 
-    DiaryDetailPageResponse toDetailPageResponse(DiaryDetailPageDto diaryDetailPageDto);
+    DiaryDetailResponse toDetailResponse(DiaryDetailDto diaryDetailPageDto);
 
-    List<DiaryListPageDto> toListPageDto(List<Diary> mergedList);
+    List<DiaryListDto> toListDto(List<Diary> mergedList);
 
-    List<DiaryListPageResponse> toListPageResponse(List<DiaryListPageDto> diaryListPageDto);
+    List<DiaryListResponse> toListResponse(List<DiaryListDto> diaryListPageDto);
 }

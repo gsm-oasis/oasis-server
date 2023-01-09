@@ -10,7 +10,7 @@ import java.util.List;
 @Getter
 @RequiredArgsConstructor
 @Builder
-public class DiaryDetailPageDto {
+public class DiaryDetailDto {
     private final String title;
     private final String content;
     private final String mood;

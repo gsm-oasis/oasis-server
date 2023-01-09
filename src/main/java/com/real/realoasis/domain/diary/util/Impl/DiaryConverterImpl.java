@@ -1,14 +1,14 @@
 package com.real.realoasis.domain.diary.util.Impl;
 
 import com.real.realoasis.domain.diary.data.dto.CreateDiaryDto;
-import com.real.realoasis.domain.diary.data.dto.DiaryDetailPageDto;
-import com.real.realoasis.domain.diary.data.dto.DiaryListPageDto;
+import com.real.realoasis.domain.diary.data.dto.DiaryDetailDto;
+import com.real.realoasis.domain.diary.data.dto.DiaryListDto;
 import com.real.realoasis.domain.diary.data.dto.EditDiaryDto;
 import com.real.realoasis.domain.diary.data.entity.Diary;
 import com.real.realoasis.domain.diary.data.request.CreateDiaryRequest;
 import com.real.realoasis.domain.diary.data.request.EditDiaryRequest;
-import com.real.realoasis.domain.diary.data.response.DiaryDetailPageResponse;
-import com.real.realoasis.domain.diary.data.response.DiaryListPageResponse;
+import com.real.realoasis.domain.diary.data.response.DiaryDetailResponse;
+import com.real.realoasis.domain.diary.data.response.DiaryListResponse;
 import com.real.realoasis.domain.diary.util.DiaryConverter;
 import com.real.realoasis.domain.image.data.entity.Image;
 import com.real.realoasis.domain.user.entity.User;
@@ -54,8 +54,8 @@ public class DiaryConverterImpl implements DiaryConverter {
     }
 
     @Override
-    public DiaryDetailPageDto toDetailPageDto(String title, String content, String mood, List<Image> images, String createDate) {
-        return DiaryDetailPageDto.builder()
+    public DiaryDetailDto toDetailDto(String title, String content, String mood, List<Image> images, String createDate) {
+        return DiaryDetailDto.builder()
                 .title(title)
                 .content(content)
                 .mood(mood)
@@ -65,8 +65,8 @@ public class DiaryConverterImpl implements DiaryConverter {
     }
 
     @Override
-    public DiaryDetailPageResponse toDetailPageResponse(DiaryDetailPageDto diaryDetailPageDto) {
-        return DiaryDetailPageResponse.builder()
+    public DiaryDetailResponse toDetailResponse(DiaryDetailDto diaryDetailPageDto) {
+        return DiaryDetailResponse.builder()
                 .title(diaryDetailPageDto.getTitle())
                 .content(diaryDetailPageDto.getContent())
                 .mood(diaryDetailPageDto.getMood())
@@ -76,9 +76,9 @@ public class DiaryConverterImpl implements DiaryConverter {
     }
 
     @Override
-    public List<DiaryListPageDto> toListPageDto(List<Diary> mergedList) {
+    public List<DiaryListDto> toListDto(List<Diary> mergedList) {
         return mergedList.stream().map(diary ->
-                new DiaryListPageDto(
+                new DiaryListDto(
                         diary.getId(),
                         diary.getContent(),
                         diary.getTitle(),
@@ -89,15 +89,15 @@ public class DiaryConverterImpl implements DiaryConverter {
     }
 
     @Override
-    public List<DiaryListPageResponse> toListPageResponse(List<DiaryListPageDto> diaryListPageDto) {
+    public List<DiaryListResponse> toListResponse(List<DiaryListDto> diaryListPageDto) {
         return diaryListPageDto.stream().map(listPageDto ->
-                new DiaryListPageResponse(
+                new DiaryListResponse(
                         listPageDto.getDiaryId(),
                         listPageDto.getContent(),
                         listPageDto.getTitle(),
                         listPageDto.getWriter(),
                         listPageDto.getCreateDate()
                 )
-        ).sorted(Comparator.comparing(DiaryListPageResponse::getDiaryId).reversed()).collect(Collectors.toList());
+        ).sorted(Comparator.comparing(DiaryListResponse::getDiaryId).reversed()).collect(Collectors.toList());
     }
 }

@@ -4,8 +4,8 @@ import com.real.realoasis.domain.diary.data.dto.CreateDiaryDto;
 import com.real.realoasis.domain.diary.data.dto.EditDiaryDto;
 import com.real.realoasis.domain.diary.data.request.CreateDiaryRequest;
 import com.real.realoasis.domain.diary.data.request.EditDiaryRequest;
-import com.real.realoasis.domain.diary.data.response.DiaryDetailPageResponse;
-import com.real.realoasis.domain.diary.data.response.DiaryListPageResponse;
+import com.real.realoasis.domain.diary.data.response.DiaryDetailResponse;
+import com.real.realoasis.domain.diary.data.response.DiaryListResponse;
 import com.real.realoasis.domain.diary.service.*;
 import com.real.realoasis.domain.diary.util.DiaryConverter;
 import lombok.RequiredArgsConstructor;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 @RestController
 @RequiredArgsConstructor
@@ -48,8 +47,8 @@ public class DiaryController {
 
     //일기디테일 페이지
     @GetMapping("/detail/{diaryId}")
-    public ResponseEntity<DiaryDetailPageResponse> getDetailPage(@PathVariable Long diaryId){
-        DiaryDetailPageResponse diaryDetailPageResponse = diaryService.getDetailPage(diaryId);
+    public ResponseEntity<DiaryDetailResponse> getDetailPage(@PathVariable Long diaryId){
+        DiaryDetailResponse diaryDetailPageResponse = diaryService.getDetail(diaryId);
         return new ResponseEntity<>(diaryDetailPageResponse, HttpStatus.OK);
     }
 
@@ -62,8 +61,8 @@ public class DiaryController {
 
     //일기 리스트
     @GetMapping("/list")
-    public ResponseEntity<List<DiaryListPageResponse>> getList(){
-        List<DiaryListPageResponse> diaryListPageResponse = diaryService.getList();
+    public ResponseEntity<List<DiaryListResponse>> getList(){
+        List<DiaryListResponse> diaryListPageResponse = diaryService.getList();
         return new ResponseEntity<>(diaryListPageResponse,HttpStatus.OK);
     }
 }
