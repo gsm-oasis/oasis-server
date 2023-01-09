@@ -20,10 +20,8 @@ public class GetQuestionAnswerMainpageServiceImpl implements GetQuestionAnswerMa
         User currentUser = userFacade.currentUser();
         User coupleUser = userFacade.findUserById(currentUser.getCoupleId());
 
-        Question question = questionAnswerFacade.findQuestionByQuestionId(questionId);
-
-        String answer = questionAnswerFacade.findQuestionAnswerByQuestionAndUser(questionId, currentUser.getId());
-        String coupleAnswer = questionAnswerFacade.findQuestionAnswerByQuestionAndUser(questionId, coupleUser.getId());
+        String answer = questionAnswerFacade.findQuestionAnswerByQuestionIdUserId(questionId, currentUser.getId());
+        String coupleAnswer = questionAnswerFacade.findQuestionAnswerByQuestionIdUserId(questionId, coupleUser.getId());
 
         return QuestionAnswerResponse.builder()
                 .userName(currentUser.getNickname())
