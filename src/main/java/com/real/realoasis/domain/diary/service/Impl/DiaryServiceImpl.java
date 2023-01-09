@@ -2,6 +2,7 @@ package com.real.realoasis.domain.diary.service.Impl;
 
 import com.real.realoasis.domain.diary.data.dto.CreateDiaryDto;
 import com.real.realoasis.domain.diary.data.dto.DiaryDetailPageDto;
+import com.real.realoasis.domain.diary.data.dto.DiaryListPageDto;
 import com.real.realoasis.domain.diary.data.dto.EditDiaryDto;
 import com.real.realoasis.domain.diary.data.entity.Diary;
 import com.real.realoasis.domain.diary.data.response.DiaryDetailPageResponse;
@@ -18,8 +19,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @RequiredArgsConstructor
@@ -83,30 +86,18 @@ public class DiaryServiceImpl implements DiaryService {
     }
 
     @Override
-    public Stream<DiaryListPageResponse> getList() {
+    public List<DiaryListPageResponse> getList() {
         User currentUser = userFacade.currentUser();
-
         User coupleUser = userFacade.findUserById(currentUser.getCoupleId());
 
-        List<DiaryListPageResponse> list = new ArrayList<>();
+        List<Diary> diaryList = diaryFacade.findAllByUserId(currentUser.getId());
+        List<Diary> diaryCoupleList = diaryFacade.findAllByUserId(coupleUser.getId());
 
-        diaryFacade.findAllByUserId(currentUser.getId()).forEach(diary -> {
-            Long diaryId = diary.getId();
-            String content = diary.getContent();
-            String title = diary.getTitle();
-            String writer = diary.getWriter();
-            String createDate = diary.getCreateDate();
-            list.add(new DiaryListPageResponse(diaryId, content, title, writer, createDate));
-        });
-        diaryFacade.findAllByUserId(coupleUser.getId()).forEach(diary -> {
-            Long diaryId = diary.getId();
-            String content = diary.getContent();
-            String title = diary.getTitle();
-            String writer = diary.getWriter();
-            String createDate = diary.getCreateDate();
-            list.add(new DiaryListPageResponse(diaryId, content, title, writer, createDate));
-        });
-        return list.stream()
-                .sorted(Comparator.comparing(DiaryListPageResponse::getDiaryId).reversed());
+        List<Diary> mergedList = Stream.of(diaryList, diaryCoupleList)
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+
+        List<DiaryListPageDto> diaryListPageDto = diaryConverter.toListPageDto(mergedList);
+        return diaryConverter.toListPageResponse(diaryListPageDto);
     }
 }

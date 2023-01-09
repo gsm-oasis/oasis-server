@@ -7,7 +7,6 @@ import com.real.realoasis.domain.diary.data.response.DiaryListPageResponse;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 
 public interface DiaryService {
@@ -15,7 +14,7 @@ public interface DiaryService {
     void deleteDiary(Long diaryId);
     DiaryDetailPageResponse getDetailPage(Long diaryId);
     void editDiary(Long diaryId, EditDiaryDto editDiaryDto, List<MultipartFile> multipartFileList) throws Exception;
-    Stream<DiaryListPageResponse> getList();
+    List<DiaryListPageResponse> getList();
 
 
 }
