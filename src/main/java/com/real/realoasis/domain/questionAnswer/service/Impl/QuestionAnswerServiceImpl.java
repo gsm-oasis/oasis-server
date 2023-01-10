@@ -3,6 +3,8 @@ package com.real.realoasis.domain.questionAnswer.service.Impl;
 import com.real.realoasis.domain.question.entity.Question;
 import com.real.realoasis.domain.questionAnswer.controller.QuestionAnswerController;
 import com.real.realoasis.domain.questionAnswer.data.dto.CreateDto;
+import com.real.realoasis.domain.questionAnswer.data.dto.QuestionAnswerDto;
+import com.real.realoasis.domain.questionAnswer.data.dto.QuestionAnswerListDto;
 import com.real.realoasis.domain.questionAnswer.data.entity.QuestionAnswer;
 import com.real.realoasis.domain.questionAnswer.data.response.QuestionAnswerListResponse;
 import com.real.realoasis.domain.questionAnswer.data.response.QuestionAnswerResponse;
@@ -36,18 +38,12 @@ public class QuestionAnswerServiceImpl implements QuestionAnswerService {
     }
 
     @Override
-    public Stream<QuestionAnswerListResponse> getList() {
+    public List<QuestionAnswerListResponse> getList() {
         User currentUser = userFacade.currentUser();
 
-        List<QuestionAnswerListResponse> list = new ArrayList<>();
-
-        questionAnswerFacade.findAllByUserId(currentUser.getId()).forEach(questionAnswer -> {
-            Long questionId = questionAnswer.getQuestion().getId();
-            String content = questionAnswer.getQuestion().getContent();
-            list.add(new QuestionAnswerListResponse(questionId, content));
-        });
-        return list.stream()
-                .sorted(Comparator.comparing(QuestionAnswerListResponse::getQuestionId).reversed());
+        List<QuestionAnswer> list = questionAnswerFacade.findAllByUserId(currentUser.getId());
+        List<QuestionAnswerListDto> questionAnswerDtoList = questionAnswerConverter.toListDto(list);
+        return questionAnswerConverter.toListResponse(questionAnswerDtoList);
     }
 
     @Override
@@ -58,11 +54,7 @@ public class QuestionAnswerServiceImpl implements QuestionAnswerService {
         String answer = questionAnswerFacade.findQuestionAnswerByQuestionIdUserId(questionId, currentUser.getId());
         String coupleAnswer = questionAnswerFacade.findQuestionAnswerByQuestionIdUserId(questionId, coupleUser.getId());
 
-        return QuestionAnswerResponse.builder()
-                .userName(currentUser.getNickname())
-                .coupleName(coupleUser.getNickname())
-                .answer(answer)
-                .coupleAnswer(coupleAnswer)
-                .build();
+        QuestionAnswerDto questionAnswerDto = questionAnswerConverter.toAnswerDto(currentUser, coupleUser, answer, coupleAnswer);
+        return questionAnswerConverter.toResponse(questionAnswerDto);
     }
 }
