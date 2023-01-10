@@ -6,6 +6,7 @@ import com.real.realoasis.domain.user.presentation.dto.request.DatingDateEnterRe
 import com.real.realoasis.domain.user.service.DatingDateEnterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,6 +17,7 @@ import java.time.temporal.ChronoUnit;
 public class DatingDateEnterServiceImpl implements DatingDateEnterService {
     private final UserFacade userFacade;
 
+    @Transactional
     @Override
     public void datingDateEnter(DatingDateEnterRequest datingDateEnterRequest) {
         User currentUser = userFacade.currentUser();
