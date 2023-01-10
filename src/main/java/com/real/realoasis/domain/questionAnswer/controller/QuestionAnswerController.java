@@ -11,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.stream.Stream;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -34,8 +34,9 @@ public class QuestionAnswerController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<Stream<QuestionAnswerListResponse>> getListPage(){
-        return new ResponseEntity<>(questionAnswerService.getList(), HttpStatus.OK);
+    public ResponseEntity<List<QuestionAnswerListResponse>> getListPage(){
+        List<QuestionAnswerListResponse> questionAnswerListResponse = questionAnswerService.getList();
+        return new ResponseEntity<>(questionAnswerListResponse, HttpStatus.OK);
     }
 
 }
