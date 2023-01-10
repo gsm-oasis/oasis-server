@@ -1,21 +1,17 @@
 package com.real.realoasis.domain.diary.data.response;
 
 import com.real.realoasis.domain.image.data.entity.Image;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
 @Getter
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class DiaryDetailResponse {
-    private String title;
-    private String content;
-    private String mood;
-    private List<Image> imgs;
-    private String createDate;
+    private final String title;
+    private final String content;
+    private final String mood;
+    private final List<Image> imgs;
+    private final String createDate;
 }

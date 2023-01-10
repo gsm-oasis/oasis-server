@@ -1,9 +1,9 @@
-package com.real.realoasis.domain.user.presentation;
+package com.real.realoasis.domain.user.controller;
 
-import com.real.realoasis.domain.user.presentation.dto.request.AnniversaryTimeChangeRequest;
-import com.real.realoasis.domain.user.presentation.dto.request.NicknameChangeRequest;
-import com.real.realoasis.domain.user.presentation.dto.request.PasswordChangeRequest;
-import com.real.realoasis.domain.user.presentation.dto.response.SettingResponse;
+import com.real.realoasis.domain.user.data.request.AnniversaryTimeChangeRequest;
+import com.real.realoasis.domain.user.data.request.NicknameChangeRequest;
+import com.real.realoasis.domain.user.data.request.PasswordChangeRequest;
+import com.real.realoasis.domain.user.data.response.SettingResponse;
 import com.real.realoasis.domain.user.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

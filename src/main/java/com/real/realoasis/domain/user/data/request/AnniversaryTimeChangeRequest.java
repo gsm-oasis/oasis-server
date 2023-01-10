@@ -1,14 +1,14 @@
-package com.real.realoasis.domain.user.presentation.dto.response;
+package com.real.realoasis.domain.user.data.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Builder
 @Getter
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ConnectCoupleResponse {
-    private String nickname;
+public class AnniversaryTimeChangeRequest {
+    private long anniversaryTime;
 }

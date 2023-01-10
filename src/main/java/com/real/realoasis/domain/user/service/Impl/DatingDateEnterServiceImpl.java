@@ -1,8 +1,8 @@
 package com.real.realoasis.domain.user.service.Impl;
 
-import com.real.realoasis.domain.user.entity.User;
+import com.real.realoasis.domain.user.data.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
-import com.real.realoasis.domain.user.presentation.dto.request.DatingDateEnterRequest;
+import com.real.realoasis.domain.user.data.request.DatingDateEnterRequest;
 import com.real.realoasis.domain.user.service.DatingDateEnterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

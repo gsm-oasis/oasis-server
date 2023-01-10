@@ -11,7 +11,7 @@ import com.real.realoasis.domain.auth.exception.ExpiredTokenException;
 import com.real.realoasis.domain.auth.exception.InvalidTokenException;
 import com.real.realoasis.domain.auth.service.AuthService;
 import com.real.realoasis.domain.auth.util.AuthConverter;
-import com.real.realoasis.domain.user.entity.User;
+import com.real.realoasis.domain.user.data.entity.User;
 import com.real.realoasis.domain.user.exception.DuplicateIdException;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.global.error.type.ErrorCode;

@@ -1,7 +1,7 @@
 package com.real.realoasis.domain.diary.data.entity;
 
 import com.real.realoasis.domain.image.data.entity.Image;
-import com.real.realoasis.domain.user.entity.User;
+import com.real.realoasis.domain.user.data.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

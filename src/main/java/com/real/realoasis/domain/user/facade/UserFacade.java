@@ -1,8 +1,6 @@
 package com.real.realoasis.domain.user.facade;
 
-import com.real.realoasis.domain.auth.data.request.SignUpRequest;
-import com.real.realoasis.domain.auth.data.response.SignupResponse;
-import com.real.realoasis.domain.user.entity.User;
+import com.real.realoasis.domain.user.data.entity.User;
 import com.real.realoasis.domain.user.exception.PasswordNotMatchException;
 import com.real.realoasis.domain.user.exception.UserNotFoundException;
 import com.real.realoasis.domain.user.repository.UserRepository;
@@ -12,8 +10,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Random;
 
 @Component
 @RequiredArgsConstructor

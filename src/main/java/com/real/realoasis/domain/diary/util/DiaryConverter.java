@@ -10,7 +10,7 @@ import com.real.realoasis.domain.diary.data.request.EditDiaryRequest;
 import com.real.realoasis.domain.diary.data.response.DiaryDetailResponse;
 import com.real.realoasis.domain.diary.data.response.DiaryListResponse;
 import com.real.realoasis.domain.image.data.entity.Image;
-import com.real.realoasis.domain.user.entity.User;
+import com.real.realoasis.domain.user.data.entity.User;
 
 import java.util.List;
 

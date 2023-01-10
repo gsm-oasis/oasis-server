@@ -1,14 +1,10 @@
 package com.real.realoasis.domain.auth.data.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 @Getter
 @Builder
-@AllArgsConstructor
-@NoArgsConstructor
+@RequiredArgsConstructor
 public class SearchIdResponse {
-    private String userId;
+    private final String userId;
 }

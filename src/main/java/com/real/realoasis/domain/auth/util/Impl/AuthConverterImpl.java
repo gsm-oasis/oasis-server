@@ -11,7 +11,7 @@ import com.real.realoasis.domain.auth.data.response.SearchPwResponse;
 import com.real.realoasis.domain.auth.data.response.SignupResponse;
 import com.real.realoasis.domain.auth.data.response.TokenResponse;
 import com.real.realoasis.domain.auth.util.AuthConverter;
-import com.real.realoasis.domain.user.entity.User;
+import com.real.realoasis.domain.user.data.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;

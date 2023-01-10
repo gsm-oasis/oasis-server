@@ -1,6 +1,6 @@
 package com.real.realoasis.domain.questionAnswer.repository;
 
-import com.real.realoasis.domain.questionAnswer.entity.QuestionAnswer;
+import com.real.realoasis.domain.questionAnswer.data.entity.QuestionAnswer;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

@@ -1,15 +1,11 @@
 package com.real.realoasis.domain.auth.data.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 
 @Builder
 @Getter
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SignupResponse {
-    private String code;
+    private final String code;
 }

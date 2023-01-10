@@ -1,10 +1,9 @@
 package com.real.realoasis.domain.questionAnswer.service.Impl;
 
-import com.real.realoasis.domain.question.entity.Question;
 import com.real.realoasis.domain.questionAnswer.facade.QuestionAnswerFacade;
-import com.real.realoasis.domain.questionAnswer.presentation.dto.response.QuestionAnswerResponse;
+import com.real.realoasis.domain.questionAnswer.data.response.QuestionAnswerResponse;
 import com.real.realoasis.domain.questionAnswer.service.GetQuestionAnswerMainpageService;
-import com.real.realoasis.domain.user.entity.User;
+import com.real.realoasis.domain.user.data.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

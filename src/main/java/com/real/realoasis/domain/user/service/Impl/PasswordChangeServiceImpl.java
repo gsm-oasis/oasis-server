@@ -1,14 +1,12 @@
 package com.real.realoasis.domain.user.service.Impl;
 
-import com.real.realoasis.domain.user.entity.User;
+import com.real.realoasis.domain.user.data.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
-import com.real.realoasis.domain.user.presentation.dto.request.PasswordChangeRequest;
+import com.real.realoasis.domain.user.data.request.PasswordChangeRequest;
 import com.real.realoasis.domain.user.service.PasswordChangeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.beans.Encoder;
 
 @Service
 @RequiredArgsConstructor

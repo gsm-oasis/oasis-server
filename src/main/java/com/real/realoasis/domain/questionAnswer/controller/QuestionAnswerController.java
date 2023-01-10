@@ -1,8 +1,8 @@
-package com.real.realoasis.domain.questionAnswer.presentation;
+package com.real.realoasis.domain.questionAnswer.controller;
 
-import com.real.realoasis.domain.questionAnswer.presentation.dto.request.QuestionAnswerWriteRequest;
-import com.real.realoasis.domain.questionAnswer.presentation.dto.response.QuestionAnswerListResponse;
-import com.real.realoasis.domain.questionAnswer.presentation.dto.response.QuestionAnswerResponse;
+import com.real.realoasis.domain.questionAnswer.data.request.QuestionAnswerWriteRequest;
+import com.real.realoasis.domain.questionAnswer.data.response.QuestionAnswerListResponse;
+import com.real.realoasis.domain.questionAnswer.data.response.QuestionAnswerResponse;
 import com.real.realoasis.domain.questionAnswer.service.CreateQuestionAnswerService;
 import com.real.realoasis.domain.questionAnswer.service.GetQuestionAnswerListService;
 import com.real.realoasis.domain.questionAnswer.service.GetQuestionAnswerMainpageService;

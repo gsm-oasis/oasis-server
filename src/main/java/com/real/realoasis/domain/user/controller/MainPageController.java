@@ -1,7 +1,7 @@
-package com.real.realoasis.domain.user.presentation;
+package com.real.realoasis.domain.user.controller;
 
-import com.real.realoasis.domain.user.presentation.dto.request.DatingDateEnterRequest;
-import com.real.realoasis.domain.user.presentation.dto.response.MainPageResponse;
+import com.real.realoasis.domain.user.data.request.DatingDateEnterRequest;
+import com.real.realoasis.domain.user.data.response.MainPageResponse;
 import com.real.realoasis.domain.user.service.DatingDateEnterService;
 import com.real.realoasis.domain.user.service.GetMainPageService;
 import lombok.RequiredArgsConstructor;

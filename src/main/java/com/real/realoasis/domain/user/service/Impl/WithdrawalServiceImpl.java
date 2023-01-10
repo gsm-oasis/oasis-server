@@ -1,6 +1,6 @@
 package com.real.realoasis.domain.user.service.Impl;
 
-import com.real.realoasis.domain.user.entity.User;
+import com.real.realoasis.domain.user.data.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.domain.user.repository.UserRepository;
 import com.real.realoasis.domain.user.service.WithdrawalService;

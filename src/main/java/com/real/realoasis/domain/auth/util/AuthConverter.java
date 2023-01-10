@@ -10,7 +10,7 @@ import com.real.realoasis.domain.auth.data.request.SignUpRequest;
 import com.real.realoasis.domain.auth.data.response.SearchPwResponse;
 import com.real.realoasis.domain.auth.data.response.SignupResponse;
 import com.real.realoasis.domain.auth.data.response.TokenResponse;
-import com.real.realoasis.domain.user.entity.User;
+import com.real.realoasis.domain.user.data.entity.User;
 
 public interface AuthConverter {
     SignupDto toSignupDto(SignUpRequest signupRequest);

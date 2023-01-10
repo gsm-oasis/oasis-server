@@ -1,8 +1,8 @@
-package com.real.realoasis.domain.questionAnswer.presentation.dto.request;
+package com.real.realoasis.domain.questionAnswer.data.request;
 
 import com.real.realoasis.domain.question.entity.Question;
-import com.real.realoasis.domain.questionAnswer.entity.QuestionAnswer;
-import com.real.realoasis.domain.user.entity.User;
+import com.real.realoasis.domain.questionAnswer.data.entity.QuestionAnswer;
+import com.real.realoasis.domain.user.data.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.user.entity;
+package com.real.realoasis.domain.user.data.entity;
 
 import com.real.realoasis.domain.heart.data.entity.Heart;
 import com.real.realoasis.domain.user.type.Role;

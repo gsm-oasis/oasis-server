@@ -1,9 +1,9 @@
 package com.real.realoasis.domain.user.service.Impl;
 
-import com.real.realoasis.domain.user.entity.User;
+import com.real.realoasis.domain.user.data.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
-import com.real.realoasis.domain.user.presentation.dto.request.ConnectCoupleRequest;
-import com.real.realoasis.domain.user.presentation.dto.response.ConnectCoupleResponse;
+import com.real.realoasis.domain.user.data.request.ConnectCoupleRequest;
+import com.real.realoasis.domain.user.data.response.ConnectCoupleResponse;
 import com.real.realoasis.domain.user.service.ConnectCoupleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

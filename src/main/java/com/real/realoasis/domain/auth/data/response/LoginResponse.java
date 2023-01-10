@@ -1,20 +1,16 @@
 package com.real.realoasis.domain.auth.data.response;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @Getter
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class LoginResponse {
-    private String accessToken;
-    private String refreshToken;
-    private Long expiredAt;
-    private String code;
-    private boolean couple;
+    private final String accessToken;
+    private final String refreshToken;
+    private final Long expiredAt;
+    private final String code;
+    private final boolean couple;
 }

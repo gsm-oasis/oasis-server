@@ -12,7 +12,7 @@ import com.real.realoasis.domain.diary.service.DiaryService;
 import com.real.realoasis.domain.diary.util.DiaryConverter;
 import com.real.realoasis.domain.image.data.entity.Image;
 import com.real.realoasis.domain.image.service.ImageService;
-import com.real.realoasis.domain.user.entity.User;
+import com.real.realoasis.domain.user.data.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
