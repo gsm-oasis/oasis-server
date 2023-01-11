@@ -5,9 +5,10 @@ import com.real.realoasis.domain.heart.util.HeartUtil;
 import com.real.realoasis.domain.question.entity.Question;
 import com.real.realoasis.domain.questionAnswer.facade.QuestionAnswerFacade;
 import com.real.realoasis.domain.user.data.entity.User;
-import com.real.realoasis.domain.user.facade.UserFacade;
+import com.real.realoasis.domain.user.data.request.DatingDateEnterRequest;
 import com.real.realoasis.domain.user.data.response.MainPageResponse;
-import com.real.realoasis.domain.user.service.GetMainPageService;
+import com.real.realoasis.domain.user.facade.UserFacade;
+import com.real.realoasis.domain.user.service.MainPageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -16,10 +17,10 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 
-
 @Service
 @RequiredArgsConstructor
-public class GetMainPageServiceImpl implements GetMainPageService {
+public class MainPageServiceImpl implements MainPageService {
+
     private final UserFacade userFacade;
     private final DiaryService diaryService;
     private final QuestionAnswerFacade questionAnswerFacade;
@@ -45,6 +46,7 @@ public class GetMainPageServiceImpl implements GetMainPageService {
 
         Question question = questionAnswerFacade.findQuestionByQuestionId(datingDate - currentUser.getDatingDate());
 
+
         return MainPageResponse.builder()
                 .nickname(currentUser.getNickname())
                 .coupleNickname(coupleUser.getNickname())
@@ -57,4 +59,22 @@ public class GetMainPageServiceImpl implements GetMainPageService {
                 .build();
     }
 
+    @Transactional
+    @Override
+    public void datingDateEnter(DatingDateEnterRequest datingDateEnterRequest) {
+        User currentUser = userFacade.currentUser();
+        currentUser.createFirstDay(datingDateEnterRequest.getFirstDay());
+
+        currentUser.today();
+
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
+        LocalDate firstDayToLocalDate = LocalDate.parse(currentUser.getFirstDay(), dateFormat);
+        LocalDate todayToLocalDate = LocalDate.parse(currentUser.getToday(), dateFormat);
+
+        long datingDate = ChronoUnit.DAYS.between(firstDayToLocalDate, todayToLocalDate);
+
+        currentUser.updateDatingDate(datingDate);
+
+        userFacade.saveUser(currentUser);
+    }
 }
