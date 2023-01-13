@@ -1,11 +1,13 @@
 package com.real.realoasis.domain.user.service.Impl;
 
+import com.real.realoasis.domain.user.data.dto.ConnectCoupleDto;
+import com.real.realoasis.domain.user.data.dto.ConnectCoupleResDto;
 import com.real.realoasis.domain.user.data.entity.User;
-import com.real.realoasis.domain.user.data.request.ConnectCoupleRequest;
 import com.real.realoasis.domain.user.data.response.ConnectCoupleResponse;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.domain.user.repository.UserRepository;
 import com.real.realoasis.domain.user.service.UserService;
+import com.real.realoasis.domain.user.util.UserConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +17,7 @@ public class UserServiceImpl implements UserService {
 
     private final UserFacade userFacade;
     private final UserRepository userRepository;
+    private final UserConverter userConverter;
 
     @Override
     public void withdrawal() {
@@ -23,17 +26,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ConnectCoupleResponse connectCouple(ConnectCoupleRequest connectCoupleRequest) {
+    public ConnectCoupleResponse connectCouple(ConnectCoupleDto connectCoupleDto) {
         User currentUser = userFacade.currentUser();
-        User coupleUser = userFacade.findUserByCode(connectCoupleRequest.getCode());
+        User coupleUser = userFacade.findUserByCode(connectCoupleDto.getCode());
 
         currentUser.updateCoupleId(coupleUser.getId());
         currentUser.updateIsCouple();
 
         userFacade.saveUser(currentUser);
 
-        return ConnectCoupleResponse.builder()
-                .nickname(coupleUser.getNickname())
-                .build();
+        ConnectCoupleResDto connectCoupleResDto = userConverter.toResDto(coupleUser);
+        return userConverter.toResponse(connectCoupleResDto);
     }
 }
