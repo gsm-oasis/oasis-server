@@ -1,7 +1,9 @@
 package com.real.realoasis.domain.user.util.Impl;
 
+import com.real.realoasis.domain.user.data.dto.NicknameChangeDto;
 import com.real.realoasis.domain.user.data.dto.SettingResDto;
 import com.real.realoasis.domain.user.data.entity.User;
+import com.real.realoasis.domain.user.data.request.NicknameChangeRequest;
 import com.real.realoasis.domain.user.data.response.SettingResponse;
 import com.real.realoasis.domain.user.util.UserSettingConverter;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,13 @@ public class UserSettingConverterImpl implements UserSettingConverter {
                 .anniversaryDate(settingResDto.getAnniversaryDate())
                 .myCode(settingResDto.getMyCode())
                 .version(settingResDto.getVersion())
+                .build();
+    }
+
+    @Override
+    public NicknameChangeDto toNicknameChangeDto(NicknameChangeRequest nicknameChangeRequest) {
+        return NicknameChangeDto.builder()
+                .nickname(nicknameChangeRequest.getNickname())
                 .build();
     }
 }

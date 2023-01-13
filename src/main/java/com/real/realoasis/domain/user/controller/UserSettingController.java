@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.user.controller;
 
+import com.real.realoasis.domain.user.data.dto.NicknameChangeDto;
 import com.real.realoasis.domain.user.data.request.AnniversaryTimeChangeRequest;
 import com.real.realoasis.domain.user.data.request.NicknameChangeRequest;
 import com.real.realoasis.domain.user.data.request.PasswordChangeRequest;
@@ -28,7 +29,8 @@ public class UserSettingController {
     // 닉네임 변경 페이지
     @PatchMapping("/change/nickname")
     public ResponseEntity<Void> changeNickname(@RequestBody NicknameChangeRequest nicknameChangeRequest){
-        userSettingService.nicknameChange(nicknameChangeRequest);
+        NicknameChangeDto nicknameChangeDto = userSettingConverter.toNicknameChangeDto(nicknameChangeRequest);
+        userSettingService.nicknameChange(nicknameChangeDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

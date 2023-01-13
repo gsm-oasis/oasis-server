@@ -1,9 +1,9 @@
 package com.real.realoasis.domain.user.service.Impl;
 
+import com.real.realoasis.domain.user.data.dto.NicknameChangeDto;
 import com.real.realoasis.domain.user.data.dto.SettingResDto;
 import com.real.realoasis.domain.user.data.entity.User;
 import com.real.realoasis.domain.user.data.request.AnniversaryTimeChangeRequest;
-import com.real.realoasis.domain.user.data.request.NicknameChangeRequest;
 import com.real.realoasis.domain.user.data.request.PasswordChangeRequest;
 import com.real.realoasis.domain.user.data.response.SettingResponse;
 import com.real.realoasis.domain.user.facade.UserFacade;
@@ -30,9 +30,9 @@ public class UserSettingServiceImpl implements UserSettingService {
     }
 
     @Override
-    public void nicknameChange(NicknameChangeRequest nicknameChangeRequest) {
+    public void nicknameChange(NicknameChangeDto nicknameChangeDto) {
         User currentUser = userFacade.currentUser();
-        currentUser.updateNickname(nicknameChangeRequest.getNickname());
+        currentUser.updateNickname(nicknameChangeDto.getNickname());
         userFacade.saveUser(currentUser);
     }
 
