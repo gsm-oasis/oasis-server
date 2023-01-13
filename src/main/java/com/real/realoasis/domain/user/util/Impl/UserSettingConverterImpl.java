@@ -51,7 +51,7 @@ public class UserSettingConverterImpl implements UserSettingConverter {
     @Override
     public AnniversaryTimeChangeDto toAnniversaryTimeChangeDto(AnniversaryTimeChangeRequest anniversaryTimeChangeRequest) {
         return AnniversaryTimeChangeDto.builder()
-                .anniversaryDate(anniversaryTimeChangeRequest.getAnniversaryDate())
+                .anniversaryTime(anniversaryTimeChangeRequest.getAnniversaryTime())
                 .build();
     }
 }
