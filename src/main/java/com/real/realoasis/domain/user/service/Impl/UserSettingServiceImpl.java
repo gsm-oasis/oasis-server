@@ -1,10 +1,10 @@
 package com.real.realoasis.domain.user.service.Impl;
 
 import com.real.realoasis.domain.user.data.dto.NicknameChangeDto;
+import com.real.realoasis.domain.user.data.dto.PasswordChangeDto;
 import com.real.realoasis.domain.user.data.dto.SettingResDto;
 import com.real.realoasis.domain.user.data.entity.User;
 import com.real.realoasis.domain.user.data.request.AnniversaryTimeChangeRequest;
-import com.real.realoasis.domain.user.data.request.PasswordChangeRequest;
 import com.real.realoasis.domain.user.data.response.SettingResponse;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.domain.user.service.UserSettingService;
@@ -37,9 +37,9 @@ public class UserSettingServiceImpl implements UserSettingService {
     }
 
     @Override
-    public void passwordChange(PasswordChangeRequest passwordChangeRequest) {
+    public void passwordChange(PasswordChangeDto passwordChangeDto) {
         User currentUser = userFacade.currentUser();
-        currentUser.updatePassword(passwordEncoder.encode(passwordChangeRequest.getPassword()));
+        currentUser.updatePassword(passwordEncoder.encode(passwordChangeDto.getPassword()));
         userFacade.saveUser(currentUser);
     }
 

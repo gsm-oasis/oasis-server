@@ -1,6 +1,7 @@
 package com.real.realoasis.domain.user.controller;
 
 import com.real.realoasis.domain.user.data.dto.NicknameChangeDto;
+import com.real.realoasis.domain.user.data.dto.PasswordChangeDto;
 import com.real.realoasis.domain.user.data.request.AnniversaryTimeChangeRequest;
 import com.real.realoasis.domain.user.data.request.NicknameChangeRequest;
 import com.real.realoasis.domain.user.data.request.PasswordChangeRequest;
@@ -37,7 +38,8 @@ public class UserSettingController {
     // 비밀번호 변경 페이지
     @PatchMapping("/change/password")
     public ResponseEntity<Void> changePassword(@RequestBody PasswordChangeRequest passwordChangeRequest){
-        userSettingService.passwordChange(passwordChangeRequest);
+        PasswordChangeDto passwordChangeDto = userSettingConverter.toPasswordChangeDto(passwordChangeRequest);
+        userSettingService.passwordChange(passwordChangeDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
