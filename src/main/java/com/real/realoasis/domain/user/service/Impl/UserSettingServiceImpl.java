@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.user.service.Impl;
 
+import com.real.realoasis.domain.user.data.dto.AnniversaryTimeChangeDto;
 import com.real.realoasis.domain.user.data.dto.NicknameChangeDto;
 import com.real.realoasis.domain.user.data.dto.PasswordChangeDto;
 import com.real.realoasis.domain.user.data.dto.SettingResDto;
@@ -44,9 +45,9 @@ public class UserSettingServiceImpl implements UserSettingService {
     }
 
     @Override
-    public void anniversaryTimeChange(AnniversaryTimeChangeRequest anniversaryTimeChangeRequest) {
+    public void anniversaryTimeChange(AnniversaryTimeChangeDto anniversaryTimeChangeDto) {
         User currentUser = userFacade.currentUser();
-        currentUser.updateAnniversaryTime(anniversaryTimeChangeRequest.getAnniversaryTime());
+        currentUser.updateAnniversaryTime(anniversaryTimeChangeDto.getAnniversaryTime());
         userFacade.saveUser(currentUser);
     }
 }

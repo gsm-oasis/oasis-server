@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.user.controller;
 
+import com.real.realoasis.domain.user.data.dto.AnniversaryTimeChangeDto;
 import com.real.realoasis.domain.user.data.dto.NicknameChangeDto;
 import com.real.realoasis.domain.user.data.dto.PasswordChangeDto;
 import com.real.realoasis.domain.user.data.request.AnniversaryTimeChangeRequest;
@@ -45,8 +46,9 @@ public class UserSettingController {
 
     // 기념일 알림 시간 변경 페이지
     @PatchMapping("/change/anniversarytime")
-    public ResponseEntity<Void> changeAnniversaryTIme(@RequestBody AnniversaryTimeChangeRequest anniversaryTimeChangeRequest){
-        userSettingService.anniversaryTimeChange(anniversaryTimeChangeRequest);
+    public ResponseEntity<Void> changeAnniversaryTime(@RequestBody AnniversaryTimeChangeRequest anniversaryTimeChangeRequest){
+        AnniversaryTimeChangeDto anniversaryTimeChangeDto = userSettingConverter.toAnniversaryTimeChangeDto(anniversaryTimeChangeRequest);
+        userSettingService.anniversaryTimeChange(anniversaryTimeChangeDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }
