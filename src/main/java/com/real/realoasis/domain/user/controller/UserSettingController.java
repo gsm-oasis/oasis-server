@@ -19,7 +19,7 @@ public class UserSettingController {
     private final UserSettingConverter userSettingConverter;
 
     // 설정 메인 페이지
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<SettingResponse> getSetting(){
         SettingResponse settingResponse = userSettingService.getSetting();
         return new ResponseEntity<>(settingResponse, HttpStatus.OK);
