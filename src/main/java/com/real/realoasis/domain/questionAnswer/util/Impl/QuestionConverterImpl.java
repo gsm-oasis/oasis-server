@@ -59,9 +59,9 @@ public class QuestionConverterImpl implements QuestionAnswerConverter {
         return list.stream().map(questionAnswer ->
                 new QuestionAnswerListDto(
                         questionAnswer.getId(),
-                        questionAnswer.getAnswer()
+                        questionAnswer.getQuestion().getContent()
                 )
-        ).sorted(Comparator.comparing(QuestionAnswerListDto::getQuestionId).reversed()).collect(Collectors.toList());
+        ).collect(Collectors.toList());
     }
 
     @Override
@@ -71,6 +71,6 @@ public class QuestionConverterImpl implements QuestionAnswerConverter {
                         response.getQuestionId(),
                         response.getContent()
                 )
-        ).sorted().collect(Collectors.toList());
+        ).sorted(Comparator.comparing(QuestionAnswerListResponse::getQuestionId).reversed()).collect(Collectors.toList());
     }
 }
