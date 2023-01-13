@@ -6,7 +6,7 @@ import lombok.*;
 @Builder
 @RequiredArgsConstructor
 public class SettingResponse {
-    private final long anniversaryTime;
+    private final long anniversaryDate;
     private final String version;
     private final String myCode;
 }
