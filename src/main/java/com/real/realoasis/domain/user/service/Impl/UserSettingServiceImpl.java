@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.user.service.Impl;
 
+import com.real.realoasis.domain.user.data.dto.SettingResDto;
 import com.real.realoasis.domain.user.data.entity.User;
 import com.real.realoasis.domain.user.data.request.AnniversaryTimeChangeRequest;
 import com.real.realoasis.domain.user.data.request.NicknameChangeRequest;
@@ -7,6 +8,7 @@ import com.real.realoasis.domain.user.data.request.PasswordChangeRequest;
 import com.real.realoasis.domain.user.data.response.SettingResponse;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.domain.user.service.UserSettingService;
+import com.real.realoasis.domain.user.util.UserSettingConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,16 +18,15 @@ import org.springframework.stereotype.Service;
 public class UserSettingServiceImpl implements UserSettingService {
     private final UserFacade userFacade;
     private final PasswordEncoder passwordEncoder;
+    private final UserSettingConverter userSettingConverter;
 
 
 
     @Override
     public SettingResponse getSetting() {
         User user = userFacade.currentUser();
-        return SettingResponse.builder()
-                .anniversaryTime(user.getAnniversaryDate())
-                .myCode(user.getCode())
-                .build();
+        SettingResDto settingResDto = userSettingConverter.toSettingResDto(user);
+        return userSettingConverter.toSettingResponse(settingResDto);
     }
 
     @Override

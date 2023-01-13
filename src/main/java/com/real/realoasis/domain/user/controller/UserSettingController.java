@@ -5,6 +5,7 @@ import com.real.realoasis.domain.user.data.request.NicknameChangeRequest;
 import com.real.realoasis.domain.user.data.request.PasswordChangeRequest;
 import com.real.realoasis.domain.user.data.response.SettingResponse;
 import com.real.realoasis.domain.user.service.*;
+import com.real.realoasis.domain.user.util.UserSettingConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,11 +16,13 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user/setting")
 public class UserSettingController {
     private final UserSettingService userSettingService;
+    private final UserSettingConverter userSettingConverter;
 
     // 설정 메인 페이지
     @GetMapping("/")
     public ResponseEntity<SettingResponse> getSetting(){
-        return new ResponseEntity<>(userSettingService.getSetting(), HttpStatus.OK);
+        SettingResponse settingResponse = userSettingService.getSetting();
+        return new ResponseEntity<>(settingResponse, HttpStatus.OK);
     }
 
     // 닉네임 변경 페이지
