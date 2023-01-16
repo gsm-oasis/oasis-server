@@ -23,5 +23,5 @@ public interface QuestionAnswerConverter {
 
     List<QuestionAnswerListDto> toListDto(List<QuestionAnswer> list);
 
-    List<QuestionAnswerListResponse> toListResponse(List<QuestionAnswerListDto> questionAnswerDtoList);
+    QuestionAnswerListResponse toListResponse(List<QuestionAnswerListDto> questionAnswerDtoList);
 }
