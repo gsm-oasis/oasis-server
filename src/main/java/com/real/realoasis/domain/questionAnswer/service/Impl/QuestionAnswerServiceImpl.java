@@ -38,7 +38,7 @@ public class QuestionAnswerServiceImpl implements QuestionAnswerService {
     }
 
     @Override
-    public List<QuestionAnswerListResponse> getList() {
+    public QuestionAnswerListResponse getList() {
         User currentUser = userFacade.currentUser();
 
         List<QuestionAnswer> list = questionAnswerFacade.findAllByUserId(currentUser.getId());
