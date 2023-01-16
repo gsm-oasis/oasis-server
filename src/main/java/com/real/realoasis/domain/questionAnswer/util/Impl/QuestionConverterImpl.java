@@ -61,16 +61,13 @@ public class QuestionConverterImpl implements QuestionAnswerConverter {
                         questionAnswer.getId(),
                         questionAnswer.getQuestion().getContent()
                 )
-        ).collect(Collectors.toList());
+        ).sorted(Comparator.comparing(QuestionAnswerListDto::getQuestionId).reversed()).collect(Collectors.toList());
     }
 
     @Override
-    public List<QuestionAnswerListResponse> toListResponse(List<QuestionAnswerListDto> questionAnswerDtoList) {
-        return questionAnswerDtoList.stream().map(response ->
-                new QuestionAnswerListResponse(
-                        response.getQuestionId(),
-                        response.getContent()
-                )
-        ).sorted(Comparator.comparing(QuestionAnswerListResponse::getQuestionId).reversed()).collect(Collectors.toList());
+    public QuestionAnswerListResponse toListResponse(List<QuestionAnswerListDto> questionAnswerDtoList) {
+        return QuestionAnswerListResponse.builder()
+                .questions(questionAnswerDtoList)
+                .build();
     }
 }
