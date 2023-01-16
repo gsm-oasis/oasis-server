@@ -27,5 +27,5 @@ public interface DiaryConverter {
 
     List<DiaryListDto> toListDto(List<Diary> mergedList);
 
-    List<DiaryListResponse> toListResponse(List<DiaryListDto> diaryListPageDto);
+    DiaryListResponse toListResponse(List<DiaryListDto> diaryListPageDto);
 }

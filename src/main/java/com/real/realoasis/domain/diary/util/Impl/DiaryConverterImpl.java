@@ -85,19 +85,13 @@ public class DiaryConverterImpl implements DiaryConverter {
                         diary.getWriter(),
                         diary.getCreateDate()
                         )
-        ).collect(Collectors.toList());
+        ).sorted(Comparator.comparing(DiaryListDto::getDiaryId).reversed()).collect(Collectors.toList());
     }
 
     @Override
-    public List<DiaryListResponse> toListResponse(List<DiaryListDto> diaryListPageDto) {
-        return diaryListPageDto.stream().map(listPageDto ->
-                new DiaryListResponse(
-                        listPageDto.getDiaryId(),
-                        listPageDto.getContent(),
-                        listPageDto.getTitle(),
-                        listPageDto.getWriter(),
-                        listPageDto.getCreateDate()
-                )
-        ).sorted(Comparator.comparing(DiaryListResponse::getDiaryId).reversed()).collect(Collectors.toList());
+    public DiaryListResponse toListResponse(List<DiaryListDto> diaryListPageDto) {
+        return DiaryListResponse.builder()
+                .diaries(diaryListPageDto)
+                .build();
     }
 }
