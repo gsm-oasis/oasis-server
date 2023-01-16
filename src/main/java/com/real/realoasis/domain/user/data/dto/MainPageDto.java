@@ -18,5 +18,5 @@ public class MainPageDto {
     private final int anniversary;
     private final Long questionId;
     private final String content;
-    private final List<DiaryListResponse> diaryListPageResponse;
+    private final DiaryListResponse diaryListPageResponse;
 }

@@ -1,10 +1,9 @@
 package com.real.realoasis.domain.user.data.response;
 
-import com.real.realoasis.domain.diary.data.response.DiaryListResponse;
+import com.real.realoasis.domain.diary.data.dto.DiaryListDto;
 import lombok.*;
 
 import java.util.List;
-import java.util.stream.Stream;
 
 @Builder
 @Getter
@@ -17,5 +16,5 @@ public class MainPageResponse {
     private final int anniversary;
     private final Long questionId;
     private final String content;
-    private final List<DiaryListResponse> diaryListPageResponse;
+    private final List<DiaryListDto> diaryListPageResponse;
 }

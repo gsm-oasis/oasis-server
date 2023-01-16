@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.user.util.Impl;
 
+import com.real.realoasis.domain.diary.data.dto.DiaryListDto;
 import com.real.realoasis.domain.diary.service.DiaryService;
 import com.real.realoasis.domain.question.entity.Question;
 import com.real.realoasis.domain.user.data.dto.EnterDto;
@@ -11,6 +12,8 @@ import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.domain.user.util.MainPageConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -34,6 +37,8 @@ public class MainPageConverterImpl implements MainPageConverter {
 
     @Override
     public MainPageResponse toResponse(MainPageDto mainPageDto) {
+        List<DiaryListDto> list = mainPageDto.getDiaryListPageResponse().getDiaries();
+
         return MainPageResponse.builder()
                 .nickname(mainPageDto.getNickname())
                 .coupleNickname(mainPageDto.getCoupleNickname())
@@ -42,7 +47,7 @@ public class MainPageConverterImpl implements MainPageConverter {
                 .anniversary(mainPageDto.getAnniversary())
                 .questionId(mainPageDto.getQuestionId())
                 .content(mainPageDto.getContent())
-                .diaryListPageResponse(mainPageDto.getDiaryListPageResponse())
+                .diaryListPageResponse(list)
                 .build();
     }
 
