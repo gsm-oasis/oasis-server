@@ -34,8 +34,8 @@ public class QuestionAnswerController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<List<QuestionAnswerListResponse>> getListPage(){
-        List<QuestionAnswerListResponse> questionAnswerListResponse = questionAnswerService.getList();
+    public ResponseEntity<QuestionAnswerListResponse> getListPage(){
+        QuestionAnswerListResponse questionAnswerListResponse = questionAnswerService.getList();
         return new ResponseEntity<>(questionAnswerListResponse, HttpStatus.OK);
     }
 
