@@ -85,7 +85,7 @@ public class DiaryServiceImpl implements DiaryService {
     }
 
     @Override
-    public List<DiaryListResponse> getList() {
+    public DiaryListResponse getList() {
         User currentUser = userFacade.currentUser();
         User coupleUser = userFacade.findUserById(currentUser.getCoupleId());
 

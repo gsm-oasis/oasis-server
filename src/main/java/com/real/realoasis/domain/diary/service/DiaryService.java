@@ -14,7 +14,7 @@ public interface DiaryService {
     void deleteDiary(Long diaryId);
     DiaryDetailResponse getDetail(Long diaryId);
     void editDiary(Long diaryId, EditDiaryDto editDiaryDto, List<MultipartFile> multipartFileList) throws Exception;
-    List<DiaryListResponse> getList();
+    DiaryListResponse getList();
 
 
 }
