@@ -61,8 +61,8 @@ public class DiaryController {
 
     //일기 리스트
     @GetMapping("/list")
-    public ResponseEntity<List<DiaryListResponse>> getList(){
-        List<DiaryListResponse> diaryListPageResponse = diaryService.getList();
+    public ResponseEntity<DiaryListResponse> getList(){
+        DiaryListResponse diaryListPageResponse = diaryService.getList();
         return new ResponseEntity<>(diaryListPageResponse,HttpStatus.OK);
     }
 }
