@@ -45,7 +45,7 @@ public class MainPageServiceImpl implements MainPageService {
         currentUser.updateDatingDate(datingDate);
         heartUtil.heartLevel(currentUser);
 
-        Question question = questionAnswerFacade.findQuestionByQuestionId(datingDate - currentUser.getDatingDate());
+        Question question = questionAnswerFacade.findQuestionByQuestionId(datingDate - currentUser.getDatingDate()+1);
 
         MainPageDto mainPageDto = mainPageConverter.toDto(currentUser, coupleUser, datingDate, question);
         return mainPageConverter.toResponse(mainPageDto);
