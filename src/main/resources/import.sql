@@ -1,4 +1,3 @@
-INSERT INTO question(id,content) values (0,'상대방의 첫인상을 말해주세요');
 INSERT INTO question(id,content) values (1,'상대방의 첫인상을 말해주세요');
 INSERT INTO question(id,content) values (2,'상대방의 장점 4가지만 말해주세요');
 INSERT INTO question(id,content) values (3,'자신의 약점을 말해보세요');
