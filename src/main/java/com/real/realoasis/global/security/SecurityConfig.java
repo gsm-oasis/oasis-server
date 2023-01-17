@@ -34,6 +34,7 @@ public class SecurityConfig {
         http
                 .authorizeRequests()
                 .mvcMatchers(HttpMethod.OPTIONS,"/**").permitAll()
+
                 //auth
                 .antMatchers(HttpMethod.PATCH,"/auth/refresh").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth/signup").permitAll()
