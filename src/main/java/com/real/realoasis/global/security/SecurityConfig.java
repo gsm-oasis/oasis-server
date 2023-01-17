@@ -49,13 +49,13 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST,"/user/connect/couple").authenticated()
 
                 //user/setting
-                .antMatchers(HttpMethod.GET,"/user/setting/").authenticated()
+                .antMatchers(HttpMethod.GET,"/user/setting").authenticated()
                 .antMatchers(HttpMethod.PATCH,"/user/setting/change/nickname").authenticated()
                 .antMatchers(HttpMethod.PATCH,"/user/setting/change/password").authenticated()
                 .antMatchers(HttpMethod.PATCH,"/user/setting/change/anniversarytime").authenticated()
 
                 //mainpage
-                .antMatchers(HttpMethod.GET,"/mainpage/").authenticated()
+                .antMatchers(HttpMethod.GET,"/mainpage").authenticated()
                 .antMatchers(HttpMethod.POST,"/mainpage/enter/datingdate").authenticated()
 
                 //diary
