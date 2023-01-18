@@ -72,7 +72,7 @@ public class AuthController {
     }
 
     // id 를 통해 비밀번호 찾기
-    @PostMapping("/search/pw")
+    @PostMapping("/reset/password")
     public ResponseEntity<SearchPwResponse> searchPW(@RequestBody SearchPwRequest searchPWRequest) {
         SearchPwDto searchPwDto = authConverter.toSearchPwDto(searchPWRequest);
         SearchPwResponse searchPWResponse = authService.searchPW(searchPwDto);
