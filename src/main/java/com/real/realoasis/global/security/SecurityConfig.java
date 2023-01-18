@@ -40,8 +40,8 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST,"/auth/signup").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth/login").permitAll()
                 .antMatchers(HttpMethod.PATCH, "/auth/logout").permitAll()
-                .antMatchers(HttpMethod.GET,"/auth/search/id").permitAll()
-                .antMatchers(HttpMethod.GET,"/auth/search/pw").permitAll()
+                .antMatchers(HttpMethod.POST,"/auth/search/id").permitAll()
+                .antMatchers(HttpMethod.POST,"/auth/search/pw").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth/mailconfirm").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth/sendmail").permitAll()
 
