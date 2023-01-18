@@ -5,7 +5,6 @@ import com.real.realoasis.domain.user.data.dto.NicknameChangeDto;
 import com.real.realoasis.domain.user.data.dto.PasswordChangeDto;
 import com.real.realoasis.domain.user.data.dto.SettingResDto;
 import com.real.realoasis.domain.user.data.entity.User;
-import com.real.realoasis.domain.user.data.request.AnniversaryTimeChangeRequest;
 import com.real.realoasis.domain.user.data.response.SettingResponse;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.domain.user.service.UserSettingService;
@@ -13,6 +12,7 @@ import com.real.realoasis.domain.user.util.UserSettingConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -38,9 +38,12 @@ public class UserSettingServiceImpl implements UserSettingService {
     }
 
     @Override
+    @Transactional
     public void passwordChange(PasswordChangeDto passwordChangeDto) {
         User currentUser = userFacade.currentUser();
-        currentUser.updatePassword(passwordEncoder.encode(passwordChangeDto.getPassword()));
+        userFacade.checkPassword(currentUser, passwordChangeDto.getOriginalPassword());
+        currentUser.updatePassword(passwordEncoder.encode(passwordChangeDto.getNewPassword()));
+
         userFacade.saveUser(currentUser);
     }
 

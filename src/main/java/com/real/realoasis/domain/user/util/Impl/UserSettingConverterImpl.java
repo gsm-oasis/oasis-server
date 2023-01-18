@@ -44,7 +44,8 @@ public class UserSettingConverterImpl implements UserSettingConverter {
     @Override
     public PasswordChangeDto toPasswordChangeDto(PasswordChangeRequest passwordChangeRequest) {
         return PasswordChangeDto.builder()
-                .password(passwordChangeRequest.getPassword())
+                .originalPassword(passwordChangeRequest.getOriginalPassword())
+                .newPassword(passwordChangeRequest.getNewPassword())
                 .build();
     }
 
