@@ -64,7 +64,7 @@ public class AuthController {
     }
 
     // 이메일을 통해 아이디 찾기
-    @GetMapping("/search/id")
+    @PostMapping("/search/id")
     public ResponseEntity<Void> searchID(@RequestBody SearchIdRequest searchIDRequest) throws MessagingException, UnsupportedEncodingException {
         SearchIdDto searchIdDto = mailConverter.toSearchIdDto(searchIDRequest);
         emailService.sendId(searchIdDto.getEmail());
@@ -72,7 +72,7 @@ public class AuthController {
     }
 
     // id 를 통해 비밀번호 찾기
-    @GetMapping("/search/pw")
+    @PostMapping("/search/pw")
     public ResponseEntity<SearchPwResponse> searchPW(@RequestBody SearchPwRequest searchPWRequest) {
         SearchPwDto searchPwDto = authConverter.toSearchPwDto(searchPWRequest);
         SearchPwResponse searchPWResponse = authService.searchPW(searchPwDto);
