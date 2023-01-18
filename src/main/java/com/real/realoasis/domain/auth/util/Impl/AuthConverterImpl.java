@@ -81,7 +81,9 @@ public class AuthConverterImpl implements AuthConverter {
     @Override
     public SearchPwDto toSearchPwDto(SearchPwRequest searchPWRequest) {
         return SearchPwDto.builder()
-                .id(searchPWRequest.getId())
+                .email(searchPWRequest.getEmail())
+                .newPassword(searchPWRequest.getNewPassword())
+                .checkPassword(searchPWRequest.getCheckPassword())
                 .build();
     }
 

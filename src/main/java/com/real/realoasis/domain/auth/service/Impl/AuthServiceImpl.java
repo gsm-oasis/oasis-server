@@ -4,7 +4,6 @@ import com.real.realoasis.domain.auth.data.dto.LoginDto;
 import com.real.realoasis.domain.auth.data.dto.SearchPwDto;
 import com.real.realoasis.domain.auth.data.dto.SignupDto;
 import com.real.realoasis.domain.auth.data.dto.TokenDto;
-import com.real.realoasis.domain.auth.data.response.SearchPwResponse;
 import com.real.realoasis.domain.auth.data.response.SignupResponse;
 import com.real.realoasis.domain.auth.data.response.TokenResponse;
 import com.real.realoasis.domain.auth.exception.ExpiredTokenException;
@@ -13,11 +12,13 @@ import com.real.realoasis.domain.auth.service.AuthService;
 import com.real.realoasis.domain.auth.util.AuthConverter;
 import com.real.realoasis.domain.user.data.entity.User;
 import com.real.realoasis.domain.user.exception.DuplicateIdException;
+import com.real.realoasis.domain.user.exception.PasswordNotMatchException;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.global.error.type.ErrorCode;
 import com.real.realoasis.global.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +33,7 @@ public class AuthServiceImpl implements AuthService {
     private final JwtTokenProvider jwtTokenProvider;
     private final RedisTemplate<String, Object> redisTemplate;
     private final AuthConverter authConverter;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -79,13 +81,14 @@ public class AuthServiceImpl implements AuthService {
         return authConverter.toTokenResponse(tokenDto);
     }
 
+    @Transactional
     @Override
-    public SearchPwResponse searchPW(SearchPwDto searchPwDto) {
-        User user = userFacade.findUserById(searchPwDto.getId());
-        String pw = user.getPassword();
-
-        return authConverter.toSearchPwResponse(pw);
-
+    public void searchPW(SearchPwDto searchPwDto) {
+        User user = userFacade.findUserByEmail(searchPwDto.getEmail());
+        if(!searchPwDto.getNewPassword().equals(searchPwDto.getCheckPassword())){
+            throw new PasswordNotMatchException(ErrorCode.PASSWORD_NOT_MATCH_EXCEPTION);
+        }
+        user.updatePassword(passwordEncoder.encode(searchPwDto.getNewPassword()));
     }
 
     @Override

@@ -8,5 +8,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Builder
 public class SearchPwDto {
-    private final String id;
+    private final String email;
+    private final String newPassword;
+    private final String checkPassword;
 }
