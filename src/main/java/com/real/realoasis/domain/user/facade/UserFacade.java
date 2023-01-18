@@ -30,12 +30,13 @@ public class UserFacade {
         return userRepository.findUserById(id).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND_EXCEPTION));
     }
 
-    public String findUserByEmail(String email){
-        User user = userRepository.findUserByEmail(email);
-        if(user == null) {
-            throw new UserNotFoundException(ErrorCode.USER_NOT_FOUND_EXCEPTION);
-        }
+    public String findUserIdByEmail(String email){
+        User user = userRepository.findUserByEmail(email).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND_EXCEPTION));
         return user.getId();
+    }
+
+    public User findUserByEmail(String email){
+        return userRepository.findUserByEmail(email).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND_EXCEPTION));
     }
 
     public User findUserByCode(String code) {
