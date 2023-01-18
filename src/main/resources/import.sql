@@ -47,7 +47,7 @@ INSERT INTO heart(level) values (5);
 INSERT INTO heart(level) values (6);
 INSERT INTO heart(level) values (7);
 
-INSERT INTO user(user_id, is_couple,anniversary_date, code, couple_id, dating_date, email, first_day, nickname, password, today, heart_level) VALUES ('adminId', true,'7', 'o4KLNO0H', 'testId', '9', 'shgur7236@naver.com', '20221210', '곽희상', '$2a$10$5gLLAwYnrS614Ay3bVc4E.vnJZ/0a0blCNkm1m9p5SyVKJoQFY8/K', '20221212', '1');
+INSERT INTO user(user_id, is_couple,anniversary_date, code, couple_id, dating_date, email, first_day, nickname, password, today, heart_level) VALUES ('adminId', true,'7', 'o4KLNO0H', 'testId', '9', 'test1234@naver.com', '20221210', '곽희상', '$2a$10$5gLLAwYnrS614Ay3bVc4E.vnJZ/0a0blCNkm1m9p5SyVKJoQFY8/K', '20221212', '1');
 
 INSERT INTO user(user_id, is_couple,anniversary_date, code, couple_id, dating_date, email, first_day, nickname, password, today, heart_level) VALUES ('testId', true,'7', 'h64OW2u3', 'adminId', '9', 'shgur7236@naver.com', '20221210', '진시윤', '$2a$10$5gLLAwYnrS614Ay3bVc4E.vnJZ/0a0blCNkm1m9p5SyVKJoQFY8/K', '20221212', '1');
 
