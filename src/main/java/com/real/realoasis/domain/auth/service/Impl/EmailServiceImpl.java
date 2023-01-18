@@ -56,7 +56,7 @@ public class EmailServiceImpl implements EmailService {
     public MimeMessage createEmailForm(String email) throws MessagingException{
         createCode(); //인증 코드 생성
         String setFrom = "shgurtns7236@naver.com"; //email-config 에 설정한 자신의 이메일 주소(보내는 사람)
-        String title = "OASIS 회원가입 인증 번호"; //제목
+        String title = "OASIS 인증 번호"; //제목
 
         MimeMessage message = emailSender.createMimeMessage();
         message.addRecipients(MimeMessage.RecipientType.TO, email); //보낼 이메일 설정
@@ -77,7 +77,7 @@ public class EmailServiceImpl implements EmailService {
         message.addRecipients(Message.RecipientType.TO, email);
         message.setSubject(title);
         message.setFrom(setFrom);
-        message.setText(setContext(userFacade.findUserByEmail(email)), "utf-8", "html");
+        message.setText(setContext(userFacade.findUserIdByEmail(email)), "utf-8", "html");
 
         return message;
     }
