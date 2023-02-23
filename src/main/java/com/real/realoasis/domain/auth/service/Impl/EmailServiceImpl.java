@@ -2,6 +2,7 @@ package com.real.realoasis.domain.auth.service.Impl;
 
 import com.real.realoasis.domain.auth.data.dto.AuthCodeDto;
 import com.real.realoasis.domain.auth.data.dto.MailDto;
+import com.real.realoasis.domain.auth.data.dto.SearchIdDto;
 import com.real.realoasis.domain.auth.exception.InValidAuthCodeException;
 import com.real.realoasis.domain.auth.service.EmailService;
 import com.real.realoasis.domain.user.facade.UserFacade;
@@ -85,9 +86,9 @@ public class EmailServiceImpl implements EmailService {
     }
 
     @Override
-    public void sendId(String toEmail) throws MessagingException, UnsupportedEncodingException {
+    public void sendId(SearchIdDto searchIdDto) throws MessagingException, UnsupportedEncodingException {
         //메일전송에 필요한 정보 설정
-        MimeMessage emailForm = createSearchIdForm(toEmail);
+        MimeMessage emailForm = createSearchIdForm(searchIdDto.getEmail());
         //실제 메일 전송
         emailSender.send(emailForm);
     }

@@ -29,7 +29,7 @@ public class MailConverterImpl implements MailConverter {
     }
 
     @Override
-    public SearchIdDto toSearchIdDto(SearchIdRequest searchIDRequest) {
+    public SearchIdDto toDto(SearchIdRequest searchIDRequest) {
         return SearchIdDto.builder()
                 .email(searchIDRequest.getEmail())
                 .build();

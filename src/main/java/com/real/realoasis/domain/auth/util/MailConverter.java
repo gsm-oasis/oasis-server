@@ -11,5 +11,5 @@ public interface MailConverter {
     MailDto toDto(SendMailRequest sendMailRequest);
     AuthCodeDto toDto(AuthenticationCodeRequest authenticationCodeRequest);
 
-    SearchIdDto toSearchIdDto(SearchIdRequest searchIDRequest);
+    SearchIdDto toDto(SearchIdRequest searchIDRequest);
 }
