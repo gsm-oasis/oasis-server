@@ -37,7 +37,7 @@ public class AuthController {
     @PostMapping("/sendmail")
     public ResponseEntity<Void> sendMail(@RequestBody SendMailRequest sendMailRequest) throws MessagingException, UnsupportedEncodingException {
         MailDto mailDto = mailConverter.toDto(sendMailRequest);
-        emailService.sendEmail(mailDto.getEmail());
+        emailService.sendEmail(mailDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.auth.service.Impl;
 
+import com.real.realoasis.domain.auth.data.dto.MailDto;
 import com.real.realoasis.domain.auth.exception.InValidAuthCodeException;
 import com.real.realoasis.domain.auth.service.EmailService;
 import com.real.realoasis.domain.user.facade.UserFacade;
@@ -92,9 +93,9 @@ public class EmailServiceImpl implements EmailService {
 
     // 실제 메일 전송
     @Override
-    public void sendEmail(String toEmail) throws MessagingException {
+    public void sendEmail(MailDto mailDto) throws MessagingException {
         //메일전송에 필요한 정보 설정
-        MimeMessage emailForm = createEmailForm(toEmail);
+        MimeMessage emailForm = createEmailForm(mailDto.getEmail());
         //실제 메일 전송
         emailSender.send(emailForm);
     }
