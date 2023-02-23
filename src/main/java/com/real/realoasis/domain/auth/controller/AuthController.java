@@ -28,8 +28,8 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<SignupResponse> signUp(@Valid @RequestBody SignUpRequest signupRequest){
         SignupDto signupDto = authConverter.toDto(signupRequest);
-        SignupResponseDto signupResponseDto = authService.signUp(signupDto);
-        SignupResponse signupResponse = authConverter.toResponse(signupResponseDto);
+        AuthCodeDto authCodeDto = authService.signUp(signupDto);
+        SignupResponse signupResponse = authConverter.toResponse(authCodeDto);
         return new ResponseEntity<>(signupResponse,HttpStatus.CREATED);
     }
 
@@ -53,8 +53,9 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<TokenResponse> login(@RequestBody LoginRequest loginRequest) {
         LoginDto loginDto = authConverter.toDto(loginRequest);
-        TokenResponse tokenResponse = authService.login(loginDto);
-        return new ResponseEntity<>(tokenResponse,HttpStatus.OK);
+        TokenDto tokenDto = authService.login(loginDto);
+        TokenResponse tokenResponse = authConverter.toResponse(tokenDto);
+        return new ResponseEntity<>(tokenResponse, HttpStatus.OK);
     }
 
     // 토큰 재발급

@@ -39,9 +39,9 @@ public class AuthConverterImpl implements AuthConverter {
     }
 
     @Override
-    public SignupResponse toResponse(SignupResponseDto signupResponseDto) {
+    public SignupResponse toResponse(AuthCodeDto authCodeDto) {
         return SignupResponse.builder()
-                .code(signupResponseDto.getCode())
+                .code(authCodeDto.getCode())
                 .build();
     }
 
@@ -92,8 +92,8 @@ public class AuthConverterImpl implements AuthConverter {
     }
 
     @Override
-    public SignupResponseDto toResponseDto(String code) {
-        return SignupResponseDto.builder()
+    public AuthCodeDto toDto(String code) {
+        return AuthCodeDto.builder()
                 .code(code)
                 .build();
     }

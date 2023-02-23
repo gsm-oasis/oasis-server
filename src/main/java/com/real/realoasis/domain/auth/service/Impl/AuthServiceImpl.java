@@ -33,21 +33,11 @@ public class AuthServiceImpl implements AuthService {
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public TokenResponse login(LoginDto loginDto) {
+    public TokenDto login(LoginDto loginDto) {
         User user = userFacade.findUserById(loginDto.getId());
         userFacade.checkPassword(user, loginDto.getPassword());
 
-        String accessToken = jwtTokenProvider.generateAccessToken(loginDto.getId());
-        String refreshToken = jwtTokenProvider.generateRefreshToken(loginDto.getId());
-        Long expiredAt = jwtTokenProvider.getExpiredTime(accessToken);
-
-        redisTemplate.opsForValue()
-                .set("RefreshToken:" + user.getId(), refreshToken,
-                        jwtTokenProvider.getExpiredTime(refreshToken), TimeUnit.MILLISECONDS);
-
-        TokenDto tokenDto = authConverter.toDto(accessToken, refreshToken, expiredAt, user);
-
-        return authConverter.toResponse(tokenDto);
+        return makeTokenDto(loginDto, user);
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -89,7 +79,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public SignupResponseDto signUp(SignupDto signupDto) {
+    public AuthCodeDto signUp(SignupDto signupDto) {
         User user = authConverter.toEntity(signupDto);
         if(userFacade.existsById(user.getId())){
             throw new DuplicateIdException(ErrorCode.DUPLICATE_ID_EXCEPTION);
@@ -98,7 +88,7 @@ public class AuthServiceImpl implements AuthService {
 
         String code = makeRandomCode();
 
-        return authConverter.toResponseDto(code);
+        return authConverter.toDto(code);
     }
 
     private String makeRandomCode() {
@@ -120,5 +110,16 @@ public class AuthServiceImpl implements AuthService {
             }
         }
         return key.toString();
+    }
+    private TokenDto makeTokenDto(LoginDto loginDto, User user){
+        String accessToken = jwtTokenProvider.generateAccessToken(loginDto.getId());
+        String refreshToken = jwtTokenProvider.generateRefreshToken(loginDto.getId());
+        Long expiredAt = jwtTokenProvider.getExpiredTime(accessToken);
+
+        redisTemplate.opsForValue()
+                .set("RefreshToken:" + user.getId(), refreshToken,
+                        jwtTokenProvider.getExpiredTime(refreshToken), TimeUnit.MILLISECONDS);
+
+        return authConverter.toDto(accessToken, refreshToken, expiredAt, user);
     }
 }

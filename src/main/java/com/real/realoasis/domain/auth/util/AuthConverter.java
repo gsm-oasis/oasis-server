@@ -14,7 +14,7 @@ public interface AuthConverter {
 
     User toEntity(SignupDto signupDto);
 
-    SignupResponse toResponse(SignupResponseDto signupResponseDto);
+    SignupResponse toResponse(AuthCodeDto authCodeDto);
 
     LoginDto toDto(LoginRequest loginRequest);
 
@@ -26,5 +26,5 @@ public interface AuthConverter {
 
     SearchPwResponse toSearchPwResponse(String pw);
 
-    SignupResponseDto toResponseDto(String code);
+    AuthCodeDto toDto(String code);
 }
