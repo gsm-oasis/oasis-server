@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.auth.service.Impl;
 
+import com.real.realoasis.domain.auth.data.dto.AuthCodeDto;
 import com.real.realoasis.domain.auth.data.dto.MailDto;
 import com.real.realoasis.domain.auth.exception.InValidAuthCodeException;
 import com.real.realoasis.domain.auth.service.EmailService;
@@ -102,8 +103,8 @@ public class EmailServiceImpl implements EmailService {
 
     // 인증코드 확인
     @Override
-    public void confirmAuthenticationCode(String authenticationCode) {
-        if(!authenticationCode.equals(authNum)){
+    public void confirmAuthenticationCode(AuthCodeDto authCodeDto) {
+        if(!authCodeDto.getCode().equals(authNum)){
             throw new InValidAuthCodeException(ErrorCode.INVALID_AUTH_CODE_EXCEPTION);
         }
     }

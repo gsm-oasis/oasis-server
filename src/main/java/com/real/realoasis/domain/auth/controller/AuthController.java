@@ -45,7 +45,7 @@ public class AuthController {
     @PostMapping("/mailconfirm")
     public ResponseEntity<Void> confirmAuthenticationCode(@RequestBody AuthenticationCodeRequest authenticationCodeRequest) {
         AuthCodeDto authCodeDto = mailConverter.toDto(authenticationCodeRequest);
-        emailService.confirmAuthenticationCode(authCodeDto.getCode());
+        emailService.confirmAuthenticationCode(authCodeDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

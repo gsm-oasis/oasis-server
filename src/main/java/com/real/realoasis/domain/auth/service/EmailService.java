@@ -1,6 +1,7 @@
 package com.real.realoasis.domain.auth.service;
 
 
+import com.real.realoasis.domain.auth.data.dto.AuthCodeDto;
 import com.real.realoasis.domain.auth.data.dto.MailDto;
 
 import javax.mail.MessagingException;
@@ -16,5 +17,5 @@ public interface EmailService {
 
     void sendEmail(MailDto mailDto) throws MessagingException, UnsupportedEncodingException;
 
-    void confirmAuthenticationCode(String authenticationCode);
+    void confirmAuthenticationCode(AuthCodeDto authCodeDto);
 }
