@@ -1,9 +1,6 @@
 package com.real.realoasis.domain.auth.util.Impl;
 
-import com.real.realoasis.domain.auth.data.dto.LoginDto;
-import com.real.realoasis.domain.auth.data.dto.SearchPwDto;
-import com.real.realoasis.domain.auth.data.dto.SignupDto;
-import com.real.realoasis.domain.auth.data.dto.TokenDto;
+import com.real.realoasis.domain.auth.data.dto.*;
 import com.real.realoasis.domain.auth.data.request.LoginRequest;
 import com.real.realoasis.domain.auth.data.request.SearchPwRequest;
 import com.real.realoasis.domain.auth.data.request.SignUpRequest;
@@ -42,9 +39,9 @@ public class AuthConverterImpl implements AuthConverter {
     }
 
     @Override
-    public SignupResponse toResponse(String code) {
+    public SignupResponse toResponse(SignupResponseDto signupResponseDto) {
         return SignupResponse.builder()
-                .code(code)
+                .code(signupResponseDto.getCode())
                 .build();
     }
 
@@ -91,6 +88,13 @@ public class AuthConverterImpl implements AuthConverter {
     public SearchPwResponse toSearchPwResponse(String pw) {
         return SearchPwResponse.builder()
                 .password(pw)
+                .build();
+    }
+
+    @Override
+    public SignupResponseDto toResponseDto(String code) {
+        return SignupResponseDto.builder()
+                .code(code)
                 .build();
     }
 }

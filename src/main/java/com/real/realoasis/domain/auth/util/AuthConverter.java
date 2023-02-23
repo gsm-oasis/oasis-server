@@ -1,9 +1,6 @@
 package com.real.realoasis.domain.auth.util;
 
-import com.real.realoasis.domain.auth.data.dto.LoginDto;
-import com.real.realoasis.domain.auth.data.dto.SearchPwDto;
-import com.real.realoasis.domain.auth.data.dto.SignupDto;
-import com.real.realoasis.domain.auth.data.dto.TokenDto;
+import com.real.realoasis.domain.auth.data.dto.*;
 import com.real.realoasis.domain.auth.data.request.LoginRequest;
 import com.real.realoasis.domain.auth.data.request.SearchPwRequest;
 import com.real.realoasis.domain.auth.data.request.SignUpRequest;
@@ -17,7 +14,7 @@ public interface AuthConverter {
 
     User toEntity(SignupDto signupDto);
 
-    SignupResponse toResponse(String code);
+    SignupResponse toResponse(SignupResponseDto signupResponseDto);
 
     LoginDto toDto(LoginRequest loginRequest);
 
@@ -28,4 +25,6 @@ public interface AuthConverter {
     SearchPwDto toDto(SearchPwRequest searchPWRequest);
 
     SearchPwResponse toSearchPwResponse(String pw);
+
+    SignupResponseDto toResponseDto(String code);
 }

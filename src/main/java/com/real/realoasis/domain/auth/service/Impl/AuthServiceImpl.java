@@ -1,10 +1,6 @@
 package com.real.realoasis.domain.auth.service.Impl;
 
-import com.real.realoasis.domain.auth.data.dto.LoginDto;
-import com.real.realoasis.domain.auth.data.dto.SearchPwDto;
-import com.real.realoasis.domain.auth.data.dto.SignupDto;
-import com.real.realoasis.domain.auth.data.dto.TokenDto;
-import com.real.realoasis.domain.auth.data.response.SignupResponse;
+import com.real.realoasis.domain.auth.data.dto.*;
 import com.real.realoasis.domain.auth.data.response.TokenResponse;
 import com.real.realoasis.domain.auth.exception.ExpiredTokenException;
 import com.real.realoasis.domain.auth.exception.InvalidTokenException;
@@ -93,23 +89,29 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public SignupResponse signUp(SignupDto signupDto) {
+    public SignupResponseDto signUp(SignupDto signupDto) {
         User user = authConverter.toEntity(signupDto);
         if(userFacade.existsById(user.getId())){
             throw new DuplicateIdException(ErrorCode.DUPLICATE_ID_EXCEPTION);
         }
         userFacade.saveUser(user);
 
+        String code = makeRandomCode();
+
+        return authConverter.toResponseDto(code);
+    }
+
+    private String makeRandomCode() {
         Random random = new Random();
         StringBuilder key = new StringBuilder();
 
-        for(int i = 0; i < 8; i++) {
+        for (int i = 0; i < 8; i++) {
             int index = random.nextInt(3);
             switch (index) {
-                case 0 :
+                case 0:
                     key.append((char) (random.nextInt(26) + 97));
                     break;
-                case 1 :
+                case 1:
                     key.append((char) (random.nextInt(26) + 65));
                     break;
                 case 2:
@@ -117,6 +119,6 @@ public class AuthServiceImpl implements AuthService {
                     break;
             }
         }
-        return authConverter.toResponse(key.toString());
+        return key.toString();
     }
 }

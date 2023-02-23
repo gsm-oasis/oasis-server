@@ -28,7 +28,8 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<SignupResponse> signUp(@Valid @RequestBody SignUpRequest signupRequest){
         SignupDto signupDto = authConverter.toDto(signupRequest);
-        SignupResponse signupResponse = authService.signUp(signupDto);
+        SignupResponseDto signupResponseDto = authService.signUp(signupDto);
+        SignupResponse signupResponse = authConverter.toResponse(signupResponseDto);
         return new ResponseEntity<>(signupResponse,HttpStatus.CREATED);
     }
 
