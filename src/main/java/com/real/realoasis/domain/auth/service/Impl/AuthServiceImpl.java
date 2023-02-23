@@ -37,12 +37,12 @@ public class AuthServiceImpl implements AuthService {
         User user = userFacade.findUserById(loginDto.getId());
         userFacade.checkPassword(user, loginDto.getPassword());
 
-        return makeTokenDto(loginDto, user);
+        return makeTokenDto(user);
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
-    public TokenResponse reissue(String refreshToken) {
+    public TokenDto reissue(String refreshToken) {
         if(jwtTokenProvider.validateToken(refreshToken)){
             throw new ExpiredTokenException(ErrorCode.EXPIRATION_TOKEN_EXCEPTION);
         }
@@ -55,16 +55,7 @@ public class AuthServiceImpl implements AuthService {
             throw new InvalidTokenException(ErrorCode.INVALID_TOKEN_EXCEPTION);
         }
 
-        String newAccessToken = jwtTokenProvider.generateAccessToken(user.getId());
-        String newRefreshToken = jwtTokenProvider.generateRefreshToken(user.getId());
-        Long expiredAt = jwtTokenProvider.getExpiredTime(newAccessToken);
-
-        redisTemplate.opsForValue()
-                .set("RefreshToken:" + user.getId(), newRefreshToken,
-                        jwtTokenProvider.getExpiredTime(newRefreshToken), TimeUnit.MILLISECONDS);
-
-        TokenDto tokenDto = authConverter.toDto(newAccessToken, newRefreshToken, expiredAt, user);
-        return authConverter.toResponse(tokenDto);
+        return makeTokenDto(user);
     }
 
     @Transactional
@@ -111,9 +102,9 @@ public class AuthServiceImpl implements AuthService {
         }
         return key.toString();
     }
-    private TokenDto makeTokenDto(LoginDto loginDto, User user){
-        String accessToken = jwtTokenProvider.generateAccessToken(loginDto.getId());
-        String refreshToken = jwtTokenProvider.generateRefreshToken(loginDto.getId());
+    private TokenDto makeTokenDto(User user){
+        String accessToken = jwtTokenProvider.generateAccessToken(user.getId());
+        String refreshToken = jwtTokenProvider.generateRefreshToken(user.getId());
         Long expiredAt = jwtTokenProvider.getExpiredTime(accessToken);
 
         redisTemplate.opsForValue()

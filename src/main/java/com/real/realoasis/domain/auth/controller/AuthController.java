@@ -30,7 +30,7 @@ public class AuthController {
         SignupDto signupDto = authConverter.toDto(signupRequest);
         AuthCodeDto authCodeDto = authService.signUp(signupDto);
         SignupResponse signupResponse = authConverter.toResponse(authCodeDto);
-        return new ResponseEntity<>(signupResponse,HttpStatus.CREATED);
+        return new ResponseEntity<>(signupResponse, HttpStatus.CREATED);
     }
 
     // 이메일에 인증코드 전송
@@ -61,7 +61,8 @@ public class AuthController {
     // 토큰 재발급
     @PatchMapping("/refresh")
     public ResponseEntity<TokenResponse> reissue(@RequestHeader("RefreshToken") String refreshToken){
-        TokenResponse tokenResponse = authService.reissue(refreshToken);
+        TokenDto tokenDto = authService.reissue(refreshToken);
+        TokenResponse tokenResponse = authConverter.toResponse(tokenDto);
         return new ResponseEntity<>(tokenResponse, HttpStatus.CREATED);
     }
 
