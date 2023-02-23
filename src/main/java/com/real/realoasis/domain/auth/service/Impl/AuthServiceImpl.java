@@ -49,9 +49,9 @@ public class AuthServiceImpl implements AuthService {
                 .set("RefreshToken:" + user.getId(), refreshToken,
                         jwtTokenProvider.getExpiredTime(refreshToken), TimeUnit.MILLISECONDS);
 
-        TokenDto tokenDto = authConverter.toTokenDto(accessToken, refreshToken, expiredAt, user);
+        TokenDto tokenDto = authConverter.toDto(accessToken, refreshToken, expiredAt, user);
 
-        return authConverter.toTokenResponse(tokenDto);
+        return authConverter.toResponse(tokenDto);
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -77,8 +77,8 @@ public class AuthServiceImpl implements AuthService {
                 .set("RefreshToken:" + user.getId(), newRefreshToken,
                         jwtTokenProvider.getExpiredTime(newRefreshToken), TimeUnit.MILLISECONDS);
 
-        TokenDto tokenDto = authConverter.toTokenDto(newAccessToken, newRefreshToken, expiredAt, user);
-        return authConverter.toTokenResponse(tokenDto);
+        TokenDto tokenDto = authConverter.toDto(newAccessToken, newRefreshToken, expiredAt, user);
+        return authConverter.toResponse(tokenDto);
     }
 
     @Transactional
@@ -117,6 +117,6 @@ public class AuthServiceImpl implements AuthService {
                     break;
             }
         }
-        return authConverter.toSignResponse(key.toString());
+        return authConverter.toResponse(key.toString());
     }
 }

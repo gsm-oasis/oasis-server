@@ -27,7 +27,7 @@ public class AuthController {
     // 회원가입
     @PostMapping("/signup")
     public ResponseEntity<SignupResponse> signUp(@Valid @RequestBody SignUpRequest signupRequest){
-        SignupDto signupDto = authConverter.toSignupDto(signupRequest);
+        SignupDto signupDto = authConverter.toDto(signupRequest);
         SignupResponse signupResponse = authService.signUp(signupDto);
         return new ResponseEntity<>(signupResponse,HttpStatus.CREATED);
     }
@@ -51,7 +51,7 @@ public class AuthController {
     // 로그인
     @PostMapping("/login")
     public ResponseEntity<TokenResponse> login(@RequestBody LoginRequest loginRequest) {
-        LoginDto loginDto = authConverter.toLoginDto(loginRequest);
+        LoginDto loginDto = authConverter.toDto(loginRequest);
         TokenResponse tokenResponse = authService.login(loginDto);
         return new ResponseEntity<>(tokenResponse,HttpStatus.OK);
     }
@@ -74,7 +74,7 @@ public class AuthController {
     // id 를 통해 비밀번호 찾기
     @PatchMapping ("/reset/password")
     public ResponseEntity<Void> searchPW(@RequestBody SearchPwRequest searchPWRequest) {
-        SearchPwDto searchPwDto = authConverter.toSearchPwDto(searchPWRequest);
+        SearchPwDto searchPwDto = authConverter.toDto(searchPWRequest);
         authService.searchPW(searchPwDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }

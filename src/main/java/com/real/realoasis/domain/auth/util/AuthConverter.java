@@ -13,19 +13,19 @@ import com.real.realoasis.domain.auth.data.response.TokenResponse;
 import com.real.realoasis.domain.user.data.entity.User;
 
 public interface AuthConverter {
-    SignupDto toSignupDto(SignUpRequest signupRequest);
+    SignupDto toDto(SignUpRequest signupRequest);
 
     User toEntity(SignupDto signupDto);
 
-    SignupResponse toSignResponse(String code);
+    SignupResponse toResponse(String code);
 
-    LoginDto toLoginDto(LoginRequest loginRequest);
+    LoginDto toDto(LoginRequest loginRequest);
 
-    TokenDto toTokenDto(String accessToken, String refreshToken, Long expireAt, User user);
+    TokenDto toDto(String accessToken, String refreshToken, Long expireAt, User user);
 
-    TokenResponse toTokenResponse(TokenDto tokenDto);
+    TokenResponse toResponse(TokenDto tokenDto);
 
-    SearchPwDto toSearchPwDto(SearchPwRequest searchPWRequest);
+    SearchPwDto toDto(SearchPwRequest searchPWRequest);
 
     SearchPwResponse toSearchPwResponse(String pw);
 }

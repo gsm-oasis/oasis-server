@@ -21,7 +21,7 @@ import org.springframework.stereotype.Component;
 public class AuthConverterImpl implements AuthConverter {
     private final PasswordEncoder passwordEncoder;
     @Override
-    public SignupDto toSignupDto(SignUpRequest signupRequest) {
+    public SignupDto toDto(SignUpRequest signupRequest) {
         return SignupDto.builder()
                 .id(signupRequest.getId())
                 .email(signupRequest.getEmail())
@@ -42,14 +42,14 @@ public class AuthConverterImpl implements AuthConverter {
     }
 
     @Override
-    public SignupResponse toSignResponse(String code) {
+    public SignupResponse toResponse(String code) {
         return SignupResponse.builder()
                 .code(code)
                 .build();
     }
 
     @Override
-    public LoginDto toLoginDto(LoginRequest loginRequest) {
+    public LoginDto toDto(LoginRequest loginRequest) {
         return LoginDto.builder()
                 .id(loginRequest.getId())
                 .password(loginRequest.getPassword())
@@ -57,7 +57,7 @@ public class AuthConverterImpl implements AuthConverter {
     }
 
     @Override
-    public TokenDto toTokenDto(String accessToken, String refreshToken, Long expiredAt, User user) {
+    public TokenDto toDto(String accessToken, String refreshToken, Long expiredAt, User user) {
         return TokenDto.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
@@ -68,7 +68,7 @@ public class AuthConverterImpl implements AuthConverter {
     }
 
     @Override
-    public TokenResponse toTokenResponse(TokenDto tokenDto) {
+    public TokenResponse toResponse(TokenDto tokenDto) {
         return TokenResponse.builder()
                 .accessToken(tokenDto.getAccessToken())
                 .refreshToken(tokenDto.getRefreshToken())
@@ -79,7 +79,7 @@ public class AuthConverterImpl implements AuthConverter {
     }
 
     @Override
-    public SearchPwDto toSearchPwDto(SearchPwRequest searchPWRequest) {
+    public SearchPwDto toDto(SearchPwRequest searchPWRequest) {
         return SearchPwDto.builder()
                 .email(searchPWRequest.getEmail())
                 .newPassword(searchPWRequest.getNewPassword())
