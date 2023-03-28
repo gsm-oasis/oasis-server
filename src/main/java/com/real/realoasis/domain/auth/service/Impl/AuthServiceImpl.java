@@ -1,7 +1,6 @@
 package com.real.realoasis.domain.auth.service.Impl;
 
-import com.real.realoasis.domain.auth.data.dto.*;
-import com.real.realoasis.domain.auth.data.response.TokenResponse;
+import com.real.realoasis.domain.auth.presentation.data.dto.*;
 import com.real.realoasis.domain.auth.exception.ExpiredTokenException;
 import com.real.realoasis.domain.auth.exception.InvalidTokenException;
 import com.real.realoasis.domain.auth.service.AuthService;
@@ -71,14 +70,14 @@ public class AuthServiceImpl implements AuthService {
     @Override
     @Transactional(rollbackFor = Exception.class)
     public AuthCodeDto signUp(SignupDto signupDto) {
-        User user = authConverter.toEntity(signupDto);
-        if(userFacade.existsById(user.getId())){
+        if(userFacade.existsById(signupDto.getId())){
             throw new DuplicateIdException(ErrorCode.DUPLICATE_ID_EXCEPTION);
         }
-        userFacade.saveUser(user);
 
+        User user = authConverter.toEntity(signupDto);
         String code = makeRandomCode();
 
+        userFacade.saveUser(user);
         return authConverter.toDto(code);
     }
 

@@ -1,14 +1,14 @@
-package com.real.realoasis.domain.auth.data.request;
+package com.real.realoasis.domain.auth.presentation.data.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
-public class SearchIdRequest {
+@Getter
+@NoArgsConstructor
+@AllArgsConstructor
+public class SendMailRequest {
     private String email;
 }

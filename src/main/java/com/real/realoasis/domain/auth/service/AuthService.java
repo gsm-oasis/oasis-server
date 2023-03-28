@@ -1,7 +1,6 @@
 package com.real.realoasis.domain.auth.service;
 
-import com.real.realoasis.domain.auth.data.dto.*;
-import com.real.realoasis.domain.auth.data.response.TokenResponse;
+import com.real.realoasis.domain.auth.presentation.data.dto.*;
 
 public interface AuthService {
     TokenDto login(LoginDto loginDto);

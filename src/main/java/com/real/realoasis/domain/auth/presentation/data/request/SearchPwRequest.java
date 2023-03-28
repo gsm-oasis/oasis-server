@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.auth.data.request;
+package com.real.realoasis.domain.auth.presentation.data.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SendMailRequest {
+public class SearchPwRequest {
     private String email;
+    private String newPassword;
+    private String checkPassword;
 }

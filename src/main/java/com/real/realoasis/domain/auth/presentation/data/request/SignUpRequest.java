@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.auth.data.request;
+package com.real.realoasis.domain.auth.presentation.data.request;
 
 import lombok.*;
 

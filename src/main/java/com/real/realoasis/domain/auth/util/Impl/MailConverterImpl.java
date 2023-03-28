@@ -1,11 +1,11 @@
 package com.real.realoasis.domain.auth.util.Impl;
 
-import com.real.realoasis.domain.auth.data.dto.AuthCodeDto;
-import com.real.realoasis.domain.auth.data.dto.MailDto;
-import com.real.realoasis.domain.auth.data.dto.SearchIdDto;
-import com.real.realoasis.domain.auth.data.request.AuthenticationCodeRequest;
-import com.real.realoasis.domain.auth.data.request.SearchIdRequest;
-import com.real.realoasis.domain.auth.data.request.SendMailRequest;
+import com.real.realoasis.domain.auth.presentation.data.dto.AuthCodeDto;
+import com.real.realoasis.domain.auth.presentation.data.dto.MailDto;
+import com.real.realoasis.domain.auth.presentation.data.dto.SearchIdDto;
+import com.real.realoasis.domain.auth.presentation.data.request.AuthenticationCodeRequest;
+import com.real.realoasis.domain.auth.presentation.data.request.SearchIdRequest;
+import com.real.realoasis.domain.auth.presentation.data.request.SendMailRequest;
 import com.real.realoasis.domain.auth.util.MailConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

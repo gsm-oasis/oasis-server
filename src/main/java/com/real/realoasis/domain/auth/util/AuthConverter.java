@@ -1,12 +1,12 @@
 package com.real.realoasis.domain.auth.util;
 
-import com.real.realoasis.domain.auth.data.dto.*;
-import com.real.realoasis.domain.auth.data.request.LoginRequest;
-import com.real.realoasis.domain.auth.data.request.SearchPwRequest;
-import com.real.realoasis.domain.auth.data.request.SignUpRequest;
-import com.real.realoasis.domain.auth.data.response.SearchPwResponse;
-import com.real.realoasis.domain.auth.data.response.SignupResponse;
-import com.real.realoasis.domain.auth.data.response.TokenResponse;
+import com.real.realoasis.domain.auth.presentation.data.dto.*;
+import com.real.realoasis.domain.auth.presentation.data.request.LoginRequest;
+import com.real.realoasis.domain.auth.presentation.data.request.SearchPwRequest;
+import com.real.realoasis.domain.auth.presentation.data.request.SignUpRequest;
+import com.real.realoasis.domain.auth.presentation.data.response.SearchPwResponse;
+import com.real.realoasis.domain.auth.presentation.data.response.SignupResponse;
+import com.real.realoasis.domain.auth.presentation.data.response.TokenResponse;
 import com.real.realoasis.domain.user.data.entity.User;
 
 public interface AuthConverter {
@@ -23,8 +23,6 @@ public interface AuthConverter {
     TokenResponse toResponse(TokenDto tokenDto);
 
     SearchPwDto toDto(SearchPwRequest searchPWRequest);
-
-    SearchPwResponse toSearchPwResponse(String pw);
 
     AuthCodeDto toDto(String code);
 }

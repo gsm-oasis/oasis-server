@@ -1,8 +1,9 @@
-package com.real.realoasis.domain.auth.controller;
+package com.real.realoasis.domain.auth.presentation;
 
-import com.real.realoasis.domain.auth.data.dto.*;
-import com.real.realoasis.domain.auth.data.request.*;
-import com.real.realoasis.domain.auth.data.response.*;
+import com.real.realoasis.domain.auth.presentation.data.dto.*;
+import com.real.realoasis.domain.auth.presentation.data.request.*;
+import com.real.realoasis.domain.auth.presentation.data.response.SignupResponse;
+import com.real.realoasis.domain.auth.presentation.data.response.TokenResponse;
 import com.real.realoasis.domain.auth.service.*;
 import com.real.realoasis.domain.auth.util.AuthConverter;
 import com.real.realoasis.domain.auth.util.MailConverter;
@@ -26,7 +27,7 @@ public class AuthController {
 
     // 회원가입
     @PostMapping("/signup")
-    public ResponseEntity<SignupResponse> signUp(@Valid @RequestBody SignUpRequest signupRequest){
+    public ResponseEntity<SignupResponse> signUp(@RequestBody SignUpRequest signupRequest){
         SignupDto signupDto = authConverter.toDto(signupRequest);
         AuthCodeDto authCodeDto = authService.signUp(signupDto);
         SignupResponse signupResponse = authConverter.toResponse(authCodeDto);

@@ -1,12 +1,12 @@
 package com.real.realoasis.domain.auth.util.Impl;
 
-import com.real.realoasis.domain.auth.data.dto.*;
-import com.real.realoasis.domain.auth.data.request.LoginRequest;
-import com.real.realoasis.domain.auth.data.request.SearchPwRequest;
-import com.real.realoasis.domain.auth.data.request.SignUpRequest;
-import com.real.realoasis.domain.auth.data.response.SearchPwResponse;
-import com.real.realoasis.domain.auth.data.response.SignupResponse;
-import com.real.realoasis.domain.auth.data.response.TokenResponse;
+import com.real.realoasis.domain.auth.presentation.data.dto.*;
+import com.real.realoasis.domain.auth.presentation.data.request.LoginRequest;
+import com.real.realoasis.domain.auth.presentation.data.request.SearchPwRequest;
+import com.real.realoasis.domain.auth.presentation.data.request.SignUpRequest;
+import com.real.realoasis.domain.auth.presentation.data.response.SearchPwResponse;
+import com.real.realoasis.domain.auth.presentation.data.response.SignupResponse;
+import com.real.realoasis.domain.auth.presentation.data.response.TokenResponse;
 import com.real.realoasis.domain.auth.util.AuthConverter;
 import com.real.realoasis.domain.user.data.entity.User;
 import lombok.RequiredArgsConstructor;
@@ -81,13 +81,6 @@ public class AuthConverterImpl implements AuthConverter {
                 .email(searchPWRequest.getEmail())
                 .newPassword(searchPWRequest.getNewPassword())
                 .checkPassword(searchPWRequest.getCheckPassword())
-                .build();
-    }
-
-    @Override
-    public SearchPwResponse toSearchPwResponse(String pw) {
-        return SearchPwResponse.builder()
-                .password(pw)
                 .build();
     }
 

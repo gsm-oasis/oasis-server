@@ -1,15 +1,13 @@
-package com.real.realoasis.domain.auth.data.dto;
+package com.real.realoasis.domain.auth.presentation.data.dto;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+@Builder
 @RequiredArgsConstructor
 @Getter
-@Builder
-public class SignupDto {
+public class LoginDto {
     private final String id;
-    private final String email;
     private final String password;
-    private final String nickname;
 }

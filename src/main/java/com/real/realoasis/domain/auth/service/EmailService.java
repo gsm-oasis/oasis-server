@@ -1,9 +1,9 @@
 package com.real.realoasis.domain.auth.service;
 
 
-import com.real.realoasis.domain.auth.data.dto.AuthCodeDto;
-import com.real.realoasis.domain.auth.data.dto.MailDto;
-import com.real.realoasis.domain.auth.data.dto.SearchIdDto;
+import com.real.realoasis.domain.auth.presentation.data.dto.AuthCodeDto;
+import com.real.realoasis.domain.auth.presentation.data.dto.MailDto;
+import com.real.realoasis.domain.auth.presentation.data.dto.SearchIdDto;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;

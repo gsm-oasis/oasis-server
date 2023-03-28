@@ -1,8 +1,8 @@
 package com.real.realoasis.domain.auth.service.Impl;
 
-import com.real.realoasis.domain.auth.data.dto.AuthCodeDto;
-import com.real.realoasis.domain.auth.data.dto.MailDto;
-import com.real.realoasis.domain.auth.data.dto.SearchIdDto;
+import com.real.realoasis.domain.auth.presentation.data.dto.AuthCodeDto;
+import com.real.realoasis.domain.auth.presentation.data.dto.MailDto;
+import com.real.realoasis.domain.auth.presentation.data.dto.SearchIdDto;
 import com.real.realoasis.domain.auth.exception.InValidAuthCodeException;
 import com.real.realoasis.domain.auth.service.EmailService;
 import com.real.realoasis.domain.user.facade.UserFacade;
