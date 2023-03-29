@@ -12,7 +12,7 @@ import com.real.realoasis.domain.user.data.entity.User;
 public interface AuthConverter {
     SignupDto toDto(SignUpRequest signupRequest);
 
-    User toEntity(SignupDto signupDto);
+    User toEntity(SignupDto signupDto, String code);
 
     SignupResponse toResponse(AuthCodeDto authCodeDto);
 

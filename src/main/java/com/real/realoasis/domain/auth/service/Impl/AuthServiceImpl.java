@@ -74,8 +74,8 @@ public class AuthServiceImpl implements AuthService {
             throw new DuplicateIdException(ErrorCode.DUPLICATE_ID_EXCEPTION);
         }
 
-        User user = authConverter.toEntity(signupDto);
         String code = makeRandomCode();
+        User user = authConverter.toEntity(signupDto, code);
 
         userFacade.saveUser(user);
         return authConverter.toDto(code);

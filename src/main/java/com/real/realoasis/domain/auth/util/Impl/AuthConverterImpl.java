@@ -28,13 +28,14 @@ public class AuthConverterImpl implements AuthConverter {
     }
 
     @Override
-    public User toEntity(SignupDto signupDto) {
+    public User toEntity(SignupDto signupDto, String code) {
         String password = passwordEncoder.encode(signupDto.getPassword());
         return User.builder()
                 .id(signupDto.getId())
                 .email(signupDto.getEmail())
                 .password(password)
                 .nickname(signupDto.getNickname())
+                .code(code)
                 .build();
     }
 
