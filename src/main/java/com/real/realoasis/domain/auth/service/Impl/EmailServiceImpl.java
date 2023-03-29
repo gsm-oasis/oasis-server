@@ -1,6 +1,6 @@
 package com.real.realoasis.domain.auth.service.Impl;
 
-import com.real.realoasis.domain.auth.presentation.data.dto.AuthCodeDto;
+import com.real.realoasis.domain.auth.presentation.data.dto.CoupleCodeDto;
 import com.real.realoasis.domain.auth.presentation.data.dto.MailDto;
 import com.real.realoasis.domain.auth.presentation.data.dto.SearchIdDto;
 import com.real.realoasis.domain.auth.exception.InValidAuthCodeException;
@@ -31,8 +31,7 @@ public class EmailServiceImpl implements EmailService {
 
 
     // 랜덤 인증 코드 생성
-    @Override
-    public void createCode() {
+    private void createCode() {
         Random random = new Random();
         StringBuilder key = new StringBuilder();
 
@@ -55,8 +54,7 @@ public class EmailServiceImpl implements EmailService {
     }
 
     // 메일 양식 작성
-    @Override
-    public MimeMessage createEmailForm(String email) throws MessagingException{
+    private MimeMessage createEmailForm(String email) throws MessagingException{
         createCode(); //인증 코드 생성
         String setFrom = "shgurtns7236@naver.com"; //email-config 에 설정한 자신의 이메일 주소(보내는 사람)
         String title = "OASIS 인증 번호"; //제목
@@ -104,8 +102,8 @@ public class EmailServiceImpl implements EmailService {
 
     // 인증코드 확인
     @Override
-    public void confirmAuthenticationCode(AuthCodeDto authCodeDto) {
-        if(!authCodeDto.getCode().equals(authNum)){
+    public void confirmAuthenticationCode(CoupleCodeDto coupleCodeDto) {
+        if(!coupleCodeDto.getCoupleCode().equals(authNum)){
             throw new InValidAuthCodeException(ErrorCode.INVALID_AUTH_CODE_EXCEPTION);
         }
     }

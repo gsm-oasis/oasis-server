@@ -2,6 +2,7 @@ package com.real.realoasis.domain.user.data.entity;
 
 import com.real.realoasis.domain.heart.data.entity.Heart;
 import com.real.realoasis.domain.user.type.Role;
+import com.real.realoasis.global.entity.BaseIdEntity;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,31 +22,19 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
-
-    @Id
-    @Column(name = "user_id")
+public class User extends BaseIdEntity {
     private String id;
-
     private String email;
-
     @NotNull
     private String password;
-
     private String nickname;
-
     private boolean isCouple;
-
     private long anniversaryDate;
 
-    private String code;
-
+    private String coupleCode;
     private String coupleId;
-
     private String firstDay;
-
     private String today;
-
     private long datingDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -55,11 +44,6 @@ public class User {
     public void updateHeart(Heart heart){
         this.heart = heart;
     }
-
-    @ElementCollection(fetch = FetchType.EAGER) // roles 컬렉션
-    @CollectionTable(name = "role", joinColumns = @JoinColumn(name = "id"))
-    @Builder.Default
-    private List<Role> roles = new ArrayList<>();
 
     public void updateIsCouple() {
         this.isCouple = true;

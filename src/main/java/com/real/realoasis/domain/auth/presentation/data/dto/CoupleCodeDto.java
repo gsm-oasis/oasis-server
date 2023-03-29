@@ -7,6 +7,6 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @Builder
 @RequiredArgsConstructor
-public class AuthCodeDto {
-    private final String code;
+public class CoupleCodeDto {
+    private final String coupleCode;
 }

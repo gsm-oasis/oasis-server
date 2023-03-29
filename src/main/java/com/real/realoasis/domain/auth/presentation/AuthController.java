@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
-import javax.validation.Valid;
 import java.io.UnsupportedEncodingException;
 
 @RestController
@@ -29,8 +28,8 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<SignupResponse> signUp(@RequestBody SignUpRequest signupRequest){
         SignupDto signupDto = authConverter.toDto(signupRequest);
-        AuthCodeDto authCodeDto = authService.signUp(signupDto);
-        SignupResponse signupResponse = authConverter.toResponse(authCodeDto);
+        CoupleCodeDto coupleCodeDto = authService.signUp(signupDto);
+        SignupResponse signupResponse = authConverter.toResponse(coupleCodeDto);
         return new ResponseEntity<>(signupResponse, HttpStatus.CREATED);
     }
 
@@ -45,7 +44,7 @@ public class AuthController {
     // 인증코드 확인
     @PostMapping("/mailconfirm")
     public ResponseEntity<Void> confirmAuthenticationCode(@RequestBody AuthenticationCodeRequest authenticationCodeRequest) {
-        AuthCodeDto authCodeDto = mailConverter.toDto(authenticationCodeRequest);
+        CoupleCodeDto authCodeDto = mailConverter.toDto(authenticationCodeRequest);
         emailService.confirmAuthenticationCode(authCodeDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -1,10 +1,10 @@
 package com.real.realoasis.domain.auth.util.Impl;
 
+import com.real.realoasis.domain.auth.domain.entity.RefreshToken;
 import com.real.realoasis.domain.auth.presentation.data.dto.*;
 import com.real.realoasis.domain.auth.presentation.data.request.LoginRequest;
 import com.real.realoasis.domain.auth.presentation.data.request.SearchPwRequest;
 import com.real.realoasis.domain.auth.presentation.data.request.SignUpRequest;
-import com.real.realoasis.domain.auth.presentation.data.response.SearchPwResponse;
 import com.real.realoasis.domain.auth.presentation.data.response.SignupResponse;
 import com.real.realoasis.domain.auth.presentation.data.response.TokenResponse;
 import com.real.realoasis.domain.auth.util.AuthConverter;
@@ -12,6 +12,8 @@ import com.real.realoasis.domain.user.data.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+
+import java.time.LocalDateTime;
 
 @Component
 @RequiredArgsConstructor
@@ -35,14 +37,14 @@ public class AuthConverterImpl implements AuthConverter {
                 .email(signupDto.getEmail())
                 .password(password)
                 .nickname(signupDto.getNickname())
-                .code(code)
+                .coupleCode(code)
                 .build();
     }
 
     @Override
-    public SignupResponse toResponse(AuthCodeDto authCodeDto) {
+    public SignupResponse toResponse(CoupleCodeDto authCodeDto) {
         return SignupResponse.builder()
-                .code(authCodeDto.getCode())
+                .coupleCode(authCodeDto.getCoupleCode())
                 .build();
     }
 
@@ -55,13 +57,14 @@ public class AuthConverterImpl implements AuthConverter {
     }
 
     @Override
-    public TokenDto toDto(String accessToken, String refreshToken, Long expiredAt, User user) {
+    public TokenDto toDto(String accessToken, String refreshToken, LocalDateTime accessExp, LocalDateTime refreshExp, User user) {
         return TokenDto.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
-                .expiredAt(expiredAt)
-                .code(user.getCode())
-                .couple(user.isCouple())
+                .accessExp(accessExp)
+                .refreshExp(refreshExp)
+                .coupleCode(user.getCoupleCode())
+                .isCouple(user.isCouple())
                 .build();
     }
 
@@ -70,9 +73,9 @@ public class AuthConverterImpl implements AuthConverter {
         return TokenResponse.builder()
                 .accessToken(tokenDto.getAccessToken())
                 .refreshToken(tokenDto.getRefreshToken())
-                .expiredAt(tokenDto.getExpiredAt())
-                .code(tokenDto.getCode())
-                .couple(tokenDto.isCouple())
+                .accessExp(tokenDto.getAccessExp())
+                .coupleCode(tokenDto.getCoupleCode())
+                .isCouple(tokenDto.isCouple())
                 .build();
     }
 
@@ -86,9 +89,17 @@ public class AuthConverterImpl implements AuthConverter {
     }
 
     @Override
-    public AuthCodeDto toDto(String code) {
-        return AuthCodeDto.builder()
-                .code(code)
+    public CoupleCodeDto toDto(String code) {
+        return CoupleCodeDto.builder()
+                .coupleCode(code)
+                .build();
+    }
+
+    @Override
+    public RefreshToken toEntity(Long idx, String refreshToken) {
+        return RefreshToken.builder()
+                .userId(idx)
+                .token(refreshToken)
                 .build();
     }
 }

@@ -1,6 +1,6 @@
 package com.real.realoasis.domain.auth.util.Impl;
 
-import com.real.realoasis.domain.auth.presentation.data.dto.AuthCodeDto;
+import com.real.realoasis.domain.auth.presentation.data.dto.CoupleCodeDto;
 import com.real.realoasis.domain.auth.presentation.data.dto.MailDto;
 import com.real.realoasis.domain.auth.presentation.data.dto.SearchIdDto;
 import com.real.realoasis.domain.auth.presentation.data.request.AuthenticationCodeRequest;
@@ -22,8 +22,8 @@ public class MailConverterImpl implements MailConverter {
     }
 
     @Override
-    public AuthCodeDto toDto(AuthenticationCodeRequest authenticationCodeRequest) {
-        return AuthCodeDto.builder()
+    public CoupleCodeDto toDto(AuthenticationCodeRequest authenticationCodeRequest) {
+        return CoupleCodeDto.builder()
                 .code(authenticationCodeRequest.getCode())
                 .build();
     }

@@ -1,7 +1,7 @@
 package com.real.realoasis.domain.auth.service;
 
 
-import com.real.realoasis.domain.auth.presentation.data.dto.AuthCodeDto;
+import com.real.realoasis.domain.auth.presentation.data.dto.CoupleCodeDto;
 import com.real.realoasis.domain.auth.presentation.data.dto.MailDto;
 import com.real.realoasis.domain.auth.presentation.data.dto.SearchIdDto;
 
@@ -10,13 +10,9 @@ import javax.mail.internet.MimeMessage;
 import java.io.UnsupportedEncodingException;
 
 public interface EmailService {
-    void createCode();
-    MimeMessage createEmailForm(String email) throws MessagingException, UnsupportedEncodingException;
-
-    MimeMessage createSearchIdForm(String email) throws MessagingException, UnsupportedEncodingException;
     void sendId(SearchIdDto searchIdDto) throws MessagingException, UnsupportedEncodingException;
 
     void sendEmail(MailDto mailDto) throws MessagingException, UnsupportedEncodingException;
 
-    void confirmAuthenticationCode(AuthCodeDto authCodeDto);
+    void confirmAuthenticationCode(CoupleCodeDto authCodeDto);
 }

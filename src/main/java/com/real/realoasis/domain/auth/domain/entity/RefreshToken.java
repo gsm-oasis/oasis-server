@@ -1,22 +1,25 @@
 package com.real.realoasis.domain.auth.domain.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
+import org.springframework.data.redis.core.index.Indexed;
 
-import javax.persistence.Id;
 import java.time.LocalDateTime;
 
 @Getter
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
-@RedisHash(value = "refresh")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@RedisHash(value = "refresh", timeToLive = 60L * 60 * 24 * 7)
 public class RefreshToken {
     @Id
-    private String userId;
-    private String refreshToken;
-    private LocalDateTime timeToLive;
+    @Indexed
+    private Long userId;
+    @Indexed
+    private String token;
+
+    @Builder
+    public RefreshToken(Long userId, String token){
+        this.userId = userId;
+        this.token = token;
+    }
 }

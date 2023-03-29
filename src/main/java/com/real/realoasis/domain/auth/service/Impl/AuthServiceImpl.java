@@ -1,8 +1,9 @@
 package com.real.realoasis.domain.auth.service.Impl;
 
+import com.real.realoasis.domain.auth.domain.entity.RefreshToken;
+import com.real.realoasis.domain.auth.domain.repository.RefreshTokenRepository;
 import com.real.realoasis.domain.auth.presentation.data.dto.*;
 import com.real.realoasis.domain.auth.exception.ExpiredTokenException;
-import com.real.realoasis.domain.auth.exception.InvalidTokenException;
 import com.real.realoasis.domain.auth.service.AuthService;
 import com.real.realoasis.domain.auth.util.AuthConverter;
 import com.real.realoasis.domain.user.data.entity.User;
@@ -12,23 +13,21 @@ import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.global.error.type.ErrorCode;
 import com.real.realoasis.global.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Objects;
+import java.time.LocalDateTime;
 import java.util.Random;
-import java.util.concurrent.TimeUnit;
 
 @Service
 @RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
     private final UserFacade userFacade;
     private final JwtTokenProvider jwtTokenProvider;
-    private final RedisTemplate<String, Object> redisTemplate;
     private final AuthConverter authConverter;
     private final PasswordEncoder passwordEncoder;
+    private final RefreshTokenRepository refreshTokenRepository;
 
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -36,25 +35,28 @@ public class AuthServiceImpl implements AuthService {
         User user = userFacade.findUserById(loginDto.getId());
         userFacade.checkPassword(user, loginDto.getPassword());
 
-        return makeTokenDto(user);
+        TokenDto tokenDto = makeTokenDto(user);
+
+        RefreshToken refresh = authConverter.toEntity(user.getIdx(), tokenDto.getRefreshToken());
+        refreshTokenRepository.save(refresh);
+
+        return tokenDto;
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
     public TokenDto reissue(String refreshToken) {
-        if(jwtTokenProvider.validateToken(refreshToken)){
+        if(jwtTokenProvider.validateToken(refreshToken, JwtTokenProvider.TokenType.REFRESH_TOKEN)){
             throw new ExpiredTokenException(ErrorCode.EXPIRATION_TOKEN_EXCEPTION);
         }
 
-        User user = userFacade.findUserById(jwtTokenProvider.getUserPk(refreshToken));
+        User user = userFacade.findUserById(jwtTokenProvider.getTokenSubject(refreshToken, JwtTokenProvider.TokenType.REFRESH_TOKEN));
+        RefreshToken existingRefreshToken = refreshTokenRepository.findByToken(refreshToken);
+        TokenDto tokenDto = makeTokenDto(user);
 
-        String redisRefreshToken = (String) redisTemplate.opsForValue().get("refresh:" + user.getId());
+        refreshTokenRepository.save(authConverter.toEntity(existingRefreshToken.getUserId(), tokenDto.getRefreshToken()));
 
-        if(Objects.equals(redisRefreshToken, refreshToken)){
-            throw new InvalidTokenException(ErrorCode.INVALID_TOKEN_EXCEPTION);
-        }
-
-        return makeTokenDto(user);
+        return tokenDto;
     }
 
     @Transactional
@@ -69,7 +71,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public AuthCodeDto signUp(SignupDto signupDto) {
+    public CoupleCodeDto signUp(SignupDto signupDto) {
         if(userFacade.existsById(signupDto.getId())){
             throw new DuplicateIdException(ErrorCode.DUPLICATE_ID_EXCEPTION);
         }
@@ -104,12 +106,9 @@ public class AuthServiceImpl implements AuthService {
     private TokenDto makeTokenDto(User user){
         String accessToken = jwtTokenProvider.generateAccessToken(user.getId());
         String refreshToken = jwtTokenProvider.generateRefreshToken(user.getId());
-        Long expiredAt = jwtTokenProvider.getExpiredTime(accessToken);
+        LocalDateTime accessExp = jwtTokenProvider.getAccessTokenExpiredTime();
+        LocalDateTime refreshExp = jwtTokenProvider.getRefreshTokenExpiredTime();
 
-        redisTemplate.opsForValue()
-                .set("RefreshToken:" + user.getId(), refreshToken,
-                        jwtTokenProvider.getExpiredTime(refreshToken), TimeUnit.MILLISECONDS);
-
-        return authConverter.toDto(accessToken, refreshToken, expiredAt, user);
+        return authConverter.toDto(accessToken, refreshToken, accessExp, refreshExp, user);
     }
 }

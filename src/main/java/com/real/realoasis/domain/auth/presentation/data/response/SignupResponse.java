@@ -7,5 +7,5 @@ import lombok.*;
 @Getter
 @RequiredArgsConstructor
 public class SignupResponse {
-    private final String code;
+    private final String coupleCode;
 }

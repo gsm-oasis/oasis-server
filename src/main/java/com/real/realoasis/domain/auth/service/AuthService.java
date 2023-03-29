@@ -6,7 +6,7 @@ public interface AuthService {
     TokenDto login(LoginDto loginDto);
     TokenDto reissue(String refreshToken);
     void searchPW(SearchPwDto searchPwDto);
-    AuthCodeDto signUp(SignupDto signupDto);
+    CoupleCodeDto signUp(SignupDto signupDto);
 
 
 }
