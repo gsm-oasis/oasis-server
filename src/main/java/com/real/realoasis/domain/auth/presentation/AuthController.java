@@ -20,7 +20,7 @@ import java.io.UnsupportedEncodingException;
 @RequiredArgsConstructor
 public class AuthController {
     private final AuthService authService;
-    private final EmailService emailService;
+    private final MailService mailService;
     private final AuthConverter authConverter;
     private final MailConverter mailConverter;
 
@@ -34,18 +34,16 @@ public class AuthController {
     }
 
     // 이메일에 인증코드 전송
-    @PostMapping("/sendmail")
-    public ResponseEntity<Void> sendMail(@RequestBody SendMailRequest sendMailRequest) throws MessagingException, UnsupportedEncodingException {
-        MailDto mailDto = mailConverter.toDto(sendMailRequest);
-        emailService.sendEmail(mailDto);
+    @PostMapping("/email")
+    public ResponseEntity<Void> sendEmail(@RequestParam("email") String email) throws MessagingException, UnsupportedEncodingException {
+        mailService.sendEmail(email);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // 인증코드 확인
-    @PostMapping("/mailconfirm")
-    public ResponseEntity<Void> confirmAuthenticationCode(@RequestBody AuthenticationCodeRequest authenticationCodeRequest) {
-        CoupleCodeDto authCodeDto = mailConverter.toDto(authenticationCodeRequest);
-        emailService.confirmAuthenticationCode(authCodeDto);
+    @GetMapping("/code")
+    public ResponseEntity<Void> confirmAuthenticationCode(@RequestParam("code") String code) {
+        mailService.confirmAuthenticationCode(code);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -67,15 +65,15 @@ public class AuthController {
     }
 
     // 이메일을 통해 아이디 찾기
-    @PostMapping("/search/id")
+    @PostMapping("/id")
     public ResponseEntity<Void> searchID(@RequestBody SearchIdRequest searchIDRequest) throws MessagingException, UnsupportedEncodingException {
         SearchIdDto searchIdDto = mailConverter.toDto(searchIDRequest);
-        emailService.sendId(searchIdDto);
+        mailService.sendId(searchIdDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // id 를 통해 비밀번호 찾기
-    @PatchMapping ("/reset/password")
+    @PatchMapping ("/password")
     public ResponseEntity<Void> searchPW(@RequestBody SearchPwRequest searchPWRequest) {
         SearchPwDto searchPwDto = authConverter.toDto(searchPWRequest);
         authService.searchPW(searchPwDto);
