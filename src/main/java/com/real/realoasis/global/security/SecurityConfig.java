@@ -40,10 +40,10 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.POST,"/auth/signup").permitAll()
                 .antMatchers(HttpMethod.POST,"/auth/login").permitAll()
                 .antMatchers(HttpMethod.PATCH, "/auth/logout").permitAll()
-                .antMatchers(HttpMethod.POST,"/auth/search/id").permitAll()
-                .antMatchers(HttpMethod.PATCH,"/auth/reset/password").permitAll()
-                .antMatchers(HttpMethod.POST,"/auth/mailconfirm").permitAll()
-                .antMatchers(HttpMethod.POST,"/auth/sendmail").permitAll()
+                .antMatchers(HttpMethod.POST,"/auth/id").permitAll()
+                .antMatchers(HttpMethod.PATCH,"/auth/password").permitAll()
+                .antMatchers(HttpMethod.POST,"/auth/email/**").permitAll()
+                .antMatchers(HttpMethod.GET,"/auth/code/**").permitAll()
 
                 //user
                 .antMatchers(HttpMethod.DELETE, "/user/withdrawal").authenticated()
