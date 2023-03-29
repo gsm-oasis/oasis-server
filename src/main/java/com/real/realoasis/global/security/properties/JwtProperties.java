@@ -1,18 +1,14 @@
 package com.real.realoasis.global.security.properties;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.context.properties.ConstructorBinding;
 
 @Getter
-@Setter
-@Component
-@NoArgsConstructor
-@AllArgsConstructor
-@ConfigurationProperties(prefix = "jwt.secret")
+@ConstructorBinding
+@RequiredArgsConstructor
+@ConfigurationProperties(prefix = "jwt")
 public class JwtProperties {
-    private String key;
+    private final String accessSecret;
+    private final String refreshSecret;
 }
