@@ -21,7 +21,6 @@ import java.io.IOException;
 public class ExceptionHandlerFilter extends OncePerRequestFilter {
     private final ObjectMapper objectMapper;
 
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
@@ -39,7 +38,7 @@ public class ExceptionHandlerFilter extends OncePerRequestFilter {
     public void setErrorResponse(ErrorCode errorCode, HttpServletResponse response) throws IOException {
         response.setStatus(errorCode.getStatus());
         response.setContentType("application/json");
-        ErrorResponse errorResponse = new ErrorResponse(errorCode);
+        ErrorResponse errorResponse = new ErrorResponse(errorCode.getStatus(), errorCode.getMessage());
         String errorResponseEntityToJson = objectMapper.writeValueAsString(errorResponse);
         response.getWriter().write(errorResponseEntityToJson);
     }
