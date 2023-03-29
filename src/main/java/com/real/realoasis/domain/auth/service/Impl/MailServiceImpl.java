@@ -2,10 +2,10 @@ package com.real.realoasis.domain.auth.service.Impl;
 
 import com.real.realoasis.domain.auth.domain.entity.AuthCode;
 import com.real.realoasis.domain.auth.domain.repository.AuthCodeRepository;
-import com.real.realoasis.domain.auth.presentation.data.dto.CoupleCodeDto;
 import com.real.realoasis.domain.auth.presentation.data.dto.CreateMessageDto;
 import com.real.realoasis.domain.auth.presentation.data.dto.SearchIdDto;
 import com.real.realoasis.domain.auth.exception.InValidAuthCodeException;
+import com.real.realoasis.domain.auth.presentation.data.dto.SendAuthCodeDto;
 import com.real.realoasis.domain.auth.service.MailService;
 import com.real.realoasis.domain.auth.util.MailConverter;
 import com.real.realoasis.domain.user.facade.UserFacade;
@@ -45,7 +45,7 @@ public class MailServiceImpl implements MailService {
 
     // 실제 메일 전송
     @Override
-    public void sendEmail(String email) throws MessagingException {
+    public SendAuthCodeDto sendEmail(String email) throws MessagingException {
         //메일전송에 필요한 정보 설정
         CreateMessageDto createMessageDto = createEmailForm(email);
         //실제 메일 전송
@@ -53,13 +53,15 @@ public class MailServiceImpl implements MailService {
 
         AuthCode authCode = mailConverter.toEntity(email, createMessageDto.getAuthCode());
         authCodeRepository.save(authCode);
+
+        return mailConverter.toDto(authCode.getCode());
     }
 
     // 인증코드 확인
     @Override
-    public void confirmAuthenticationCode(CoupleCodeDto coupleCodeDto) {
-        if(!coupleCodeDto.getCoupleCode().equals(authNum)){
-            throw new InValidAuthCodeException(ErrorCode.INVALID_AUTH_CODE_EXCEPTION);
+    public void confirmAuthenticationCode(String code, String sentCode) {
+        if(!code.equals(sentCode)) {
+            throw new InValidAuthCodeException(ErrorCode.INVALID_AUTH_CODE);
         }
     }
 

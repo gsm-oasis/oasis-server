@@ -1,13 +1,11 @@
 package com.real.realoasis.domain.auth.util.Impl;
 
 import com.real.realoasis.domain.auth.domain.entity.AuthCode;
-import com.real.realoasis.domain.auth.presentation.data.dto.CoupleCodeDto;
-import com.real.realoasis.domain.auth.presentation.data.dto.CreateMessageDto;
-import com.real.realoasis.domain.auth.presentation.data.dto.MailDto;
-import com.real.realoasis.domain.auth.presentation.data.dto.SearchIdDto;
+import com.real.realoasis.domain.auth.presentation.data.dto.*;
 import com.real.realoasis.domain.auth.presentation.data.request.AuthenticationCodeRequest;
 import com.real.realoasis.domain.auth.presentation.data.request.SearchIdRequest;
 import com.real.realoasis.domain.auth.presentation.data.request.SendMailRequest;
+import com.real.realoasis.domain.auth.presentation.data.response.SendAuthCodeResponse;
 import com.real.realoasis.domain.auth.util.MailConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -52,6 +50,20 @@ public class MailConverterImpl implements MailConverter {
         return AuthCode.builder()
                 .email(email)
                 .code(authCode)
+                .build();
+    }
+
+    @Override
+    public SendAuthCodeResponse toResponse(SendAuthCodeDto sendAuthCodeDto) {
+        return SendAuthCodeResponse.builder()
+                .sentCode(sendAuthCodeDto.getSentCode())
+                .build();
+    }
+
+    @Override
+    public SendAuthCodeDto toDto(String code) {
+        return SendAuthCodeDto.builder()
+                .sentCode(code)
                 .build();
     }
 }
