@@ -20,7 +20,7 @@ public class UserSettingConverterImpl implements UserSettingConverter {
     public SettingResDto toSettingResDto(User user) {
         return SettingResDto.builder()
                 .anniversaryDate(user.getAnniversaryDate())
-                .myCode(user.getCode())
+                .myCode(user.getCoupleCode())
                 .version("1.0")
                 .build();
     }

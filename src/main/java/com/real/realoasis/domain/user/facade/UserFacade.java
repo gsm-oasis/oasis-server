@@ -40,7 +40,7 @@ public class UserFacade {
     }
 
     public User findUserByCode(String code) {
-        return userRepository.findUserByCode(code).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND_EXCEPTION));
+        return userRepository.findUserByCoupleCode(code).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND_EXCEPTION));
     }
 
     public void checkPassword(User user, String password) {
