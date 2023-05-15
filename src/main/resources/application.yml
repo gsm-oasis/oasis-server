@@ -12,6 +12,7 @@ spring:
             auth: ${MAIL_AUTH}
           ssl:
             enable: ${MAIL_SSL_ENABLE}
+
   datasource:
     driver-class-name: ${DB_DRIVER}
     url: ${DB_URL}
