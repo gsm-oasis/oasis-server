@@ -1,7 +1,7 @@
 spring:
   mail:
     host: ${MAIL_HOST}
-    post: ${MAIL_POST}
+    port: ${MAIL_PORT}
     username: ${MAIL_USERNAME}
     password: ${MAIL_PASSWORD}
     properties:
@@ -11,7 +11,7 @@ spring:
             enable: ${MAIL_ENABLE}
             auth: ${MAIL_AUTH}
           ssl:
-            enable: ${MAIL_ENAbLE}
+            enable: ${MAIL_SSL_ENABLE}
   datasource:
     driver-class-name: ${DB_DRIVER}
     url: ${DB_URL}
@@ -40,7 +40,7 @@ spring:
 
 jwt:
   access-secret: ${JWT_ACCESS}
-  refresh-secret: ${JWt_REFRESH}
+  refresh-secret: ${JWT_REFRESH}
 
 server:
   port: ${SERVER_PORT}
