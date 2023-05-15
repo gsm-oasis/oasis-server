@@ -20,10 +20,10 @@ jobs:
         uses: cloudtype-github-actions/deploy@v1
         with:
           token: ${{ secrets.CLOUDTYPE_TOKEN }}
-          project: devnoh/oasis
+          project: devnoh/oasis-server
           stage: main
           yaml: >
-            name: oasis
+            name: oasis-server
             
              app: java@11
 
