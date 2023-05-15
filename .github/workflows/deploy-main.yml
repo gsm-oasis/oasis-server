@@ -43,7 +43,7 @@ jobs:
                 - name: MAIL_AUTH
                   value: ${{ secrets.MAIL_AUTH }}
                 - name: MAIL_SSL_ENABLE
-                  value: ${{ MAIL_SSL_ENABLE }}
+                  value: ${{ secrets.MAIL_SSL_ENABLE }}
                 - name: DB_DRIVER
                   value: ${{ secrets.DB_DRIVER }}
                 - name: DB_URL
