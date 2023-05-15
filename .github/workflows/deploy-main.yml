@@ -23,7 +23,7 @@ jobs:
           project: devnoh/oasis
           stage: main
           yaml: >
-            name: oasis-server
+            name: oasis
             
              app: java@11
 
