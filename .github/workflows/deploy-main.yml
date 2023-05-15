@@ -72,7 +72,7 @@ jobs:
                   value: ${{ secrets.MAX_FILE_SIZE }}
                 - name: JWT_ACCESS
                   value: ${{ secrets.JWT_ACCESS }}
-                - name: JWt_REFRESH
+                - name: JWT_REFRESH
                   value: ${{ secrets.JWT_REFRESH }}
                 - name: SERVER_PORT
                   value: ${{ secrets.SERVER_PORT }}
