@@ -45,6 +45,7 @@ jwt:
 server:
   port: ${SERVER_PORT}
 
+
 cloud:
   aws:
     region:
