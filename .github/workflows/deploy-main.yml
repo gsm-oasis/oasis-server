@@ -22,7 +22,7 @@ jobs:
           token: ${{ secrets.CLOUDTYPE_TOKEN }}
           project: devnoh/oasis
           stage: main
-          yaml: >
+          yaml: |
             name: oasis-server
             
              app: java@11
@@ -76,7 +76,7 @@ jobs:
                   value: ${{ secrets.JWT_REFRESH }}
                 - name: SERVER_PORT
                   value: ${{ secrets.SERVER_PORT }}
-                - name: COOL_SMS_API_KEY
+                - name: AWS_REGION
                   value: ${{ secrets.AWS_REGION }}
                 - name: AWS_STACK
                   value: ${{ secrets.AWS_STACK }}
