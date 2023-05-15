@@ -24,8 +24,7 @@ jobs:
           stage: main
           yaml: |
             name: oasis-server
-            
-             app: java@11
+            app: java@11
 
             options:
               ports: 8090
