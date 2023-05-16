@@ -27,5 +27,5 @@ public interface AuthConverter {
     SearchPwDto toDto(SearchPwRequest searchPWRequest);
 
     CoupleCodeDto toDto(String code);
-    RefreshToken toEntity(Long idx, String refreshToken);
+    RefreshToken toEntity(String id, String refreshToken);
 }

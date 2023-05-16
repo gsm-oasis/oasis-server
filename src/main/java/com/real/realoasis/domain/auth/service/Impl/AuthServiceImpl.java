@@ -10,6 +10,7 @@ import com.real.realoasis.domain.user.data.entity.User;
 import com.real.realoasis.domain.user.exception.DuplicateIdException;
 import com.real.realoasis.domain.user.exception.PasswordNotMatchException;
 import com.real.realoasis.domain.user.facade.UserFacade;
+import com.real.realoasis.domain.user.repository.UserRepository;
 import com.real.realoasis.global.error.type.ErrorCode;
 import com.real.realoasis.global.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -37,7 +38,7 @@ public class AuthServiceImpl implements AuthService {
 
         TokenDto tokenDto = makeTokenDto(user);
 
-        RefreshToken refresh = authConverter.toEntity(user.getIdx(), tokenDto.getRefreshToken());
+        RefreshToken refresh = authConverter.toEntity(user.getId(), tokenDto.getRefreshToken());
         refreshTokenRepository.save(refresh);
 
         return tokenDto;

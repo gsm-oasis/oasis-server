@@ -22,7 +22,8 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class User extends BaseIdEntity {
+public class User {
+    @Id
     private String id;
     private String email;
     @NotNull
