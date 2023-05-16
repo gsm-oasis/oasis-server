@@ -13,9 +13,8 @@ public class WebConfig implements WebMvcConfigurer {
     @Override //CORS 설정
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins("http://localhost:3000", "https://oasis-a8863.web.app/")
+                .allowedOrigins("http://localhost:3000", "https://oasis-a8863.web.app")
                 .allowedMethods("GET","POST","DELETE","PUT","OPTIONS","PATCH")
-                .allowedHeaders("*")
                 .allowCredentials(true)
                 .maxAge(3600);
     }
