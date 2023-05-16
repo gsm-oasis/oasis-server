@@ -20,12 +20,11 @@ jobs:
         uses: cloudtype-github-actions/deploy@v1
         with:
           token: ${{ secrets.CLOUDTYPE_TOKEN }}
-          project: shgur7236/choice
+          project: devnoh/oasis
           stage: main
-          yaml: >
-            name: choice-backend
-            
-             app: java@11
+          yaml: |
+            name: oasis-server
+            app: java@11
 
             options:
               ports: 8090
@@ -72,11 +71,11 @@ jobs:
                   value: ${{ secrets.MAX_FILE_SIZE }}
                 - name: JWT_ACCESS
                   value: ${{ secrets.JWT_ACCESS }}
-                - name: JWt_REFRESH
+                - name: JWT_REFRESH
                   value: ${{ secrets.JWT_REFRESH }}
                 - name: SERVER_PORT
                   value: ${{ secrets.SERVER_PORT }}
-                - name: COOL_SMS_API_KEY
+                - name: AWS_REGION
                   value: ${{ secrets.AWS_REGION }}
                 - name: AWS_STACK
                   value: ${{ secrets.AWS_STACK }}
@@ -94,3 +93,4 @@ jobs:
               git:
                 url: git@github.com:${{ github.repository }}.git
                 ref: ${{ github.ref }}
+                preset: java-springboot
