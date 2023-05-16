@@ -5,7 +5,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.index.Indexed;
 
-import java.time.LocalDateTime;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -13,12 +12,12 @@ import java.time.LocalDateTime;
 public class RefreshToken {
     @Id
     @Indexed
-    private Long userId;
+    private String userId;
     @Indexed
     private String token;
 
     @Builder
-    public RefreshToken(Long userId, String token){
+    public RefreshToken(String userId, String token){
         this.userId = userId;
         this.token = token;
     }

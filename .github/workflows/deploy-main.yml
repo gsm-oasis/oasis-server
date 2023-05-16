@@ -27,7 +27,7 @@ jobs:
             app: java@11
 
             options:
-              ports: 8090
+              ports: 9000
               env:
                 - name: MAIL_HOST
                   value: ${{ secrets.MAIL_HOST }}
@@ -93,4 +93,3 @@ jobs:
               git:
                 url: git@github.com:${{ github.repository }}.git
                 ref: ${{ github.ref }}
-                preset: java-springboot
