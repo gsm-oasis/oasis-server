@@ -2,9 +2,8 @@ package com.real.realoasis.domain.diary.service.Impl;
 
 import com.real.realoasis.domain.diary.domain.entity.Diary;
 import com.real.realoasis.domain.diary.facade.DiaryFacade;
-import com.real.realoasis.domain.diary.presentation.dto.DiaryListDto;
-import com.real.realoasis.domain.diary.presentation.response.DiaryListResponse;
-import com.real.realoasis.domain.diary.service.GetDiaryDetailService;
+import com.real.realoasis.domain.diary.presentation.data.dto.DiaryListDto;
+import com.real.realoasis.domain.diary.presentation.data.response.DiaryListResponse;
 import com.real.realoasis.domain.diary.service.GetDiaryListService;
 import com.real.realoasis.domain.diary.util.DiaryConverter;
 import com.real.realoasis.domain.user.data.entity.User;

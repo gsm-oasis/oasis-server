@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.diary.presentation.dto;
+package com.real.realoasis.domain.diary.presentation.data.dto;
 
 import lombok.Builder;
 import lombok.Getter;

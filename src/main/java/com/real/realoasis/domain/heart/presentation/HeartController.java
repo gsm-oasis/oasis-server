@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.heart.controller;
+package com.real.realoasis.domain.heart.presentation;
 
 import com.real.realoasis.domain.heart.data.response.HeartResponse;
 import com.real.realoasis.domain.heart.service.HeartService;

@@ -1,6 +1,6 @@
 package com.real.realoasis.domain.user.data.dto;
 
-import com.real.realoasis.domain.diary.presentation.response.DiaryListResponse;
+import com.real.realoasis.domain.diary.presentation.data.response.DiaryListResponse;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

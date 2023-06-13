@@ -1,14 +1,15 @@
-package com.real.realoasis.domain.diary.presentation.dto;
+package com.real.realoasis.domain.diary.presentation.data.dto;
 
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-@Getter
-@RequiredArgsConstructor
 @Builder
-public class EditDiaryDto {
+@RequiredArgsConstructor
+@Getter
+public class CreateDiaryDto {
     private final String title;
     private final String content;
     private final String mood;
+    private final String writer;
 }

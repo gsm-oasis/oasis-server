@@ -1,14 +1,16 @@
-package com.real.realoasis.domain.diary.presentation.response;
+package com.real.realoasis.domain.diary.presentation.data.dto;
 
 import com.real.realoasis.domain.image.data.entity.Image;
-import lombok.*;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @Getter
-@Builder
 @RequiredArgsConstructor
-public class DiaryDetailResponse {
+@Builder
+public class DiaryDetailDto {
     private final String title;
     private final String content;
     private final String mood;

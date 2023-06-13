@@ -1,11 +1,11 @@
 package com.real.realoasis.domain.diary.presentation;
 
-import com.real.realoasis.domain.diary.presentation.dto.CreateDiaryDto;
-import com.real.realoasis.domain.diary.presentation.dto.EditDiaryDto;
-import com.real.realoasis.domain.diary.presentation.request.CreateDiaryRequest;
-import com.real.realoasis.domain.diary.presentation.request.EditDiaryRequest;
-import com.real.realoasis.domain.diary.presentation.response.DiaryDetailResponse;
-import com.real.realoasis.domain.diary.presentation.response.DiaryListResponse;
+import com.real.realoasis.domain.diary.presentation.data.dto.CreateDiaryDto;
+import com.real.realoasis.domain.diary.presentation.data.dto.EditDiaryDto;
+import com.real.realoasis.domain.diary.presentation.data.request.CreateDiaryRequest;
+import com.real.realoasis.domain.diary.presentation.data.request.EditDiaryRequest;
+import com.real.realoasis.domain.diary.presentation.data.response.DiaryDetailResponse;
+import com.real.realoasis.domain.diary.presentation.data.response.DiaryListResponse;
 import com.real.realoasis.domain.diary.service.*;
 import com.real.realoasis.domain.diary.util.DiaryConverter;
 import lombok.RequiredArgsConstructor;

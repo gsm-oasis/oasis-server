@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.diary.presentation.request;
+package com.real.realoasis.domain.diary.presentation.data.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class CreateDiaryRequest {
+public class EditDiaryRequest {
     private String title;
     private String content;
     private String mood;
-    private String writer;
 }

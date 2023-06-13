@@ -2,7 +2,7 @@ package com.real.realoasis.domain.diary.service.Impl;
 
 import com.real.realoasis.domain.diary.domain.entity.Diary;
 import com.real.realoasis.domain.diary.facade.DiaryFacade;
-import com.real.realoasis.domain.diary.presentation.dto.CreateDiaryDto;
+import com.real.realoasis.domain.diary.presentation.data.dto.CreateDiaryDto;
 import com.real.realoasis.domain.diary.service.CreateDiaryService;
 import com.real.realoasis.domain.diary.util.DiaryConverter;
 import com.real.realoasis.domain.image.data.entity.Image;
