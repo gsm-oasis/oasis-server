@@ -4,7 +4,7 @@ import com.real.realoasis.domain.auth.presentation.data.dto.CoupleCodeDto;
 import com.real.realoasis.domain.auth.presentation.data.dto.SignupDto;
 import com.real.realoasis.domain.auth.service.SignUpService;
 import com.real.realoasis.domain.auth.util.AuthConverter;
-import com.real.realoasis.domain.user.data.entity.User;
+import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.exception.DuplicateIdException;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.global.error.type.ErrorCode;

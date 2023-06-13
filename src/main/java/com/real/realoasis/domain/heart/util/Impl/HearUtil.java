@@ -2,7 +2,7 @@ package com.real.realoasis.domain.heart.util.Impl;
 
 import com.real.realoasis.domain.heart.domain.entity.Heart;
 import com.real.realoasis.domain.heart.util.HeartUtil;
-import com.real.realoasis.domain.user.data.entity.User;
+import com.real.realoasis.domain.user.domain.entity.User;
 import org.springframework.stereotype.Component;
 
 @Component

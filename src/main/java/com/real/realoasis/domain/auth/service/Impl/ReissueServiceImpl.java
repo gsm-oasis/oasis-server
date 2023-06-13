@@ -6,7 +6,7 @@ import com.real.realoasis.domain.auth.exception.ExpiredTokenException;
 import com.real.realoasis.domain.auth.presentation.data.dto.TokenDto;
 import com.real.realoasis.domain.auth.service.ReissueService;
 import com.real.realoasis.domain.auth.util.AuthConverter;
-import com.real.realoasis.domain.user.data.entity.User;
+import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.global.error.type.ErrorCode;
 import com.real.realoasis.global.security.JwtTokenProvider;

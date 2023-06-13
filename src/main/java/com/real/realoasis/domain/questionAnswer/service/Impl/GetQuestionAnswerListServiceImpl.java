@@ -6,7 +6,7 @@ import com.real.realoasis.domain.questionAnswer.presentation.data.dto.QuestionAn
 import com.real.realoasis.domain.questionAnswer.presentation.data.response.QuestionAnswerListResponse;
 import com.real.realoasis.domain.questionAnswer.service.GetQuestionAnswerListService;
 import com.real.realoasis.domain.questionAnswer.util.QuestionAnswerConverter;
-import com.real.realoasis.domain.user.data.entity.User;
+import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

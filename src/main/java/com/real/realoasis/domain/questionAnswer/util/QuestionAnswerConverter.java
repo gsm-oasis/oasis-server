@@ -8,7 +8,7 @@ import com.real.realoasis.domain.questionAnswer.domain.entity.QuestionAnswer;
 import com.real.realoasis.domain.questionAnswer.presentation.data.request.QuestionAnswerWriteRequest;
 import com.real.realoasis.domain.questionAnswer.presentation.data.response.QuestionAnswerListResponse;
 import com.real.realoasis.domain.questionAnswer.presentation.data.response.QuestionAnswerResponse;
-import com.real.realoasis.domain.user.data.entity.User;
+import com.real.realoasis.domain.user.domain.entity.User;
 
 import java.util.List;
 

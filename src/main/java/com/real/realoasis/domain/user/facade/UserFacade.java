@@ -1,9 +1,9 @@
 package com.real.realoasis.domain.user.facade;
 
-import com.real.realoasis.domain.user.data.entity.User;
+import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.exception.PasswordNotMatchException;
 import com.real.realoasis.domain.user.exception.UserNotFoundException;
-import com.real.realoasis.domain.user.repository.UserRepository;
+import com.real.realoasis.domain.user.domain.repository.UserRepository;
 import com.real.realoasis.global.error.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;

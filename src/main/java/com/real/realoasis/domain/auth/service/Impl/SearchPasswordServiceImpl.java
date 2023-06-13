@@ -2,7 +2,7 @@ package com.real.realoasis.domain.auth.service.Impl;
 
 import com.real.realoasis.domain.auth.presentation.data.dto.SearchPwDto;
 import com.real.realoasis.domain.auth.service.SearchPasswordService;
-import com.real.realoasis.domain.user.data.entity.User;
+import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.exception.PasswordNotMatchException;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.global.error.type.ErrorCode;

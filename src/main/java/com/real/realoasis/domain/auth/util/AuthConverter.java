@@ -7,7 +7,7 @@ import com.real.realoasis.domain.auth.presentation.data.request.SearchPwRequest;
 import com.real.realoasis.domain.auth.presentation.data.request.SignUpRequest;
 import com.real.realoasis.domain.auth.presentation.data.response.SignupResponse;
 import com.real.realoasis.domain.auth.presentation.data.response.TokenResponse;
-import com.real.realoasis.domain.user.data.entity.User;
+import com.real.realoasis.domain.user.domain.entity.User;
 
 import java.time.LocalDateTime;
 

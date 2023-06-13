@@ -6,7 +6,7 @@ import com.real.realoasis.domain.diary.presentation.data.dto.DiaryListDto;
 import com.real.realoasis.domain.diary.presentation.data.response.DiaryListResponse;
 import com.real.realoasis.domain.diary.service.GetDiaryListService;
 import com.real.realoasis.domain.diary.util.DiaryConverter;
-import com.real.realoasis.domain.user.data.entity.User;
+import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
