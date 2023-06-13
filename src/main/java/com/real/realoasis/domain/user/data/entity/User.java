@@ -1,8 +1,6 @@
 package com.real.realoasis.domain.user.data.entity;
 
-import com.real.realoasis.domain.heart.data.entity.Heart;
-import com.real.realoasis.domain.user.type.Role;
-import com.real.realoasis.global.entity.BaseIdEntity;
+import com.real.realoasis.domain.heart.domain.entity.Heart;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -14,8 +12,6 @@ import org.hibernate.annotations.OnDeleteAction;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Getter

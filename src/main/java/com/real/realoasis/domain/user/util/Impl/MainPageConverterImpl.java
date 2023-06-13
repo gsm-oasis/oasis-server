@@ -1,8 +1,8 @@
 package com.real.realoasis.domain.user.util.Impl;
 
-import com.real.realoasis.domain.diary.data.dto.DiaryListDto;
-import com.real.realoasis.domain.diary.service.DiaryService;
-import com.real.realoasis.domain.question.entity.Question;
+import com.real.realoasis.domain.diary.presentation.data.dto.DiaryListDto;
+import com.real.realoasis.domain.diary.service.GetDiaryListService;
+import com.real.realoasis.domain.question.domain.entity.Question;
 import com.real.realoasis.domain.user.data.dto.EnterDto;
 import com.real.realoasis.domain.user.data.dto.MainPageDto;
 import com.real.realoasis.domain.user.data.entity.User;
@@ -19,7 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class MainPageConverterImpl implements MainPageConverter {
     private final UserFacade userFacade;
-    private final DiaryService diaryService;
+    private final GetDiaryListService getDiaryListService;
 
     @Override
     public MainPageDto toDto(User currentUser, User coupleUser, long datingDate, Question question) {
@@ -31,7 +31,7 @@ public class MainPageConverterImpl implements MainPageConverter {
                 .anniversary(userFacade.getAnniversary(datingDate))
                 .questionId(question.getId())
                 .content(question.getContent())
-                .diaryListPageResponse(diaryService.getList())
+                .diaryListPageResponse(getDiaryListService.getList())
                 .build();
     }
 

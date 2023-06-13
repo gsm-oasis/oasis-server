@@ -20,7 +20,10 @@ import java.io.UnsupportedEncodingException;
 @RequestMapping("/auth")
 @RequiredArgsConstructor
 public class AuthController {
-    private final AuthService authService;
+    private final LoginService loginService;
+    private final ReissueService reissueService;
+    private final SearchPasswordService searchPasswordService;
+    private final SignUpService signUpService;
     private final MailService mailService;
     private final AuthConverter authConverter;
     private final MailConverter mailConverter;
@@ -29,7 +32,7 @@ public class AuthController {
     @PostMapping("/signup")
     public ResponseEntity<SignupResponse> signUp(@RequestBody SignUpRequest signupRequest){
         SignupDto signupDto = authConverter.toDto(signupRequest);
-        CoupleCodeDto coupleCodeDto = authService.signUp(signupDto);
+        CoupleCodeDto coupleCodeDto = signUpService.signUp(signupDto);
         SignupResponse signupResponse = authConverter.toResponse(coupleCodeDto);
         return new ResponseEntity<>(signupResponse, HttpStatus.CREATED);
     }
@@ -53,7 +56,7 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<TokenResponse> login(@RequestBody LoginRequest loginRequest) {
         LoginDto loginDto = authConverter.toDto(loginRequest);
-        TokenDto tokenDto = authService.login(loginDto);
+        TokenDto tokenDto = loginService.login(loginDto);
         TokenResponse tokenResponse = authConverter.toResponse(tokenDto);
         return new ResponseEntity<>(tokenResponse, HttpStatus.OK);
     }
@@ -61,7 +64,7 @@ public class AuthController {
     // 토큰 재발급
     @PatchMapping("/refresh")
     public ResponseEntity<TokenResponse> reissue(@RequestHeader("RefreshToken") String refreshToken){
-        TokenDto tokenDto = authService.reissue(refreshToken);
+        TokenDto tokenDto = reissueService.reissue(refreshToken);
         TokenResponse tokenResponse = authConverter.toResponse(tokenDto);
         return new ResponseEntity<>(tokenResponse, HttpStatus.CREATED);
     }
@@ -78,7 +81,7 @@ public class AuthController {
     @PatchMapping ("/password")
     public ResponseEntity<Void> searchPW(@RequestBody SearchPwRequest searchPWRequest) {
         SearchPwDto searchPwDto = authConverter.toDto(searchPWRequest);
-        authService.searchPW(searchPwDto);
+        searchPasswordService.searchPW(searchPwDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

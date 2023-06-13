@@ -1,16 +1,16 @@
 package com.real.realoasis.domain.diary.util.Impl;
 
-import com.real.realoasis.domain.diary.data.dto.CreateDiaryDto;
-import com.real.realoasis.domain.diary.data.dto.DiaryDetailDto;
-import com.real.realoasis.domain.diary.data.dto.DiaryListDto;
-import com.real.realoasis.domain.diary.data.dto.EditDiaryDto;
-import com.real.realoasis.domain.diary.data.entity.Diary;
-import com.real.realoasis.domain.diary.data.request.CreateDiaryRequest;
-import com.real.realoasis.domain.diary.data.request.EditDiaryRequest;
-import com.real.realoasis.domain.diary.data.response.DiaryDetailResponse;
-import com.real.realoasis.domain.diary.data.response.DiaryListResponse;
+import com.real.realoasis.domain.diary.presentation.data.dto.CreateDiaryDto;
+import com.real.realoasis.domain.diary.presentation.data.dto.DiaryDetailDto;
+import com.real.realoasis.domain.diary.presentation.data.dto.DiaryListDto;
+import com.real.realoasis.domain.diary.presentation.data.dto.EditDiaryDto;
+import com.real.realoasis.domain.diary.domain.entity.Diary;
+import com.real.realoasis.domain.diary.presentation.data.request.CreateDiaryRequest;
+import com.real.realoasis.domain.diary.presentation.data.request.EditDiaryRequest;
+import com.real.realoasis.domain.diary.presentation.data.response.DiaryDetailResponse;
+import com.real.realoasis.domain.diary.presentation.data.response.DiaryListResponse;
 import com.real.realoasis.domain.diary.util.DiaryConverter;
-import com.real.realoasis.domain.image.data.entity.Image;
+import com.real.realoasis.domain.image.domain.entity.Image;
 import com.real.realoasis.domain.user.data.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
