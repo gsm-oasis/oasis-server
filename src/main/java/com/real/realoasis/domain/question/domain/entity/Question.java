@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.question.entity;
+package com.real.realoasis.domain.question.domain.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.questionAnswer.data.response;
+package com.real.realoasis.domain.questionAnswer.presentation.data.response;
 
 import lombok.*;
 

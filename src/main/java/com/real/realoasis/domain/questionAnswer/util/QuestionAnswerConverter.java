@@ -1,13 +1,13 @@
 package com.real.realoasis.domain.questionAnswer.util;
 
-import com.real.realoasis.domain.question.entity.Question;
-import com.real.realoasis.domain.questionAnswer.data.dto.CreateDto;
-import com.real.realoasis.domain.questionAnswer.data.dto.QuestionAnswerDto;
-import com.real.realoasis.domain.questionAnswer.data.dto.QuestionAnswerListDto;
-import com.real.realoasis.domain.questionAnswer.data.entity.QuestionAnswer;
-import com.real.realoasis.domain.questionAnswer.data.request.QuestionAnswerWriteRequest;
-import com.real.realoasis.domain.questionAnswer.data.response.QuestionAnswerListResponse;
-import com.real.realoasis.domain.questionAnswer.data.response.QuestionAnswerResponse;
+import com.real.realoasis.domain.question.domain.entity.Question;
+import com.real.realoasis.domain.questionAnswer.presentation.data.dto.CreateDto;
+import com.real.realoasis.domain.questionAnswer.presentation.data.dto.QuestionAnswerDto;
+import com.real.realoasis.domain.questionAnswer.presentation.data.dto.QuestionAnswerListDto;
+import com.real.realoasis.domain.questionAnswer.domain.entity.QuestionAnswer;
+import com.real.realoasis.domain.questionAnswer.presentation.data.request.QuestionAnswerWriteRequest;
+import com.real.realoasis.domain.questionAnswer.presentation.data.response.QuestionAnswerListResponse;
+import com.real.realoasis.domain.questionAnswer.presentation.data.response.QuestionAnswerResponse;
 import com.real.realoasis.domain.user.data.entity.User;
 
 import java.util.List;

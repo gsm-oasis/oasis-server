@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.image.data.entity;
+package com.real.realoasis.domain.image.domain.entity;
 
 import lombok.*;
 

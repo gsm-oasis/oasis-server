@@ -1,6 +1,6 @@
 package com.real.realoasis.domain.diary.presentation.data.response;
 
-import com.real.realoasis.domain.image.data.entity.Image;
+import com.real.realoasis.domain.image.domain.entity.Image;
 import lombok.*;
 
 import java.util.List;

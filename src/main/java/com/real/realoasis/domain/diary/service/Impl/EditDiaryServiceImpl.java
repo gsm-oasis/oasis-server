@@ -4,7 +4,7 @@ import com.real.realoasis.domain.diary.domain.entity.Diary;
 import com.real.realoasis.domain.diary.facade.DiaryFacade;
 import com.real.realoasis.domain.diary.presentation.data.dto.EditDiaryDto;
 import com.real.realoasis.domain.diary.service.EditDiaryService;
-import com.real.realoasis.domain.image.data.entity.Image;
+import com.real.realoasis.domain.image.domain.entity.Image;
 import com.real.realoasis.domain.image.service.ImageService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

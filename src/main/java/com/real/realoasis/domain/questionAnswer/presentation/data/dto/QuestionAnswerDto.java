@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.questionAnswer.data.dto;
+package com.real.realoasis.domain.questionAnswer.presentation.data.dto;
 
 import lombok.Builder;
 import lombok.Getter;

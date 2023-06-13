@@ -1,6 +1,6 @@
 package com.real.realoasis.domain.diary.presentation.data.dto;
 
-import com.real.realoasis.domain.image.data.entity.Image;
+import com.real.realoasis.domain.image.domain.entity.Image;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
