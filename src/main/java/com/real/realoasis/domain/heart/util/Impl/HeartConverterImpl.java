@@ -1,7 +1,7 @@
 package com.real.realoasis.domain.heart.util.Impl;
 
-import com.real.realoasis.domain.heart.data.dto.HeartDto;
-import com.real.realoasis.domain.heart.data.response.HeartResponse;
+import com.real.realoasis.domain.heart.presentation.data.dto.HeartDto;
+import com.real.realoasis.domain.heart.presentation.data.response.HeartResponse;
 import com.real.realoasis.domain.heart.util.HeartConverter;
 import org.springframework.stereotype.Component;
 
