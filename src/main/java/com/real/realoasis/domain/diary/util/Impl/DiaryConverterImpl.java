@@ -1,14 +1,14 @@
 package com.real.realoasis.domain.diary.util.Impl;
 
-import com.real.realoasis.domain.diary.data.dto.CreateDiaryDto;
-import com.real.realoasis.domain.diary.data.dto.DiaryDetailDto;
-import com.real.realoasis.domain.diary.data.dto.DiaryListDto;
-import com.real.realoasis.domain.diary.data.dto.EditDiaryDto;
-import com.real.realoasis.domain.diary.data.entity.Diary;
-import com.real.realoasis.domain.diary.data.request.CreateDiaryRequest;
-import com.real.realoasis.domain.diary.data.request.EditDiaryRequest;
-import com.real.realoasis.domain.diary.data.response.DiaryDetailResponse;
-import com.real.realoasis.domain.diary.data.response.DiaryListResponse;
+import com.real.realoasis.domain.diary.presentation.dto.CreateDiaryDto;
+import com.real.realoasis.domain.diary.presentation.dto.DiaryDetailDto;
+import com.real.realoasis.domain.diary.presentation.dto.DiaryListDto;
+import com.real.realoasis.domain.diary.presentation.dto.EditDiaryDto;
+import com.real.realoasis.domain.diary.domain.entity.Diary;
+import com.real.realoasis.domain.diary.presentation.request.CreateDiaryRequest;
+import com.real.realoasis.domain.diary.presentation.request.EditDiaryRequest;
+import com.real.realoasis.domain.diary.presentation.response.DiaryDetailResponse;
+import com.real.realoasis.domain.diary.presentation.response.DiaryListResponse;
 import com.real.realoasis.domain.diary.util.DiaryConverter;
 import com.real.realoasis.domain.image.data.entity.Image;
 import com.real.realoasis.domain.user.data.entity.User;

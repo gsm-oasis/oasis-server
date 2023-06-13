@@ -1,7 +1,6 @@
 package com.real.realoasis.domain.user.util.Impl;
 
-import com.real.realoasis.domain.diary.data.dto.DiaryListDto;
-import com.real.realoasis.domain.diary.service.DiaryService;
+import com.real.realoasis.domain.diary.presentation.dto.DiaryListDto;
 import com.real.realoasis.domain.question.entity.Question;
 import com.real.realoasis.domain.user.data.dto.EnterDto;
 import com.real.realoasis.domain.user.data.dto.MainPageDto;

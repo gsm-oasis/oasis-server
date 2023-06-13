@@ -1,6 +1,6 @@
-package com.real.realoasis.domain.diary.repository;
+package com.real.realoasis.domain.diary.domain.repository;
 
-import com.real.realoasis.domain.diary.data.entity.Diary;
+import com.real.realoasis.domain.diary.domain.entity.Diary;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

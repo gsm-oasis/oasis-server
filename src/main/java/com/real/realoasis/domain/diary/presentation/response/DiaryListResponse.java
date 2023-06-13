@@ -1,6 +1,6 @@
-package com.real.realoasis.domain.diary.data.response;
+package com.real.realoasis.domain.diary.presentation.response;
 
-import com.real.realoasis.domain.diary.data.dto.DiaryListDto;
+import com.real.realoasis.domain.diary.presentation.dto.DiaryListDto;
 import lombok.*;
 
 import java.util.List;

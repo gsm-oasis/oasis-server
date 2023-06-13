@@ -1,11 +1,9 @@
 package com.real.realoasis.domain.user.data.dto;
 
-import com.real.realoasis.domain.diary.data.response.DiaryListResponse;
+import com.real.realoasis.domain.diary.presentation.response.DiaryListResponse;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-
-import java.util.List;
 
 @Getter
 @RequiredArgsConstructor

@@ -1,11 +1,11 @@
-package com.real.realoasis.domain.diary.controller;
+package com.real.realoasis.domain.diary.presentation;
 
-import com.real.realoasis.domain.diary.data.dto.CreateDiaryDto;
-import com.real.realoasis.domain.diary.data.dto.EditDiaryDto;
-import com.real.realoasis.domain.diary.data.request.CreateDiaryRequest;
-import com.real.realoasis.domain.diary.data.request.EditDiaryRequest;
-import com.real.realoasis.domain.diary.data.response.DiaryDetailResponse;
-import com.real.realoasis.domain.diary.data.response.DiaryListResponse;
+import com.real.realoasis.domain.diary.presentation.dto.CreateDiaryDto;
+import com.real.realoasis.domain.diary.presentation.dto.EditDiaryDto;
+import com.real.realoasis.domain.diary.presentation.request.CreateDiaryRequest;
+import com.real.realoasis.domain.diary.presentation.request.EditDiaryRequest;
+import com.real.realoasis.domain.diary.presentation.response.DiaryDetailResponse;
+import com.real.realoasis.domain.diary.presentation.response.DiaryListResponse;
 import com.real.realoasis.domain.diary.service.*;
 import com.real.realoasis.domain.diary.util.DiaryConverter;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,11 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/diary")
 public class DiaryController {
-    private final DiaryService diaryService;
+    private final CreateDiaryService createDiaryService;
+    private final DeleteDiaryService deleteDiaryService;
+    private final EditDiaryService editDiaryService;
+    private final GetDiaryDetailService getDiaryDetailService;
+    private final GetDiaryListService getDiaryListService;
     private final DiaryConverter diaryConverter;
 
     //일기 생성
@@ -29,7 +33,7 @@ public class DiaryController {
             @RequestPart(value = "file", required = false)List<MultipartFile> files,
             @RequestPart(value = "req") CreateDiaryRequest createDiaryRequest) throws Exception {
         CreateDiaryDto createDiaryDto = diaryConverter.toCreateDiaryDto(createDiaryRequest);
-        diaryService.createDiary(createDiaryDto, files);
+        createDiaryService.create(createDiaryDto, files);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -40,7 +44,7 @@ public class DiaryController {
             @RequestPart(value = "file", required = false)List<MultipartFile> files,
             @RequestPart(value = "req") EditDiaryRequest editDiaryRequest) throws Exception {
         EditDiaryDto editDiaryDto = diaryConverter.toEditDiaryDto(editDiaryRequest);
-        diaryService.editDiary(diaryId, editDiaryDto, files);
+        editDiaryService.editDiary(diaryId, editDiaryDto, files);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -48,21 +52,21 @@ public class DiaryController {
     //일기디테일 페이지
     @GetMapping("/detail/{diaryId}")
     public ResponseEntity<DiaryDetailResponse> getDetailPage(@PathVariable Long diaryId){
-        DiaryDetailResponse diaryDetailPageResponse = diaryService.getDetail(diaryId);
+        DiaryDetailResponse diaryDetailPageResponse = getDiaryDetailService.get(diaryId);
         return new ResponseEntity<>(diaryDetailPageResponse, HttpStatus.OK);
     }
 
     //일기 삭제
     @DeleteMapping("/delete/{diaryId}")
     public ResponseEntity<Void> deleteDiary(@PathVariable Long diaryId){
-        diaryService.deleteDiary(diaryId);
+        deleteDiaryService.delete(diaryId);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //일기 리스트
     @GetMapping("/list")
     public ResponseEntity<DiaryListResponse> getList(){
-        DiaryListResponse diaryListPageResponse = diaryService.getList();
+        DiaryListResponse diaryListPageResponse = getDiaryListService.getList();
         return new ResponseEntity<>(diaryListPageResponse,HttpStatus.OK);
     }
 }
