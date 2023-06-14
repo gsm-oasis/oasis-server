@@ -1,6 +1,8 @@
 package com.real.realoasis.domain.couple.util.impl;
 
-import com.real.realoasis.domain.diary.presentation.data.dto.DiaryListDto;
+import com.real.realoasis.domain.diary.presentation.data.dto.DiaryDto;
+import com.real.realoasis.domain.diary.presentation.data.response.DiaryListResponse;
+import com.real.realoasis.domain.diary.presentation.data.response.DiaryResponse;
 import com.real.realoasis.domain.diary.service.GetDiaryListService;
 import com.real.realoasis.domain.question.domain.entity.Question;
 import com.real.realoasis.domain.user.presentation.data.dto.EnterDto;
@@ -31,14 +33,12 @@ public class CoupleConverterImpl implements CoupleConverter {
                 .anniversary(userFacade.getAnniversary(datingDate))
                 .questionId(question.getIdx())
                 .content(question.getContent())
-                .diaryListPageResponse(getDiaryListService.getList())
+                .diaryListDtoList(getDiaryListService.getList())
                 .build();
     }
 
     @Override
-    public MainPageResponse toResponse(MainPageDto mainPageDto) {
-        List<DiaryListDto> list = mainPageDto.getDiaryListPageResponse().getDiaries();
-
+    public MainPageResponse toResponse(MainPageDto mainPageDto, DiaryListResponse diaryResponseList) {
         return MainPageResponse.builder()
                 .nickname(mainPageDto.getNickname())
                 .coupleNickname(mainPageDto.getCoupleNickname())
@@ -47,7 +47,7 @@ public class CoupleConverterImpl implements CoupleConverter {
                 .anniversary(mainPageDto.getAnniversary())
                 .questionId(mainPageDto.getQuestionId())
                 .content(mainPageDto.getContent())
-                .diaryListPageResponse(list)
+                .diarys(diaryResponseList)
                 .build();
     }
 

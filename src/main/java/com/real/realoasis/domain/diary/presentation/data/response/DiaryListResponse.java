@@ -1,6 +1,5 @@
 package com.real.realoasis.domain.diary.presentation.data.response;
 
-import com.real.realoasis.domain.diary.presentation.data.dto.DiaryListDto;
 import lombok.*;
 
 import java.util.List;
@@ -9,5 +8,5 @@ import java.util.List;
 @Builder
 @RequiredArgsConstructor
 public class DiaryListResponse {
-    private final List<DiaryListDto> diaries;
+    private final List<DiaryResponse> diaries;
 }

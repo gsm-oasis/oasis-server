@@ -4,11 +4,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-@Builder
-@RequiredArgsConstructor
 @Getter
-public class CreateDiaryDto {
-    private final String title;
+@RequiredArgsConstructor
+@Builder
+public class DiaryDto {
+    private final Long diaryId;
     private final String content;
-    private final String mood;
+    private final String title;
+    private final String writer;
+    private final String createDate;
 }

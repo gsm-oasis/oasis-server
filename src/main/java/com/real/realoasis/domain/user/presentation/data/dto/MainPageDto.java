@@ -1,9 +1,11 @@
 package com.real.realoasis.domain.user.presentation.data.dto;
 
-import com.real.realoasis.domain.diary.presentation.data.response.DiaryListResponse;
+import com.real.realoasis.domain.diary.presentation.data.dto.DiaryDto;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import java.util.List;
 
 @Getter
 @RequiredArgsConstructor
@@ -16,5 +18,5 @@ public class MainPageDto {
     private final int anniversary;
     private final Long questionId;
     private final String content;
-    private final DiaryListResponse diaryListPageResponse;
+    private final List<DiaryDto> diaryListDtoList;
 }

@@ -2,13 +2,14 @@ package com.real.realoasis.domain.diary.util.Impl;
 
 import com.real.realoasis.domain.diary.presentation.data.dto.CreateDiaryDto;
 import com.real.realoasis.domain.diary.presentation.data.dto.DiaryDetailDto;
-import com.real.realoasis.domain.diary.presentation.data.dto.DiaryListDto;
+import com.real.realoasis.domain.diary.presentation.data.dto.DiaryDto;
 import com.real.realoasis.domain.diary.presentation.data.dto.EditDiaryDto;
 import com.real.realoasis.domain.diary.domain.entity.Diary;
 import com.real.realoasis.domain.diary.presentation.data.request.CreateDiaryRequest;
 import com.real.realoasis.domain.diary.presentation.data.request.EditDiaryRequest;
 import com.real.realoasis.domain.diary.presentation.data.response.DiaryDetailResponse;
 import com.real.realoasis.domain.diary.presentation.data.response.DiaryListResponse;
+import com.real.realoasis.domain.diary.presentation.data.response.DiaryResponse;
 import com.real.realoasis.domain.diary.util.DiaryConverter;
 import com.real.realoasis.domain.image.domain.entity.Image;
 import com.real.realoasis.domain.user.domain.entity.User;
@@ -29,7 +30,6 @@ public class DiaryConverterImpl implements DiaryConverter {
                 .content(createDiaryRequest.getContent())
                 .mood(createDiaryRequest.getMood())
                 .title(createDiaryRequest.getTitle())
-                .writer(createDiaryRequest.getWriter())
                 .build();
     }
 
@@ -39,7 +39,6 @@ public class DiaryConverterImpl implements DiaryConverter {
                 .content(createDiaryDto.getContent())
                 .mood(createDiaryDto.getMood())
                 .title(createDiaryDto.getTitle())
-                .writer(createDiaryDto.getWriter())
                 .user(user)
                 .build();
     }
@@ -76,22 +75,33 @@ public class DiaryConverterImpl implements DiaryConverter {
     }
 
     @Override
-    public List<DiaryListDto> toListDto(List<Diary> mergedList) {
+    public List<DiaryDto> toDto(List<Diary> mergedList, User user) {
         return mergedList.stream().map(diary ->
-                new DiaryListDto(
-                        diary.getId(),
+                new DiaryDto(
+                        diary.getIdx(),
                         diary.getContent(),
                         diary.getTitle(),
-                        diary.getWriter(),
+                        user.getNickname(),
                         diary.getCreateDate()
                         )
-        ).sorted(Comparator.comparing(DiaryListDto::getDiaryId).reversed()).collect(Collectors.toList());
+        ).sorted(Comparator.comparing(DiaryDto::getDiaryId).reversed()).collect(Collectors.toList());
     }
 
     @Override
-    public DiaryListResponse toListResponse(List<DiaryListDto> diaryListPageDto) {
+    public DiaryListResponse toListResponse(List<DiaryResponse> diaryListPageDto) {
         return DiaryListResponse.builder()
                 .diaries(diaryListPageDto)
+                .build();
+    }
+
+    @Override
+    public DiaryResponse toResponse(DiaryDto diaryDto) {
+        return DiaryResponse.builder()
+                .diaryId(diaryDto.getDiaryId())
+                .content(diaryDto.getContent())
+                .title(diaryDto.getTitle())
+                .writer(diaryDto.getWriter())
+                .createDate(diaryDto.getCreateDate())
                 .build();
     }
 }

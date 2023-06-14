@@ -1,6 +1,8 @@
 package com.real.realoasis.domain.couple.presenattion;
 
 import com.real.realoasis.domain.couple.service.EnterDatingDateService;
+import com.real.realoasis.domain.diary.presentation.data.response.DiaryResponse;
+import com.real.realoasis.domain.diary.util.DiaryConverter;
 import com.real.realoasis.domain.user.presentation.data.dto.EnterDto;
 import com.real.realoasis.domain.user.presentation.data.dto.MainPageDto;
 import com.real.realoasis.domain.user.presentation.data.request.DatingDateEnterRequest;
@@ -12,6 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequestMapping("/couple")
 @RequiredArgsConstructor
@@ -19,11 +24,15 @@ public class CoupleController {
     private final MainPageService mainPageService;
     private final EnterDatingDateService enterDatingDateService;
     private final CoupleConverter coupleConverter;
+    private final DiaryConverter diaryConverter;
 
     @GetMapping
     public ResponseEntity<MainPageResponse> getMainPage(){
         MainPageDto mainPageDto = mainPageService.getMainPage();
-        MainPageResponse mainPageResponse = coupleConverter.toResponse(mainPageDto);
+        List<DiaryResponse> diaryResponseList = mainPageDto.getDiaryListDtoList().stream()
+                .map(diaryConverter::toResponse)
+                .collect(Collectors.toList());
+        MainPageResponse mainPageResponse = coupleConverter.toResponse(mainPageDto, diaryConverter.toListResponse(diaryResponseList));
         return new ResponseEntity<>( mainPageResponse, HttpStatus.OK);
     }
 

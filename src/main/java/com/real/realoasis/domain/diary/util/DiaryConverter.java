@@ -1,14 +1,12 @@
 package com.real.realoasis.domain.diary.util;
 
-import com.real.realoasis.domain.diary.presentation.data.dto.CreateDiaryDto;
-import com.real.realoasis.domain.diary.presentation.data.dto.DiaryDetailDto;
-import com.real.realoasis.domain.diary.presentation.data.dto.DiaryListDto;
-import com.real.realoasis.domain.diary.presentation.data.dto.EditDiaryDto;
+import com.real.realoasis.domain.diary.presentation.data.dto.*;
 import com.real.realoasis.domain.diary.domain.entity.Diary;
 import com.real.realoasis.domain.diary.presentation.data.request.CreateDiaryRequest;
 import com.real.realoasis.domain.diary.presentation.data.request.EditDiaryRequest;
 import com.real.realoasis.domain.diary.presentation.data.response.DiaryDetailResponse;
 import com.real.realoasis.domain.diary.presentation.data.response.DiaryListResponse;
+import com.real.realoasis.domain.diary.presentation.data.response.DiaryResponse;
 import com.real.realoasis.domain.image.domain.entity.Image;
 import com.real.realoasis.domain.user.domain.entity.User;
 
@@ -25,7 +23,8 @@ public interface DiaryConverter {
 
     DiaryDetailResponse toDetailResponse(DiaryDetailDto diaryDetailPageDto);
 
-    List<DiaryListDto> toListDto(List<Diary> mergedList);
+    List<DiaryDto> toDto(List<Diary> mergedList, User user);
 
-    DiaryListResponse toListResponse(List<DiaryListDto> diaryListPageDto);
+    DiaryListResponse toListResponse(List<DiaryResponse> diaryListPageDto);
+    DiaryResponse toResponse(DiaryDto diaryDto);
 }
