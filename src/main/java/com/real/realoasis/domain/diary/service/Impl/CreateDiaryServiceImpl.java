@@ -34,10 +34,9 @@ public class CreateDiaryServiceImpl implements CreateDiaryService {
         if(!imgUrlList.isEmpty()) {
             List<Image> list = new ArrayList<>();
             for(String imgUrl : imgUrlList) {
-                Image image = new Image(imgUrl);
+                Image image = new Image(imgUrl, diary);
                 list.add(image);
             }
-            diary.updateImages(list);
         }
         diaryFacade.saveDiary(diary);
     }

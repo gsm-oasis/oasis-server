@@ -1,6 +1,7 @@
 package com.real.realoasis.domain.diary.presentation;
 
 import com.real.realoasis.domain.diary.presentation.data.dto.CreateDiaryDto;
+import com.real.realoasis.domain.diary.presentation.data.dto.DiaryDetailDto;
 import com.real.realoasis.domain.diary.presentation.data.dto.EditDiaryDto;
 import com.real.realoasis.domain.diary.presentation.data.request.CreateDiaryRequest;
 import com.real.realoasis.domain.diary.presentation.data.request.EditDiaryRequest;
@@ -52,7 +53,8 @@ public class DiaryController {
     //일기디테일 페이지
     @GetMapping("/detail/{diaryId}")
     public ResponseEntity<DiaryDetailResponse> getDetailPage(@PathVariable Long diaryId){
-        DiaryDetailResponse diaryDetailPageResponse = getDiaryDetailService.get(diaryId);
+        DiaryDetailDto diaryDetailDto = getDiaryDetailService.get(diaryId);
+        DiaryDetailResponse diaryDetailPageResponse = diaryConverter.toDetailResponse(diaryDetailDto);
         return new ResponseEntity<>(diaryDetailPageResponse, HttpStatus.OK);
     }
 

@@ -28,10 +28,9 @@ public class EditDiaryServiceImpl implements EditDiaryService {
         if(!imgUrlList.isEmpty()) {
             List<Image> list = new ArrayList<>();
             for(String imgUrl : imgUrlList) {
-                Image image = new Image(imgUrl);
+                Image image = new Image(imgUrl, editDiary);
                 list.add(image);
             }
-            editDiary.updateImages(list);
         }
         editDiary.update(editDiaryDto.getTitle(), editDiaryDto.getContent(), editDiaryDto.getMood());
         diaryFacade.saveDiary(editDiary);
