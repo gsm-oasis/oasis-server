@@ -21,11 +21,11 @@ public class QuestionAnswerFacade {
     private final QuestionRepository questionRepository;
 
     public Question findQuestionByQuestionId(Long questionId){
-       return questionRepository.findQuestionById(questionId).orElseThrow(() -> new QuestionNotFoundException(ErrorCode.QUESTION_NOT_FOUND_EXCEPTION));
+       return questionRepository.findQuestionByIdx(questionId).orElseThrow(() -> new QuestionNotFoundException(ErrorCode.QUESTION_NOT_FOUND_EXCEPTION));
     }
 
-    public String findQuestionAnswerByQuestionIdUserId(Long questionId, String userId){
-        QuestionAnswer questionAnswer = questionAnswerRepository.findQuestionAnswerByQuestionIdAndUserId(questionId, userId);
+    public String findQuestionAnswerByQuestionIdxUserIdx(Long questionId, Long userId){
+        QuestionAnswer questionAnswer = questionAnswerRepository.findQuestionAnswerByQuestionIdxAndUserIdx(questionId, userId);
         if(questionAnswer == null){
             return "";
         }else {

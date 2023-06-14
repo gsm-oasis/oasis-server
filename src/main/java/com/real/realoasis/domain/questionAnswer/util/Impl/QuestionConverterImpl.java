@@ -58,7 +58,7 @@ public class QuestionConverterImpl implements QuestionAnswerConverter {
     public List<QuestionAnswerListDto> toListDto(List<QuestionAnswer> list) {
         return list.stream().map(questionAnswer ->
                 new QuestionAnswerListDto(
-                        questionAnswer.getId(),
+                        questionAnswer.getIdx(),
                         questionAnswer.getQuestion().getContent()
                 )
         ).sorted(Comparator.comparing(QuestionAnswerListDto::getQuestionId).reversed()).collect(Collectors.toList());

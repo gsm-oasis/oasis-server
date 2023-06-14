@@ -18,12 +18,10 @@ import javax.persistence.*;
 public class QuestionAnswer extends BaseIdEntity {
     @Column(nullable = false)
     private String answer;
-
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Question question;
-
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)

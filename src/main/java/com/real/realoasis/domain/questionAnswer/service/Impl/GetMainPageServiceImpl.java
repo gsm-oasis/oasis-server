@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.questionAnswer.service.Impl;
 
+import com.real.realoasis.domain.couple.domain.repository.CoupleRepository;
 import com.real.realoasis.domain.questionAnswer.facade.QuestionAnswerFacade;
 import com.real.realoasis.domain.questionAnswer.presentation.data.dto.QuestionAnswerDto;
 import com.real.realoasis.domain.questionAnswer.presentation.data.response.QuestionAnswerResponse;
@@ -16,14 +17,15 @@ public class GetMainPageServiceImpl implements GetMainPageService {
     private final UserFacade userFacade;
     private final QuestionAnswerFacade questionAnswerFacade;
     private final QuestionAnswerConverter questionAnswerConverter;
+    private final CoupleRepository coupleRepository;
 
     @Override
     public QuestionAnswerResponse getMainpage(Long questionId) {
         User currentUser = userFacade.currentUser();
-        User coupleUser = userFacade.findUserById(currentUser.getCoupleId());
+        User coupleUser = coupleRepository.findByCoupleId(currentUser.getId()).getUser();
 
-        String answer = questionAnswerFacade.findQuestionAnswerByQuestionIdUserId(questionId, currentUser.getId());
-        String coupleAnswer = questionAnswerFacade.findQuestionAnswerByQuestionIdUserId(questionId, coupleUser.getId());
+        String answer = questionAnswerFacade.findQuestionAnswerByQuestionIdxUserIdx(questionId, currentUser.getIdx());
+        String coupleAnswer = questionAnswerFacade.findQuestionAnswerByQuestionIdxUserIdx(questionId, coupleUser.getIdx());
 
         QuestionAnswerDto questionAnswerDto = questionAnswerConverter.toAnswerDto(currentUser, coupleUser, answer, coupleAnswer);
         return questionAnswerConverter.toResponse(questionAnswerDto);
