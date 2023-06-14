@@ -24,7 +24,9 @@ public class AuthController {
     private final ReissueService reissueService;
     private final SearchPasswordService searchPasswordService;
     private final SignUpService signUpService;
-    private final MailService mailService;
+    private final ConfirmAuthCodeService confirmAuthenticationCode;
+    private final SendAuthCodeService sendAuthCodeService;
+    private final SearchIdService searchIdService;
     private final AuthConverter authConverter;
     private final MailConverter mailConverter;
 
@@ -40,7 +42,7 @@ public class AuthController {
     // 이메일에 인증코드 전송
     @PostMapping("/email")
     public ResponseEntity<SendAuthCodeResponse> sendEmail(@RequestParam("email") String email) throws MessagingException, UnsupportedEncodingException {
-        SendAuthCodeDto sendAuthCodeDto = mailService.sendEmail(email);
+        SendAuthCodeDto sendAuthCodeDto = sendAuthCodeService.send(email);
         SendAuthCodeResponse sendAuthCodeResponse = mailConverter.toResponse(sendAuthCodeDto);
         return new ResponseEntity<>(sendAuthCodeResponse, HttpStatus.OK);
     }
@@ -48,7 +50,7 @@ public class AuthController {
     // 인증코드 확인
     @GetMapping("/code")
     public ResponseEntity<Void> confirmAuthenticationCode(@RequestParam("code")String code, @RequestParam("sentCode")String sentCode) {
-        mailService.confirmAuthenticationCode(code, sentCode);
+        confirmAuthenticationCode.confirmAuthenticationCode(code, sentCode);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -73,7 +75,7 @@ public class AuthController {
     @PostMapping("/id")
     public ResponseEntity<Void> searchID(@RequestBody SearchIdRequest searchIDRequest) throws MessagingException, UnsupportedEncodingException {
         SearchIdDto searchIdDto = mailConverter.toDto(searchIDRequest);
-        mailService.sendId(searchIdDto);
+        searchIdService.send(searchIdDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
