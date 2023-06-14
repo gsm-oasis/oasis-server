@@ -65,8 +65,8 @@ public class User extends BaseIdEntity {
         this.anniversaryDate = anniversaryDate;
     }
 
-    public void createFirstDay(String firstDay){
-        this.firstDay = firstDay;
+    public void updateStartDay(String startDay){
+        this.startDay = startDay;
     }
 
     public void updateDatingDate(long datingDate) {

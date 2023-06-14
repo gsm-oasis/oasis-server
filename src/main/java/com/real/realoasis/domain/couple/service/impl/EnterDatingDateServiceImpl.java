@@ -21,12 +21,12 @@ public class EnterDatingDateServiceImpl implements EnterDatingDateService {
     @Override
     public void enter(EnterDto enterDto) {
         User currentUser = userFacade.currentUser();
-        currentUser.createFirstDay(enterDto.getFirstDay());
+        currentUser.updateStartDay(enterDto.getFirstDay());
 
         currentUser.today();
 
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
-        LocalDate firstDayToLocalDate = LocalDate.parse(currentUser.getFirstDay(), dateFormat);
+        LocalDate firstDayToLocalDate = LocalDate.parse(currentUser.getStartDay(), dateFormat);
         LocalDate todayToLocalDate = LocalDate.parse(currentUser.getToday(), dateFormat);
 
         long datingDate = ChronoUnit.DAYS.between(firstDayToLocalDate, todayToLocalDate);

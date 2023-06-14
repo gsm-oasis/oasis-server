@@ -29,7 +29,7 @@ public class CoupleConverterImpl implements CoupleConverter {
                 .heartLevel(currentUser.getHeart().getLevel())
                 .datingDate(datingDate)
                 .anniversary(userFacade.getAnniversary(datingDate))
-                .questionId(question.getId())
+                .questionId(question.getIdx())
                 .content(question.getContent())
                 .diaryListPageResponse(getDiaryListService.getList())
                 .build();
