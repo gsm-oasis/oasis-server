@@ -7,10 +7,7 @@ import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Entity
 @Getter
@@ -19,12 +16,9 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Couple extends BaseIdEntity {
     @Column(nullable = false)
+    private String coupleId;
+    @Column(nullable = false)
     private String code;
-    @Column(nullable = false)
-    private String startDay;
-    @Column(nullable = false)
-    private String today;
-    private long datingDate;
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)

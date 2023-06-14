@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.user.util.Impl;
+package com.real.realoasis.domain.couple.util.impl;
 
 import com.real.realoasis.domain.diary.presentation.data.dto.DiaryListDto;
 import com.real.realoasis.domain.diary.service.GetDiaryListService;
@@ -9,7 +9,7 @@ import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.presentation.data.request.DatingDateEnterRequest;
 import com.real.realoasis.domain.user.presentation.data.response.MainPageResponse;
 import com.real.realoasis.domain.user.facade.UserFacade;
-import com.real.realoasis.domain.user.util.MainPageConverter;
+import com.real.realoasis.domain.couple.util.CoupleConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -17,7 +17,7 @@ import java.util.List;
 
 @Component
 @RequiredArgsConstructor
-public class MainPageConverterImpl implements MainPageConverter {
+public class CoupleConverterImpl implements CoupleConverter {
     private final UserFacade userFacade;
     private final GetDiaryListService getDiaryListService;
 

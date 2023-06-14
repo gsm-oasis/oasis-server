@@ -25,17 +25,20 @@ public class User extends BaseIdEntity {
     @Column(nullable = false)
     private String nickname;
     private boolean isCouple;
-    private long anniversaryDate;
-
-    private String coupleCode;
-    private String coupleId;
-    private String firstDay;
+    @Column(nullable = false)
+    private String startDay;
+    @Column(nullable = false)
     private String today;
     private long datingDate;
+    private long anniversaryDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Heart heart;
+    @PrePersist
+    public void today(){
+        this.today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+    }
 
     public void updateHeart(Heart heart){
         this.heart = heart;
@@ -64,11 +67,6 @@ public class User extends BaseIdEntity {
 
     public void createFirstDay(String firstDay){
         this.firstDay = firstDay;
-    }
-
-    @PrePersist
-    public void today(){
-        this.today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
     }
 
     public void updateDatingDate(long datingDate) {
