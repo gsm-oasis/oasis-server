@@ -24,7 +24,7 @@ public class GetQuestionAnswerListServiceImpl implements GetQuestionAnswerListSe
     public QuestionAnswerListResponse getList() {
         User currentUser = userFacade.currentUser();
 
-        List<QuestionAnswer> list = questionAnswerFacade.findAllByUserId(currentUser.getId());
+        List<QuestionAnswer> list = questionAnswerFacade.findAllByUserIdx(currentUser.getIdx());
         List<QuestionAnswerListDto> questionAnswerDtoList = questionAnswerConverter.toListDto(list);
         return questionAnswerConverter.toListResponse(questionAnswerDtoList);
     }

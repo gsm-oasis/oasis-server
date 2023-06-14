@@ -36,7 +36,7 @@ public class QuestionAnswerFacade {
         questionAnswerRepository.save(questionAnswer);
     }
 
-    public List<QuestionAnswer> findAllByUserId(String userId) {
-        return questionAnswerRepository.findAllByUserId(userId);
+    public List<QuestionAnswer> findAllByUserIdx(Long userIdx) {
+        return questionAnswerRepository.findAllByUserIdx(userIdx);
     }
 }
