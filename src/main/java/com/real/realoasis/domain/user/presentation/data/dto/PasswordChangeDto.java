@@ -9,5 +9,5 @@ import lombok.RequiredArgsConstructor;
 @Builder
 public class PasswordChangeDto {
     private final String originalPassword;
-    private final String newPassword;
+    private final String password;
 }

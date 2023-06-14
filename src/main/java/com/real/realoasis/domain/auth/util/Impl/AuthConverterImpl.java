@@ -83,8 +83,7 @@ public class AuthConverterImpl implements AuthConverter {
     public SearchPwDto toDto(SearchPwRequest searchPWRequest) {
         return SearchPwDto.builder()
                 .email(searchPWRequest.getEmail())
-                .newPassword(searchPWRequest.getNewPassword())
-                .checkPassword(searchPWRequest.getCheckPassword())
+                .password(searchPWRequest.getPassword())
                 .build();
     }
 

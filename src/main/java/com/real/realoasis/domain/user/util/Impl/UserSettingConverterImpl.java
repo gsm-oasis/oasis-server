@@ -45,7 +45,7 @@ public class UserSettingConverterImpl implements UserSettingConverter {
     public PasswordChangeDto toPasswordChangeDto(PasswordChangeRequest passwordChangeRequest) {
         return PasswordChangeDto.builder()
                 .originalPassword(passwordChangeRequest.getOriginalPassword())
-                .newPassword(passwordChangeRequest.getNewPassword())
+                .password(passwordChangeRequest.getPassword())
                 .build();
     }
 
