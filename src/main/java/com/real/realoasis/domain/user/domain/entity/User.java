@@ -17,6 +17,8 @@ import java.time.format.DateTimeFormatter;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends BaseIdEntity {
     @Column(nullable = false)
+    private String id;
+    @Column(nullable = false)
     private String email;
     @Column(nullable = false)
     private String password;
