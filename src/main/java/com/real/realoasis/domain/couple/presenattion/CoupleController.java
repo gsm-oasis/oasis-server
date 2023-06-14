@@ -1,9 +1,10 @@
-package com.real.realoasis.domain.user.presentation;
+package com.real.realoasis.domain.couple.presenattion;
 
+import com.real.realoasis.domain.couple.service.EnterDatingDateService;
 import com.real.realoasis.domain.user.presentation.data.dto.EnterDto;
 import com.real.realoasis.domain.user.presentation.data.request.DatingDateEnterRequest;
 import com.real.realoasis.domain.user.presentation.data.response.MainPageResponse;
-import com.real.realoasis.domain.user.service.MainPageService;
+import com.real.realoasis.domain.couple.service.MainPageService;
 import com.real.realoasis.domain.user.util.MainPageConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -11,10 +12,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/mainpage")
+@RequestMapping("/couple")
 @RequiredArgsConstructor
-public class MainPageController {
+public class CoupleController {
     private final MainPageService mainPageService;
+    private final EnterDatingDateService enterDatingDateService;
     private final MainPageConverter mainPageConverter;
 
     @GetMapping
@@ -23,10 +25,10 @@ public class MainPageController {
         return new ResponseEntity<>( mainPageResponse, HttpStatus.OK);
     }
 
-    @PostMapping("/enter/datingdate")
+    @PostMapping
     public ResponseEntity<Void> datingDateEnter(@RequestBody DatingDateEnterRequest datingDateEnterRequest){
         EnterDto enterDto = mainPageConverter.toEnterDto(datingDateEnterRequest);
-        mainPageService.datingDateEnter(enterDto);
+        enterDatingDateService.enter(enterDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

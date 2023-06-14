@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.user.service.Impl;
+package com.real.realoasis.domain.couple.service.impl;
 
 import com.real.realoasis.domain.heart.util.HeartUtil;
 import com.real.realoasis.domain.question.domain.entity.Question;
@@ -8,7 +8,7 @@ import com.real.realoasis.domain.user.presentation.data.dto.MainPageDto;
 import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.presentation.data.response.MainPageResponse;
 import com.real.realoasis.domain.user.facade.UserFacade;
-import com.real.realoasis.domain.user.service.MainPageService;
+import com.real.realoasis.domain.couple.service.MainPageService;
 import com.real.realoasis.domain.user.util.MainPageConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -51,22 +51,5 @@ public class MainPageServiceImpl implements MainPageService {
         return mainPageConverter.toResponse(mainPageDto);
     }
 
-    @Transactional
-    @Override
-    public void datingDateEnter(EnterDto enterDto) {
-        User currentUser = userFacade.currentUser();
-        currentUser.createFirstDay(enterDto.getFirstDay());
 
-        currentUser.today();
-
-        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
-        LocalDate firstDayToLocalDate = LocalDate.parse(currentUser.getFirstDay(), dateFormat);
-        LocalDate todayToLocalDate = LocalDate.parse(currentUser.getToday(), dateFormat);
-
-        long datingDate = ChronoUnit.DAYS.between(firstDayToLocalDate, todayToLocalDate);
-
-        currentUser.updateDatingDate(datingDate);
-
-        userFacade.saveUser(currentUser);
-    }
 }
