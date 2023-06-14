@@ -1,11 +1,8 @@
 package com.real.realoasis.domain.user.domain.entity;
 
 import com.real.realoasis.domain.heart.domain.entity.Heart;
-import com.sun.istack.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.real.realoasis.global.entity.BaseIdEntity;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -16,14 +13,14 @@ import java.time.format.DateTimeFormatter;
 @Entity
 @Getter
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class User {
-    @Id
-    private String id;
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class User extends BaseIdEntity {
+    @Column(nullable = false)
     private String email;
-    @NotNull
+    @Column(nullable = false)
     private String password;
+    @Column(nullable = false)
     private String nickname;
     private boolean isCouple;
     private long anniversaryDate;
