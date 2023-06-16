@@ -29,8 +29,8 @@ public class GetDiaryListServiceImpl implements GetDiaryListService {
         User currentUser = userFacade.currentUser();
         User coupleUser = coupleRepository.findByCoupleId(currentUser.getId()).getUser();
 
-        List<Diary> diaryList = diaryFacade.findAllByUserId(currentUser.getId());
-        List<Diary> diaryCoupleList = diaryFacade.findAllByUserId(coupleUser.getId());
+        List<Diary> diaryList = diaryFacade.findAllByUser(currentUser);
+        List<Diary> diaryCoupleList = diaryFacade.findAllByUser(coupleUser);
 
         List<Diary> mergedList = Stream.of(diaryList, diaryCoupleList)
                 .flatMap(Collection::stream)

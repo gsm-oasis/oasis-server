@@ -3,6 +3,7 @@ package com.real.realoasis.domain.diary.facade;
 import com.real.realoasis.domain.diary.domain.entity.Diary;
 import com.real.realoasis.domain.diary.exception.DiaryNotFoundException;
 import com.real.realoasis.domain.diary.domain.repository.DiaryRepository;
+import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.global.error.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -16,8 +17,8 @@ public class DiaryFacade {
     private final DiaryRepository diaryRepository;
 
     @Transactional(rollbackFor = Exception.class)
-    public Diary findDiaryById(Long id) {
-        return diaryRepository.findDiaryById(id).orElseThrow(() -> new DiaryNotFoundException(ErrorCode.DIARY_NOT_FOUND_EXCEPTION));
+    public Diary findDiaryById(Long idx) {
+        return diaryRepository.findDiaryByIdx(idx).orElseThrow(() -> new DiaryNotFoundException(ErrorCode.DIARY_NOT_FOUND_EXCEPTION));
     }
 
     @Transactional(rollbackFor = Exception.class)
@@ -31,8 +32,8 @@ public class DiaryFacade {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public List<Diary> findAllByUserId(String userId){
-        return diaryRepository.findAllByUserId(userId);
+    public List<Diary> findAllByUser(User user){
+        return diaryRepository.findAllByUser(user);
     }
 
 
