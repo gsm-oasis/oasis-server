@@ -23,4 +23,8 @@ public class Couple extends BaseIdEntity {
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
+
+    public void update(User coupleUser) {
+        this.coupleId = coupleUser.getId();
+    }
 }

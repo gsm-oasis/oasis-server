@@ -1,9 +1,6 @@
 package com.real.realoasis.domain.user.presentation;
 
-import com.real.realoasis.domain.user.presentation.data.dto.AnniversaryTimeChangeDto;
-import com.real.realoasis.domain.user.presentation.data.dto.ConnectCoupleDto;
-import com.real.realoasis.domain.user.presentation.data.dto.NicknameChangeDto;
-import com.real.realoasis.domain.user.presentation.data.dto.PasswordChangeDto;
+import com.real.realoasis.domain.user.presentation.data.dto.*;
 import com.real.realoasis.domain.user.presentation.data.request.AnniversaryTimeChangeRequest;
 import com.real.realoasis.domain.user.presentation.data.request.ConnectCoupleRequest;
 import com.real.realoasis.domain.user.presentation.data.request.NicknameChangeRequest;
@@ -11,7 +8,6 @@ import com.real.realoasis.domain.user.presentation.data.request.PasswordChangeRe
 import com.real.realoasis.domain.user.presentation.data.response.ConnectCoupleResponse;
 import com.real.realoasis.domain.user.presentation.data.response.SettingResponse;
 import com.real.realoasis.domain.user.service.*;
-import com.real.realoasis.domain.user.service.Impl.UpdateAnniversaryTimeServiceImpl;
 import com.real.realoasis.domain.user.util.UserConverter;
 import com.real.realoasis.domain.user.util.UserSettingConverter;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +39,8 @@ public class UserController {
     @PostMapping
     public ResponseEntity<ConnectCoupleResponse> connectCouple(@RequestBody ConnectCoupleRequest connectCoupleRequest){
         ConnectCoupleDto connectCoupleDto = userConverter.toDto(connectCoupleRequest);
-        ConnectCoupleResponse connectCoupleResponse = connectCoupleService.connectCouple(connectCoupleDto);
+        ConnectCoupleResDto connectCoupleResDto = connectCoupleService.connectCouple(connectCoupleDto);
+        ConnectCoupleResponse connectCoupleResponse = userConverter.toResponse(connectCoupleResDto);
         return new ResponseEntity<>(connectCoupleResponse, HttpStatus.OK);
     }
 

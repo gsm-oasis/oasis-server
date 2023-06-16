@@ -18,8 +18,8 @@ public class UserFacade {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public boolean existsById(String id) {
-        return userRepository.existsById(id);
+    public boolean existsByIdx(String id) {
+        return userRepository.existsUserById(id);
     }
 
     public void saveUser(User user) {

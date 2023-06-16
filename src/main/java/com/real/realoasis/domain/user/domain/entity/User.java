@@ -29,12 +29,14 @@ public class User extends BaseIdEntity {
     private String startDay;
     @Column(nullable = false)
     private String today;
+    @Column(nullable = false)
     private long datingDate;
+    @Column(nullable = false)
     private long anniversaryDate;
-
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Heart heart;
+
     @PrePersist
     public void today(){
         this.today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
@@ -46,10 +48,6 @@ public class User extends BaseIdEntity {
 
     public void updateIsCouple() {
         this.isCouple = true;
-    }
-
-    public void updateCoupleId(String coupleId){
-        this.coupleId = coupleId;
     }
 
     public void updateNickname(String nickname) {
