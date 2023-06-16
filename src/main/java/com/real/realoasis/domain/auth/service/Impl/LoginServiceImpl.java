@@ -6,6 +6,8 @@ import com.real.realoasis.domain.auth.presentation.data.dto.LoginDto;
 import com.real.realoasis.domain.auth.presentation.data.dto.TokenDto;
 import com.real.realoasis.domain.auth.service.LoginService;
 import com.real.realoasis.domain.auth.util.AuthConverter;
+import com.real.realoasis.domain.couple.domain.entity.Couple;
+import com.real.realoasis.domain.couple.domain.repository.CoupleRepository;
 import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.global.security.JwtTokenProvider;
@@ -22,13 +24,16 @@ public class LoginServiceImpl implements LoginService {
     private final AuthConverter authConverter;
     private final RefreshTokenRepository refreshTokenRepository;
     private final JwtTokenProvider jwtTokenProvider;
+    private final CoupleRepository coupleRepository;
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public TokenDto login(LoginDto loginDto) {
         User user = userFacade.findUserById(loginDto.getId());
+        Couple couple = coupleRepository.findByUser(user);
         userFacade.checkPassword(user, loginDto.getPassword());
 
-        TokenDto tokenDto = makeTokenDto(user);
+        TokenDto tokenDto = makeTokenDto(user, couple);
 
         RefreshToken refresh = authConverter.toEntity(user.getId(), tokenDto.getRefreshToken());
         refreshTokenRepository.save(refresh);
@@ -36,12 +41,12 @@ public class LoginServiceImpl implements LoginService {
         return tokenDto;
     }
 
-    private TokenDto makeTokenDto(User user){
+    private TokenDto makeTokenDto(User user, Couple couple){
         String accessToken = jwtTokenProvider.generateAccessToken(user.getId());
         String refreshToken = jwtTokenProvider.generateRefreshToken(user.getId());
         LocalDateTime accessExp = jwtTokenProvider.getAccessTokenExpiredTime();
         LocalDateTime refreshExp = jwtTokenProvider.getRefreshTokenExpiredTime();
 
-        return authConverter.toDto(accessToken, refreshToken, accessExp, refreshExp, user);
+        return authConverter.toDto(accessToken, refreshToken, accessExp, refreshExp, user, couple);
     }
 }

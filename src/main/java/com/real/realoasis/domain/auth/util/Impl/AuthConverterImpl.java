@@ -57,13 +57,13 @@ public class AuthConverterImpl implements AuthConverter {
     }
 
     @Override
-    public TokenDto toDto(String accessToken, String refreshToken, LocalDateTime accessExp, LocalDateTime refreshExp, User user) {
+    public TokenDto toDto(String accessToken, String refreshToken, LocalDateTime accessExp, LocalDateTime refreshExp, User user, Couple couple) {
         return TokenDto.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .accessExp(accessExp)
                 .refreshExp(refreshExp)
-                .coupleCode(user.getCoupleCode())
+                .coupleCode(couple.getCode())
                 .isCouple(user.isCouple())
                 .build();
     }
