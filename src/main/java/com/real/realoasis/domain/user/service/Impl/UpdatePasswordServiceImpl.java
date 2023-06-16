@@ -20,8 +20,6 @@ public class UpdatePasswordServiceImpl implements UpdatePasswordService {
     public void update(PasswordChangeDto passwordChangeDto) {
         User currentUser = userFacade.currentUser();
         userFacade.checkPassword(currentUser, passwordChangeDto.getOriginalPassword());
-        currentUser.updatePassword(passwordEncoder.encode(passwordChangeDto.getNewPassword()));
-
-        userFacade.saveUser(currentUser);
+        currentUser.updatePassword(passwordEncoder.encode(passwordChangeDto.getPassword()));
     }
 }
