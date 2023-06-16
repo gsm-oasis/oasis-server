@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.user.util.Impl;
 
+import com.real.realoasis.domain.couple.domain.entity.Couple;
 import com.real.realoasis.domain.user.presentation.data.dto.AnniversaryTimeChangeDto;
 import com.real.realoasis.domain.user.presentation.data.dto.NicknameChangeDto;
 import com.real.realoasis.domain.user.presentation.data.dto.PasswordChangeDto;
@@ -17,10 +18,10 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UserSettingConverterImpl implements UserSettingConverter {
     @Override
-    public SettingResDto toSettingResDto(User user) {
+    public SettingResDto toSettingResDto(User user, Couple couple) {
         return SettingResDto.builder()
                 .anniversaryDate(user.getAnniversaryDate())
-                .myCode(user.getCoupleCode())
+                .myCode(couple.getCode())
                 .version("1.0")
                 .build();
     }
