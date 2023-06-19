@@ -4,6 +4,7 @@ import com.real.realoasis.domain.auth.presentation.data.dto.*;
 import com.real.realoasis.domain.auth.presentation.data.request.*;
 import com.real.realoasis.domain.auth.presentation.data.response.SendAuthCodeResponse;
 import com.real.realoasis.domain.auth.presentation.data.response.SignupResponse;
+import com.real.realoasis.domain.auth.presentation.data.response.RefreshTokenResponse;
 import com.real.realoasis.domain.auth.presentation.data.response.TokenResponse;
 import com.real.realoasis.domain.auth.service.*;
 import com.real.realoasis.domain.auth.util.AuthConverter;
@@ -65,9 +66,9 @@ public class AuthController {
 
     // 토큰 재발급
     @PatchMapping("/refresh")
-    public ResponseEntity<TokenResponse> reissue(@RequestHeader("RefreshToken") String refreshToken){
-        TokenDto tokenDto = reissueService.reissue(refreshToken);
-        TokenResponse tokenResponse = authConverter.toResponse(tokenDto);
+    public ResponseEntity<RefreshTokenResponse> reissue(@RequestHeader("RefreshToken") String refreshToken){
+        RefreshTokenDto refreshTokenDto = reissueService.reissue(refreshToken);
+        RefreshTokenResponse tokenResponse = authConverter.toResponse(refreshTokenDto);
         return new ResponseEntity<>(tokenResponse, HttpStatus.CREATED);
     }
 

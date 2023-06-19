@@ -10,11 +10,9 @@ import java.time.LocalDateTime;
 @Builder
 @RequiredArgsConstructor
 @Getter
-public class TokenResponse {
+public class RefreshTokenResponse {
     private final String accessToken;
     private final String refreshToken;
     private final LocalDateTime accessExp;
     private final LocalDateTime refreshExp;
-    private final String coupleCode;
-    private final boolean isCouple;
 }
