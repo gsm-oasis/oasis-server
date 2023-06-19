@@ -39,10 +39,6 @@ public class UserFacade {
         return userRepository.findUserByEmail(email).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND_EXCEPTION));
     }
 
-    public User findUserByCode(String code) {
-        return userRepository.findUserByCoupleCode(code).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND_EXCEPTION));
-    }
-
     public void checkPassword(User user, String password) {
         if(!passwordEncoder.matches(password, user.getPassword())) {
             throw new PasswordNotMatchException(ErrorCode.PASSWORD_NOT_MATCH_EXCEPTION);
