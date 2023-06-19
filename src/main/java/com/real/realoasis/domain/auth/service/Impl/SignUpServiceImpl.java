@@ -4,7 +4,9 @@ import com.real.realoasis.domain.auth.presentation.data.dto.CoupleCodeDto;
 import com.real.realoasis.domain.auth.presentation.data.dto.SignupDto;
 import com.real.realoasis.domain.auth.service.SignUpService;
 import com.real.realoasis.domain.auth.util.AuthConverter;
-import com.real.realoasis.domain.user.data.entity.User;
+import com.real.realoasis.domain.couple.domain.entity.Couple;
+import com.real.realoasis.domain.couple.domain.repository.CoupleRepository;
+import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.exception.DuplicateIdException;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.global.error.type.ErrorCode;
@@ -19,19 +21,23 @@ import java.util.Random;
 public class SignUpServiceImpl implements SignUpService {
     private final UserFacade userFacade;
     private final AuthConverter authConverter;
+    private final CoupleRepository coupleRepository;
 
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public CoupleCodeDto signUp(SignupDto signupDto) {
-        if(userFacade.existsById(signupDto.getId())){
+        if(userFacade.existsByIdx(signupDto.getId())){
             throw new DuplicateIdException(ErrorCode.DUPLICATE_ID_EXCEPTION);
         }
 
         String code = makeRandomCode();
-        User user = authConverter.toEntity(signupDto, code);
+        User user = authConverter.toEntity(signupDto);
+        Couple couple = authConverter.toEntity(user, code);
 
         userFacade.saveUser(user);
+        coupleRepository.save(couple);
+
         return authConverter.toDto(code);
     }
 

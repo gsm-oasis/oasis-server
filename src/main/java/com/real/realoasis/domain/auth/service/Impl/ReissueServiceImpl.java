@@ -6,7 +6,9 @@ import com.real.realoasis.domain.auth.exception.ExpiredTokenException;
 import com.real.realoasis.domain.auth.presentation.data.dto.TokenDto;
 import com.real.realoasis.domain.auth.service.ReissueService;
 import com.real.realoasis.domain.auth.util.AuthConverter;
-import com.real.realoasis.domain.user.data.entity.User;
+import com.real.realoasis.domain.couple.domain.entity.Couple;
+import com.real.realoasis.domain.couple.domain.repository.CoupleRepository;
+import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.global.error.type.ErrorCode;
 import com.real.realoasis.global.security.JwtTokenProvider;
@@ -23,6 +25,7 @@ public class ReissueServiceImpl implements ReissueService {
     private final UserFacade userFacade;
     private final RefreshTokenRepository refreshTokenRepository;
     private final AuthConverter authConverter;
+    private final CoupleRepository coupleRepository;
 
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -33,19 +36,20 @@ public class ReissueServiceImpl implements ReissueService {
 
         User user = userFacade.findUserById(jwtTokenProvider.getTokenSubject(refreshToken, JwtTokenProvider.TokenType.REFRESH_TOKEN));
         RefreshToken existingRefreshToken = refreshTokenRepository.findByToken(refreshToken);
-        TokenDto tokenDto = makeTokenDto(user);
+        Couple couple = coupleRepository.findByUser(user);
+        TokenDto tokenDto = makeTokenDto(user, couple);
 
         refreshTokenRepository.save(authConverter.toEntity(existingRefreshToken.getUserId(), tokenDto.getRefreshToken()));
 
         return tokenDto;
     }
 
-    private TokenDto makeTokenDto(User user){
+    private TokenDto makeTokenDto(User user, Couple couple){
         String accessToken = jwtTokenProvider.generateAccessToken(user.getId());
         String refreshToken = jwtTokenProvider.generateRefreshToken(user.getId());
         LocalDateTime accessExp = jwtTokenProvider.getAccessTokenExpiredTime();
         LocalDateTime refreshExp = jwtTokenProvider.getRefreshTokenExpiredTime();
 
-        return authConverter.toDto(accessToken, refreshToken, accessExp, refreshExp, user);
+        return authConverter.toDto(accessToken, refreshToken, accessExp, refreshExp, user, couple);
     }
 }

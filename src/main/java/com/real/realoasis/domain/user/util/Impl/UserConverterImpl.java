@@ -1,10 +1,10 @@
 package com.real.realoasis.domain.user.util.Impl;
 
-import com.real.realoasis.domain.user.data.dto.ConnectCoupleDto;
-import com.real.realoasis.domain.user.data.dto.ConnectCoupleResDto;
-import com.real.realoasis.domain.user.data.entity.User;
-import com.real.realoasis.domain.user.data.request.ConnectCoupleRequest;
-import com.real.realoasis.domain.user.data.response.ConnectCoupleResponse;
+import com.real.realoasis.domain.user.presentation.data.dto.ConnectCoupleDto;
+import com.real.realoasis.domain.user.presentation.data.dto.ConnectCoupleResDto;
+import com.real.realoasis.domain.user.domain.entity.User;
+import com.real.realoasis.domain.user.presentation.data.request.ConnectCoupleRequest;
+import com.real.realoasis.domain.user.presentation.data.response.ConnectCoupleResponse;
 import com.real.realoasis.domain.user.util.UserConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

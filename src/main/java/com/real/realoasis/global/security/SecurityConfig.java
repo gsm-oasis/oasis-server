@@ -46,14 +46,12 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET,"/auth/code/**").permitAll()
 
                 //user
-                .antMatchers(HttpMethod.DELETE, "/user/withdrawal").authenticated()
-                .antMatchers(HttpMethod.POST,"/user/connect/couple").authenticated()
-
-                //user/setting
-                .antMatchers(HttpMethod.GET,"/user/setting").authenticated()
-                .antMatchers(HttpMethod.PATCH,"/user/setting/change/nickname").authenticated()
-                .antMatchers(HttpMethod.PATCH,"/user/setting/change/password").authenticated()
-                .antMatchers(HttpMethod.PATCH,"/user/setting/change/anniversarytime").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/user").authenticated()
+                .antMatchers(HttpMethod.POST,"/user").authenticated()
+                .antMatchers(HttpMethod.GET,"/user").authenticated()
+                .antMatchers(HttpMethod.PATCH,"/user/nickname").authenticated()
+                .antMatchers(HttpMethod.PATCH,"/user/password").authenticated()
+                .antMatchers(HttpMethod.PATCH,"/user/anniversarytime").authenticated()
 
                 //mainpage
                 .antMatchers(HttpMethod.GET,"/mainpage").authenticated()

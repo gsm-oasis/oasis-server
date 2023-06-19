@@ -11,5 +11,4 @@ public class CreateDiaryDto {
     private final String title;
     private final String content;
     private final String mood;
-    private final String writer;
 }

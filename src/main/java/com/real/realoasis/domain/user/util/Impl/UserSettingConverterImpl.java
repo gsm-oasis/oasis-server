@@ -1,14 +1,15 @@
 package com.real.realoasis.domain.user.util.Impl;
 
-import com.real.realoasis.domain.user.data.dto.AnniversaryTimeChangeDto;
-import com.real.realoasis.domain.user.data.dto.NicknameChangeDto;
-import com.real.realoasis.domain.user.data.dto.PasswordChangeDto;
-import com.real.realoasis.domain.user.data.dto.SettingResDto;
-import com.real.realoasis.domain.user.data.entity.User;
-import com.real.realoasis.domain.user.data.request.AnniversaryTimeChangeRequest;
-import com.real.realoasis.domain.user.data.request.NicknameChangeRequest;
-import com.real.realoasis.domain.user.data.request.PasswordChangeRequest;
-import com.real.realoasis.domain.user.data.response.SettingResponse;
+import com.real.realoasis.domain.couple.domain.entity.Couple;
+import com.real.realoasis.domain.user.presentation.data.dto.AnniversaryTimeChangeDto;
+import com.real.realoasis.domain.user.presentation.data.dto.NicknameChangeDto;
+import com.real.realoasis.domain.user.presentation.data.dto.PasswordChangeDto;
+import com.real.realoasis.domain.user.presentation.data.dto.SettingResDto;
+import com.real.realoasis.domain.user.domain.entity.User;
+import com.real.realoasis.domain.user.presentation.data.request.AnniversaryTimeChangeRequest;
+import com.real.realoasis.domain.user.presentation.data.request.NicknameChangeRequest;
+import com.real.realoasis.domain.user.presentation.data.request.PasswordChangeRequest;
+import com.real.realoasis.domain.user.presentation.data.response.SettingResponse;
 import com.real.realoasis.domain.user.util.UserSettingConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -17,10 +18,10 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UserSettingConverterImpl implements UserSettingConverter {
     @Override
-    public SettingResDto toSettingResDto(User user) {
+    public SettingResDto toSettingResDto(User user, Couple couple) {
         return SettingResDto.builder()
                 .anniversaryDate(user.getAnniversaryDate())
-                .myCode(user.getCoupleCode())
+                .myCode(couple.getCode())
                 .version("1.0")
                 .build();
     }
@@ -45,7 +46,7 @@ public class UserSettingConverterImpl implements UserSettingConverter {
     public PasswordChangeDto toPasswordChangeDto(PasswordChangeRequest passwordChangeRequest) {
         return PasswordChangeDto.builder()
                 .originalPassword(passwordChangeRequest.getOriginalPassword())
-                .newPassword(passwordChangeRequest.getNewPassword())
+                .password(passwordChangeRequest.getPassword())
                 .build();
     }
 

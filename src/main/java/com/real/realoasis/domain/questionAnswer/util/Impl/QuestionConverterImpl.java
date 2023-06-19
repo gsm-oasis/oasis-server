@@ -9,7 +9,7 @@ import com.real.realoasis.domain.questionAnswer.presentation.data.request.Questi
 import com.real.realoasis.domain.questionAnswer.presentation.data.response.QuestionAnswerListResponse;
 import com.real.realoasis.domain.questionAnswer.presentation.data.response.QuestionAnswerResponse;
 import com.real.realoasis.domain.questionAnswer.util.QuestionAnswerConverter;
-import com.real.realoasis.domain.user.data.entity.User;
+import com.real.realoasis.domain.user.domain.entity.User;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
@@ -58,7 +58,7 @@ public class QuestionConverterImpl implements QuestionAnswerConverter {
     public List<QuestionAnswerListDto> toListDto(List<QuestionAnswer> list) {
         return list.stream().map(questionAnswer ->
                 new QuestionAnswerListDto(
-                        questionAnswer.getId(),
+                        questionAnswer.getIdx(),
                         questionAnswer.getQuestion().getContent()
                 )
         ).sorted(Comparator.comparing(QuestionAnswerListDto::getQuestionId).reversed()).collect(Collectors.toList());

@@ -1,11 +1,15 @@
 package com.real.realoasis.domain.diary.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.real.realoasis.domain.image.domain.entity.Image;
-import com.real.realoasis.domain.user.data.entity.User;
+import com.real.realoasis.domain.user.domain.entity.User;
+import com.real.realoasis.global.entity.BaseIdEntity;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -17,26 +21,20 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Diary {
-    @Id
-    @Column(name = "diary_id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class Diary extends BaseIdEntity {
+    @Column(nullable = false)
     private String content;
-    @OneToMany(cascade = CascadeType.PERSIST)
-    private List<Image> images;
+    @Column(nullable = false)
     private String mood;
+    @Column(nullable = false)
     private String createDate;
+    @Column(nullable = false)
     private String title;
-    private String writer;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
-
-    public void updateImages(List<Image> images) {
-        this.images = images;
-    }
 
     @PrePersist
     public void createDate() {

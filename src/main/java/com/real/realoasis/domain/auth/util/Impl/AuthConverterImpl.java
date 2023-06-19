@@ -8,7 +8,8 @@ import com.real.realoasis.domain.auth.presentation.data.request.SignUpRequest;
 import com.real.realoasis.domain.auth.presentation.data.response.SignupResponse;
 import com.real.realoasis.domain.auth.presentation.data.response.TokenResponse;
 import com.real.realoasis.domain.auth.util.AuthConverter;
-import com.real.realoasis.domain.user.data.entity.User;
+import com.real.realoasis.domain.couple.domain.entity.Couple;
+import com.real.realoasis.domain.user.domain.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -30,14 +31,13 @@ public class AuthConverterImpl implements AuthConverter {
     }
 
     @Override
-    public User toEntity(SignupDto signupDto, String code) {
+    public User toEntity(SignupDto signupDto) {
         String password = passwordEncoder.encode(signupDto.getPassword());
         return User.builder()
                 .id(signupDto.getId())
                 .email(signupDto.getEmail())
                 .password(password)
                 .nickname(signupDto.getNickname())
-                .coupleCode(code)
                 .build();
     }
 
@@ -57,13 +57,13 @@ public class AuthConverterImpl implements AuthConverter {
     }
 
     @Override
-    public TokenDto toDto(String accessToken, String refreshToken, LocalDateTime accessExp, LocalDateTime refreshExp, User user) {
+    public TokenDto toDto(String accessToken, String refreshToken, LocalDateTime accessExp, LocalDateTime refreshExp, User user, Couple couple) {
         return TokenDto.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .accessExp(accessExp)
                 .refreshExp(refreshExp)
-                .coupleCode(user.getCoupleCode())
+                .coupleCode(couple.getCode())
                 .isCouple(user.isCouple())
                 .build();
     }
@@ -83,8 +83,7 @@ public class AuthConverterImpl implements AuthConverter {
     public SearchPwDto toDto(SearchPwRequest searchPWRequest) {
         return SearchPwDto.builder()
                 .email(searchPWRequest.getEmail())
-                .newPassword(searchPWRequest.getNewPassword())
-                .checkPassword(searchPWRequest.getCheckPassword())
+                .password(searchPWRequest.getPassword())
                 .build();
     }
 
@@ -100,6 +99,14 @@ public class AuthConverterImpl implements AuthConverter {
         return RefreshToken.builder()
                 .userId(id)
                 .token(refreshToken)
+                .build();
+    }
+
+    @Override
+    public Couple toEntity(User user, String code) {
+        return Couple.builder()
+                .code(code)
+                .user(user)
                 .build();
     }
 }

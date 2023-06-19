@@ -1,21 +1,18 @@
 package com.real.realoasis.domain.question.domain.entity;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.real.realoasis.global.entity.BaseIdEntity;
+import lombok.*;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
 @Getter
-public class Question {
-    @Id
-    private Long id;
-
+public class Question extends BaseIdEntity {
+    @Column(nullable = false)
     private String content;
 }
