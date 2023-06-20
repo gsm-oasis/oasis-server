@@ -7,7 +7,6 @@ import com.real.realoasis.domain.question.domain.entity.Question;
 import com.real.realoasis.domain.questionAnswer.facade.QuestionAnswerFacade;
 import com.real.realoasis.domain.user.presentation.data.dto.MainPageDto;
 import com.real.realoasis.domain.user.domain.entity.User;
-import com.real.realoasis.domain.user.presentation.data.response.MainPageResponse;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.domain.couple.service.MainPageService;
 import com.real.realoasis.domain.couple.util.CoupleConverter;
@@ -18,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -33,22 +33,26 @@ public class MainPageServiceImpl implements MainPageService {
     @Override
     public MainPageDto getMainPage() {
         User currentUser = userFacade.currentUser();
-        User coupleUser = coupleRepository.findByCoupleId(currentUser.getId()).getUser();
-
-        currentUser.today();
+        Couple foundCouple = null;
+        if (coupleRepository.existsByUserA(currentUser)) {
+            foundCouple = coupleRepository.findByUserA(currentUser);
+        } else if (coupleRepository.existsByUserB(currentUser)) {
+            foundCouple = coupleRepository.findByUserB(currentUser);
+        }
+        Objects.requireNonNull(foundCouple).today();
 
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
-        LocalDate firstDayToLocalDate = LocalDate.parse(currentUser.getStartDay(), dateFormat);
-        LocalDate todayToLocalDate = LocalDate.parse(currentUser.getToday(), dateFormat);
+        LocalDate firstDayToLocalDate = LocalDate.parse(foundCouple.getStartDay(), dateFormat);
+        LocalDate todayToLocalDate = LocalDate.parse(foundCouple.getToday(), dateFormat);
 
         long datingDate = ChronoUnit.DAYS.between(firstDayToLocalDate, todayToLocalDate);
 
-        currentUser.updateDatingDate(datingDate);
-        heartUtil.heartLevel(currentUser);
+        foundCouple.updateDatingDate(datingDate);
+        heartUtil.heartLevel(foundCouple);
 
-        Question question = questionAnswerFacade.findQuestionByQuestionId(datingDate - currentUser.getDatingDate()+1);
+        Question question = questionAnswerFacade.findQuestionByQuestionId(datingDate - foundCouple.getDatingDate()+1);
 
-        return mainPageConverter.toDto(currentUser, coupleUser, datingDate, question);
+        return mainPageConverter.toDto(foundCouple, question);
     }
 
 

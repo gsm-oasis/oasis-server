@@ -26,25 +26,7 @@ public class User extends BaseIdEntity {
     private String nickname;
     private boolean isCouple;
     @Column(nullable = false)
-    private String startDay;
-    @Column(nullable = false)
-    private String today;
-    @Column(nullable = false)
-    private long datingDate;
-    @Column(nullable = false)
-    private long anniversaryDate;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Heart heart;
-
-    @PrePersist
-    public void today(){
-        this.today = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
-    }
-
-    public void updateHeart(Heart heart){
-        this.heart = heart;
-    }
+    private String coupleCode;
 
     public void updateIsCouple() {
         this.isCouple = true;
@@ -56,18 +38,5 @@ public class User extends BaseIdEntity {
 
     public void updatePassword(String password) {
         this.password = password;
-    }
-
-
-    public void updateAnniversaryTime(long anniversaryDate) {
-        this.anniversaryDate = anniversaryDate;
-    }
-
-    public void updateStartDay(String startDay){
-        this.startDay = startDay;
-    }
-
-    public void updateDatingDate(long datingDate) {
-        this.datingDate = datingDate;
     }
 }
