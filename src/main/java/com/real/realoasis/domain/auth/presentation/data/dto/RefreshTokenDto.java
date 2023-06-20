@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.auth.presentation.data.response;
+package com.real.realoasis.domain.auth.presentation.data.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
@@ -8,13 +8,13 @@ import lombok.RequiredArgsConstructor;
 import java.time.LocalDateTime;
 
 @Builder
-@RequiredArgsConstructor
 @Getter
-public class TokenResponse {
+@RequiredArgsConstructor
+public class RefreshTokenDto {
     private final String accessToken;
     private final String refreshToken;
+    @JsonFormat(pattern = "yyyy-MM-dd 'T' HH:mm:ss")
     private final LocalDateTime accessExp;
+    @JsonFormat(pattern = "yyyy-MM-dd 'T' HH:mm:ss")
     private final LocalDateTime refreshExp;
-    private final String coupleCode;
-    private final boolean isCouple;
 }

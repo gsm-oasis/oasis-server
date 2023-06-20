@@ -6,6 +6,7 @@ import com.real.realoasis.domain.auth.presentation.data.request.LoginRequest;
 import com.real.realoasis.domain.auth.presentation.data.request.SearchPwRequest;
 import com.real.realoasis.domain.auth.presentation.data.request.SignUpRequest;
 import com.real.realoasis.domain.auth.presentation.data.response.SignupResponse;
+import com.real.realoasis.domain.auth.presentation.data.response.RefreshTokenResponse;
 import com.real.realoasis.domain.auth.presentation.data.response.TokenResponse;
 import com.real.realoasis.domain.auth.util.AuthConverter;
 import com.real.realoasis.domain.couple.domain.entity.Couple;
@@ -65,6 +66,15 @@ public class AuthConverterImpl implements AuthConverter {
                 .refreshExp(refreshExp)
                 .coupleCode(couple.getCode())
                 .isCouple(user.isCouple())
+                .build();
+    }
+
+    @Override
+    public RefreshTokenResponse toResponse(RefreshTokenDto tokenDto) {
+        return RefreshTokenResponse.builder()
+                .accessToken(tokenDto.getAccessToken())
+                .refreshToken(tokenDto.getRefreshToken())
+                .accessExp(tokenDto.getAccessExp())
                 .build();
     }
 
