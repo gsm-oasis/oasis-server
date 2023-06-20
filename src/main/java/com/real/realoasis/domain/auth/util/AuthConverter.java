@@ -16,13 +16,13 @@ import java.time.LocalDateTime;
 public interface AuthConverter {
     SignupDto toDto(SignUpRequest signupRequest);
 
-    User toEntity(SignupDto signupDto);
+    User toEntity(SignupDto signupDto, String coupleCode);
 
     SignupResponse toResponse(CoupleCodeDto authCodeDto);
 
     LoginDto toDto(LoginRequest loginRequest);
 
-    TokenDto toDto(String accessToken, String refreshToken, LocalDateTime accessExp, LocalDateTime refreshExp, User user, Couple couple);
+    TokenDto toDto(String accessToken, String refreshToken, LocalDateTime accessExp, LocalDateTime refreshExp, User user);
 
     TokenResponse toResponse(TokenDto tokenDto);
     RefreshTokenResponse toResponse(RefreshTokenDto tokenDto);
@@ -31,5 +31,4 @@ public interface AuthConverter {
 
     CoupleCodeDto toDto(String code);
     RefreshToken toEntity(String id, String refreshToken);
-    Couple toEntity(User user, String code);
 }

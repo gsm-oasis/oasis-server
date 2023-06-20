@@ -32,13 +32,14 @@ public class AuthConverterImpl implements AuthConverter {
     }
 
     @Override
-    public User toEntity(SignupDto signupDto) {
+    public User toEntity(SignupDto signupDto, String coupleCode) {
         String password = passwordEncoder.encode(signupDto.getPassword());
         return User.builder()
                 .id(signupDto.getId())
                 .email(signupDto.getEmail())
                 .password(password)
                 .nickname(signupDto.getNickname())
+                .coupleCode(coupleCode)
                 .build();
     }
 
@@ -58,13 +59,13 @@ public class AuthConverterImpl implements AuthConverter {
     }
 
     @Override
-    public TokenDto toDto(String accessToken, String refreshToken, LocalDateTime accessExp, LocalDateTime refreshExp, User user, Couple couple) {
+    public TokenDto toDto(String accessToken, String refreshToken, LocalDateTime accessExp, LocalDateTime refreshExp, User user) {
         return TokenDto.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
                 .accessExp(accessExp)
                 .refreshExp(refreshExp)
-                .coupleCode(couple.getCode())
+                .coupleCode(user.getCoupleCode())
                 .isCouple(user.isCouple())
                 .build();
     }
@@ -109,14 +110,6 @@ public class AuthConverterImpl implements AuthConverter {
         return RefreshToken.builder()
                 .userId(id)
                 .token(refreshToken)
-                .build();
-    }
-
-    @Override
-    public Couple toEntity(User user, String code) {
-        return Couple.builder()
-                .code(code)
-                .user(user)
                 .build();
     }
 }
