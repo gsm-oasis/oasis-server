@@ -8,5 +8,5 @@ import lombok.RequiredArgsConstructor;
 @Builder
 @RequiredArgsConstructor
 public class EnterDto {
-    private final String firstDay;
+    private final String startDay;
 }
