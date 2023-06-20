@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.user.util;
 
+import com.real.realoasis.domain.couple.domain.entity.Couple;
 import com.real.realoasis.domain.user.presentation.data.dto.ConnectCoupleDto;
 import com.real.realoasis.domain.user.presentation.data.dto.ConnectCoupleResDto;
 import com.real.realoasis.domain.user.domain.entity.User;
@@ -13,4 +14,6 @@ public interface UserConverter {
     ConnectCoupleResDto toResDto(User coupleUser);
 
     ConnectCoupleResponse toResponse(ConnectCoupleResDto connectCoupleResDto);
+
+    Couple toEntity(User currentUser, User coupleUser);
 }

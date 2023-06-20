@@ -1,5 +1,7 @@
 package com.real.realoasis.domain.user.util.Impl;
 
+import com.real.realoasis.domain.couple.domain.entity.Couple;
+import com.real.realoasis.domain.heart.domain.entity.Heart;
 import com.real.realoasis.domain.user.presentation.data.dto.ConnectCoupleDto;
 import com.real.realoasis.domain.user.presentation.data.dto.ConnectCoupleResDto;
 import com.real.realoasis.domain.user.domain.entity.User;
@@ -31,5 +33,18 @@ public class UserConverterImpl implements UserConverter {
         return ConnectCoupleResponse.builder()
                 .nickname(connectCoupleResDto.getNickname())
                 .build();
+    }
+
+    @Override
+    public Couple toEntity(User currentUser, User coupleUser) {
+        return new Couple(
+                "0000",
+                "0000",
+                0,
+                '0',
+                currentUser,
+                coupleUser,
+                new Heart(1)
+        );
     }
 }
