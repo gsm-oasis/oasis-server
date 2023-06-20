@@ -16,6 +16,7 @@ public enum ErrorCode {
     QUESTION_NOT_FOUND_EXCEPTION("질문을 찾을 수 없습니다.",404),
 
     QUESTION_ANSWER_NOT_FOUND_EXCEPTION("답변을 찾을 수 없습니다.", 404),
+    COUPLE_NOT_FOUND("Couple이 존재하지 않습니다.", 404),
     DIARY_NOT_FOUND_EXCEPTION("일기를 찾을 수 없습니다.", 404),
     DUPLICATE_ID_EXCEPTION("이미 존재하는 아이디입니다.",409);
 
