@@ -10,5 +10,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DatingDateEnterRequest {
-    private String firstDay;
+    private String startDay;
 }
