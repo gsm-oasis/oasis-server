@@ -1,7 +1,7 @@
 package com.real.realoasis.domain.heart.util;
 
-import com.real.realoasis.domain.user.domain.entity.User;
+import com.real.realoasis.domain.couple.domain.entity.Couple;
 
 public interface HeartUtil {
-    void heartLevel(User user);
+    void heartLevel(Couple couple);
 }
