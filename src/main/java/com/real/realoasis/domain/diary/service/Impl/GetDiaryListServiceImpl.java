@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.diary.service.Impl;
 
+import com.real.realoasis.domain.couple.domain.entity.Couple;
 import com.real.realoasis.domain.couple.domain.repository.CoupleRepository;
 import com.real.realoasis.domain.diary.domain.entity.Diary;
 import com.real.realoasis.domain.diary.facade.DiaryFacade;
@@ -27,7 +28,15 @@ public class GetDiaryListServiceImpl implements GetDiaryListService {
     @Override
     public List<DiaryDto> getList() {
         User currentUser = userFacade.currentUser();
-        User coupleUser = coupleRepository.findByCoupleId(currentUser.getId()).getUser();
+        Couple foundCouple;
+        User coupleUser = null;
+        if (coupleRepository.existsByUserA(currentUser)) {
+            foundCouple = coupleRepository.findByUserA(currentUser);
+            coupleUser = foundCouple.getUserB();
+        } else if (coupleRepository.existsByUserB(currentUser)) {
+            foundCouple = coupleRepository.findByUserB(currentUser);
+            coupleUser = foundCouple.getUserA();
+        }
 
         List<Diary> diaryList = diaryFacade.findAllByUser(currentUser);
         List<Diary> diaryCoupleList = diaryFacade.findAllByUser(coupleUser);

@@ -32,11 +32,8 @@ public class SignUpServiceImpl implements SignUpService {
         }
 
         String code = makeRandomCode();
-        User user = authConverter.toEntity(signupDto);
-        Couple couple = authConverter.toEntity(user, code);
-
+        User user = authConverter.toEntity(signupDto, code);
         userFacade.saveUser(user);
-        coupleRepository.save(couple);
 
         return authConverter.toDto(code);
     }

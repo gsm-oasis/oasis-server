@@ -20,9 +20,15 @@ public class GetSettingServiceImpl implements GetSettingService {
 
     @Override
     public SettingResponse getSetting() {
-        User user = userFacade.currentUser();
-        Couple couple = coupleRepository.findByUser(user);
-        SettingResDto settingResDto = userSettingConverter.toSettingResDto(user, couple);
+        User currentUser = userFacade.currentUser();
+        Couple foundCouple = null;
+        if (coupleRepository.existsByUserA(currentUser)) {
+            foundCouple = coupleRepository.findByUserA(currentUser);
+        } else if (coupleRepository.existsByUserB(currentUser)) {
+            foundCouple = coupleRepository.findByUserB(currentUser);
+        }
+
+        SettingResDto settingResDto = userSettingConverter.toSettingResDto(currentUser,foundCouple);
         return userSettingConverter.toSettingResponse(settingResDto);
     }
 }

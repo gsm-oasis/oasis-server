@@ -26,7 +26,6 @@ public class ReissueServiceImpl implements ReissueService {
     private final UserFacade userFacade;
     private final RefreshTokenRepository refreshTokenRepository;
     private final AuthConverter authConverter;
-    private final CoupleRepository coupleRepository;
 
     @Transactional(rollbackFor = Exception.class)
     @Override

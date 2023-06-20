@@ -30,10 +30,9 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public TokenDto login(LoginDto loginDto) {
         User user = userFacade.findUserById(loginDto.getId());
-        Couple couple = coupleRepository.findByUser(user);
         userFacade.checkPassword(user, loginDto.getPassword());
 
-        TokenDto tokenDto = makeTokenDto(user, couple);
+        TokenDto tokenDto = makeTokenDto(user);
 
         RefreshToken refresh = authConverter.toEntity(user.getId(), tokenDto.getRefreshToken());
         refreshTokenRepository.save(refresh);
@@ -41,12 +40,12 @@ public class LoginServiceImpl implements LoginService {
         return tokenDto;
     }
 
-    private TokenDto makeTokenDto(User user, Couple couple){
+    private TokenDto makeTokenDto(User user){
         String accessToken = jwtTokenProvider.generateAccessToken(user.getId());
         String refreshToken = jwtTokenProvider.generateRefreshToken(user.getId());
         LocalDateTime accessExp = jwtTokenProvider.getAccessTokenExpiredTime();
         LocalDateTime refreshExp = jwtTokenProvider.getRefreshTokenExpiredTime();
 
-        return authConverter.toDto(accessToken, refreshToken, accessExp, refreshExp, user, couple);
+        return authConverter.toDto(accessToken, refreshToken, accessExp, refreshExp, user);
     }
 }
