@@ -20,7 +20,6 @@ import org.springframework.stereotype.Service;
 public class GetHeartServiceImpl implements GetHeartService {
     private final UserFacade userFacade;
     private final HeartConverter heartConverter;
-    private final HeartUtil heartUtil;
     private final CoupleRepository coupleRepository;
 
     @Override
@@ -32,7 +31,6 @@ public class GetHeartServiceImpl implements GetHeartService {
         } else if (coupleRepository.existsByUserB(currentUser)) {
             foundCouple = coupleRepository.findByUserB(currentUser);
         }
-        heartUtil.heartLevel(foundCouple);
 
         HeartDto heartDto = heartConverter.toDto(foundCouple);
         return heartConverter.toResponse(heartDto);
