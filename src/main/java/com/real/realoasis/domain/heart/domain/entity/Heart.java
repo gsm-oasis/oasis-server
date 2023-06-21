@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
 @Entity
 @Builder
@@ -16,6 +15,8 @@ import javax.persistence.Id;
 @NoArgsConstructor
 @Getter
 public class Heart extends BaseIdEntity {
+    @Column(nullable = false)
+    private long levelBar;
     @Column(nullable = false)
     private int level;
 }
