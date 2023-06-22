@@ -33,25 +33,24 @@ public class AuthController {
 
     // 회원가입
     @PostMapping("/signup")
-    public ResponseEntity<SignupResponse> signUp(@RequestBody SignUpRequest signupRequest){
+    public ResponseEntity<Void> signUp(@RequestBody SignUpRequest signupRequest){
         SignupDto signupDto = authConverter.toDto(signupRequest);
-        CoupleCodeDto coupleCodeDto = signUpService.signUp(signupDto);
-        SignupResponse signupResponse = authConverter.toResponse(coupleCodeDto);
-        return new ResponseEntity<>(signupResponse, HttpStatus.CREATED);
+        signUpService.signUp(signupDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     // 이메일에 인증코드 전송
     @PostMapping("/email")
-    public ResponseEntity<SendAuthCodeResponse> sendEmail(@RequestParam("email") String email) throws MessagingException, UnsupportedEncodingException {
+    public ResponseEntity<Void> sendEmail(@RequestParam("email") String email) throws MessagingException, UnsupportedEncodingException {
         SendAuthCodeDto sendAuthCodeDto = sendAuthCodeService.send(email);
-        SendAuthCodeResponse sendAuthCodeResponse = mailConverter.toResponse(sendAuthCodeDto);
-        return new ResponseEntity<>(sendAuthCodeResponse, HttpStatus.OK);
+        mailConverter.toResponse(sendAuthCodeDto);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     // 인증코드 확인
     @GetMapping("/code")
-    public ResponseEntity<Void> confirmAuthenticationCode(@RequestParam("code")String code, @RequestParam("sentCode")String sentCode) {
-        confirmAuthenticationCode.confirmAuthenticationCode(code, sentCode);
+    public ResponseEntity<Void> confirmAuthenticationCode(@RequestParam("email") String email, @RequestParam("code")String code) {
+        confirmAuthenticationCode.confirmAuthenticationCode(email, code);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

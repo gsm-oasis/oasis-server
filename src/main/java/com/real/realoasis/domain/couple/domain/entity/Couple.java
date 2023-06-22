@@ -29,16 +29,13 @@ public class Couple extends BaseIdEntity {
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private User userA;
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private User userB;
 
     @OneToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Heart heart;
 
 

@@ -4,4 +4,5 @@ import com.real.realoasis.domain.auth.domain.entity.AuthCode;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AuthCodeRepository extends JpaRepository<AuthCode, String> {
+    AuthCode findByEmail(String email);
 }

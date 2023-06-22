@@ -21,12 +21,11 @@ import java.util.Random;
 public class SignUpServiceImpl implements SignUpService {
     private final UserFacade userFacade;
     private final AuthConverter authConverter;
-    private final CoupleRepository coupleRepository;
 
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public CoupleCodeDto signUp(SignupDto signupDto) {
+    public void signUp(SignupDto signupDto) {
         if(userFacade.existsByIdx(signupDto.getId())){
             throw new DuplicateIdException(ErrorCode.DUPLICATE_ID_EXCEPTION);
         }
@@ -34,8 +33,6 @@ public class SignUpServiceImpl implements SignUpService {
         String code = makeRandomCode();
         User user = authConverter.toEntity(signupDto, code);
         userFacade.saveUser(user);
-
-        return authConverter.toDto(code);
     }
 
     private String makeRandomCode() {
