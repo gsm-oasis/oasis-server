@@ -24,5 +24,6 @@ public class CreateQuestionAnswerServiceImpl implements CreateQuestionAnswerServ
         Question question = questionAnswerFacade.findQuestionByQuestionId(questionId);
         QuestionAnswer questionAnswer = questionAnswerConverter.toEntity(createDto, question, currentUser);
         questionAnswerFacade.saveAnswer(questionAnswer);
+        currentUser.getCouple().getHeart().updateLevelBar();
     }
 }

@@ -1,7 +1,6 @@
 package com.real.realoasis.domain.user.service.Impl;
 
 import com.real.realoasis.domain.couple.domain.entity.Couple;
-import com.real.realoasis.domain.couple.domain.repository.CoupleRepository;
 import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.domain.user.presentation.data.dto.SettingResDto;
@@ -16,19 +15,13 @@ import org.springframework.stereotype.Service;
 public class GetSettingServiceImpl implements GetSettingService {
     private final UserFacade userFacade;
     private final UserSettingConverter userSettingConverter;
-    private final CoupleRepository coupleRepository;
 
     @Override
     public SettingResponse getSetting() {
         User currentUser = userFacade.currentUser();
-        Couple foundCouple = null;
-        if (coupleRepository.existsByUserA(currentUser)) {
-            foundCouple = coupleRepository.findByUserA(currentUser);
-        } else if (coupleRepository.existsByUserB(currentUser)) {
-            foundCouple = coupleRepository.findByUserB(currentUser);
-        }
+        Couple couple = currentUser.getCouple();
 
-        SettingResDto settingResDto = userSettingConverter.toSettingResDto(currentUser,foundCouple);
+        SettingResDto settingResDto = userSettingConverter.toSettingResDto(currentUser, couple);
         return userSettingConverter.toSettingResponse(settingResDto);
     }
 }

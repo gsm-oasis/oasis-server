@@ -19,28 +19,22 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class EnterDatingDateServiceImpl implements EnterDatingDateService {
     private final UserFacade userFacade;
-    private final CoupleRepository coupleRepository;
 
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void enter(EnterDto enterDto) {
         User currentUser = userFacade.currentUser();
-        Couple foundCouple = null;
-        if (coupleRepository.existsByUserA(currentUser)) {
-            foundCouple = coupleRepository.findByUserA(currentUser);
-        } else if (coupleRepository.existsByUserB(currentUser)) {
-            foundCouple = coupleRepository.findByUserB(currentUser);
-        }
-        Objects.requireNonNull(foundCouple).updateStartDay(enterDto.getStartDay());
+        Couple couple = currentUser.getCouple();
 
-        foundCouple.today();
+        couple.updateStartDay(enterDto.getStartDay());
+        couple.today();
 
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
-        LocalDate firstDayToLocalDate = LocalDate.parse(foundCouple.getStartDay(), dateFormat);
-        LocalDate todayToLocalDate = LocalDate.parse(foundCouple.getToday(), dateFormat);
+        LocalDate firstDayToLocalDate = LocalDate.parse(couple.getStartDay(), dateFormat);
+        LocalDate todayToLocalDate = LocalDate.parse(couple.getToday(), dateFormat);
 
         long datingDate = ChronoUnit.DAYS.between(firstDayToLocalDate, todayToLocalDate);
 
-        foundCouple.updateDatingDate(datingDate);
+        couple.updateDatingDate(datingDate);
     }
 }

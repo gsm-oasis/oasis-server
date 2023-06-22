@@ -1,14 +1,13 @@
 package com.real.realoasis.domain.user.domain.entity;
 
-import com.real.realoasis.domain.heart.domain.entity.Heart;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.real.realoasis.domain.couple.domain.entity.Couple;
 import com.real.realoasis.global.entity.BaseIdEntity;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 @Entity
 @Getter
@@ -27,6 +26,11 @@ public class User extends BaseIdEntity {
     private boolean isCouple;
     @Column(nullable = false)
     private String coupleCode;
+
+    @JsonIgnore
+    @OneToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Couple couple;
 
     public void updateIsCouple() {
         this.isCouple = true;

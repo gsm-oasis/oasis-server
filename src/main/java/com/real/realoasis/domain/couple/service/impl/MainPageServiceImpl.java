@@ -25,34 +25,27 @@ public class MainPageServiceImpl implements MainPageService {
 
     private final UserFacade userFacade;
     private final QuestionAnswerFacade questionAnswerFacade;
-    private final HeartUtil heartUtil;
     private final CoupleConverter mainPageConverter;
-    private final CoupleRepository coupleRepository;
 
     @Transactional
     @Override
     public MainPageDto getMainPage() {
         User currentUser = userFacade.currentUser();
-        Couple foundCouple = null;
-        if (coupleRepository.existsByUserA(currentUser)) {
-            foundCouple = coupleRepository.findByUserA(currentUser);
-        } else if (coupleRepository.existsByUserB(currentUser)) {
-            foundCouple = coupleRepository.findByUserB(currentUser);
-        }
-        Objects.requireNonNull(foundCouple).today();
+        Couple couple = currentUser.getCouple();
+
+        couple.today();
 
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
-        LocalDate firstDayToLocalDate = LocalDate.parse(foundCouple.getStartDay(), dateFormat);
-        LocalDate todayToLocalDate = LocalDate.parse(foundCouple.getToday(), dateFormat);
+        LocalDate firstDayToLocalDate = LocalDate.parse(couple.getStartDay(), dateFormat);
+        LocalDate todayToLocalDate = LocalDate.parse(couple.getToday(), dateFormat);
 
         long datingDate = ChronoUnit.DAYS.between(firstDayToLocalDate, todayToLocalDate);
 
-        foundCouple.updateDatingDate(datingDate);
-        heartUtil.heartLevel(foundCouple);
+        couple.updateDatingDate(datingDate);
 
-        Question question = questionAnswerFacade.findQuestionByQuestionId(datingDate - foundCouple.getDatingDate()+1);
+        Question question = questionAnswerFacade.findQuestionByQuestionId(datingDate - couple.getDatingDate()+1);
 
-        return mainPageConverter.toDto(foundCouple, question);
+        return mainPageConverter.toDto(couple, question);
     }
 
 
