@@ -1,7 +1,6 @@
 package com.real.realoasis.domain.user.service.Impl;
 
 import com.real.realoasis.domain.couple.domain.entity.Couple;
-import com.real.realoasis.domain.couple.domain.repository.CoupleRepository;
 import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.domain.user.presentation.data.dto.AnniversaryTimeChangeDto;
@@ -14,19 +13,13 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class UpdateAnniversaryTimeServiceImpl implements UpdateAnniversaryTimeService {
     private final UserFacade userFacade;
-    private final CoupleRepository coupleRepository;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void update(AnniversaryTimeChangeDto anniversaryTimeChangeDto) {
         User currentUser = userFacade.currentUser();
-        Couple foundCouple;
-        if (coupleRepository.existsByUserA(currentUser)) {
-            foundCouple = coupleRepository.findByUserA(currentUser);
-            foundCouple.updateAnniversaryTime(anniversaryTimeChangeDto.getAnniversaryTime());
-        } else if (coupleRepository.existsByUserB(currentUser)) {
-            foundCouple = coupleRepository.findByUserB(currentUser);
-            foundCouple.updateAnniversaryTime(anniversaryTimeChangeDto.getAnniversaryTime());
-        }
+        Couple couple = currentUser.getCouple();
+
+        couple.updateAnniversaryTime(anniversaryTimeChangeDto.getAnniversaryTime());
     }
 }
