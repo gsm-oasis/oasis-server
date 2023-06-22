@@ -22,23 +22,20 @@ public class GetMainPageServiceImpl implements GetMainPageService {
     private final UserFacade userFacade;
     private final QuestionAnswerFacade questionAnswerFacade;
     private final QuestionAnswerConverter questionAnswerConverter;
-    private final CoupleRepository coupleRepository;
 
     @Override
     public QuestionAnswerResponse getMainpage(Long questionId) {
         User currentUser = userFacade.currentUser();
-        Couple foundCouple;
-        User coupleUser = null;
-        if (coupleRepository.existsByUserA(currentUser)) {
-            foundCouple = coupleRepository.findByUserA(currentUser);
-            coupleUser = foundCouple.getUserB();
-        } else if (coupleRepository.existsByUserB(currentUser)) {
-            foundCouple = coupleRepository.findByUserB(currentUser);
-            coupleUser = foundCouple.getUserA();
-        }
+        Couple couple = currentUser.getCouple();
+        User coupleUser;
+
+        if(couple.getUserA().equals(currentUser))
+            coupleUser = couple.getUserB();
+        else
+            coupleUser = couple.getUserA();
 
         String answer = questionAnswerFacade.findQuestionAnswerByQuestionIdxUserIdx(questionId, currentUser.getIdx());
-        String coupleAnswer = questionAnswerFacade.findQuestionAnswerByQuestionIdxUserIdx(questionId, Objects.requireNonNull(coupleUser).getIdx());
+        String coupleAnswer = questionAnswerFacade.findQuestionAnswerByQuestionIdxUserIdx(questionId, coupleUser.getIdx());
 
         QuestionAnswerDto questionAnswerDto = questionAnswerConverter.toAnswerDto(currentUser, coupleUser, answer, coupleAnswer);
         return questionAnswerConverter.toResponse(questionAnswerDto);
