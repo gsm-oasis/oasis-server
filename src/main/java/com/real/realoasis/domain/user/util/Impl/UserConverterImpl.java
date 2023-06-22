@@ -44,7 +44,7 @@ public class UserConverterImpl implements UserConverter {
                 '0',
                 currentUser,
                 coupleUser,
-                new Heart(1)
+                new Heart(0, 1)
         );
     }
 }
