@@ -29,7 +29,7 @@ public class DiaryController {
     private final DiaryConverter diaryConverter;
 
     //일기 생성
-    @PostMapping("/create")
+    @PostMapping
     public ResponseEntity<Void> createDiary(
             @RequestPart(value = "file", required = false)List<MultipartFile> files,
             @RequestPart(value = "req") CreateDiaryRequest createDiaryRequest) throws Exception {
@@ -39,7 +39,7 @@ public class DiaryController {
     }
 
     //일기 수정
-    @PatchMapping("/edit/{diaryId}")
+    @PatchMapping("/{diaryId}")
     public ResponseEntity<Void> editDiary(
             @PathVariable Long diaryId,
             @RequestPart(value = "file", required = false)List<MultipartFile> files,
@@ -51,7 +51,7 @@ public class DiaryController {
 
 
     //일기디테일 페이지
-    @GetMapping("/detail/{diaryId}")
+    @GetMapping("/{diaryId}")
     public ResponseEntity<DiaryDetailResponse> getDetailPage(@PathVariable Long diaryId){
         DiaryDetailDto diaryDetailDto = getDiaryDetailService.get(diaryId);
         DiaryDetailResponse diaryDetailPageResponse = diaryConverter.toDetailResponse(diaryDetailDto);
@@ -59,7 +59,7 @@ public class DiaryController {
     }
 
     //일기 삭제
-    @DeleteMapping("/delete/{diaryId}")
+    @DeleteMapping("/{diaryId}")
     public ResponseEntity<Void> deleteDiary(@PathVariable Long diaryId){
         deleteDiaryService.delete(diaryId);
         return new ResponseEntity<>(HttpStatus.OK);
