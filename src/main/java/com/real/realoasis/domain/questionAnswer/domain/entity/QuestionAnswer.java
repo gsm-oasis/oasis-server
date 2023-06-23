@@ -1,31 +1,30 @@
 package com.real.realoasis.domain.questionAnswer.domain.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.real.realoasis.domain.question.domain.entity.Question;
-import com.real.realoasis.domain.user.data.entity.User;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import com.real.realoasis.domain.user.domain.entity.User;
+import com.real.realoasis.global.entity.BaseIdEntity;
+import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
 @Entity
 @Builder
 @Getter
-@NoArgsConstructor
 @AllArgsConstructor
-public class QuestionAnswer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class QuestionAnswer extends BaseIdEntity {
+    @Column(nullable = false)
     private String answer;
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Question question;
-
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
 }

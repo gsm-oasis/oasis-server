@@ -1,10 +1,13 @@
 package com.real.realoasis.domain.user.util;
 
-import com.real.realoasis.domain.user.data.dto.ConnectCoupleDto;
-import com.real.realoasis.domain.user.data.dto.ConnectCoupleResDto;
-import com.real.realoasis.domain.user.data.entity.User;
-import com.real.realoasis.domain.user.data.request.ConnectCoupleRequest;
-import com.real.realoasis.domain.user.data.response.ConnectCoupleResponse;
+import com.real.realoasis.domain.couple.domain.entity.CoupleAnniversaryDate;
+import com.real.realoasis.domain.couple.domain.entity.FixedAnniversaryDate;
+import com.real.realoasis.domain.couple.domain.entity.Couple;
+import com.real.realoasis.domain.user.presentation.data.dto.ConnectCoupleDto;
+import com.real.realoasis.domain.user.presentation.data.dto.ConnectCoupleResDto;
+import com.real.realoasis.domain.user.domain.entity.User;
+import com.real.realoasis.domain.user.presentation.data.request.ConnectCoupleRequest;
+import com.real.realoasis.domain.user.presentation.data.response.ConnectCoupleResponse;
 
 public interface UserConverter {
 
@@ -13,4 +16,8 @@ public interface UserConverter {
     ConnectCoupleResDto toResDto(User coupleUser);
 
     ConnectCoupleResponse toResponse(ConnectCoupleResDto connectCoupleResDto);
+
+    Couple toEntity(User currentUser, User coupleUser);
+
+    CoupleAnniversaryDate toEntity(Couple couple);
 }

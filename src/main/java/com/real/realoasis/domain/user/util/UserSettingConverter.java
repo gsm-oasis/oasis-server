@@ -1,17 +1,18 @@
 package com.real.realoasis.domain.user.util;
 
-import com.real.realoasis.domain.user.data.dto.AnniversaryTimeChangeDto;
-import com.real.realoasis.domain.user.data.dto.NicknameChangeDto;
-import com.real.realoasis.domain.user.data.dto.PasswordChangeDto;
-import com.real.realoasis.domain.user.data.dto.SettingResDto;
-import com.real.realoasis.domain.user.data.entity.User;
-import com.real.realoasis.domain.user.data.request.AnniversaryTimeChangeRequest;
-import com.real.realoasis.domain.user.data.request.NicknameChangeRequest;
-import com.real.realoasis.domain.user.data.request.PasswordChangeRequest;
-import com.real.realoasis.domain.user.data.response.SettingResponse;
+import com.real.realoasis.domain.couple.domain.entity.Couple;
+import com.real.realoasis.domain.user.presentation.data.dto.AnniversaryTimeChangeDto;
+import com.real.realoasis.domain.user.presentation.data.dto.NicknameChangeDto;
+import com.real.realoasis.domain.user.presentation.data.dto.PasswordChangeDto;
+import com.real.realoasis.domain.user.presentation.data.dto.SettingResDto;
+import com.real.realoasis.domain.user.domain.entity.User;
+import com.real.realoasis.domain.user.presentation.data.request.AnniversaryTimeChangeRequest;
+import com.real.realoasis.domain.user.presentation.data.request.NicknameChangeRequest;
+import com.real.realoasis.domain.user.presentation.data.request.PasswordChangeRequest;
+import com.real.realoasis.domain.user.presentation.data.response.SettingResponse;
 
 public interface UserSettingConverter {
-    SettingResDto toSettingResDto(User user);
+    SettingResDto toSettingResDto(User user, Couple couple);
 
     SettingResponse toSettingResponse(SettingResDto settingResDto);
 

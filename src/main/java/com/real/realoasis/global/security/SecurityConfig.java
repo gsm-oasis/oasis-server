@@ -46,33 +46,34 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET,"/auth/code/**").permitAll()
 
                 //user
-                .antMatchers(HttpMethod.DELETE, "/user/withdrawal").authenticated()
-                .antMatchers(HttpMethod.POST,"/user/connect/couple").authenticated()
-
-                //user/setting
-                .antMatchers(HttpMethod.GET,"/user/setting").authenticated()
-                .antMatchers(HttpMethod.PATCH,"/user/setting/change/nickname").authenticated()
-                .antMatchers(HttpMethod.PATCH,"/user/setting/change/password").authenticated()
-                .antMatchers(HttpMethod.PATCH,"/user/setting/change/anniversarytime").authenticated()
+                .antMatchers(HttpMethod.DELETE, "/user").authenticated()
+                .antMatchers(HttpMethod.POST,"/user").authenticated()
+                .antMatchers(HttpMethod.GET,"/user").authenticated()
+                .antMatchers(HttpMethod.PATCH,"/user/nickname").authenticated()
+                .antMatchers(HttpMethod.PATCH,"/user/password").authenticated()
+                .antMatchers(HttpMethod.PATCH,"/user/anniversarytime").authenticated()
 
                 //mainpage
                 .antMatchers(HttpMethod.GET,"/mainpage").authenticated()
                 .antMatchers(HttpMethod.POST,"/mainpage/enter/datingdate").authenticated()
 
                 //diary
-                .antMatchers(HttpMethod.POST,"/diary/create").authenticated()
-                .antMatchers(HttpMethod.PATCH,"/diary/edit/**").authenticated()
-                .antMatchers(HttpMethod.GET,"/diary/detail/**").authenticated()
-                .antMatchers(HttpMethod.DELETE,"/diary/delete/**").authenticated()
+                .antMatchers(HttpMethod.POST,"/diary").authenticated()
+                .antMatchers(HttpMethod.PATCH,"/diary/**").authenticated()
+                .antMatchers(HttpMethod.GET,"/diary/**").authenticated()
+                .antMatchers(HttpMethod.DELETE,"/diary/**").authenticated()
                 .antMatchers(HttpMethod.GET,"/diary/list").authenticated()
 
                 //question
-                .antMatchers(HttpMethod.POST,"/question/answer/**").authenticated()
+                .antMatchers(HttpMethod.POST,"/question/**").authenticated()
                 .antMatchers(HttpMethod.GET,"/question/list").authenticated()
                 .antMatchers(HttpMethod.GET,"/question/**").authenticated()
 
                 //image
                 .antMatchers(HttpMethod.POST,"/image").authenticated()
+
+                //heart
+                .antMatchers(HttpMethod.GET, "/heart").authenticated()
 
                 .anyRequest().permitAll();
         http

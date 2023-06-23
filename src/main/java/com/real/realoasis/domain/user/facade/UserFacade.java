@@ -1,9 +1,9 @@
 package com.real.realoasis.domain.user.facade;
 
-import com.real.realoasis.domain.user.data.entity.User;
+import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.exception.PasswordNotMatchException;
 import com.real.realoasis.domain.user.exception.UserNotFoundException;
-import com.real.realoasis.domain.user.repository.UserRepository;
+import com.real.realoasis.domain.user.domain.repository.UserRepository;
 import com.real.realoasis.global.error.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,8 +18,8 @@ public class UserFacade {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public boolean existsById(String id) {
-        return userRepository.existsById(id);
+    public boolean existsByIdx(String id) {
+        return userRepository.existsUserById(id);
     }
 
     public void saveUser(User user) {
@@ -37,10 +37,6 @@ public class UserFacade {
 
     public User findUserByEmail(String email){
         return userRepository.findUserByEmail(email).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND_EXCEPTION));
-    }
-
-    public User findUserByCode(String code) {
-        return userRepository.findUserByCoupleCode(code).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND_EXCEPTION));
     }
 
     public void checkPassword(User user, String password) {

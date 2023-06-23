@@ -13,5 +13,4 @@ public class CreateDiaryRequest {
     private String title;
     private String content;
     private String mood;
-    private String writer;
 }

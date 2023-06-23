@@ -6,7 +6,9 @@ import com.real.realoasis.domain.auth.presentation.data.dto.LoginDto;
 import com.real.realoasis.domain.auth.presentation.data.dto.TokenDto;
 import com.real.realoasis.domain.auth.service.LoginService;
 import com.real.realoasis.domain.auth.util.AuthConverter;
-import com.real.realoasis.domain.user.data.entity.User;
+import com.real.realoasis.domain.couple.domain.entity.Couple;
+import com.real.realoasis.domain.couple.domain.repository.CoupleRepository;
+import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.global.security.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +24,8 @@ public class LoginServiceImpl implements LoginService {
     private final AuthConverter authConverter;
     private final RefreshTokenRepository refreshTokenRepository;
     private final JwtTokenProvider jwtTokenProvider;
+    private final CoupleRepository coupleRepository;
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public TokenDto login(LoginDto loginDto) {

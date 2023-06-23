@@ -5,10 +5,13 @@ import com.real.realoasis.domain.auth.presentation.data.dto.*;
 import com.real.realoasis.domain.auth.presentation.data.request.LoginRequest;
 import com.real.realoasis.domain.auth.presentation.data.request.SearchPwRequest;
 import com.real.realoasis.domain.auth.presentation.data.request.SignUpRequest;
+import com.real.realoasis.domain.auth.presentation.data.response.SendEmailResponse;
 import com.real.realoasis.domain.auth.presentation.data.response.SignupResponse;
+import com.real.realoasis.domain.auth.presentation.data.response.RefreshTokenResponse;
 import com.real.realoasis.domain.auth.presentation.data.response.TokenResponse;
 import com.real.realoasis.domain.auth.util.AuthConverter;
-import com.real.realoasis.domain.user.data.entity.User;
+import com.real.realoasis.domain.couple.domain.entity.Couple;
+import com.real.realoasis.domain.user.domain.entity.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
@@ -30,14 +33,14 @@ public class AuthConverterImpl implements AuthConverter {
     }
 
     @Override
-    public User toEntity(SignupDto signupDto, String code) {
+    public User toEntity(SignupDto signupDto, String coupleCode) {
         String password = passwordEncoder.encode(signupDto.getPassword());
         return User.builder()
                 .id(signupDto.getId())
                 .email(signupDto.getEmail())
                 .password(password)
                 .nickname(signupDto.getNickname())
-                .coupleCode(code)
+                .coupleCode(coupleCode)
                 .build();
     }
 
@@ -69,6 +72,15 @@ public class AuthConverterImpl implements AuthConverter {
     }
 
     @Override
+    public RefreshTokenResponse toResponse(RefreshTokenDto tokenDto) {
+        return RefreshTokenResponse.builder()
+                .accessToken(tokenDto.getAccessToken())
+                .refreshToken(tokenDto.getRefreshToken())
+                .accessExp(tokenDto.getAccessExp())
+                .build();
+    }
+
+    @Override
     public TokenResponse toResponse(TokenDto tokenDto) {
         return TokenResponse.builder()
                 .accessToken(tokenDto.getAccessToken())
@@ -82,9 +94,7 @@ public class AuthConverterImpl implements AuthConverter {
     @Override
     public SearchPwDto toDto(SearchPwRequest searchPWRequest) {
         return SearchPwDto.builder()
-                .email(searchPWRequest.getEmail())
-                .newPassword(searchPWRequest.getNewPassword())
-                .checkPassword(searchPWRequest.getCheckPassword())
+                .password(searchPWRequest.getPassword())
                 .build();
     }
 
@@ -100,6 +110,13 @@ public class AuthConverterImpl implements AuthConverter {
         return RefreshToken.builder()
                 .userId(id)
                 .token(refreshToken)
+                .build();
+    }
+
+    @Override
+    public SendEmailResponse toResponse(SendEmailDto sendEmailDto) {
+        return SendEmailResponse.builder()
+                .email(sendEmailDto.getEmail())
                 .build();
     }
 }

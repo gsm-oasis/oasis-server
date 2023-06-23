@@ -11,6 +11,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class SearchPwRequest {
     private String email;
-    private String newPassword;
-    private String checkPassword;
+    private String password;
 }

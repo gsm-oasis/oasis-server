@@ -6,7 +6,7 @@ import com.real.realoasis.domain.questionAnswer.facade.QuestionAnswerFacade;
 import com.real.realoasis.domain.questionAnswer.presentation.data.dto.CreateDto;
 import com.real.realoasis.domain.questionAnswer.service.CreateQuestionAnswerService;
 import com.real.realoasis.domain.questionAnswer.util.QuestionAnswerConverter;
-import com.real.realoasis.domain.user.data.entity.User;
+import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -24,5 +24,6 @@ public class CreateQuestionAnswerServiceImpl implements CreateQuestionAnswerServ
         Question question = questionAnswerFacade.findQuestionByQuestionId(questionId);
         QuestionAnswer questionAnswer = questionAnswerConverter.toEntity(createDto, question, currentUser);
         questionAnswerFacade.saveAnswer(questionAnswer);
+        currentUser.getCouple().getHeart().updateLevelBar();
     }
 }

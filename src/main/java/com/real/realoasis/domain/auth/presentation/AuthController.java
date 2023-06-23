@@ -2,9 +2,7 @@ package com.real.realoasis.domain.auth.presentation;
 
 import com.real.realoasis.domain.auth.presentation.data.dto.*;
 import com.real.realoasis.domain.auth.presentation.data.request.*;
-import com.real.realoasis.domain.auth.presentation.data.response.SendAuthCodeResponse;
-import com.real.realoasis.domain.auth.presentation.data.response.SignupResponse;
-import com.real.realoasis.domain.auth.presentation.data.response.TokenResponse;
+import com.real.realoasis.domain.auth.presentation.data.response.*;
 import com.real.realoasis.domain.auth.service.*;
 import com.real.realoasis.domain.auth.util.AuthConverter;
 import com.real.realoasis.domain.auth.util.MailConverter;
@@ -24,31 +22,31 @@ public class AuthController {
     private final ReissueService reissueService;
     private final SearchPasswordService searchPasswordService;
     private final SignUpService signUpService;
-    private final MailService mailService;
+    private final ConfirmAuthCodeService confirmAuthenticationCode;
+    private final SendAuthCodeService sendAuthCodeService;
+    private final SearchIdService searchIdService;
     private final AuthConverter authConverter;
     private final MailConverter mailConverter;
 
     // 회원가입
     @PostMapping("/signup")
-    public ResponseEntity<SignupResponse> signUp(@RequestBody SignUpRequest signupRequest){
+    public ResponseEntity<Void> signUp(@RequestBody SignUpRequest signupRequest){
         SignupDto signupDto = authConverter.toDto(signupRequest);
-        CoupleCodeDto coupleCodeDto = signUpService.signUp(signupDto);
-        SignupResponse signupResponse = authConverter.toResponse(coupleCodeDto);
-        return new ResponseEntity<>(signupResponse, HttpStatus.CREATED);
+        signUpService.signUp(signupDto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     // 이메일에 인증코드 전송
     @PostMapping("/email")
-    public ResponseEntity<SendAuthCodeResponse> sendEmail(@RequestParam("email") String email) throws MessagingException, UnsupportedEncodingException {
-        SendAuthCodeDto sendAuthCodeDto = mailService.sendEmail(email);
-        SendAuthCodeResponse sendAuthCodeResponse = mailConverter.toResponse(sendAuthCodeDto);
-        return new ResponseEntity<>(sendAuthCodeResponse, HttpStatus.OK);
+    public ResponseEntity<SendEmailResponse> sendEmail(@RequestParam("email") String email) throws MessagingException, UnsupportedEncodingException {
+        SendEmailDto sendEmailDto = sendAuthCodeService.send(email);
+        return new ResponseEntity<>(authConverter.toResponse(sendEmailDto), HttpStatus.OK);
     }
 
     // 인증코드 확인
     @GetMapping("/code")
-    public ResponseEntity<Void> confirmAuthenticationCode(@RequestParam("code")String code, @RequestParam("sentCode")String sentCode) {
-        mailService.confirmAuthenticationCode(code, sentCode);
+    public ResponseEntity<Void> confirmAuthenticationCode(@RequestParam("email") String email, @RequestParam("code")String code) {
+        confirmAuthenticationCode.confirmAuthenticationCode(email, code);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
@@ -63,9 +61,9 @@ public class AuthController {
 
     // 토큰 재발급
     @PatchMapping("/refresh")
-    public ResponseEntity<TokenResponse> reissue(@RequestHeader("RefreshToken") String refreshToken){
-        TokenDto tokenDto = reissueService.reissue(refreshToken);
-        TokenResponse tokenResponse = authConverter.toResponse(tokenDto);
+    public ResponseEntity<RefreshTokenResponse> reissue(@RequestHeader("RefreshToken") String refreshToken){
+        RefreshTokenDto refreshTokenDto = reissueService.reissue(refreshToken);
+        RefreshTokenResponse tokenResponse = authConverter.toResponse(refreshTokenDto);
         return new ResponseEntity<>(tokenResponse, HttpStatus.CREATED);
     }
 
@@ -73,7 +71,7 @@ public class AuthController {
     @PostMapping("/id")
     public ResponseEntity<Void> searchID(@RequestBody SearchIdRequest searchIDRequest) throws MessagingException, UnsupportedEncodingException {
         SearchIdDto searchIdDto = mailConverter.toDto(searchIDRequest);
-        mailService.sendId(searchIdDto);
+        searchIdService.send(searchIdDto);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 

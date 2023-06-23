@@ -1,10 +1,13 @@
 package com.real.realoasis.domain.user.util.Impl;
 
-import com.real.realoasis.domain.user.data.dto.ConnectCoupleDto;
-import com.real.realoasis.domain.user.data.dto.ConnectCoupleResDto;
-import com.real.realoasis.domain.user.data.entity.User;
-import com.real.realoasis.domain.user.data.request.ConnectCoupleRequest;
-import com.real.realoasis.domain.user.data.response.ConnectCoupleResponse;
+import com.real.realoasis.domain.couple.domain.entity.CoupleAnniversaryDate;
+import com.real.realoasis.domain.couple.domain.entity.Couple;
+import com.real.realoasis.domain.heart.domain.entity.Heart;
+import com.real.realoasis.domain.user.presentation.data.dto.ConnectCoupleDto;
+import com.real.realoasis.domain.user.presentation.data.dto.ConnectCoupleResDto;
+import com.real.realoasis.domain.user.domain.entity.User;
+import com.real.realoasis.domain.user.presentation.data.request.ConnectCoupleRequest;
+import com.real.realoasis.domain.user.presentation.data.response.ConnectCoupleResponse;
 import com.real.realoasis.domain.user.util.UserConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -31,5 +34,26 @@ public class UserConverterImpl implements UserConverter {
         return ConnectCoupleResponse.builder()
                 .nickname(connectCoupleResDto.getNickname())
                 .build();
+    }
+
+    @Override
+    public Couple toEntity(User currentUser, User coupleUser) {
+        return new Couple(
+                "0000",
+                "0000",
+                0,
+                0,
+                currentUser,
+                coupleUser,
+                new Heart(0, 1)
+        );
+    }
+
+    @Override
+    public CoupleAnniversaryDate toEntity(Couple couple) {
+        return new CoupleAnniversaryDate(
+                0,
+                couple
+        );
     }
 }
