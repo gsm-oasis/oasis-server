@@ -16,6 +16,7 @@ jobs:
         with:
           token: ${{ secrets.CLOUDTYPE_TOKEN }}
           ghtoken: ${{ secrets.GHP_TOKEN }}
+          repo: gsm-oasis/oasis-server
       - name: Deploy
         uses: cloudtype-github-actions/deploy@v1
         with:
