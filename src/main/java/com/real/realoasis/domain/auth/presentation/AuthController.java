@@ -2,10 +2,7 @@ package com.real.realoasis.domain.auth.presentation;
 
 import com.real.realoasis.domain.auth.presentation.data.dto.*;
 import com.real.realoasis.domain.auth.presentation.data.request.*;
-import com.real.realoasis.domain.auth.presentation.data.response.SendAuthCodeResponse;
-import com.real.realoasis.domain.auth.presentation.data.response.SignupResponse;
-import com.real.realoasis.domain.auth.presentation.data.response.RefreshTokenResponse;
-import com.real.realoasis.domain.auth.presentation.data.response.TokenResponse;
+import com.real.realoasis.domain.auth.presentation.data.response.*;
 import com.real.realoasis.domain.auth.service.*;
 import com.real.realoasis.domain.auth.util.AuthConverter;
 import com.real.realoasis.domain.auth.util.MailConverter;
@@ -41,10 +38,9 @@ public class AuthController {
 
     // 이메일에 인증코드 전송
     @PostMapping("/email")
-    public ResponseEntity<Void> sendEmail(@RequestParam("email") String email) throws MessagingException, UnsupportedEncodingException {
-        SendAuthCodeDto sendAuthCodeDto = sendAuthCodeService.send(email);
-        mailConverter.toResponse(sendAuthCodeDto);
-        return new ResponseEntity<>(HttpStatus.OK);
+    public ResponseEntity<SendEmailResponse> sendEmail(@RequestParam("email") String email) throws MessagingException, UnsupportedEncodingException {
+        SendEmailDto sendEmailDto = sendAuthCodeService.send(email);
+        return new ResponseEntity<>(authConverter.toResponse(sendEmailDto), HttpStatus.OK);
     }
 
     // 인증코드 확인
