@@ -5,6 +5,7 @@ import com.real.realoasis.domain.auth.presentation.data.dto.*;
 import com.real.realoasis.domain.auth.presentation.data.request.LoginRequest;
 import com.real.realoasis.domain.auth.presentation.data.request.SearchPwRequest;
 import com.real.realoasis.domain.auth.presentation.data.request.SignUpRequest;
+import com.real.realoasis.domain.auth.presentation.data.response.SendEmailResponse;
 import com.real.realoasis.domain.auth.presentation.data.response.SignupResponse;
 import com.real.realoasis.domain.auth.presentation.data.response.RefreshTokenResponse;
 import com.real.realoasis.domain.auth.presentation.data.response.TokenResponse;
@@ -93,7 +94,6 @@ public class AuthConverterImpl implements AuthConverter {
     @Override
     public SearchPwDto toDto(SearchPwRequest searchPWRequest) {
         return SearchPwDto.builder()
-                .email(searchPWRequest.getEmail())
                 .password(searchPWRequest.getPassword())
                 .build();
     }
@@ -110,6 +110,13 @@ public class AuthConverterImpl implements AuthConverter {
         return RefreshToken.builder()
                 .userId(id)
                 .token(refreshToken)
+                .build();
+    }
+
+    @Override
+    public SendEmailResponse toResponse(SendEmailDto sendEmailDto) {
+        return SendEmailResponse.builder()
+                .email(sendEmailDto.getEmail())
                 .build();
     }
 }

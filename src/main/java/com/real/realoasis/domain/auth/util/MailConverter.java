@@ -17,4 +17,5 @@ public interface MailConverter {
     AuthCode toEntity(String email, String authCode);
     SendAuthCodeResponse toResponse(SendAuthCodeDto sendAuthCodeDto);
     SendAuthCodeDto toDto(String code);
+    SendEmailDto toEmailDto(String email);
 }
