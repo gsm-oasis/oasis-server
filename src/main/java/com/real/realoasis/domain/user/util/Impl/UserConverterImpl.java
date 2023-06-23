@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.user.util.Impl;
 
+import com.real.realoasis.domain.couple.domain.entity.CoupleAnniversaryDate;
 import com.real.realoasis.domain.couple.domain.entity.Couple;
 import com.real.realoasis.domain.heart.domain.entity.Heart;
 import com.real.realoasis.domain.user.presentation.data.dto.ConnectCoupleDto;
@@ -41,10 +42,18 @@ public class UserConverterImpl implements UserConverter {
                 "0000",
                 "0000",
                 0,
-                '0',
+                0,
                 currentUser,
                 coupleUser,
                 new Heart(0, 1)
+        );
+    }
+
+    @Override
+    public CoupleAnniversaryDate toEntity(Couple couple) {
+        return new CoupleAnniversaryDate(
+                0,
+                couple
         );
     }
 }

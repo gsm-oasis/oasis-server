@@ -66,4 +66,11 @@ public class MailConverterImpl implements MailConverter {
                 .sentCode(code)
                 .build();
     }
+
+    @Override
+    public SendEmailDto toEmailDto(String email) {
+        return SendEmailDto.builder()
+                .email(email)
+                .build();
+    }
 }

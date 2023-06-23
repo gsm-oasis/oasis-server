@@ -5,6 +5,7 @@ import com.real.realoasis.domain.auth.presentation.data.dto.*;
 import com.real.realoasis.domain.auth.presentation.data.request.LoginRequest;
 import com.real.realoasis.domain.auth.presentation.data.request.SearchPwRequest;
 import com.real.realoasis.domain.auth.presentation.data.request.SignUpRequest;
+import com.real.realoasis.domain.auth.presentation.data.response.SendEmailResponse;
 import com.real.realoasis.domain.auth.presentation.data.response.SignupResponse;
 import com.real.realoasis.domain.auth.presentation.data.response.RefreshTokenResponse;
 import com.real.realoasis.domain.auth.presentation.data.response.TokenResponse;
@@ -31,4 +32,5 @@ public interface AuthConverter {
 
     CoupleCodeDto toDto(String code);
     RefreshToken toEntity(String id, String refreshToken);
+    SendEmailResponse toResponse(SendEmailDto sendEmailDto);
 }
