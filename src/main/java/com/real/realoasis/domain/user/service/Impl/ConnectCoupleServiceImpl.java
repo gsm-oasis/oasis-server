@@ -22,7 +22,6 @@ public class ConnectCoupleServiceImpl implements ConnectCoupleService {
     private final UserConverter userConverter;
     private final CoupleRepository coupleRepository;
     private final UserRepository userRepository;
-    private final CoupleAnniversaryDateRepository coupleAnniversaryDateRepository;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
