@@ -3,7 +3,7 @@ package com.real.realoasis.domain.auth.service.Impl;
 import com.real.realoasis.domain.auth.domain.entity.AuthCode;
 import com.real.realoasis.domain.auth.domain.repository.AuthCodeRepository;
 import com.real.realoasis.domain.auth.presentation.data.dto.CreateMessageDto;
-import com.real.realoasis.domain.auth.presentation.data.dto.SendAuthCodeDto;
+import com.real.realoasis.domain.auth.presentation.data.dto.SendEmailDto;
 import com.real.realoasis.domain.auth.service.SendAuthCodeService;
 import com.real.realoasis.domain.auth.util.MailConverter;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +26,7 @@ public class SenAuthCodeServiceImpl implements SendAuthCodeService {
     private final SpringTemplateEngine templateEngine;
 
     @Override
-    public SendAuthCodeDto send(String email) throws MessagingException, UnsupportedEncodingException {
+    public SendEmailDto send(String email) throws MessagingException, UnsupportedEncodingException {
         //메일전송에 필요한 정보 설정
         CreateMessageDto createMessageDto = createEmailForm(email);
         //실제 메일 전송
@@ -35,7 +35,7 @@ public class SenAuthCodeServiceImpl implements SendAuthCodeService {
         AuthCode authCode = mailConverter.toEntity(email, createMessageDto.getAuthCode());
         authCodeRepository.save(authCode);
 
-        return mailConverter.toDto(authCode.getCode());
+        return mailConverter.toEmailDto(email);
 
     }
 
