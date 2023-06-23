@@ -29,7 +29,6 @@ public class User extends BaseIdEntity {
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     private Couple couple;
 
     public void updateIsCouple() {
