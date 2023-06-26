@@ -23,7 +23,7 @@ public interface AuthConverter {
 
     LoginDto toDto(LoginRequest loginRequest);
 
-    TokenDto toDto(String accessToken, String refreshToken, LocalDateTime accessExp, LocalDateTime refreshExp, User user);
+    TokenDto toDto(String accessToken, String refreshToken, LocalDateTime expiredAt, User user);
 
     TokenResponse toResponse(TokenDto tokenDto);
     RefreshTokenResponse toResponse(RefreshTokenDto tokenDto);

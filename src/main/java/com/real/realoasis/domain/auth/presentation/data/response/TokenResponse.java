@@ -13,8 +13,7 @@ import java.time.LocalDateTime;
 public class TokenResponse {
     private final String accessToken;
     private final String refreshToken;
-    private final LocalDateTime accessExp;
-    private final LocalDateTime refreshExp;
+    private final LocalDateTime expiredAt;
     private final String coupleCode;
-    private final boolean isCouple;
+    private final Boolean isCouple;
 }

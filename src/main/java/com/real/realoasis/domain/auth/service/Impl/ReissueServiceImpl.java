@@ -4,11 +4,8 @@ import com.real.realoasis.domain.auth.domain.entity.RefreshToken;
 import com.real.realoasis.domain.auth.domain.repository.RefreshTokenRepository;
 import com.real.realoasis.domain.auth.exception.ExpiredTokenException;
 import com.real.realoasis.domain.auth.presentation.data.dto.RefreshTokenDto;
-import com.real.realoasis.domain.auth.presentation.data.dto.TokenDto;
 import com.real.realoasis.domain.auth.service.ReissueService;
 import com.real.realoasis.domain.auth.util.AuthConverter;
-import com.real.realoasis.domain.couple.domain.entity.Couple;
-import com.real.realoasis.domain.couple.domain.repository.CoupleRepository;
 import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.global.error.type.ErrorCode;
@@ -46,14 +43,12 @@ public class ReissueServiceImpl implements ReissueService {
     private RefreshTokenDto makeTokenDto(User user){
         String accessToken = jwtTokenProvider.generateAccessToken(user.getId());
         String refreshToken = jwtTokenProvider.generateRefreshToken(user.getId());
-        LocalDateTime accessExp = jwtTokenProvider.getAccessTokenExpiredTime();
-        LocalDateTime refreshExp = jwtTokenProvider.getRefreshTokenExpiredTime();
+        LocalDateTime expiredAt = jwtTokenProvider.getAccessTokenExpiredTime();
 
         return new RefreshTokenDto(
                 accessToken,
                 refreshToken,
-                accessExp,
-                refreshExp
+                expiredAt
         );
     }
 }

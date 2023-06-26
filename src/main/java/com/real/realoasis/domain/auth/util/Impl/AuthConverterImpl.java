@@ -60,14 +60,13 @@ public class AuthConverterImpl implements AuthConverter {
     }
 
     @Override
-    public TokenDto toDto(String accessToken, String refreshToken, LocalDateTime accessExp, LocalDateTime refreshExp, User user) {
+    public TokenDto toDto(String accessToken, String refreshToken, LocalDateTime expiredAt, User user) {
         return TokenDto.builder()
                 .accessToken(accessToken)
                 .refreshToken(refreshToken)
-                .accessExp(accessExp)
-                .refreshExp(refreshExp)
+                .expiredAt(expiredAt)
                 .coupleCode(user.getCoupleCode())
-                .isCouple(user.isCouple())
+                .isCouple(user.getIsCouple())
                 .build();
     }
 
@@ -76,7 +75,7 @@ public class AuthConverterImpl implements AuthConverter {
         return RefreshTokenResponse.builder()
                 .accessToken(tokenDto.getAccessToken())
                 .refreshToken(tokenDto.getRefreshToken())
-                .accessExp(tokenDto.getAccessExp())
+                .expiredAt(tokenDto.getExpiredAt())
                 .build();
     }
 
@@ -85,9 +84,9 @@ public class AuthConverterImpl implements AuthConverter {
         return TokenResponse.builder()
                 .accessToken(tokenDto.getAccessToken())
                 .refreshToken(tokenDto.getRefreshToken())
-                .accessExp(tokenDto.getAccessExp())
+                .expiredAt(tokenDto.getExpiredAt())
                 .coupleCode(tokenDto.getCoupleCode())
-                .isCouple(tokenDto.isCouple())
+                .isCouple(tokenDto.getIsCouple())
                 .build();
     }
 

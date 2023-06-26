@@ -23,7 +23,7 @@ public class User extends BaseIdEntity {
     private String password;
     @Column(nullable = false)
     private String nickname;
-    private boolean isCouple;
+    private Boolean isCouple;
     @Column(nullable = false)
     private String coupleCode;
 
