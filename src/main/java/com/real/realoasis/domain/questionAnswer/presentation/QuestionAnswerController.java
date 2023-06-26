@@ -22,7 +22,7 @@ public class QuestionAnswerController {
     private final GetQuestionAnswerListService getQuestionAnswerListService;
     private final QuestionAnswerConverter questionAnswerConverter;
 
-    @PostMapping("/answer/{questionId}")
+    @PostMapping("/{questionId}")
     public ResponseEntity<Void> createAnswer(@PathVariable Long questionId, @RequestBody QuestionAnswerWriteRequest questionAnswerRequest){
         CreateDto createDto = questionAnswerConverter.toDto(questionAnswerRequest);
         createQuestionAnswerService.createQuestionAnswer(createDto, questionId);
