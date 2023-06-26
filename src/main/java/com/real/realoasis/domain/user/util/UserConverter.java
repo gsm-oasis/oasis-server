@@ -3,6 +3,7 @@ package com.real.realoasis.domain.user.util;
 import com.real.realoasis.domain.couple.domain.entity.CoupleAnniversaryDate;
 import com.real.realoasis.domain.couple.domain.entity.FixedAnniversaryDate;
 import com.real.realoasis.domain.couple.domain.entity.Couple;
+import com.real.realoasis.domain.heart.domain.entity.Heart;
 import com.real.realoasis.domain.user.presentation.data.dto.ConnectCoupleDto;
 import com.real.realoasis.domain.user.presentation.data.dto.ConnectCoupleResDto;
 import com.real.realoasis.domain.user.domain.entity.User;
@@ -17,7 +18,7 @@ public interface UserConverter {
 
     ConnectCoupleResponse toResponse(ConnectCoupleResDto connectCoupleResDto);
 
-    Couple toEntity(User currentUser, User coupleUser);
+    Couple toEntity(User currentUser, User coupleUser, Heart heart);
 
     CoupleAnniversaryDate toEntity(Couple couple);
 }

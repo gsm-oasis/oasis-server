@@ -4,6 +4,8 @@ import com.real.realoasis.domain.couple.domain.entity.Couple;
 import com.real.realoasis.domain.couple.domain.repository.CoupleAnniversaryDateRepository;
 import com.real.realoasis.domain.couple.domain.repository.FixedAnniversaryDateRepository;
 import com.real.realoasis.domain.couple.domain.repository.CoupleRepository;
+import com.real.realoasis.domain.heart.domain.entity.Heart;
+import com.real.realoasis.domain.heart.domain.repository.HeartRepository;
 import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.domain.repository.UserRepository;
 import com.real.realoasis.domain.user.facade.UserFacade;
@@ -22,13 +24,16 @@ public class ConnectCoupleServiceImpl implements ConnectCoupleService {
     private final UserConverter userConverter;
     private final CoupleRepository coupleRepository;
     private final UserRepository userRepository;
+    private final HeartRepository heartRepository;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
     public ConnectCoupleResDto connectCouple(ConnectCoupleDto connectCoupleDto) {
         User currentUser = userFacade.currentUser();
         User coupleUser = userRepository.findByCoupleCode(connectCoupleDto.getCode());
-        Couple couple = userConverter.toEntity(currentUser, coupleUser);
+        Heart heart = new Heart(0, 1);
+        heartRepository.save(heart);
+        Couple couple = userConverter.toEntity(currentUser, coupleUser, heart);
 
         coupleRepository.save(couple);
 

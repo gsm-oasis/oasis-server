@@ -37,7 +37,7 @@ public class UserConverterImpl implements UserConverter {
     }
 
     @Override
-    public Couple toEntity(User currentUser, User coupleUser) {
+    public Couple toEntity(User currentUser, User coupleUser, Heart heart) {
         return new Couple(
                 "0000",
                 "0000",
@@ -45,7 +45,7 @@ public class UserConverterImpl implements UserConverter {
                 0,
                 currentUser,
                 coupleUser,
-                new Heart(0, 1)
+                heart
         );
     }
 
