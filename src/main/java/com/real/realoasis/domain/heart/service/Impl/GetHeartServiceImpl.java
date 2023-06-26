@@ -20,12 +20,14 @@ import org.springframework.stereotype.Service;
 public class GetHeartServiceImpl implements GetHeartService {
     private final UserFacade userFacade;
     private final HeartConverter heartConverter;
+    private final HeartUtil heartUtil;
 
     @Override
     public HeartDto getHeart() {
         User currentUser = userFacade.currentUser();
         Couple couple = currentUser.getCouple();
+        int max = heartUtil.getMax(couple.getHeart().getLevel());
 
-        return heartConverter.toDto(couple);
+        return heartConverter.toDto(couple, max);
     }
 }

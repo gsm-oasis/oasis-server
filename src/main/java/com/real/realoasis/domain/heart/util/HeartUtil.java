@@ -1,5 +1,9 @@
 package com.real.realoasis.domain.heart.util;
 
 
-public interface HeartUtil {
+import org.springframework.stereotype.Component;
+
+
+public interface HeartUtil{
+    int getMax(int level);
 }

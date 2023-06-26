@@ -6,7 +6,7 @@ import com.real.realoasis.domain.heart.presentation.data.response.HeartResponse;
 
 
 public interface HeartConverter {
-    HeartDto toDto(Couple couple);
+    HeartDto toDto(Couple couple, int max);
 
     HeartResponse toResponse(HeartDto heartDto);
 }

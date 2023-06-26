@@ -10,4 +10,5 @@ import lombok.RequiredArgsConstructor;
 public class HeartResponse {
     private final int level;
     private final long levelBar;
+    private final int max;
 }

@@ -9,10 +9,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class HeartConverterImpl implements HeartConverter {
     @Override
-    public HeartDto toDto(Couple couple) {
+    public HeartDto toDto(Couple couple, int max) {
         return HeartDto.builder()
                 .level(couple.getHeart().getLevel())
                 .levelBar(couple.getHeart().getLevelBar())
+                .max(max)
                 .build();
     }
 
