@@ -22,6 +22,7 @@ public class HeartConverterImpl implements HeartConverter {
         return HeartResponse.builder()
                 .level(heartDto.getLevel())
                 .levelBar(heartDto.getLevelBar())
+                .max(heartDto.getMax())
                 .build();
     }
 }
