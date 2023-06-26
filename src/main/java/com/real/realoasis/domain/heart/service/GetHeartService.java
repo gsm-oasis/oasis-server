@@ -1,7 +1,7 @@
 package com.real.realoasis.domain.heart.service;
 
-import com.real.realoasis.domain.heart.presentation.data.response.HeartResponse;
+import com.real.realoasis.domain.heart.presentation.data.dto.HeartDto;
 
 public interface GetHeartService {
-    HeartResponse getHeart();
+    HeartDto getHeart();
 }

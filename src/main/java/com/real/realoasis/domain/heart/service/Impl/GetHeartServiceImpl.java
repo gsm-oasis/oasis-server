@@ -22,11 +22,10 @@ public class GetHeartServiceImpl implements GetHeartService {
     private final HeartConverter heartConverter;
 
     @Override
-    public HeartResponse getHeart() {
+    public HeartDto getHeart() {
         User currentUser = userFacade.currentUser();
         Couple couple = currentUser.getCouple();
 
-        HeartDto heartDto = heartConverter.toDto(couple);
-        return heartConverter.toResponse(heartDto);
+        return heartConverter.toDto(couple);
     }
 }

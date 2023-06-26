@@ -9,4 +9,5 @@ import lombok.RequiredArgsConstructor;
 @Builder
 public class HeartResponse {
     private final int level;
+    private final long levelBar;
 }
