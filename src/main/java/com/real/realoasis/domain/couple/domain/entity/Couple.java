@@ -54,4 +54,8 @@ public class Couple extends BaseIdEntity {
     public void updateAnniversaryTime(long anniversaryDate) {
         this.anniversaryDate = anniversaryDate;
     }
+
+    public void updateUserB(User currentUser) {
+        this.userB = currentUser;
+    }
 }

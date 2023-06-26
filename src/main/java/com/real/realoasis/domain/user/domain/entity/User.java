@@ -42,4 +42,8 @@ public class User extends BaseIdEntity {
     public void updatePassword(String password) {
         this.password = password;
     }
+
+    public void updateCouple(Couple couple) {
+        this.couple = couple;
+    }
 }
