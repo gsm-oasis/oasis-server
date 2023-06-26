@@ -7,6 +7,7 @@ import com.real.realoasis.domain.diary.service.CreateDiaryService;
 import com.real.realoasis.domain.diary.util.DiaryConverter;
 import com.real.realoasis.domain.heart.domain.entity.Heart;
 import com.real.realoasis.domain.image.domain.entity.Image;
+import com.real.realoasis.domain.image.domain.repository.ImageRepository;
 import com.real.realoasis.domain.image.service.ImageService;
 import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
@@ -25,6 +26,7 @@ public class CreateDiaryServiceImpl implements CreateDiaryService {
     private final DiaryConverter diaryConverter;
     private final ImageService imageService;
     private final DiaryFacade diaryFacade;
+    private final ImageRepository imageRepository;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -36,10 +38,9 @@ public class CreateDiaryServiceImpl implements CreateDiaryService {
         List<String> imgUrlList = imageService.upload(files);
         //파일이 존재할 때만 처리
         if(!imgUrlList.isEmpty()) {
-            List<Image> list = new ArrayList<>();
             for(String imgUrl : imgUrlList) {
                 Image image = new Image(imgUrl, diary);
-                list.add(image);
+                imageRepository.save(image);
             }
         }
         diaryFacade.saveDiary(diary);
