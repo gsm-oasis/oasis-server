@@ -32,7 +32,7 @@ public class CoupleController {
         List<DiaryResponse> diaryResponseList = mainPageDto.getDiaryListDtoList().stream()
                 .map(diaryConverter::toResponse)
                 .collect(Collectors.toList());
-        MainPageResponse mainPageResponse = coupleConverter.toResponse(mainPageDto, diaryConverter.toListResponse(diaryResponseList));
+        MainPageResponse mainPageResponse = coupleConverter.toResponse(mainPageDto, diaryResponseList);
         return new ResponseEntity<>( mainPageResponse, HttpStatus.OK);
     }
 

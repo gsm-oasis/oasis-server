@@ -1,6 +1,7 @@
 package com.real.realoasis.domain.user.presentation.data.response;
 
 import com.real.realoasis.domain.diary.presentation.data.response.DiaryListResponse;
+import com.real.realoasis.domain.diary.presentation.data.response.DiaryResponse;
 import lombok.*;
 
 import java.util.List;
@@ -16,5 +17,5 @@ public class MainPageResponse {
     private final int anniversary;
     private final Long questionId;
     private final String content;
-    private final DiaryListResponse diarys;
+    private final List<DiaryResponse> diaries;
 }

@@ -2,6 +2,7 @@ package com.real.realoasis.domain.couple.util.impl;
 
 import com.real.realoasis.domain.couple.domain.entity.Couple;
 import com.real.realoasis.domain.diary.presentation.data.response.DiaryListResponse;
+import com.real.realoasis.domain.diary.presentation.data.response.DiaryResponse;
 import com.real.realoasis.domain.diary.service.GetDiaryListService;
 import com.real.realoasis.domain.question.domain.entity.Question;
 import com.real.realoasis.domain.user.presentation.data.dto.EnterDto;
@@ -12,6 +13,8 @@ import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.domain.couple.util.CoupleConverter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 @RequiredArgsConstructor
@@ -34,7 +37,7 @@ public class CoupleConverterImpl implements CoupleConverter {
     }
 
     @Override
-    public MainPageResponse toResponse(MainPageDto mainPageDto, DiaryListResponse diaryResponseList) {
+    public MainPageResponse toResponse(MainPageDto mainPageDto, List<DiaryResponse> diaryResponseList) {
         return MainPageResponse.builder()
                 .nickname(mainPageDto.getNickname())
                 .coupleNickname(mainPageDto.getCoupleNickname())
@@ -43,7 +46,7 @@ public class CoupleConverterImpl implements CoupleConverter {
                 .anniversary(mainPageDto.getAnniversary())
                 .questionId(mainPageDto.getQuestionId())
                 .content(mainPageDto.getContent())
-                .diarys(diaryResponseList)
+                .diaries(diaryResponseList)
                 .build();
     }
 

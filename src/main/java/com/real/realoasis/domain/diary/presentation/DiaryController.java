@@ -67,12 +67,11 @@ public class DiaryController {
 
     //일기 리스트
     @GetMapping("/list")
-    public ResponseEntity<DiaryListResponse> getList(){
+    public ResponseEntity<List<DiaryResponse>> getList(){
         List<DiaryDto> diaryDtoList = getDiaryListService.getList();
         List<DiaryResponse> diaryResponseList = diaryDtoList.stream()
                 .map(diaryConverter::toResponse)
                 .collect(Collectors.toList());
-        DiaryListResponse diaryListPageResponse = diaryConverter.toListResponse(diaryResponseList);
-        return new ResponseEntity<>(diaryListPageResponse, HttpStatus.OK);
+        return new ResponseEntity<>(diaryResponseList, HttpStatus.OK);
     }
 }
