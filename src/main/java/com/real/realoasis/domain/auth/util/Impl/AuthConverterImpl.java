@@ -41,6 +41,7 @@ public class AuthConverterImpl implements AuthConverter {
                 .password(password)
                 .nickname(signupDto.getNickname())
                 .coupleCode(coupleCode)
+                .isCouple(false)
                 .build();
     }
 
