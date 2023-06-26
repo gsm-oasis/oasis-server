@@ -43,9 +43,8 @@ public class LoginServiceImpl implements LoginService {
     private TokenDto makeTokenDto(User user){
         String accessToken = jwtTokenProvider.generateAccessToken(user.getId());
         String refreshToken = jwtTokenProvider.generateRefreshToken(user.getId());
-        LocalDateTime accessExp = jwtTokenProvider.getAccessTokenExpiredTime();
-        LocalDateTime refreshExp = jwtTokenProvider.getRefreshTokenExpiredTime();
+        LocalDateTime expiredAt = jwtTokenProvider.getAccessTokenExpiredTime();
 
-        return authConverter.toDto(accessToken, refreshToken, accessExp, refreshExp, user);
+        return authConverter.toDto(accessToken, refreshToken, expiredAt, user);
     }
 }
