@@ -20,5 +20,5 @@ public interface UserConverter {
 
     Couple toEntity(User currentUser, User coupleUser, Heart heart);
 
-    CoupleAnniversaryDate toEntity(Couple couple);
+    CoupleAnniversaryDate toEntity(String anniversaryDate, Couple couple);
 }

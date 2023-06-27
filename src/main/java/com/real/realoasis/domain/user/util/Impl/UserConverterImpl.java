@@ -50,10 +50,11 @@ public class UserConverterImpl implements UserConverter {
     }
 
     @Override
-    public CoupleAnniversaryDate toEntity(Couple couple) {
+    public CoupleAnniversaryDate toEntity(String anniversaryDate, Couple couple) {
         return new CoupleAnniversaryDate(
-                0,
+                anniversaryDate,
                 couple
         );
     }
+
 }
