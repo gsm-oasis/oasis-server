@@ -42,7 +42,6 @@ public class UserConverterImpl implements UserConverter {
                 "0000",
                 "0000",
                 0,
-                0,
                 currentUser,
                 coupleUser,
                 heart

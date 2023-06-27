@@ -1,7 +1,6 @@
 package com.real.realoasis.domain.couple.util.impl;
 
 import com.real.realoasis.domain.couple.domain.entity.Couple;
-import com.real.realoasis.domain.diary.presentation.data.response.DiaryListResponse;
 import com.real.realoasis.domain.diary.presentation.data.response.DiaryResponse;
 import com.real.realoasis.domain.diary.service.GetDiaryListService;
 import com.real.realoasis.domain.question.domain.entity.Question;
@@ -23,13 +22,14 @@ public class CoupleConverterImpl implements CoupleConverter {
     private final GetDiaryListService getDiaryListService;
 
     @Override
-    public MainPageDto toDto(Couple couple, Question question) {
+    public MainPageDto toDto(Couple couple, Question question, long daysLeft) {
         return MainPageDto.builder()
                 .nickname(couple.getUserA().getNickname())
                 .coupleNickname(couple.getUserB().getNickname())
                 .heartLevel(couple.getHeart().getLevel())
                 .datingDate(couple.getDatingDate())
                 .anniversary(userFacade.getAnniversary(couple.getDatingDate()))
+                .daysLeft(daysLeft)
                 .questionId(question.getIdx())
                 .content(question.getContent())
                 .diaryListDtoList(getDiaryListService.getList())
@@ -44,6 +44,7 @@ public class CoupleConverterImpl implements CoupleConverter {
                 .heartLevel(mainPageDto.getHeartLevel())
                 .datingDate(mainPageDto.getDatingDate())
                 .anniversary(mainPageDto.getAnniversary())
+                .daysLeft(mainPageDto.getDaysLeft())
                 .questionId(mainPageDto.getQuestionId())
                 .content(mainPageDto.getContent())
                 .diaries(diaryResponseList)

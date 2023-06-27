@@ -1,12 +1,9 @@
 package com.real.realoasis.domain.user.util.Impl;
 
-import com.real.realoasis.domain.couple.domain.entity.Couple;
-import com.real.realoasis.domain.user.presentation.data.dto.AnniversaryTimeChangeDto;
 import com.real.realoasis.domain.user.presentation.data.dto.NicknameChangeDto;
 import com.real.realoasis.domain.user.presentation.data.dto.PasswordChangeDto;
 import com.real.realoasis.domain.user.presentation.data.dto.SettingResDto;
 import com.real.realoasis.domain.user.domain.entity.User;
-import com.real.realoasis.domain.user.presentation.data.request.AnniversaryTimeChangeRequest;
 import com.real.realoasis.domain.user.presentation.data.request.NicknameChangeRequest;
 import com.real.realoasis.domain.user.presentation.data.request.PasswordChangeRequest;
 import com.real.realoasis.domain.user.presentation.data.response.SettingResponse;
@@ -18,9 +15,8 @@ import org.springframework.stereotype.Component;
 @RequiredArgsConstructor
 public class UserSettingConverterImpl implements UserSettingConverter {
     @Override
-    public SettingResDto toSettingResDto(User user, Couple couple) {
+    public SettingResDto toSettingResDto(User user) {
         return SettingResDto.builder()
-                .anniversaryDate(couple.getAnniversaryDate())
                 .myCode(user.getCoupleCode())
                 .version("1.0")
                 .build();
@@ -29,7 +25,6 @@ public class UserSettingConverterImpl implements UserSettingConverter {
     @Override
     public SettingResponse toSettingResponse(SettingResDto settingResDto) {
         return SettingResponse.builder()
-                .anniversaryDate(settingResDto.getAnniversaryDate())
                 .myCode(settingResDto.getMyCode())
                 .version(settingResDto.getVersion())
                 .build();
@@ -47,13 +42,6 @@ public class UserSettingConverterImpl implements UserSettingConverter {
         return PasswordChangeDto.builder()
                 .originalPassword(passwordChangeRequest.getOriginalPassword())
                 .password(passwordChangeRequest.getPassword())
-                .build();
-    }
-
-    @Override
-    public AnniversaryTimeChangeDto toAnniversaryTimeChangeDto(AnniversaryTimeChangeRequest anniversaryTimeChangeRequest) {
-        return AnniversaryTimeChangeDto.builder()
-                .anniversaryTime(anniversaryTimeChangeRequest.getAnniversaryTime())
                 .build();
     }
 }

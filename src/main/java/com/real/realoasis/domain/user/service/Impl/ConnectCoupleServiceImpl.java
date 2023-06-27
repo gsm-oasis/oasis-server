@@ -1,8 +1,6 @@
 package com.real.realoasis.domain.user.service.Impl;
 
 import com.real.realoasis.domain.couple.domain.entity.Couple;
-import com.real.realoasis.domain.couple.domain.repository.CoupleAnniversaryDateRepository;
-import com.real.realoasis.domain.couple.domain.repository.FixedAnniversaryDateRepository;
 import com.real.realoasis.domain.couple.domain.repository.CoupleRepository;
 import com.real.realoasis.domain.heart.domain.entity.Heart;
 import com.real.realoasis.domain.heart.domain.repository.HeartRepository;

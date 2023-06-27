@@ -1,6 +1,7 @@
 package com.real.realoasis.domain.user.service.Impl;
 
 import com.real.realoasis.domain.couple.domain.entity.Couple;
+import com.real.realoasis.domain.couple.domain.repository.CoupleAnniversaryDateRepository;
 import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.domain.user.presentation.data.dto.SettingResDto;
@@ -19,9 +20,7 @@ public class GetSettingServiceImpl implements GetSettingService {
     @Override
     public SettingResponse getSetting() {
         User currentUser = userFacade.currentUser();
-        Couple couple = currentUser.getCouple();
-
-        SettingResDto settingResDto = userSettingConverter.toSettingResDto(currentUser, couple);
+        SettingResDto settingResDto = userSettingConverter.toSettingResDto(currentUser);
         return userSettingConverter.toSettingResponse(settingResDto);
     }
 }

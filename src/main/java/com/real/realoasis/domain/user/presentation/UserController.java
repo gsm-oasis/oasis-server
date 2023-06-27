@@ -1,7 +1,6 @@
 package com.real.realoasis.domain.user.presentation;
 
 import com.real.realoasis.domain.user.presentation.data.dto.*;
-import com.real.realoasis.domain.user.presentation.data.request.AnniversaryTimeChangeRequest;
 import com.real.realoasis.domain.user.presentation.data.request.ConnectCoupleRequest;
 import com.real.realoasis.domain.user.presentation.data.request.NicknameChangeRequest;
 import com.real.realoasis.domain.user.presentation.data.request.PasswordChangeRequest;
