@@ -14,10 +14,10 @@ import javax.persistence.Entity;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class FixedAnniversaryDate extends BaseIdEntity {
     @Column(nullable = false)
-    private long anniversaryDate;
+    private String anniversaryDate;
 
     @Builder
-    public FixedAnniversaryDate(long anniversaryDate) {
+    public FixedAnniversaryDate(String anniversaryDate) {
         this.anniversaryDate = anniversaryDate;
     }
 }

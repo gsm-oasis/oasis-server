@@ -16,14 +16,14 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CoupleAnniversaryDate extends BaseIdEntity {
     @Column(nullable = false)
-    private long anniversaryDate;
+    private String anniversaryDate;
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Couple couple;
 
     @Builder
-    public CoupleAnniversaryDate(long anniversaryDate, Couple couple) {
+    public CoupleAnniversaryDate(String anniversaryDate, Couple couple) {
         this.anniversaryDate = anniversaryDate;
         this. couple = couple;
     }
