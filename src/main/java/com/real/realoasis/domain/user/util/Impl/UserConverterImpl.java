@@ -37,11 +37,12 @@ public class UserConverterImpl implements UserConverter {
     }
 
     @Override
-    public Couple toEntity(User currentUser, User coupleUser, Heart heart) {
+    public Couple toEntity(User currentUser, User coupleUser, Heart heart, String registeredDay) {
         return new Couple(
                 "0000",
                 "0000",
                 0,
+                registeredDay,
                 currentUser,
                 coupleUser,
                 heart
