@@ -41,8 +41,8 @@ public class ReissueServiceImpl implements ReissueService {
     }
 
     private RefreshTokenDto makeTokenDto(User user){
-        String accessToken = jwtTokenProvider.generateAccessToken(user.getId());
-        String refreshToken = jwtTokenProvider.generateRefreshToken(user.getId());
+        String accessToken = jwtTokenProvider.generateAccessToken(user.getUserId());
+        String refreshToken = jwtTokenProvider.generateRefreshToken(user.getUserId());
         LocalDateTime expiredAt = jwtTokenProvider.getAccessTokenExpiredTime();
 
         return new RefreshTokenDto(

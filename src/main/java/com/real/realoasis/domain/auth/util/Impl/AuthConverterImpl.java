@@ -36,7 +36,7 @@ public class AuthConverterImpl implements AuthConverter {
     public User toEntity(SignupDto signupDto, String coupleCode) {
         String password = passwordEncoder.encode(signupDto.getPassword());
         return User.builder()
-                .id(signupDto.getId())
+                .userId(signupDto.getId())
                 .email(signupDto.getEmail())
                 .password(password)
                 .nickname(signupDto.getNickname())

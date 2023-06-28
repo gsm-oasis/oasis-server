@@ -15,6 +15,10 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.PrePersist;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 @Service
 @RequiredArgsConstructor
 public class ConnectCoupleServiceImpl implements ConnectCoupleService {
@@ -33,8 +37,9 @@ public class ConnectCoupleServiceImpl implements ConnectCoupleService {
         Couple couple;
         heartRepository.save(heart);
 
+        String registeredDay = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
         if(coupleUser.getCouple() == null)
-            couple = userConverter.toEntity(currentUser, coupleUser, heart);
+            couple = userConverter.toEntity(currentUser, coupleUser, heart, registeredDay);
         else {
             couple = coupleUser.getCouple();
             couple.updateUserB(currentUser);

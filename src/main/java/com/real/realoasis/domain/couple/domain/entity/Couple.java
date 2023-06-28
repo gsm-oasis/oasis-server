@@ -22,6 +22,8 @@ public class Couple extends BaseIdEntity {
     private String today;
     @Column(nullable = false)
     private long datingDate;
+    @Column(nullable = false)
+    private String registeredDay;
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)

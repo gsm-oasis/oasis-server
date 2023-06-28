@@ -36,11 +36,14 @@ public class MainPageServiceImpl implements MainPageService {
         couple.today();
 
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
-        LocalDate firstDayToLocalDate = LocalDate.parse(couple.getStartDay(), dateFormat);
+        LocalDate startDayToLocalDate = LocalDate.parse(couple.getStartDay(), dateFormat);
         LocalDate todayToLocalDate = LocalDate.parse(couple.getToday(), dateFormat);
-        long datingDate = ChronoUnit.DAYS.between(firstDayToLocalDate, todayToLocalDate) + 1;
+        long datingDate = ChronoUnit.DAYS.between(startDayToLocalDate, todayToLocalDate) + 1;
         couple.updateDatingDate(datingDate);
-        Question question = questionAnswerFacade.findQuestionByQuestionId(datingDate);
+
+        LocalDate registeredDate = LocalDate.parse(couple.getRegisteredDay(), dateFormat);
+        long questionIdx = ChronoUnit.DAYS.between(registeredDate, todayToLocalDate);
+        Question question = questionAnswerFacade.findQuestionByQuestionId(questionIdx);
 
         List<CoupleAnniversaryDate> coupleAnniversaryDateList = coupleAnniversaryDateRepository.findAllByCouple(couple);
         LocalDate coupleAnniversaryDate = null;
