@@ -1,17 +1,17 @@
 spring:
   mail:
-    host: ${MAIL_HOST}
-    port: ${MAIL_PORT}
+    host: smtp.naver.com
+    port: 465
     username: ${MAIL_USERNAME}
     password: ${MAIL_PASSWORD}
     properties:
       mail:
         smtp:
           starttls:
-            enable: ${MAIL_ENABLE}
-            auth: ${MAIL_AUTH}
+            enable: true
+            auth: true
           ssl:
-            enable: ${MAIL_SSL_ENABLE}
+            enable: true
 
   datasource:
     driver-class-name: ${DB_DRIVER}
@@ -20,20 +20,20 @@ spring:
     password: ${DB_PASSWORD}
 
   main:
-    allow-bean-definition-overriding: ${MAIN_OVERRIDING}
+    allow-bean-definition-overriding: true
 
   jpa:
     hibernate:
-      ddl-auto: ${JPA_DDL}
-    defer-datasource-initialization: ${JPA_INITIAL}
+      ddl-auto: update
+    defer-datasource-initialization: true
 
   servlet:
      multipart:
-       max-request-size: ${MAX_REQ_SIZE}
-       max-file-size: ${MAX_FILE_SIZE}
+       max-request-size: 100MB
+       max-file-size: 100MB
 
   cache:
-    type: ${REDIS}
+    type: redis
   redis:
     host: ${REDIS_HOST}
     port: ${REDIS_PORT}
@@ -50,11 +50,11 @@ server:
 cloud:
   aws:
     region:
-      static : ${AWS_REGION}
+      static : ap-northeast-2
     stack:
-      auto: ${AWS_STACK}
+      auto: false
     credentials:
-      instance-profile: ${AWS_PROFILE}
+      instance-profile: false
       access-key: ${AWS_ACCESS_KEY}
       secret-key: ${AWS_SECRET_KEY}
     s3:
