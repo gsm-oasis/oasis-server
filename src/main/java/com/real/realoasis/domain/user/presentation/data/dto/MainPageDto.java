@@ -15,6 +15,7 @@ public class MainPageDto {
     private final String coupleNickname;
     private final int heartLevel;
     private final long datingDate;
+    private final long daysLeft;
     private final int anniversary;
     private final Long questionId;
     private final String content;

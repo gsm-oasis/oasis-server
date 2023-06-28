@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 @Builder
 @Getter
 public class SettingResDto {
-    private final long anniversaryDate;
     private final String version;
     private final String myCode;
 }

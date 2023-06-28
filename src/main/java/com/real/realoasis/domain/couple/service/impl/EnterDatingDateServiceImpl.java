@@ -33,7 +33,7 @@ public class EnterDatingDateServiceImpl implements EnterDatingDateService {
         LocalDate firstDayToLocalDate = LocalDate.parse(couple.getStartDay(), dateFormat);
         LocalDate todayToLocalDate = LocalDate.parse(couple.getToday(), dateFormat);
 
-        long datingDate = ChronoUnit.DAYS.between(firstDayToLocalDate, todayToLocalDate);
+        long datingDate = ChronoUnit.DAYS.between(firstDayToLocalDate, todayToLocalDate) + 1;
 
         couple.updateDatingDate(datingDate);
     }

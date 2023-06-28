@@ -7,9 +7,7 @@ import com.real.realoasis.domain.couple.exception.CoupleNotFoundException;
 import com.real.realoasis.domain.diary.exception.DiaryNotFoundException;
 import com.real.realoasis.domain.question.exception.QuestionNotFoundException;
 import com.real.realoasis.domain.questionAnswer.exception.QuestionAnswerNotFoundException;
-import com.real.realoasis.domain.user.exception.DuplicateIdException;
-import com.real.realoasis.domain.user.exception.PasswordNotMatchException;
-import com.real.realoasis.domain.user.exception.UserNotFoundException;
+import com.real.realoasis.domain.user.exception.*;
 import com.real.realoasis.global.error.response.ErrorResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -79,5 +77,18 @@ public class GlobalException {
         ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode());
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
     }
+
+    @ExceptionHandler(IsNotCoupleUserException.class)
+    public ResponseEntity<ErrorResponse> IsNotCoupleUserException(IsNotCoupleUserException e) {
+        ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode());
+        return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(DuplicateAnniversaryDateException.class)
+    public ResponseEntity<ErrorResponse> DuplicateAnniversaryDateException(DuplicateAnniversaryDateException e) {
+        ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode());
+        return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
 
 }

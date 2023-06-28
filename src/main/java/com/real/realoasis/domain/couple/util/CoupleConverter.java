@@ -12,7 +12,7 @@ import com.real.realoasis.domain.user.presentation.data.response.MainPageRespons
 import java.util.List;
 
 public interface CoupleConverter {
-    MainPageDto toDto(Couple couple, Question question);
+    MainPageDto toDto(Couple couple, Question question, long daysLeft);
     MainPageResponse toResponse(MainPageDto mainPageDto, List<DiaryResponse> diaryResponseList);
 
     EnterDto toEnterDto(DatingDateEnterRequest datingDateEnterRequest);

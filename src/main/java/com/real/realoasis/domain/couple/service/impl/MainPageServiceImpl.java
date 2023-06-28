@@ -1,8 +1,8 @@
 package com.real.realoasis.domain.couple.service.impl;
 
 import com.real.realoasis.domain.couple.domain.entity.Couple;
-import com.real.realoasis.domain.couple.domain.repository.CoupleRepository;
-import com.real.realoasis.domain.heart.util.HeartUtil;
+import com.real.realoasis.domain.couple.domain.entity.CoupleAnniversaryDate;
+import com.real.realoasis.domain.couple.domain.repository.CoupleAnniversaryDateRepository;
 import com.real.realoasis.domain.question.domain.entity.Question;
 import com.real.realoasis.domain.questionAnswer.facade.QuestionAnswerFacade;
 import com.real.realoasis.domain.user.presentation.data.dto.MainPageDto;
@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Objects;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -25,28 +25,44 @@ public class MainPageServiceImpl implements MainPageService {
 
     private final UserFacade userFacade;
     private final QuestionAnswerFacade questionAnswerFacade;
-    private final CoupleConverter mainPageConverter;
+    private final CoupleConverter coupleConverter;
+    private final CoupleAnniversaryDateRepository coupleAnniversaryDateRepository;
 
     @Transactional
     @Override
     public MainPageDto getMainPage() {
         User currentUser = userFacade.currentUser();
         Couple couple = currentUser.getCouple();
-
         couple.today();
 
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
         LocalDate firstDayToLocalDate = LocalDate.parse(couple.getStartDay(), dateFormat);
         LocalDate todayToLocalDate = LocalDate.parse(couple.getToday(), dateFormat);
-
-        long datingDate = ChronoUnit.DAYS.between(firstDayToLocalDate, todayToLocalDate);
-
+        long datingDate = ChronoUnit.DAYS.between(firstDayToLocalDate, todayToLocalDate) + 1;
         couple.updateDatingDate(datingDate);
+        Question question = questionAnswerFacade.findQuestionByQuestionId(datingDate);
 
-        Question question = questionAnswerFacade.findQuestionByQuestionId(datingDate - couple.getDatingDate()+1);
+        List<CoupleAnniversaryDate> coupleAnniversaryDateList = coupleAnniversaryDateRepository.findAllByCouple(couple);
+        LocalDate coupleAnniversaryDate = null;
+        for (int i = 0; i < coupleAnniversaryDateList.size() - 1; i++) {
+            LocalDate parsedToday = LocalDate.parse(couple.getToday(), dateFormat);
+            LocalDate parsedDate1 = LocalDate.parse( couple.getToday().substring(0, 4)+ coupleAnniversaryDateList.get(i).getAnniversaryDate(), dateFormat);
+            LocalDate parsedDate2 = LocalDate.parse( couple.getToday().substring(0, 4) + coupleAnniversaryDateList.get(i+1).getAnniversaryDate(), dateFormat);
+            if(parsedDate1.compareTo(parsedToday) < 0)
+                parsedDate1 = parsedDate1.plusYears(1);
+            else if (parsedDate2.compareTo(parsedToday) < 0)
+                parsedDate2 = parsedDate2.plusYears(1);
 
-        return mainPageConverter.toDto(couple, question);
+            if(parsedDate1.isBefore(parsedDate2))
+                coupleAnniversaryDate = parsedDate1;
+            else
+                coupleAnniversaryDate = parsedDate2;
+        }
+
+        LocalDate parsedDate = LocalDate.parse(couple.getToday(), dateFormat);
+        long daysDifference = ChronoUnit.DAYS.between(parsedDate, coupleAnniversaryDate);
+
+        return coupleConverter.toDto(couple, question, daysDifference);
+
     }
-
-
 }

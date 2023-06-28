@@ -1,7 +1,6 @@
 package com.real.realoasis.domain.user.presentation;
 
 import com.real.realoasis.domain.user.presentation.data.dto.*;
-import com.real.realoasis.domain.user.presentation.data.request.AnniversaryTimeChangeRequest;
 import com.real.realoasis.domain.user.presentation.data.request.ConnectCoupleRequest;
 import com.real.realoasis.domain.user.presentation.data.request.NicknameChangeRequest;
 import com.real.realoasis.domain.user.presentation.data.request.PasswordChangeRequest;
@@ -23,10 +22,10 @@ public class UserController {
     private final GetSettingService getSettingService;
     private final UpdateNicknameService updateNicknameService;
     private final UpdatePasswordService updatePasswordService;
-    private final UpdateAnniversaryTimeService updateAnniversaryTimeService;
     private final WithdrawalService withdrawalService;
     private final UserConverter userConverter;
     private final UserSettingConverter userSettingConverter;
+    private final AddAnniversaryDateService addAnniversaryDateService;
 
     // 회원탈퇴
     @DeleteMapping
@@ -67,11 +66,10 @@ public class UserController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    // 기념일 알림 시간 변경 페이지
-    @PatchMapping("/anniversarytime")
-    public ResponseEntity<Void> changeAnniversaryTime(@RequestBody AnniversaryTimeChangeRequest anniversaryTimeChangeRequest){
-        AnniversaryTimeChangeDto anniversaryTimeChangeDto = userSettingConverter.toAnniversaryTimeChangeDto(anniversaryTimeChangeRequest);
-        updateAnniversaryTimeService.update(anniversaryTimeChangeDto);
-        return new ResponseEntity<>(HttpStatus.OK);
+    // 기념일 추가
+    @PostMapping("/anniversary")
+    public ResponseEntity<Void> addAnniversaryDate(@RequestParam("anniversaryDate") String anniversaryDate) {
+        addAnniversaryDateService.add(anniversaryDate);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
