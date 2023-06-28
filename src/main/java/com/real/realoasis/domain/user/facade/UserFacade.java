@@ -18,8 +18,8 @@ public class UserFacade {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public boolean existsByIdx(String id) {
-        return userRepository.existsUserById(id);
+    public boolean existsById(String id) {
+        return userRepository.existsByUserId(id);
     }
 
     public void saveUser(User user) {
@@ -27,12 +27,12 @@ public class UserFacade {
     }
 
     public User findUserById(String id) {
-        return userRepository.findUserById(id).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND_EXCEPTION));
+        return userRepository.findUserByUserId(id).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND_EXCEPTION));
     }
 
     public String findUserIdByEmail(String email) {
         User user = userRepository.findUserByEmail(email).orElseThrow(() -> new UserNotFoundException(ErrorCode.USER_NOT_FOUND_EXCEPTION));
-        return user.getId();
+        return user.getUserId();
     }
 
     public User findUserByEmail(String email) {

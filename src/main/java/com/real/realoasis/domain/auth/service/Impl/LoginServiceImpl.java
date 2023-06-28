@@ -34,15 +34,15 @@ public class LoginServiceImpl implements LoginService {
 
         TokenDto tokenDto = makeTokenDto(user);
 
-        RefreshToken refresh = authConverter.toEntity(user.getId(), tokenDto.getRefreshToken());
+        RefreshToken refresh = authConverter.toEntity(user.getUserId(), tokenDto.getRefreshToken());
         refreshTokenRepository.save(refresh);
 
         return tokenDto;
     }
 
     private TokenDto makeTokenDto(User user){
-        String accessToken = jwtTokenProvider.generateAccessToken(user.getId());
-        String refreshToken = jwtTokenProvider.generateRefreshToken(user.getId());
+        String accessToken = jwtTokenProvider.generateAccessToken(user.getUserId());
+        String refreshToken = jwtTokenProvider.generateRefreshToken(user.getUserId());
         LocalDateTime expiredAt = jwtTokenProvider.getAccessTokenExpiredTime();
 
         return authConverter.toDto(accessToken, refreshToken, expiredAt, user);

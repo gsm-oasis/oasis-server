@@ -16,7 +16,7 @@ import javax.persistence.*;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends BaseIdEntity {
     @Column(nullable = false)
-    private String id;
+    private String userId;
     @Column(nullable = false)
     private String email;
     @Column(nullable = false)
