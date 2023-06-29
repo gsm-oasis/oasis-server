@@ -42,7 +42,7 @@ public class MainPageServiceImpl implements MainPageService {
         couple.updateDatingDate(datingDate);
 
         LocalDate registeredDate = LocalDate.parse(couple.getRegisteredDay(), dateFormat);
-        long questionIdx = ChronoUnit.DAYS.between(registeredDate, todayToLocalDate);
+        long questionIdx = ChronoUnit.DAYS.between(registeredDate, todayToLocalDate ) + 1;
         Question question = questionAnswerFacade.findQuestionByQuestionId(questionIdx);
 
         List<CoupleAnniversaryDate> coupleAnniversaryDateList = coupleAnniversaryDateRepository.findAllByCouple(couple);
