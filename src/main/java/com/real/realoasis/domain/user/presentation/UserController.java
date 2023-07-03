@@ -26,6 +26,7 @@ public class UserController {
     private final UserConverter userConverter;
     private final UserSettingConverter userSettingConverter;
     private final AddAnniversaryDateService addAnniversaryDateService;
+    private final UnConnectCoupleService unConnectCoupleService;
 
     // 회원탈퇴
     @DeleteMapping
@@ -71,5 +72,12 @@ public class UserController {
     public ResponseEntity<Void> addAnniversaryDate(@RequestParam("anniversaryDate") String anniversaryDate) {
         addAnniversaryDateService.add(anniversaryDate);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    // 커플 끊기
+    @DeleteMapping("/unconnect")
+    public ResponseEntity<Void> unConnectCouple() {
+        unConnectCoupleService.unConnect();
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

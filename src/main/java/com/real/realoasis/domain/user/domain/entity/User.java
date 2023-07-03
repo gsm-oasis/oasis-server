@@ -46,4 +46,9 @@ public class User extends BaseIdEntity {
     public void updateCouple(Couple couple) {
         this.couple = couple;
     }
+
+    public void unConnectCouple() {
+        this.isCouple = false;
+        this.couple = null;
+    }
 }

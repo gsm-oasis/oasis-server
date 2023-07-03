@@ -52,6 +52,7 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.PATCH,"/user/nickname").authenticated()
                 .antMatchers(HttpMethod.PATCH,"/user/password").authenticated()
                 .antMatchers(HttpMethod.POST,"/user/anniversary").authenticated()
+                .antMatchers(HttpMethod.DELETE,"/user/unconnect").authenticated()
 
                 //mainpage
                 .antMatchers(HttpMethod.GET,"/mainpage").authenticated()
