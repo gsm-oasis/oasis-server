@@ -1,6 +1,7 @@
 package com.real.realoasis.domain.diary.service.Impl;
 
 import com.real.realoasis.domain.diary.domain.entity.Diary;
+import com.real.realoasis.domain.diary.exception.DuplicateWriteDiaryException;
 import com.real.realoasis.domain.diary.facade.DiaryFacade;
 import com.real.realoasis.domain.diary.presentation.data.dto.CreateDiaryDto;
 import com.real.realoasis.domain.diary.service.CreateDiaryService;
@@ -11,12 +12,12 @@ import com.real.realoasis.domain.image.domain.repository.ImageRepository;
 import com.real.realoasis.domain.image.service.ImageService;
 import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
+import com.real.realoasis.global.error.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -43,7 +44,11 @@ public class CreateDiaryServiceImpl implements CreateDiaryService {
                 imageRepository.save(image);
             }
         }
-        diaryFacade.saveDiary(diary);
-        heart.updateLevelBar();
+
+        if(user.addDiaryCount() < 1) {
+            diaryFacade.saveDiary(diary);
+            heart.updateLevelBar();
+        } else
+            throw new DuplicateWriteDiaryException(ErrorCode.DUPLICATE_WRITE_DIARY);
     }
 }

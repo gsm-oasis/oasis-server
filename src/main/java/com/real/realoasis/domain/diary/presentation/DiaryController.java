@@ -4,7 +4,6 @@ import com.real.realoasis.domain.diary.presentation.data.dto.*;
 import com.real.realoasis.domain.diary.presentation.data.request.CreateDiaryRequest;
 import com.real.realoasis.domain.diary.presentation.data.request.EditDiaryRequest;
 import com.real.realoasis.domain.diary.presentation.data.response.DiaryDetailResponse;
-import com.real.realoasis.domain.diary.presentation.data.response.DiaryListResponse;
 import com.real.realoasis.domain.diary.presentation.data.response.DiaryResponse;
 import com.real.realoasis.domain.diary.service.*;
 import com.real.realoasis.domain.diary.util.DiaryConverter;
@@ -48,7 +47,6 @@ public class DiaryController {
         editDiaryService.editDiary(diaryId, editDiaryDto, files);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-
 
     //일기디테일 페이지
     @GetMapping("/{diaryId}")

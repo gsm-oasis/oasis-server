@@ -66,6 +66,5 @@ public class MainPageServiceImpl implements MainPageService {
         long daysDifference = ChronoUnit.DAYS.between(parsedDate, coupleAnniversaryDate);
 
         return coupleConverter.toDto(couple, question, daysDifference);
-
     }
 }

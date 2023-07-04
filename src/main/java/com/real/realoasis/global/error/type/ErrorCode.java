@@ -20,7 +20,8 @@ public enum ErrorCode {
     DIARY_NOT_FOUND_EXCEPTION("일기를 찾을 수 없습니다.", 404),
     DUPLICATE_ID_EXCEPTION("이미 존재하는 아이디입니다.",409),
     IS_NOT_COUPLE_USER("커플 유저가 아닙니다.", 409),
-    DUPLICATE_ANNIVERSARY("이미 등록한 기념일입니다.", 409);
+    DUPLICATE_ANNIVERSARY("이미 등록한 기념일입니다.", 409),
+    DUPLICATE_WRITE_DIARY("이미 일기를 작성하였습니다.", 409);
 
 
 

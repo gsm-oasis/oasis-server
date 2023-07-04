@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.real.realoasis.domain.couple.domain.entity.Couple;
 import com.real.realoasis.global.entity.BaseIdEntity;
 import lombok.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -23,9 +21,12 @@ public class User extends BaseIdEntity {
     private String password;
     @Column(nullable = false)
     private String nickname;
+    @Column(nullable = false)
     private Boolean isCouple;
     @Column(nullable = false)
     private String coupleCode;
+    @Column(nullable = false)
+    private int diaryCount;
 
     @JsonIgnore
     @OneToOne(fetch = FetchType.LAZY)
@@ -50,5 +51,13 @@ public class User extends BaseIdEntity {
     public void unConnectCouple() {
         this.isCouple = false;
         this.couple = null;
+    }
+
+    public int addDiaryCount() {
+        return ++this.diaryCount;
+    }
+
+    public void resetDailyCount() {
+        this.diaryCount = 0;
     }
 }
