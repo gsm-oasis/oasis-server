@@ -31,18 +31,18 @@ public class ReissueServiceImpl implements ReissueService {
             throw new ExpiredTokenException(ErrorCode.EXPIRATION_TOKEN_EXCEPTION);
         }
 
-        User user = userFacade.findUserById(jwtTokenProvider.getTokenSubject(refreshToken, JwtTokenProvider.TokenType.REFRESH_TOKEN));
+        String id = jwtTokenProvider.getTokenSubject(refreshToken, JwtTokenProvider.TokenType.REFRESH_TOKEN);
         RefreshToken existingRefreshToken = refreshTokenRepository.findByToken(refreshToken);
-        RefreshTokenDto refreshTokenDto = makeTokenDto(user);
+        RefreshTokenDto refreshTokenDto = makeTokenDto(id);
 
         refreshTokenRepository.save(authConverter.toEntity(existingRefreshToken.getUserId(), refreshTokenDto.getRefreshToken()));
 
         return refreshTokenDto;
     }
 
-    private RefreshTokenDto makeTokenDto(User user){
-        String accessToken = jwtTokenProvider.generateAccessToken(user.getUserId());
-        String refreshToken = jwtTokenProvider.generateRefreshToken(user.getUserId());
+    private RefreshTokenDto makeTokenDto(String id){
+        String accessToken = jwtTokenProvider.generateAccessToken(id);
+        String refreshToken = jwtTokenProvider.generateRefreshToken(id);
         LocalDateTime expiredAt = jwtTokenProvider.getAccessTokenExpiredTime();
 
         return new RefreshTokenDto(
