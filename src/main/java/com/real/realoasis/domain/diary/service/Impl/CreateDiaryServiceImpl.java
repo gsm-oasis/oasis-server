@@ -45,7 +45,7 @@ public class CreateDiaryServiceImpl implements CreateDiaryService {
             }
         }
 
-        if(user.addDiaryCount() < 1) {
+        if(user.addDiaryCount() <= 1) {
             diaryFacade.saveDiary(diary);
             heart.updateLevelBar();
         } else
