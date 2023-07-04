@@ -35,6 +35,7 @@ public class ReissueServiceImpl implements ReissueService {
         RefreshToken existingRefreshToken = refreshTokenRepository.findByToken(refreshToken);
         RefreshTokenDto refreshTokenDto = makeTokenDto(id);
 
+        System.out.println(existingRefreshToken.getUserId());
         refreshTokenRepository.save(authConverter.toEntity(existingRefreshToken.getUserId(), refreshTokenDto.getRefreshToken()));
 
         return refreshTokenDto;
