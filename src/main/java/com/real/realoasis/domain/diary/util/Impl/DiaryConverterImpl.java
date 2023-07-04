@@ -75,23 +75,16 @@ public class DiaryConverterImpl implements DiaryConverter {
     }
 
     @Override
-    public List<DiaryDto> toDto(List<Diary> mergedList, User user) {
+    public List<DiaryDto> toDto(List<Diary> mergedList) {
         return mergedList.stream().map(diary ->
                 new DiaryDto(
                         diary.getIdx(),
                         diary.getContent(),
                         diary.getTitle(),
-                        user.getNickname(),
+                        diary.getUser().getNickname(),
                         diary.getCreateDate()
                         )
         ).sorted(Comparator.comparing(DiaryDto::getDiaryId).reversed()).collect(Collectors.toList());
-    }
-
-    @Override
-    public DiaryListResponse toListResponse(List<DiaryResponse> diaryListPageDto) {
-        return DiaryListResponse.builder()
-                .diaries(diaryListPageDto)
-                .build();
     }
 
     @Override

@@ -40,7 +40,7 @@ public class GetDiaryListServiceImpl implements GetDiaryListService {
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
 
-        return diaryConverter.toDto(mergedList, currentUser);
+        return diaryConverter.toDto(mergedList);
     }
 
 }
