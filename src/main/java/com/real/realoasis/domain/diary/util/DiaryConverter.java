@@ -23,8 +23,7 @@ public interface DiaryConverter {
 
     DiaryDetailResponse toDetailResponse(DiaryDetailDto diaryDetailPageDto);
 
-    List<DiaryDto> toDto(List<Diary> mergedList, User user);
+    List<DiaryDto> toDto(List<Diary> mergedList);
 
-    DiaryListResponse toListResponse(List<DiaryResponse> diaryListPageDto);
     DiaryResponse toResponse(DiaryDto diaryDto);
 }
