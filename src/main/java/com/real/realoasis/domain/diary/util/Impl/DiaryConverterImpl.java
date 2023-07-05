@@ -30,6 +30,7 @@ public class DiaryConverterImpl implements DiaryConverter {
                 .content(createDiaryRequest.getContent())
                 .mood(createDiaryRequest.getMood())
                 .title(createDiaryRequest.getTitle())
+                .color(createDiaryRequest.getColor())
                 .build();
     }
 
@@ -39,6 +40,7 @@ public class DiaryConverterImpl implements DiaryConverter {
                 .content(createDiaryDto.getContent())
                 .mood(createDiaryDto.getMood())
                 .title(createDiaryDto.getTitle())
+                .color(createDiaryDto.getColor())
                 .user(user)
                 .build();
     }
@@ -53,11 +55,12 @@ public class DiaryConverterImpl implements DiaryConverter {
     }
 
     @Override
-    public DiaryDetailDto toDetailDto(String title, String content, String mood, List<Image> images, String createDate) {
+    public DiaryDetailDto toDetailDto(Diary diary, List<Image> images, String createDate) {
         return DiaryDetailDto.builder()
-                .title(title)
-                .content(content)
-                .mood(mood)
+                .title(diary.getTitle())
+                .content(diary.getContent())
+                .mood(diary.getMood())
+                .color(diary.getColor())
                 .imgs(images)
                 .createDate(createDate)
                 .build();
@@ -69,6 +72,7 @@ public class DiaryConverterImpl implements DiaryConverter {
                 .title(diaryDetailPageDto.getTitle())
                 .content(diaryDetailPageDto.getContent())
                 .mood(diaryDetailPageDto.getMood())
+                .color(diaryDetailPageDto.getColor())
                 .imgs(diaryDetailPageDto.getImgs())
                 .createDate(diaryDetailPageDto.getCreateDate())
                 .build();

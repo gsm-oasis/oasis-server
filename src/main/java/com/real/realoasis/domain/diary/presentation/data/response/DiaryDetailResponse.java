@@ -12,6 +12,7 @@ public class DiaryDetailResponse {
     private final String title;
     private final String content;
     private final String mood;
+    private final String color;
     private final List<Image> imgs;
     private final String createDate;
 }

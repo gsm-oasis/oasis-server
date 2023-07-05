@@ -30,6 +30,8 @@ public class Diary extends BaseIdEntity {
     private String createDate;
     @Column(nullable = false)
     private String title;
+    @Column(nullable = false)
+    private String color;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)

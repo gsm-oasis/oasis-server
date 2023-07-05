@@ -17,4 +17,5 @@ public class CreateDiaryRequest {
     @Size(min = 2)
     private String content;
     private String mood;
+    private String color;
 }

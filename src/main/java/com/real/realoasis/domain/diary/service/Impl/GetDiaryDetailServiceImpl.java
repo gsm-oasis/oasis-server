@@ -29,6 +29,6 @@ public class GetDiaryDetailServiceImpl implements GetDiaryDetailService {
         String month = date.substring(4,6);
         String day = date.substring(6,8);
         String createDate = year + "년 " + month + "월 " + day + "일";
-        return diaryConverter.toDetailDto(diary.getTitle(), diary.getContent(), diary.getMood(), images, createDate);
+        return diaryConverter.toDetailDto(diary, images, createDate);
     }
 }

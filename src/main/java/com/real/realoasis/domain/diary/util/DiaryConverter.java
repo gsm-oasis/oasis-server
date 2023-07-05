@@ -19,7 +19,7 @@ public interface DiaryConverter {
 
     EditDiaryDto toEditDiaryDto(EditDiaryRequest editDiaryRequest);
 
-    DiaryDetailDto toDetailDto(String title, String content, String mood, List<Image> images, String createDate);
+    DiaryDetailDto toDetailDto(Diary diary, List<Image> images, String createDate);
 
     DiaryDetailResponse toDetailResponse(DiaryDetailDto diaryDetailPageDto);
 
