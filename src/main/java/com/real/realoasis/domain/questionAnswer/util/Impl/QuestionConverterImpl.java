@@ -65,9 +65,10 @@ public class QuestionConverterImpl implements QuestionAnswerConverter {
     }
 
     @Override
-    public QuestionAnswerListResponse toListResponse(List<QuestionAnswerListDto> questionAnswerDtoList) {
+    public QuestionAnswerListResponse toResponse(QuestionAnswerListDto questionAnswerDtoList) {
         return QuestionAnswerListResponse.builder()
-                .questions(questionAnswerDtoList)
+                .questionId(questionAnswerDtoList.getQuestionId())
+                .content(questionAnswerDtoList.getContent())
                 .build();
     }
 }

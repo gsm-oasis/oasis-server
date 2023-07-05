@@ -1,6 +1,7 @@
 package com.real.realoasis.domain.questionAnswer.presentation;
 
 import com.real.realoasis.domain.questionAnswer.presentation.data.dto.CreateDto;
+import com.real.realoasis.domain.questionAnswer.presentation.data.dto.QuestionAnswerListDto;
 import com.real.realoasis.domain.questionAnswer.presentation.data.request.QuestionAnswerWriteRequest;
 import com.real.realoasis.domain.questionAnswer.presentation.data.response.QuestionAnswerListResponse;
 import com.real.realoasis.domain.questionAnswer.presentation.data.response.QuestionAnswerResponse;
@@ -12,6 +13,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -36,8 +40,11 @@ public class QuestionAnswerController {
     }
 
     @GetMapping("/list")
-    public ResponseEntity<QuestionAnswerListResponse> getListPage(){
-        QuestionAnswerListResponse questionAnswerListResponse = getQuestionAnswerListService.getList();
+    public ResponseEntity<List<QuestionAnswerListResponse>> getListPage(){
+        List<QuestionAnswerListDto> questionAnswerListDtoList = getQuestionAnswerListService.getList();
+        List<QuestionAnswerListResponse> questionAnswerListResponse = questionAnswerListDtoList.stream()
+                .map(questionAnswerConverter::toResponse)
+                .collect(Collectors.toList());
         return new ResponseEntity<>(questionAnswerListResponse, HttpStatus.OK);
     }
 
