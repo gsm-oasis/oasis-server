@@ -27,4 +27,11 @@ public class QuestionAnswer extends BaseIdEntity {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Couple couple;
 
+    public void writeA(String answer) {
+        this.answerA = answer;
+    }
+
+    public void writeB(String answer) {
+        this.answerB = answer;
+    }
 }
