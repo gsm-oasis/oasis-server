@@ -32,6 +32,7 @@ public class ReissueServiceImpl implements ReissueService {
         }
 
         String id = jwtTokenProvider.getTokenSubject(refreshToken, JwtTokenProvider.TokenType.REFRESH_TOKEN);
+        System.out.println(id);
         RefreshToken existingRefreshToken = refreshTokenRepository.findByToken(refreshToken);
         RefreshTokenDto refreshTokenDto = makeTokenDto(id);
 
