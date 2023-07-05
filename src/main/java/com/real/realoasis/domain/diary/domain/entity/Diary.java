@@ -40,7 +40,7 @@ public class Diary extends BaseIdEntity {
 
     @PrePersist
     public void createDate() {
-        this.createDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd"));
+        this.createDate = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd"));
     }
 
     public void update(String title, String content, String mood){
