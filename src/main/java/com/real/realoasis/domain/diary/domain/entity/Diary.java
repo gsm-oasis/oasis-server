@@ -31,7 +31,7 @@ public class Diary extends BaseIdEntity {
     @Column(nullable = false)
     private String title;
     @Column(nullable = false)
-    private String color;
+    private String moodColor;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)

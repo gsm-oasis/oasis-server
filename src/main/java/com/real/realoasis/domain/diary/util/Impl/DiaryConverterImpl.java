@@ -8,7 +8,6 @@ import com.real.realoasis.domain.diary.domain.entity.Diary;
 import com.real.realoasis.domain.diary.presentation.data.request.CreateDiaryRequest;
 import com.real.realoasis.domain.diary.presentation.data.request.EditDiaryRequest;
 import com.real.realoasis.domain.diary.presentation.data.response.DiaryDetailResponse;
-import com.real.realoasis.domain.diary.presentation.data.response.DiaryListResponse;
 import com.real.realoasis.domain.diary.presentation.data.response.DiaryResponse;
 import com.real.realoasis.domain.diary.util.DiaryConverter;
 import com.real.realoasis.domain.image.domain.entity.Image;
@@ -30,7 +29,7 @@ public class DiaryConverterImpl implements DiaryConverter {
                 .content(createDiaryRequest.getContent())
                 .mood(createDiaryRequest.getMood())
                 .title(createDiaryRequest.getTitle())
-                .color(createDiaryRequest.getColor())
+                .moodColor(createDiaryRequest.getMoodColor())
                 .build();
     }
 
@@ -40,7 +39,7 @@ public class DiaryConverterImpl implements DiaryConverter {
                 .content(createDiaryDto.getContent())
                 .mood(createDiaryDto.getMood())
                 .title(createDiaryDto.getTitle())
-                .color(createDiaryDto.getColor())
+                .moodColor(createDiaryDto.getMoodColor())
                 .user(user)
                 .build();
     }
@@ -60,7 +59,7 @@ public class DiaryConverterImpl implements DiaryConverter {
                 .title(diary.getTitle())
                 .content(diary.getContent())
                 .mood(diary.getMood())
-                .color(diary.getColor())
+                .moodColor(diary.getMoodColor())
                 .imgs(images)
                 .createDate(createDate)
                 .build();
@@ -72,7 +71,7 @@ public class DiaryConverterImpl implements DiaryConverter {
                 .title(diaryDetailPageDto.getTitle())
                 .content(diaryDetailPageDto.getContent())
                 .mood(diaryDetailPageDto.getMood())
-                .color(diaryDetailPageDto.getColor())
+                .moodColor(diaryDetailPageDto.getMoodColor())
                 .imgs(diaryDetailPageDto.getImgs())
                 .createDate(diaryDetailPageDto.getCreateDate())
                 .build();
