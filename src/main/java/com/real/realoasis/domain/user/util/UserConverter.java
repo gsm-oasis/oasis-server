@@ -1,6 +1,6 @@
 package com.real.realoasis.domain.user.util;
 
-import com.real.realoasis.domain.couple.domain.entity.CoupleAnniversaryDate;
+import com.real.realoasis.domain.anniversary.domain.entity.CoupleAnniversaryDate;
 import com.real.realoasis.domain.couple.domain.entity.Couple;
 import com.real.realoasis.domain.heart.domain.entity.Heart;
 import com.real.realoasis.domain.user.presentation.data.dto.ConnectCoupleDto;

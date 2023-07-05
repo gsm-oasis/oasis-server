@@ -1,7 +1,5 @@
 package com.real.realoasis.domain.user.service.Impl;
 
-import com.real.realoasis.domain.couple.domain.entity.Couple;
-import com.real.realoasis.domain.couple.domain.repository.CoupleAnniversaryDateRepository;
 import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.domain.user.presentation.data.dto.SettingResDto;
