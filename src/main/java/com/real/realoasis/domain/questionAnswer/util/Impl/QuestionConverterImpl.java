@@ -45,7 +45,7 @@ public class QuestionConverterImpl implements QuestionAnswerConverter {
     }
 
     @Override
-    public QuestionAnswerDto toAnswerDto(User currentUser, User coupleUser, Optional<String> answer, Optional<String> coupleAnswer) {
+    public QuestionAnswerDto toAnswerDto(User currentUser, User coupleUser,String answer, String coupleAnswer) {
         return QuestionAnswerDto.builder()
                 .userName(currentUser.getNickname())
                 .coupleName(coupleUser.getNickname())

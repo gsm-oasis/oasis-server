@@ -19,7 +19,7 @@ public interface QuestionAnswerConverter {
 
     QuestionAnswer toEntity(CreateDto createDto, Question question, Couple couple, User currentUser);
 
-    QuestionAnswerDto toAnswerDto(User currentUser, User coupleUser, Optional<String> answer, Optional<String> coupleAnswer);
+    QuestionAnswerDto toAnswerDto(User currentUser, User coupleUser, String answer, String coupleAnswer);
 
     QuestionAnswerResponse toResponse(QuestionAnswerDto questionAnswerDto);
 

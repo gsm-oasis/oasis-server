@@ -1,8 +1,10 @@
 package com.real.realoasis.domain.questionAnswer.service.Impl;
 
 import com.real.realoasis.domain.couple.domain.entity.Couple;
+import com.real.realoasis.domain.question.domain.entity.Question;
 import com.real.realoasis.domain.questionAnswer.domain.entity.QuestionAnswer;
 import com.real.realoasis.domain.questionAnswer.domain.repository.QuestionAnswerRepository;
+import com.real.realoasis.domain.questionAnswer.facade.QuestionAnswerFacade;
 import com.real.realoasis.domain.questionAnswer.presentation.data.dto.QuestionAnswerDto;
 import com.real.realoasis.domain.questionAnswer.presentation.data.response.QuestionAnswerResponse;
 import com.real.realoasis.domain.questionAnswer.service.GetMainPageService;
@@ -20,39 +22,36 @@ public class GetMainPageServiceImpl implements GetMainPageService {
     private final UserFacade userFacade;
     private final QuestionAnswerConverter questionAnswerConverter;
     private final QuestionAnswerRepository questionAnswerRepository;
+    private final QuestionAnswerFacade questionAnswerFacade;
 
     @Override
     public QuestionAnswerDto getMainpage(Long questionId) {
         User currentUser = userFacade.currentUser();
         Couple couple = currentUser.getCouple();
+        Question question = questionAnswerFacade.findQuestionByQuestionId(questionId);
         QuestionAnswer questionAnswer = questionAnswerRepository.findByQuestionIdxAndCouple(questionId, couple);
         User coupleUser;
-        Optional<String> answer;
-        Optional<String> coupleAnswer;
+        String answer;
+        String coupleAnswer;
+
+        if(questionAnswer == null) {
+            questionAnswer = new QuestionAnswer(
+                    "",
+                    "",
+                    question,
+                    couple
+            );
+        }
 
         if(couple.getUserA().equals(currentUser)) {
             coupleUser = couple.getUserB();
-            if(questionAnswer.getAnswerA().isEmpty())
-                answer = Optional.empty();
-            else
-                answer = Optional.ofNullable(questionAnswer.getAnswerA());
-
-            if(questionAnswer.getAnswerB().isEmpty())
-                coupleAnswer = Optional.empty();
-            else
-                coupleAnswer = Optional.ofNullable(questionAnswer.getAnswerB());
+            answer = questionAnswer.getAnswerA();
+            coupleAnswer = questionAnswer.getAnswerB();
         }
         else {
             coupleUser = couple.getUserA();
-            if(questionAnswer.getAnswerB().isEmpty())
-                answer = Optional.empty();
-            else
-                answer = Optional.ofNullable(questionAnswer.getAnswerB());
-
-            if(questionAnswer.getAnswerA().isEmpty())
-                coupleAnswer = Optional.empty();
-            else
-                coupleAnswer = Optional.ofNullable(questionAnswer.getAnswerA());
+            answer = questionAnswer.getAnswerB();
+            coupleAnswer = questionAnswer.getAnswerA();
         }
 
         return questionAnswerConverter.toAnswerDto(currentUser, coupleUser, answer, coupleAnswer);

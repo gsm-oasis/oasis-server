@@ -10,6 +10,6 @@ import java.util.Optional;
 public class QuestionAnswerResponse {
     private final String userName;
     private final String coupleName;
-    private final Optional<String> answer;
-    private final Optional<String> coupleAnswer;
+    private final String answer;
+    private final String coupleAnswer;
 }
