@@ -41,6 +41,7 @@ public class GetMainPageServiceImpl implements GetMainPageService {
                     question,
                     couple
             );
+            questionAnswerRepository.save(questionAnswer);
         }
 
         if(couple.getUserA().equals(currentUser)) {
