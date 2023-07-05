@@ -1,14 +1,14 @@
-package com.real.realoasis.domain.user.service.Impl;
+package com.real.realoasis.domain.anniversary.service.impl;
 
+import com.real.realoasis.domain.anniversary.util.AnniversaryConverter;
 import com.real.realoasis.domain.couple.domain.entity.Couple;
-import com.real.realoasis.domain.couple.domain.entity.CoupleAnniversaryDate;
-import com.real.realoasis.domain.couple.domain.repository.CoupleAnniversaryDateRepository;
+import com.real.realoasis.domain.anniversary.domain.entity.CoupleAnniversaryDate;
+import com.real.realoasis.domain.anniversary.domain.repository.CoupleAnniversaryDateRepository;
 import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.exception.DuplicateAnniversaryDateException;
 import com.real.realoasis.domain.user.exception.IsNotCoupleUserException;
 import com.real.realoasis.domain.user.facade.UserFacade;
-import com.real.realoasis.domain.user.service.AddAnniversaryDateService;
-import com.real.realoasis.domain.user.util.UserConverter;
+import com.real.realoasis.domain.anniversary.service.AddAnniversaryDateService;
 import com.real.realoasis.global.error.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +21,7 @@ import java.util.List;
 public class AddAnniversaryDateServiceImpl implements AddAnniversaryDateService {
     private final UserFacade userFacade;
     private final CoupleAnniversaryDateRepository coupleAnniversaryDateRepository;
-    private final UserConverter userConverter;
+    private final AnniversaryConverter anniversaryConverter;
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -39,6 +39,6 @@ public class AddAnniversaryDateServiceImpl implements AddAnniversaryDateService 
                 throw new DuplicateAnniversaryDateException(ErrorCode.DUPLICATE_ANNIVERSARY);
         }
 
-        coupleAnniversaryDateRepository.save(userConverter.toEntity(anniversaryDate, couple));
+        coupleAnniversaryDateRepository.save(anniversaryConverter.toEntity(anniversaryDate, couple));
     }
 }

@@ -51,7 +51,6 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.GET,"/user").authenticated()
                 .antMatchers(HttpMethod.PATCH,"/user/nickname").authenticated()
                 .antMatchers(HttpMethod.PATCH,"/user/password").authenticated()
-                .antMatchers(HttpMethod.POST,"/user/anniversary").authenticated()
                 .antMatchers(HttpMethod.DELETE,"/user/unconnect").authenticated()
 
                 //mainpage
@@ -75,6 +74,9 @@ public class SecurityConfig {
 
                 //heart
                 .antMatchers(HttpMethod.GET, "/heart").authenticated()
+
+                //anniversary
+                .antMatchers(HttpMethod.POST,"/anniversary").authenticated()
 
                 .anyRequest().permitAll();
         http
