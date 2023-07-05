@@ -1,6 +1,7 @@
-package com.real.realoasis.domain.couple.domain.entity;
+package com.real.realoasis.domain.anniversary.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.real.realoasis.domain.couple.domain.entity.Couple;
 import com.real.realoasis.global.entity.BaseIdEntity;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;

@@ -1,7 +1,7 @@
-package com.real.realoasis.domain.couple.domain.repository;
+package com.real.realoasis.domain.anniversary.domain.repository;
 
 import com.real.realoasis.domain.couple.domain.entity.Couple;
-import com.real.realoasis.domain.couple.domain.entity.CoupleAnniversaryDate;
+import com.real.realoasis.domain.anniversary.domain.entity.CoupleAnniversaryDate;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

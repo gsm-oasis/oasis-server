@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.user.presentation;
 
+import com.real.realoasis.domain.anniversary.service.AddAnniversaryDateService;
 import com.real.realoasis.domain.user.presentation.data.dto.*;
 import com.real.realoasis.domain.user.presentation.data.request.ConnectCoupleRequest;
 import com.real.realoasis.domain.user.presentation.data.request.NicknameChangeRequest;
@@ -65,13 +66,6 @@ public class UserController {
         PasswordChangeDto passwordChangeDto = userSettingConverter.toPasswordChangeDto(passwordChangeRequest);
         updatePasswordService.update(passwordChangeDto);
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    // 기념일 추가
-    @PostMapping("/anniversary")
-    public ResponseEntity<Void> addAnniversaryDate(@RequestParam("anniversaryDate") String anniversaryDate) {
-        addAnniversaryDateService.add(anniversaryDate);
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     // 커플 끊기
