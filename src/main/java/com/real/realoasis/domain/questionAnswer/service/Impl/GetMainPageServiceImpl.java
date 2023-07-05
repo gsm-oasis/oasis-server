@@ -32,13 +32,27 @@ public class GetMainPageServiceImpl implements GetMainPageService {
 
         if(couple.getUserA().equals(currentUser)) {
             coupleUser = couple.getUserB();
-            answer = Optional.ofNullable(questionAnswer.getAnswerA());
-            coupleAnswer = Optional.ofNullable(questionAnswer.getAnswerB());
+            if(questionAnswer.getAnswerA().isEmpty())
+                answer = Optional.empty();
+            else
+                answer = Optional.ofNullable(questionAnswer.getAnswerA());
+
+            if(questionAnswer.getAnswerB().isEmpty())
+                coupleAnswer = Optional.empty();
+            else
+                coupleAnswer = Optional.ofNullable(questionAnswer.getAnswerB());
         }
         else {
             coupleUser = couple.getUserA();
-            answer = Optional.ofNullable(questionAnswer.getAnswerB());
-            coupleAnswer = Optional.ofNullable(questionAnswer.getAnswerA());
+            if(questionAnswer.getAnswerB().isEmpty())
+                answer = Optional.empty();
+            else
+                answer = Optional.ofNullable(questionAnswer.getAnswerB());
+
+            if(questionAnswer.getAnswerA().isEmpty())
+                coupleAnswer = Optional.empty();
+            else
+                coupleAnswer = Optional.ofNullable(questionAnswer.getAnswerA());
         }
 
         return questionAnswerConverter.toAnswerDto(currentUser, coupleUser, answer, coupleAnswer);
