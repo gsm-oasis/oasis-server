@@ -20,7 +20,6 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 public class ReissueServiceImpl implements ReissueService {
     private final JwtTokenProvider jwtTokenProvider;
-    private final UserFacade userFacade;
     private final RefreshTokenRepository refreshTokenRepository;
     private final AuthConverter authConverter;
 
@@ -33,7 +32,9 @@ public class ReissueServiceImpl implements ReissueService {
 
         String id = jwtTokenProvider.getTokenSubject(refreshToken, JwtTokenProvider.TokenType.REFRESH_TOKEN);
         System.out.println(id);
+        System.out.println(refreshToken);
         RefreshToken existingRefreshToken = refreshTokenRepository.findByToken(refreshToken);
+        System.out.println(existingRefreshToken == null);
         RefreshTokenDto refreshTokenDto = makeTokenDto(id);
 
         System.out.println(existingRefreshToken.getUserId());
