@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.questionAnswer.util.Impl;
 
+import com.real.realoasis.domain.couple.domain.entity.Couple;
 import com.real.realoasis.domain.question.domain.entity.Question;
 import com.real.realoasis.domain.questionAnswer.presentation.data.dto.CreateDto;
 import com.real.realoasis.domain.questionAnswer.presentation.data.dto.QuestionAnswerDto;
@@ -26,12 +27,19 @@ public class QuestionConverterImpl implements QuestionAnswerConverter {
     }
 
     @Override
-    public QuestionAnswer toEntity(CreateDto createDto, Question question, User currentUser) {
-        return QuestionAnswer.builder()
-                .answer(createDto.getAnswer())
+    public QuestionAnswer toEntity(CreateDto createDto, Question question, Couple couple, User currentUser) {
+        if(currentUser.equals(couple.getUserA()))
+            return QuestionAnswer.builder()
+                .answerA(createDto.getAnswer())
                 .question(question)
-                .user(currentUser)
+                .couple(couple)
                 .build();
+        else
+            return QuestionAnswer.builder()
+                    .answerB(createDto.getAnswer())
+                    .question(question)
+                    .couple(couple)
+                    .build();
     }
 
     @Override

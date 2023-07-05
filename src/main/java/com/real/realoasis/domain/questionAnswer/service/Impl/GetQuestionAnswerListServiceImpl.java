@@ -2,6 +2,7 @@ package com.real.realoasis.domain.questionAnswer.service.Impl;
 
 import com.real.realoasis.domain.couple.domain.entity.Couple;
 import com.real.realoasis.domain.questionAnswer.domain.entity.QuestionAnswer;
+import com.real.realoasis.domain.questionAnswer.domain.repository.QuestionAnswerRepository;
 import com.real.realoasis.domain.questionAnswer.facade.QuestionAnswerFacade;
 import com.real.realoasis.domain.questionAnswer.presentation.data.dto.QuestionAnswerListDto;
 import com.real.realoasis.domain.questionAnswer.service.GetQuestionAnswerListService;
@@ -20,25 +21,15 @@ import java.util.stream.Stream;
 @RequiredArgsConstructor
 public class GetQuestionAnswerListServiceImpl implements GetQuestionAnswerListService {
     private final UserFacade userFacade;
-    private final QuestionAnswerFacade questionAnswerFacade;
     private final QuestionAnswerConverter questionAnswerConverter;
+    private final QuestionAnswerRepository questionAnswerRepository;
 
     @Override
     public List<QuestionAnswerListDto> getList() {
         User currentUser = userFacade.currentUser();
         Couple couple = currentUser.getCouple();
-        User coupleUser;
-        if (couple.getUserA().equals(currentUser)) {
-            coupleUser = couple.getUserB();
-        } else
-            coupleUser = couple.getUserA();
+        List<QuestionAnswer> list = questionAnswerRepository.findAllByCouple(couple);
 
-        List<QuestionAnswer> list = questionAnswerFacade.findAllByUserIdx(currentUser.getIdx());
-        List<QuestionAnswer> coupleList = questionAnswerFacade.findAllByUserIdx(coupleUser.getIdx());
-        List<QuestionAnswer> mergedList = Stream.of(list, coupleList)
-                .flatMap(Collection::stream)
-                .collect(Collectors.toList());
-
-        return questionAnswerConverter.toListDto(mergedList);
+        return questionAnswerConverter.toListDto(list);
     }
 }

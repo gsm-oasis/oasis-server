@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.questionAnswer.service.Impl;
 
+import com.real.realoasis.domain.couple.domain.entity.Couple;
 import com.real.realoasis.domain.question.domain.entity.Question;
 import com.real.realoasis.domain.questionAnswer.domain.entity.QuestionAnswer;
 import com.real.realoasis.domain.questionAnswer.facade.QuestionAnswerFacade;
@@ -21,9 +22,10 @@ public class CreateQuestionAnswerServiceImpl implements CreateQuestionAnswerServ
     @Override
     public void createQuestionAnswer(CreateDto createDto, Long questionId) {
         User currentUser = userFacade.currentUser();
+        Couple couple = currentUser.getCouple();
         Question question = questionAnswerFacade.findQuestionByQuestionId(questionId);
-        QuestionAnswer questionAnswer = questionAnswerConverter.toEntity(createDto, question, currentUser);
+        QuestionAnswer questionAnswer = questionAnswerConverter.toEntity(createDto, question, couple, currentUser);
         questionAnswerFacade.saveAnswer(questionAnswer);
-        currentUser.getCouple().getHeart().updateLevelBar();
+        couple.getHeart().updateLevelBar();
     }
 }

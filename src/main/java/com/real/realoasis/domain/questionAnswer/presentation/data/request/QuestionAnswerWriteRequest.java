@@ -14,12 +14,4 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class QuestionAnswerWriteRequest {
     private String answer;
-
-    public QuestionAnswer toEntity(Question question, User user){
-        return QuestionAnswer.builder()
-                .answer(answer)
-                .question(question)
-                .user(user)
-                .build();
-    }
 }

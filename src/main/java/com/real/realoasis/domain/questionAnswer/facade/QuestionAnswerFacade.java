@@ -24,19 +24,7 @@ public class QuestionAnswerFacade {
        return questionRepository.findQuestionByIdx(questionId).orElseThrow(() -> new QuestionNotFoundException(ErrorCode.QUESTION_NOT_FOUND_EXCEPTION));
     }
 
-    public String findQuestionAnswerByQuestionIdxUserIdx(Long questionId, Long userId){
-        QuestionAnswer questionAnswer = questionAnswerRepository.findQuestionAnswerByQuestionIdxAndUserIdx(questionId, userId);
-        if(questionAnswer == null){
-            return "";
-        }else {
-            return questionAnswer.getAnswer();
-        }
-    }
     public void saveAnswer(QuestionAnswer questionAnswer) {
         questionAnswerRepository.save(questionAnswer);
-    }
-
-    public List<QuestionAnswer> findAllByUserIdx(Long userIdx) {
-        return questionAnswerRepository.findAllByUserIdx(userIdx);
     }
 }

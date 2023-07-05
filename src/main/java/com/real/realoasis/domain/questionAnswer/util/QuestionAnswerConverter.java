@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.questionAnswer.util;
 
+import com.real.realoasis.domain.couple.domain.entity.Couple;
 import com.real.realoasis.domain.question.domain.entity.Question;
 import com.real.realoasis.domain.questionAnswer.presentation.data.dto.CreateDto;
 import com.real.realoasis.domain.questionAnswer.presentation.data.dto.QuestionAnswerDto;
@@ -15,7 +16,7 @@ import java.util.List;
 public interface QuestionAnswerConverter {
     CreateDto toDto(QuestionAnswerWriteRequest questionAnswerRequest);
 
-    QuestionAnswer toEntity(CreateDto createDto,Question question, User currentUser);
+    QuestionAnswer toEntity(CreateDto createDto, Question question, Couple couple, User currentUser);
 
     QuestionAnswerDto toAnswerDto(User currentUser, User coupleUser, String answer, String coupleAnswer);
 
