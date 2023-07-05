@@ -12,13 +12,14 @@ import com.real.realoasis.domain.questionAnswer.presentation.data.response.Quest
 import com.real.realoasis.domain.user.domain.entity.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface QuestionAnswerConverter {
     CreateDto toDto(QuestionAnswerWriteRequest questionAnswerRequest);
 
     QuestionAnswer toEntity(CreateDto createDto, Question question, Couple couple, User currentUser);
 
-    QuestionAnswerDto toAnswerDto(User currentUser, User coupleUser, String answer, String coupleAnswer);
+    QuestionAnswerDto toAnswerDto(User currentUser, User coupleUser, Optional<String> answer, Optional<String> coupleAnswer);
 
     QuestionAnswerResponse toResponse(QuestionAnswerDto questionAnswerDto);
 

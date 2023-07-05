@@ -12,6 +12,8 @@ import com.real.realoasis.domain.user.facade.UserFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class GetMainPageServiceImpl implements GetMainPageService {
@@ -20,26 +22,25 @@ public class GetMainPageServiceImpl implements GetMainPageService {
     private final QuestionAnswerRepository questionAnswerRepository;
 
     @Override
-    public QuestionAnswerResponse getMainpage(Long questionId) {
+    public QuestionAnswerDto getMainpage(Long questionId) {
         User currentUser = userFacade.currentUser();
         Couple couple = currentUser.getCouple();
         QuestionAnswer questionAnswer = questionAnswerRepository.findByQuestionIdxAndCouple(questionId, couple);
         User coupleUser;
-        String answer;
-        String coupleAnswer;
+        Optional<String> answer;
+        Optional<String> coupleAnswer;
 
         if(couple.getUserA().equals(currentUser)) {
             coupleUser = couple.getUserB();
-            answer = questionAnswer.getAnswerA();
-            coupleAnswer = questionAnswer.getAnswerB();
+            answer = Optional.ofNullable(questionAnswer.getAnswerA());
+            coupleAnswer = Optional.ofNullable(questionAnswer.getAnswerB());
         }
         else {
             coupleUser = couple.getUserA();
-            answer = questionAnswer.getAnswerB();
-            coupleAnswer = questionAnswer.getAnswerA();
+            answer = Optional.ofNullable(questionAnswer.getAnswerB());
+            coupleAnswer = Optional.ofNullable(questionAnswer.getAnswerA());
         }
 
-        QuestionAnswerDto questionAnswerDto = questionAnswerConverter.toAnswerDto(currentUser, coupleUser, answer, coupleAnswer);
-        return questionAnswerConverter.toResponse(questionAnswerDto);
+        return questionAnswerConverter.toAnswerDto(currentUser, coupleUser, answer, coupleAnswer);
     }
 }

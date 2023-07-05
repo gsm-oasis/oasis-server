@@ -1,7 +1,7 @@
 package com.real.realoasis.domain.questionAnswer.service;
 
-import com.real.realoasis.domain.questionAnswer.presentation.data.response.QuestionAnswerResponse;
+import com.real.realoasis.domain.questionAnswer.presentation.data.dto.QuestionAnswerDto;
 
 public interface GetMainPageService {
-    QuestionAnswerResponse getMainpage(Long questionId);
+    QuestionAnswerDto getMainpage(Long questionId);
 }

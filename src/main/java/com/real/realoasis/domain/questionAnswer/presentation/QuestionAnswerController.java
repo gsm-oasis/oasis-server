@@ -1,6 +1,7 @@
 package com.real.realoasis.domain.questionAnswer.presentation;
 
 import com.real.realoasis.domain.questionAnswer.presentation.data.dto.CreateDto;
+import com.real.realoasis.domain.questionAnswer.presentation.data.dto.QuestionAnswerDto;
 import com.real.realoasis.domain.questionAnswer.presentation.data.dto.QuestionAnswerListDto;
 import com.real.realoasis.domain.questionAnswer.presentation.data.request.QuestionAnswerWriteRequest;
 import com.real.realoasis.domain.questionAnswer.presentation.data.response.QuestionAnswerListResponse;
@@ -35,7 +36,8 @@ public class QuestionAnswerController {
 
     @GetMapping("/{questionId}")
     public ResponseEntity<QuestionAnswerResponse> getMainpage(@PathVariable Long questionId){
-        QuestionAnswerResponse questionAnswerResponse = getMainPageService.getMainpage(questionId);
+        QuestionAnswerDto questionAnswerDto = getMainPageService.getMainpage(questionId);
+        QuestionAnswerResponse questionAnswerResponse = questionAnswerConverter.toResponse(questionAnswerDto);
         return new ResponseEntity<>(questionAnswerResponse, HttpStatus.OK);
     }
 

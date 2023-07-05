@@ -13,8 +13,10 @@ import com.real.realoasis.domain.questionAnswer.util.QuestionAnswerConverter;
 import com.real.realoasis.domain.user.domain.entity.User;
 import org.springframework.stereotype.Component;
 
+import javax.swing.text.html.Option;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component
@@ -43,7 +45,7 @@ public class QuestionConverterImpl implements QuestionAnswerConverter {
     }
 
     @Override
-    public QuestionAnswerDto toAnswerDto(User currentUser, User coupleUser, String answer, String coupleAnswer) {
+    public QuestionAnswerDto toAnswerDto(User currentUser, User coupleUser, Optional<String> answer, Optional<String> coupleAnswer) {
         return QuestionAnswerDto.builder()
                 .userName(currentUser.getNickname())
                 .coupleName(coupleUser.getNickname())
