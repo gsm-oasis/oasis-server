@@ -3,6 +3,7 @@ package com.real.realoasis.domain.auth.service.Impl;
 import com.real.realoasis.domain.auth.domain.entity.RefreshToken;
 import com.real.realoasis.domain.auth.domain.repository.RefreshTokenRepository;
 import com.real.realoasis.domain.auth.exception.ExpiredTokenException;
+import com.real.realoasis.domain.auth.exception.RefreshNotFoundException;
 import com.real.realoasis.domain.auth.presentation.data.dto.RefreshTokenDto;
 import com.real.realoasis.domain.auth.service.ReissueService;
 import com.real.realoasis.domain.auth.util.AuthConverter;
@@ -26,18 +27,11 @@ public class ReissueServiceImpl implements ReissueService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public RefreshTokenDto reissue(String refreshToken) {
-        if(jwtTokenProvider.validateToken(refreshToken, JwtTokenProvider.TokenType.REFRESH_TOKEN)){
-            throw new ExpiredTokenException(ErrorCode.EXPIRATION_TOKEN_EXCEPTION);
-        }
-
+        RefreshToken existingRefreshToken = refreshTokenRepository.findByToken(refreshToken)
+                .orElseThrow(() -> new ExpiredTokenException(ErrorCode.EXPIRATION_TOKEN_EXCEPTION));
         String id = jwtTokenProvider.getTokenSubject(refreshToken, JwtTokenProvider.TokenType.REFRESH_TOKEN);
-        System.out.println(id);
-        System.out.println(refreshToken);
-        RefreshToken existingRefreshToken = refreshTokenRepository.findByToken(refreshToken);
-        System.out.println(existingRefreshToken == null);
         RefreshTokenDto refreshTokenDto = makeTokenDto(id);
 
-        System.out.println(existingRefreshToken.getUserId());
         refreshTokenRepository.save(authConverter.toEntity(existingRefreshToken.getUserId(), refreshTokenDto.getRefreshToken()));
 
         return refreshTokenDto;

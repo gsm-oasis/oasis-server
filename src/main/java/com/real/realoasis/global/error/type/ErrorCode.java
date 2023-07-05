@@ -18,6 +18,7 @@ public enum ErrorCode {
     QUESTION_ANSWER_NOT_FOUND_EXCEPTION("답변을 찾을 수 없습니다.", 404),
     COUPLE_NOT_FOUND("Couple이 존재하지 않습니다.", 404),
     DIARY_NOT_FOUND_EXCEPTION("일기를 찾을 수 없습니다.", 404),
+    REFRESH_NOT_FOUND("재발급 토큰을 찾을 수 없습니다.", 404),
     DUPLICATE_ID_EXCEPTION("이미 존재하는 아이디입니다.",409),
     IS_NOT_COUPLE_USER("커플 유저가 아닙니다.", 409),
     DUPLICATE_ANNIVERSARY("이미 등록한 기념일입니다.", 409),
