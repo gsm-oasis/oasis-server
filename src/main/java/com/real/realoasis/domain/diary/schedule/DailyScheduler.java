@@ -5,6 +5,7 @@ import com.real.realoasis.domain.user.domain.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,7 +14,8 @@ import java.util.List;
 public class DailyScheduler {
     private final UserRepository userRepository;
 
-    @Scheduled(cron = "0 15 10 * * *")
+    @Scheduled(cron = "0 0 0 * * *")
+    @Transactional
     public void executeDailyTask() {
         List<User> userList = userRepository.findAll();
         for (User user: userList) {
