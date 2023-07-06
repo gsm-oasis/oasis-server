@@ -13,7 +13,7 @@ import java.util.List;
 public class DailyScheduler {
     private final UserRepository userRepository;
 
-    @Scheduled(cron = "0 0 0 * * *")
+    @Scheduled(cron = "0 0 10 * * *")
     public void executeDailyTask() {
         List<User> userList = userRepository.findAll();
         for (User user: userList) {
