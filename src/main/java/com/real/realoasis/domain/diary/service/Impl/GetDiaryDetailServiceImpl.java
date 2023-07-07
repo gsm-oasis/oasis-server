@@ -26,8 +26,8 @@ public class GetDiaryDetailServiceImpl implements GetDiaryDetailService {
         List<Image> images = imageRepository.findByDiary(diary);
         String date = diary.getCreateDate();
         String year = date.substring(0,4);
-        String month = date.substring(4,6);
-        String day = date.substring(6,8);
+        String month = date.substring(5,7);
+        String day = date.substring(8,10);
         String createDate = year + "년 " + month + "월 " + day + "일";
         return diaryConverter.toDetailDto(diary, images, createDate);
     }
