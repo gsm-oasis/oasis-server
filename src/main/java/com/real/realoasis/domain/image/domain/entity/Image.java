@@ -8,7 +8,6 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
-import java.util.Base64;
 
 @Entity
 @Getter
@@ -16,7 +15,7 @@ import java.util.Base64;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Image extends BaseIdEntity {
-    @Column(nullable = false)
+    @Column(nullable = false, length = 1000)
     private String imageUrl;
 
     @JsonIgnore
