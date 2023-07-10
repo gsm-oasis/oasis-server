@@ -17,6 +17,8 @@ import javax.persistence.ManyToOne;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class CoupleAnniversaryDate extends BaseIdEntity {
     @Column(nullable = false)
+    private String anniversaryName;
+    @Column(nullable = false)
     private String anniversaryDate;
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
@@ -24,7 +26,8 @@ public class CoupleAnniversaryDate extends BaseIdEntity {
     private Couple couple;
 
     @Builder
-    public CoupleAnniversaryDate(String anniversaryDate, Couple couple) {
+    public CoupleAnniversaryDate(String anniversaryName, String anniversaryDate, Couple couple) {
+        this.anniversaryName = anniversaryName;
         this.anniversaryDate = anniversaryDate;
         this. couple = couple;
     }

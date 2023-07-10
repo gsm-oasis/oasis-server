@@ -1,5 +1,6 @@
 package com.real.realoasis.domain.anniversary.service.impl;
 
+import com.real.realoasis.domain.anniversary.presentation.data.request.AddAnniversaryRequest;
 import com.real.realoasis.domain.anniversary.util.AnniversaryConverter;
 import com.real.realoasis.domain.couple.domain.entity.Couple;
 import com.real.realoasis.domain.anniversary.domain.entity.CoupleAnniversaryDate;
@@ -25,7 +26,7 @@ public class AddAnniversaryDateServiceImpl implements AddAnniversaryDateService 
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void add(String anniversaryDate) {
+    public void add(AddAnniversaryRequest addAnniversaryRequest) {
         User currentUser = userFacade.currentUser();
         Couple couple;
         if(currentUser.getIsCouple()) {
@@ -35,10 +36,10 @@ public class AddAnniversaryDateServiceImpl implements AddAnniversaryDateService 
 
         List<CoupleAnniversaryDate> coupleAnniversaryDateList = coupleAnniversaryDateRepository.findAllByCouple(couple);
         for (CoupleAnniversaryDate coupleAnniversaryDate: coupleAnniversaryDateList) {
-            if(coupleAnniversaryDate.getAnniversaryDate().equals(anniversaryDate))
+            if(coupleAnniversaryDate.getAnniversaryDate().equals(addAnniversaryRequest.getAnniversaryDate()))
                 throw new DuplicateAnniversaryDateException(ErrorCode.DUPLICATE_ANNIVERSARY);
         }
 
-        coupleAnniversaryDateRepository.save(anniversaryConverter.toEntity(anniversaryDate, couple));
+        coupleAnniversaryDateRepository.save(anniversaryConverter.toEntity(addAnniversaryRequest, couple));
     }
 }
