@@ -10,4 +10,5 @@ import lombok.RequiredArgsConstructor;
 public class AnniversaryListResponse {
     private final long idx;
     private final String date;
+    private final String name;
 }

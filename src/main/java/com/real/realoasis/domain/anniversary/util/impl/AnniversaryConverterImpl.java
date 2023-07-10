@@ -24,6 +24,7 @@ public class AnniversaryConverterImpl implements AnniversaryConverter {
         return AnniversaryListDto.builder()
                 .idx(coupleAnniversaryDate.getIdx())
                 .date(coupleAnniversaryDate.getAnniversaryDate())
+                .name(coupleAnniversaryDate.getAnniversaryName())
                 .build();
     }
 
@@ -32,6 +33,7 @@ public class AnniversaryConverterImpl implements AnniversaryConverter {
         return AnniversaryListResponse.builder()
                 .idx(anniversaryListDto.getIdx())
                 .date(anniversaryListDto.getDate())
+                .name(anniversaryListDto.getName())
                 .build();
     }
 }
