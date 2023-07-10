@@ -62,8 +62,7 @@ public class MainPageServiceImpl implements MainPageService {
                 coupleAnniversaryDate = parsedDate2;
         }
 
-        LocalDate parsedDate = LocalDate.parse(couple.getToday(), dateFormat);
-        long daysDifference = ChronoUnit.DAYS.between(parsedDate, coupleAnniversaryDate);
+        long daysDifference = ChronoUnit.DAYS.between(todayToLocalDate, coupleAnniversaryDate);
 
         return coupleConverter.toDto(couple, question, daysDifference, currentUser);
     }
