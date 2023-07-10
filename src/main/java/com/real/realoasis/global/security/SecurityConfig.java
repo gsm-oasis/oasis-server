@@ -77,6 +77,7 @@ public class SecurityConfig {
 
                 //anniversary
                 .antMatchers(HttpMethod.POST,"/anniversary").authenticated()
+                .antMatchers(HttpMethod.GET,"/anniversary").authenticated()
 
                 .anyRequest().permitAll();
         http
