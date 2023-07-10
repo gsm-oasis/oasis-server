@@ -18,6 +18,4 @@ public interface UserConverter {
     ConnectCoupleResponse toResponse(ConnectCoupleResDto connectCoupleResDto);
 
     Couple toEntity(User currentUser, User coupleUser, Heart heart, String registeredDay);
-
-    CoupleAnniversaryDate toEntity(String anniversaryDate, Couple couple);
 }

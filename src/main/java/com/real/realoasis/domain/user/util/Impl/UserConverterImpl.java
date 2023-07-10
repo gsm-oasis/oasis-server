@@ -48,13 +48,4 @@ public class UserConverterImpl implements UserConverter {
                 heart
         );
     }
-
-    @Override
-    public CoupleAnniversaryDate toEntity(String anniversaryDate, Couple couple) {
-        return new CoupleAnniversaryDate(
-                anniversaryDate,
-                couple
-        );
-    }
-
 }
