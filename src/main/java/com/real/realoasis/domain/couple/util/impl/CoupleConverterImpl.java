@@ -39,7 +39,7 @@ public class CoupleConverterImpl implements CoupleConverter {
         } else
             return MainPageDto.builder()
                     .nickname(couple.getUserB().getNickname())
-                    .coupleNickname(couple.getUserB().getNickname())
+                    .coupleNickname(couple.getUserA().getNickname())
                     .heartLevel(couple.getHeart().getLevel())
                     .datingDate(couple.getDatingDate())
                     .anniversary(userFacade.getAnniversary(couple.getDatingDate()))
