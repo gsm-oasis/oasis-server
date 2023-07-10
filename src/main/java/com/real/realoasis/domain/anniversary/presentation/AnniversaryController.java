@@ -1,6 +1,7 @@
 package com.real.realoasis.domain.anniversary.presentation;
 
 import com.real.realoasis.domain.anniversary.presentation.data.dto.AnniversaryListDto;
+import com.real.realoasis.domain.anniversary.presentation.data.request.AddAnniversaryRequest;
 import com.real.realoasis.domain.anniversary.presentation.data.response.AnniversaryListResponse;
 import com.real.realoasis.domain.anniversary.service.AddAnniversaryDateService;
 import com.real.realoasis.domain.anniversary.service.GetAnniversaryListService;
@@ -23,8 +24,8 @@ public class AnniversaryController {
 
     // 기념일 추가
     @PostMapping
-    public ResponseEntity<Void> addAnniversaryDate(@RequestParam("anniversaryDate") String anniversaryDate) {
-        addAnniversaryDateService.add(anniversaryDate);
+    public ResponseEntity<Void> addAnniversaryDate(@RequestBody AddAnniversaryRequest addAnniversaryRequest) {
+        addAnniversaryDateService.add(addAnniversaryRequest);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
