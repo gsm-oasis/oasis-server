@@ -57,7 +57,6 @@ public class MainPageServiceImpl implements MainPageService {
             coupleAnniversaryDate = parsedDate;
         }
         for (int i = 0; i < coupleAnniversaryDateList.size() - 1; i++) {
-            System.out.println("??");
             LocalDate parsedDate1 = LocalDate.parse( couple.getToday().substring(0, 4)+ coupleAnniversaryDateList.get(i).getAnniversaryDate(), dateFormat);
             LocalDate parsedDate2 = LocalDate.parse( couple.getToday().substring(0, 4) + coupleAnniversaryDateList.get(i+1).getAnniversaryDate(), dateFormat);
 
