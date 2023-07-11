@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -47,13 +48,22 @@ public class MainPageServiceImpl implements MainPageService {
 
         List<CoupleAnniversaryDate> coupleAnniversaryDateList = coupleAnniversaryDateRepository.findAllByCouple(couple);
         LocalDate coupleAnniversaryDate = null;
+
+        if(coupleAnniversaryDateList.size() == 1) {
+            LocalDate parsedDate = LocalDate.parse( couple.getToday().substring(0, 4)+ coupleAnniversaryDateList.get(0).getAnniversaryDate(), dateFormat);
+
+            if(parsedDate.compareTo(todayToLocalDate) < 0)
+                parsedDate = parsedDate.plusYears(1);
+            coupleAnniversaryDate = parsedDate;
+        }
         for (int i = 0; i < coupleAnniversaryDateList.size() - 1; i++) {
-            LocalDate parsedToday = LocalDate.parse(couple.getToday(), dateFormat);
+            System.out.println("??");
             LocalDate parsedDate1 = LocalDate.parse( couple.getToday().substring(0, 4)+ coupleAnniversaryDateList.get(i).getAnniversaryDate(), dateFormat);
             LocalDate parsedDate2 = LocalDate.parse( couple.getToday().substring(0, 4) + coupleAnniversaryDateList.get(i+1).getAnniversaryDate(), dateFormat);
-            if(parsedDate1.compareTo(parsedToday) < 0)
+
+            if(parsedDate1.compareTo(todayToLocalDate) < 0)
                 parsedDate1 = parsedDate1.plusYears(1);
-            else if (parsedDate2.compareTo(parsedToday) < 0)
+            else if (parsedDate2.compareTo(todayToLocalDate) < 0)
                 parsedDate2 = parsedDate2.plusYears(1);
 
             if(parsedDate1.isBefore(parsedDate2))
@@ -61,7 +71,10 @@ public class MainPageServiceImpl implements MainPageService {
             else
                 coupleAnniversaryDate = parsedDate2;
         }
-        CoupleAnniversaryDate anniversaryDate = coupleAnniversaryDateRepository.findByAnniversaryDate(String.valueOf(coupleAnniversaryDate));
+
+        String mm = Objects.requireNonNull(coupleAnniversaryDate).toString().substring(5, 7);
+        String dd = coupleAnniversaryDate.toString().substring(8, 10);
+        CoupleAnniversaryDate anniversaryDate = coupleAnniversaryDateRepository.findByAnniversaryDateAndCouple(mm + dd, couple);
         int daysDifference = (int) ChronoUnit.DAYS.between(todayToLocalDate, coupleAnniversaryDate);
 
         return coupleConverter.toDto(couple, question, daysDifference, currentUser, anniversaryDate);
