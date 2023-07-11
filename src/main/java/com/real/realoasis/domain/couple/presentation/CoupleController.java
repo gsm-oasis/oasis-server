@@ -1,12 +1,12 @@
-package com.real.realoasis.domain.couple.presenattion;
+package com.real.realoasis.domain.couple.presentation;
 
+import com.real.realoasis.domain.couple.presentation.data.dto.EnterDto;
+import com.real.realoasis.domain.couple.presentation.data.dto.MainPageDto;
+import com.real.realoasis.domain.couple.presentation.data.request.DatingDateEnterRequest;
+import com.real.realoasis.domain.couple.presentation.data.response.MainPageResponse;
 import com.real.realoasis.domain.couple.service.EnterDatingDateService;
 import com.real.realoasis.domain.diary.presentation.data.response.DiaryResponse;
 import com.real.realoasis.domain.diary.util.DiaryConverter;
-import com.real.realoasis.domain.user.presentation.data.dto.EnterDto;
-import com.real.realoasis.domain.user.presentation.data.dto.MainPageDto;
-import com.real.realoasis.domain.user.presentation.data.request.DatingDateEnterRequest;
-import com.real.realoasis.domain.user.presentation.data.response.MainPageResponse;
 import com.real.realoasis.domain.couple.service.MainPageService;
 import com.real.realoasis.domain.couple.util.CoupleConverter;
 import lombok.RequiredArgsConstructor;

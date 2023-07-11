@@ -3,9 +3,9 @@ package com.real.realoasis.domain.couple.service.impl;
 import com.real.realoasis.domain.couple.domain.entity.Couple;
 import com.real.realoasis.domain.anniversary.domain.entity.CoupleAnniversaryDate;
 import com.real.realoasis.domain.anniversary.domain.repository.CoupleAnniversaryDateRepository;
+import com.real.realoasis.domain.couple.presentation.data.dto.MainPageDto;
 import com.real.realoasis.domain.question.domain.entity.Question;
 import com.real.realoasis.domain.questionAnswer.facade.QuestionAnswerFacade;
-import com.real.realoasis.domain.user.presentation.data.dto.MainPageDto;
 import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.domain.couple.service.MainPageService;
@@ -61,9 +61,9 @@ public class MainPageServiceImpl implements MainPageService {
             else
                 coupleAnniversaryDate = parsedDate2;
         }
+        CoupleAnniversaryDate anniversaryDate = coupleAnniversaryDateRepository.findByAnniversaryDate(String.valueOf(coupleAnniversaryDate));
+        int daysDifference = (int) ChronoUnit.DAYS.between(todayToLocalDate, coupleAnniversaryDate);
 
-        long daysDifference = ChronoUnit.DAYS.between(todayToLocalDate, coupleAnniversaryDate);
-
-        return coupleConverter.toDto(couple, question, daysDifference, currentUser);
+        return coupleConverter.toDto(couple, question, daysDifference, currentUser, anniversaryDate);
     }
 }

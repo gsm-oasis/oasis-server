@@ -1,6 +1,5 @@
 package com.real.realoasis.domain.user.presentation;
 
-import com.real.realoasis.domain.anniversary.service.AddAnniversaryDateService;
 import com.real.realoasis.domain.user.presentation.data.dto.*;
 import com.real.realoasis.domain.user.presentation.data.request.ConnectCoupleRequest;
 import com.real.realoasis.domain.user.presentation.data.request.NicknameChangeRequest;
@@ -26,7 +25,6 @@ public class UserController {
     private final WithdrawalService withdrawalService;
     private final UserConverter userConverter;
     private final UserSettingConverter userSettingConverter;
-    private final AddAnniversaryDateService addAnniversaryDateService;
     private final UnConnectCoupleService unConnectCoupleService;
 
     // 회원탈퇴

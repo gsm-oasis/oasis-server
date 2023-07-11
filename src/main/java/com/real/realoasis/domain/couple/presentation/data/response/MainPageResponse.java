@@ -1,6 +1,5 @@
-package com.real.realoasis.domain.user.presentation.data.response;
+package com.real.realoasis.domain.couple.presentation.data.response;
 
-import com.real.realoasis.domain.diary.presentation.data.response.DiaryListResponse;
 import com.real.realoasis.domain.diary.presentation.data.response.DiaryResponse;
 import lombok.*;
 
@@ -14,8 +13,9 @@ public class MainPageResponse {
     private final String coupleNickname;
     private final int heartLevel;
     private final long datingDate;
-    private final long daysLeft;
-    private final int anniversary;
+    private final int severalHundredDays;
+    private final int daysLeft;
+    private final String anniversaryName;
     private final Long questionId;
     private final String content;
     private final List<DiaryResponse> diaries;

@@ -1,11 +1,10 @@
 package com.real.realoasis.domain.couple.service.impl;
 
 import com.real.realoasis.domain.couple.domain.entity.Couple;
-import com.real.realoasis.domain.couple.domain.repository.CoupleRepository;
+import com.real.realoasis.domain.couple.presentation.data.dto.EnterDto;
 import com.real.realoasis.domain.couple.service.EnterDatingDateService;
 import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.facade.UserFacade;
-import com.real.realoasis.domain.user.presentation.data.dto.EnterDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor

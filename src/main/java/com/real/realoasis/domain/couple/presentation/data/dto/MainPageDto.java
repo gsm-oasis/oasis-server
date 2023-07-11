@@ -1,4 +1,4 @@
-package com.real.realoasis.domain.user.presentation.data.dto;
+package com.real.realoasis.domain.couple.presentation.data.dto;
 
 import com.real.realoasis.domain.diary.presentation.data.dto.DiaryDto;
 import lombok.Builder;
@@ -15,8 +15,9 @@ public class MainPageDto {
     private final String coupleNickname;
     private final int heartLevel;
     private final long datingDate;
-    private final long daysLeft;
-    private final int anniversary;
+    private final int severalHundredDays;
+    private final String anniversaryName;
+    private final int daysLeft;
     private final Long questionId;
     private final String content;
     private final List<DiaryDto> diaryListDtoList;
