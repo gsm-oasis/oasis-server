@@ -56,27 +56,17 @@ public class MainPageServiceImpl implements MainPageService {
                 parsedDate = parsedDate.plusYears(1);
             coupleAnniversaryDate = parsedDate;
         }
-        for (int i = 0; i < coupleAnniversaryDateList.size() - 1; i++) {
-            LocalDate parsedDate1 = LocalDate.parse( couple.getToday().substring(0, 4)+ coupleAnniversaryDateList.get(i).getAnniversaryDate(), dateFormat);
-            LocalDate parsedDate2 = LocalDate.parse( couple.getToday().substring(0, 4) + coupleAnniversaryDateList.get(i+1).getAnniversaryDate(), dateFormat);
+        for (int i = 0; i < coupleAnniversaryDateList.size(); i++) {
+            LocalDate parsedDate = LocalDate.parse( couple.getToday().substring(0, 4)+ coupleAnniversaryDateList.get(i).getAnniversaryDate(), dateFormat);
+            if(i == 0)
+                coupleAnniversaryDate = parsedDate;
 
-            if(parsedDate1.compareTo(todayToLocalDate) < 0) {
-                parsedDate1 = parsedDate1.plusYears(1);
-                System.out.println(i + parsedDate1.toString() + "pareDate1");
-            }
-            else if (parsedDate2.compareTo(todayToLocalDate) < 0) {
-                parsedDate2 = parsedDate2.plusYears(1);
-                System.out.println(i + parsedDate2.toString() + "pareDate2");
+            if(parsedDate.compareTo(todayToLocalDate) < 0) {
+                parsedDate = parsedDate.plusYears(1);
             }
 
-            if(parsedDate1.isBefore(parsedDate2)) {
-                coupleAnniversaryDate = parsedDate1;
-                System.out.println(coupleAnniversaryDate + "coupleAnniversary");
-            }
-            else {
-                coupleAnniversaryDate = parsedDate2;
-                System.out.println(coupleAnniversaryDate + "coupleAnniversary");
-            }
+            if(parsedDate.isBefore((coupleAnniversaryDate)))
+                coupleAnniversaryDate = parsedDate;
         }
 
         String mm = Objects.requireNonNull(coupleAnniversaryDate).toString().substring(5, 7);
