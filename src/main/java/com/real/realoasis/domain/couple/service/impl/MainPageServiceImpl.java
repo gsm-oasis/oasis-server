@@ -60,15 +60,23 @@ public class MainPageServiceImpl implements MainPageService {
             LocalDate parsedDate1 = LocalDate.parse( couple.getToday().substring(0, 4)+ coupleAnniversaryDateList.get(i).getAnniversaryDate(), dateFormat);
             LocalDate parsedDate2 = LocalDate.parse( couple.getToday().substring(0, 4) + coupleAnniversaryDateList.get(i+1).getAnniversaryDate(), dateFormat);
 
-            if(parsedDate1.compareTo(todayToLocalDate) < 0)
+            if(parsedDate1.compareTo(todayToLocalDate) < 0) {
                 parsedDate1 = parsedDate1.plusYears(1);
-            else if (parsedDate2.compareTo(todayToLocalDate) < 0)
+                System.out.println(i + parsedDate1.toString() + "pareDate1");
+            }
+            else if (parsedDate2.compareTo(todayToLocalDate) < 0) {
                 parsedDate2 = parsedDate2.plusYears(1);
+                System.out.println(i + parsedDate2.toString() + "pareDate2");
+            }
 
-            if(parsedDate1.isBefore(parsedDate2))
+            if(parsedDate1.isBefore(parsedDate2)) {
                 coupleAnniversaryDate = parsedDate1;
-            else
+                System.out.println(coupleAnniversaryDate + "coupleAnniversary");
+            }
+            else {
                 coupleAnniversaryDate = parsedDate2;
+                System.out.println(coupleAnniversaryDate + "coupleAnniversary");
+            }
         }
 
         String mm = Objects.requireNonNull(coupleAnniversaryDate).toString().substring(5, 7);
