@@ -53,9 +53,9 @@ public class SecurityConfig {
                 .antMatchers(HttpMethod.PATCH,"/user/password").authenticated()
                 .antMatchers(HttpMethod.DELETE,"/user/unconnect").authenticated()
 
-                //mainpage
-                .antMatchers(HttpMethod.GET,"/mainpage").authenticated()
-                .antMatchers(HttpMethod.POST,"/mainpage/enter/datingdate").authenticated()
+                //couple
+                .antMatchers(HttpMethod.GET,"/couple").authenticated()
+                .antMatchers(HttpMethod.POST,"/couple").authenticated()
 
                 //diary
                 .antMatchers(HttpMethod.POST,"/diary").authenticated()
