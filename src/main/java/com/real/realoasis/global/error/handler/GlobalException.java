@@ -97,4 +97,10 @@ public class GlobalException {
         return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
     }
 
+    @ExceptionHandler(UserCodeNotFoundException.class)
+    public ResponseEntity<ErrorResponse> UserCodeNotFoundException(UserCodeNotFoundException e) {
+        ErrorResponse errorResponse = new ErrorResponse(e.getErrorCode());
+        return new ResponseEntity<>(errorResponse, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
 }

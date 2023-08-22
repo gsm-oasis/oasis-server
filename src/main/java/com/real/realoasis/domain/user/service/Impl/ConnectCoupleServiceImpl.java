@@ -6,11 +6,13 @@ import com.real.realoasis.domain.heart.domain.entity.Heart;
 import com.real.realoasis.domain.heart.domain.repository.HeartRepository;
 import com.real.realoasis.domain.user.domain.entity.User;
 import com.real.realoasis.domain.user.domain.repository.UserRepository;
+import com.real.realoasis.domain.user.exception.UserCodeNotFoundException;
 import com.real.realoasis.domain.user.facade.UserFacade;
 import com.real.realoasis.domain.user.presentation.data.dto.ConnectCoupleDto;
 import com.real.realoasis.domain.user.presentation.data.dto.ConnectCoupleResDto;
 import com.real.realoasis.domain.user.service.ConnectCoupleService;
 import com.real.realoasis.domain.user.util.UserConverter;
+import com.real.realoasis.global.error.type.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,7 +34,8 @@ public class ConnectCoupleServiceImpl implements ConnectCoupleService {
     @Transactional(rollbackFor = Exception.class)
     public ConnectCoupleResDto connectCouple(ConnectCoupleDto connectCoupleDto) {
         User currentUser = userFacade.currentUser();
-        User coupleUser = userRepository.findByCoupleCode(connectCoupleDto.getCode());
+        User coupleUser = userRepository.findByCoupleCode(connectCoupleDto.getCode())
+                .orElseThrow(() -> new UserCodeNotFoundException(ErrorCode.USER_CODE_NOT_FOUND));
         Heart heart = new Heart(0, 1);
         Couple couple;
         heartRepository.save(heart);
